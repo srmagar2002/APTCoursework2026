@@ -38,9 +38,10 @@ public class Laptop {
     private LocalDateTime updatedAt;
 
     //This Constructor can be overridden later.
-    public Laptop(){
+    //empty constructor
+    public Laptop(){}
 
-    }
+    //default constructor
     public Laptop(int laptopID, String brand, String model, String title, String description,
                   String imgUrl, String thumbnailUrl, String processor, String ram, String storage,
                   String storageType, String graphicsCard, double screenSize, String resolution,

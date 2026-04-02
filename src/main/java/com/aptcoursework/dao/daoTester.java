@@ -50,15 +50,29 @@ public class daoTester {
             case 4:
                 fetchallLaptop();
                 break;
+            case 5:
+                Search();
+                break;
 
         }
 
 
     }
 
+    static void Search() {
+        LaptopDaoImpl dao = new LaptopDaoImpl();
+        System.out.println("Enter something");
+        Scanner input = new Scanner(System.in);
+
+        ArrayList<Laptop> laptops = dao.getLaptopsBySearch(input.next());
+        for (Laptop laptop : laptops) {
+            presentLaptop(laptop);
+        }
+    }
+
     static void fetchallLaptop() {
         LaptopDao laptopDao = new LaptopDaoImpl();
-        ArrayList<Laptop> laptops= laptopDao.fetchAllLaptops();
+        ArrayList<Laptop> laptops = laptopDao.fetchAllLaptops();
 
         for (Laptop laptop : laptops) {
             presentLaptop(laptop);
