@@ -1,7 +1,7 @@
-CREATE
-DATABASE IF NOT EXISTS KHS3LG;
-USE
-KHS3LG;
+CREATE DATABASE IF NOT EXISTS KHS3LG;
+
+USE KHS3LG;
+
 
 DROP TABLE IF EXISTS LAPTOP;
 
@@ -16,6 +16,7 @@ CREATE TABLE laptop
     description TEXT ,
     imgUrl TEXT,
     thumbnailUrl TEXT,
+    category VARCHAR(200) DEFAULT 'General',
 
 /*SPECS*/
     processor VARCHAR(200) NOT NULL,
@@ -47,9 +48,20 @@ CREATE TABLE laptop
 /*METADATA*/
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-
+CONSTRAINT categoryCheck CHECK(category IN ('Gaming','Ultrabook','Business','Student','Convertible','Workstation','General')),
 CONSTRAINT storageCheck CHECK(storageType IN ('SSD','HDD')),
 CONSTRAINT osCheck CHECK(operatingSystem IN ('Windows','MacOS','Linux')),
 CONSTRAINT availabilityCheck CHECK(availabilityStatus IN('IN STOCK','OUT OF STOCK'))
 )
 
+
+/*
+Category Explanation
+Gaming -	High-performance for gaming
+Ultrabook -	Thin & portable laptops
+Business -	Enterprise/office laptops
+Student -	Affordable, simple laptops
+Convertible -	2-in-1 touch laptops
+Workstation -	Powerful for professional tasks (CAD, rendering)
+General	Default - general-purpose
+  */

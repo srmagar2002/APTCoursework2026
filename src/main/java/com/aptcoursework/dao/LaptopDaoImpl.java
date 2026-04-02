@@ -12,14 +12,13 @@ import java.util.ArrayList;
 
 public class LaptopDaoImpl implements LaptopDao {
     @Override
-    public boolean insertLaptop(Laptop laptop){
+    public boolean insertLaptop(Laptop laptop) {
 
         Connection conn = null;
         String sql = "INSERT INTO laptop ( brand, model, title, description, imgUrl, thumbnailUrl, processor, ram, storage, storageType, graphicsCard, screenSize, resolution, " +
                 "operatingSystem,price, discount, stockQuantity, weight, color, batteryLife) " +
                 "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?)";
-        try
-        {
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -46,68 +45,41 @@ public class LaptopDaoImpl implements LaptopDao {
 
             stmt.executeUpdate();
             return true;
-        }
-        catch(SQLException e){
-            System.out.println("Error Inserting Laptop"+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error Inserting Laptop" + e.getMessage());
             return false;
-        }
-        finally{
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
 
     }
+
     @Override
-    public Laptop getLaptopById(int id){
+    public Laptop getLaptopById(int id) {
         /* Fetch Laptop By ID*/
         Connection conn = null;
         String sql = "SELECT * FROM laptop WHERE laptopID = ?";
 
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                Laptop laptop = new Laptop(
-                        rs.getInt("laptopID"),
-                        rs.getString("brand"),
-                        rs.getString("model"),
-                        rs.getString("title"),
-                        rs.getString("description"),
-                        rs.getString("imgUrl"),
-                        rs.getString("thumbnailUrl"),
-                        rs.getString("processor"),
-                        rs.getString("ram"),
-                        rs.getString("storage"),
-                        rs.getString("storageType"),
-                        rs.getString("graphicsCard"),
-                        rs.getDouble("screenSize"),
-                        rs.getString("resolution"),
-                        rs.getString("operatingSystem"),
-                        rs.getBigDecimal("price"),
-                        rs.getInt("discount"),
-                        rs.getInt("stockQuantity"),
-                        rs.getString("availabilityStatus"),
-                        rs.getInt("weight"),
-                        rs.getString("color"),
-                        rs.getInt("batteryLife"),
-                        rs.getTimestamp("createdAt").toLocalDateTime(),
-                        rs.getTimestamp("updatedAt").toLocalDateTime()
-                );
+                Laptop laptop = laptopAssginer(rs);
 
                 return laptop;
             }
         } catch (SQLException e) {
-            System.out.println("Error Getting Laptop"+e.getMessage());
-        }
-        finally{
+            System.out.println("Error Getting Laptop" + e.getMessage());
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
         return null;
     }
 
     @Override
-    public boolean updateLaptop(Laptop laptop){
+    public boolean updateLaptop(Laptop laptop) {
         /* Updates Laptop By ID*/
         Connection conn = null;
         String sql = "UPDATE laptop SET brand=?, model=?, title=?, description=?, " +
@@ -116,7 +88,7 @@ public class LaptopDaoImpl implements LaptopDao {
                 "operatingSystem=?, price=?, discount=?, stockQuantity=?, weight=?, " +
                 "color=?, batteryLife=? WHERE laptopID=?";
 
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -145,69 +117,123 @@ public class LaptopDaoImpl implements LaptopDao {
             stmt.executeUpdate();
             System.out.println("Laptop updated successfully");
             return true;
-        }
-        catch(SQLException e){
-            System.out.println("Error Updating Laptop"+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error Updating Laptop" + e.getMessage());
             return false;
-        }
-        finally{
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
 
     }
 
     @Override
-    public ArrayList<Laptop> fetchAllLaptops(){
+    public ArrayList<Laptop> fetchAllLaptops() {
         /* Fetches All Laptops*/
         ArrayList<Laptop> laptops = new ArrayList<>();
         Connection conn = null;
         String sql = "SELECT * FROM laptop ORDER BY laptopID";
-        try{
-            conn= DatabaseConnection.getConnection();
+        try {
+            conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Laptop laptop = new Laptop(
-                        rs.getInt("laptopID"),
-                        rs.getString("brand"),
-                        rs.getString("model"),
-                        rs.getString("title"),
-                        rs.getString("description"),
-                        rs.getString("imgUrl"),
-                        rs.getString("thumbnailUrl"),
-                        rs.getString("processor"),
-                        rs.getString("ram"),
-                        rs.getString("storage"),
-                        rs.getString("storageType"),
-                        rs.getString("graphicsCard"),
-                        rs.getDouble("screenSize"),
-                        rs.getString("resolution"),
-                        rs.getString("operatingSystem"),
-                        rs.getBigDecimal("price"),
-                        rs.getInt("discount"),
-                        rs.getInt("stockQuantity"),
-                        rs.getString("availabilityStatus"),
-                        rs.getInt("weight"),
-                        rs.getString("color"),
-                        rs.getInt("batteryLife"),
-                        rs.getTimestamp("createdAt").toLocalDateTime(),
-                        rs.getTimestamp("updatedAt").toLocalDateTime()
-                );
+                Laptop laptop = laptopAssginer(rs);
                 laptops.add(laptop);
             }
             System.out.println("Laptops fetched successfully");
             return laptops;
-        }
-        catch (SQLException e){
-            System.out.println("Error Getting Laptop"+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error Getting Laptop" + e.getMessage());
         }
         return null;
     }
 
     @Override
-    public ArrayList<Laptop> getLaptopsBySpec(String brand, String processor,String ram,String storage,String os){
+    public ArrayList<Laptop> getLaptopsBySpec(String brand, String category, String os) {
+        ArrayList<Laptop> laptops = new ArrayList<>();
+        Connection conn = null;
+        String sql = "SELECT * FROM laptop WHERE brand=? & category=? AND os=?";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, brand == null ? "Dell" : brand);
+            stmt.setString(2, category == null ? "General" : category);
+            stmt.setString(3, os == null ? "Windows" : os);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Laptop laptop = laptopAssginer(rs);
+                laptops.add(laptop);
+            }
+            return laptops;
+
+        } catch (SQLException e) {
+            System.out.println("Error Getting Laptop" + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
         return null;
     }
 
+    @Override
+    public ArrayList<Laptop> getLaptopsBySearch(String searchWord) {
+        ArrayList<Laptop> laptops = new ArrayList<Laptop>();
+        Connection conn = null;
+        String sql = "SELECT * FROM laptop WHERE LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + searchWord.toLowerCase() + "%");
+            stmt.setString(2, "%" + searchWord.toLowerCase() + "%");
+            stmt.setString(3, "%" + searchWord.toLowerCase() + "%");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Laptop laptop = laptopAssginer(rs);
+                laptops.add(laptop);
+            }
+            return laptops;
+        } catch (SQLException e) {
+            System.out.println("Error Getting Laptop" + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return null;
+    }
+
+    //This method reduces the redundancy in code while assign the db table to java entity
+    public Laptop laptopAssginer(ResultSet rs) {
+        try {
+            return new Laptop(
+                    rs.getInt("laptopID"),
+                    rs.getString("brand"),
+                    rs.getString("model"),
+                    rs.getString("title"),
+                    rs.getString("description"),
+                    rs.getString("imgUrl"),
+                    rs.getString("thumbnailUrl"),
+                    rs.getString("processor"),
+                    rs.getString("ram"),
+                    rs.getString("storage"),
+                    rs.getString("storageType"),
+                    rs.getString("graphicsCard"),
+                    rs.getDouble("screenSize"),
+                    rs.getString("resolution"),
+                    rs.getString("operatingSystem"),
+                    rs.getBigDecimal("price"),
+                    rs.getInt("discount"),
+                    rs.getInt("stockQuantity"),
+                    rs.getString("availabilityStatus"),
+                    rs.getInt("weight"),
+                    rs.getString("color"),
+                    rs.getInt("batteryLife"),
+                    rs.getTimestamp("createdAt").toLocalDateTime(),
+                    rs.getTimestamp("updatedAt").toLocalDateTime()
+            );
+        } catch (SQLException e) {
+            System.out.println("Error Getting Laptop" + e.getMessage());
+        }
+        return null;
+    }
 
 }
