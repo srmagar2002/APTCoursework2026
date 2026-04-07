@@ -14,8 +14,8 @@ CREATE TABLE laptop
     model    VARCHAR(200) NOT NULL,
     title    TEXT NOT NULL,
     description TEXT ,
-    imgUrl TEXT,
-    thumbnailUrl TEXT,
+    imgUrl VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img/', CAST(laptopID AS CHAR), '.jpg')) ,
+    thumbnailUrl VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('thumb/', CAST(laptopID AS CHAR), '.jpg')) ,
     category VARCHAR(200) DEFAULT 'General',
 
 /*SPECS*/
@@ -32,7 +32,7 @@ CREATE TABLE laptop
     price DECIMAL(10,2) NOT NULL,
     discount INT ,
     stockQuantity INT,
-    availabilityStatus VARCHAR(200) GENERATED  ALWAYS AS(
+    availabilityStatus VARCHAR(200) GENERATED ALWAYS AS(
         CASE
             WHEN stockQuantity<1 THEN 'OUT OF STOCK'
         ELSE 'IN STOCK'
