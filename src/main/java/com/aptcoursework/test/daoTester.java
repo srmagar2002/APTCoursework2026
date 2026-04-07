@@ -1,15 +1,14 @@
-package com.aptcoursework.dao;
+package com.aptcoursework.test;
 
+import com.aptcoursework.dao.LaptopDao;
+import com.aptcoursework.dao.LaptopDaoImpl;
 import com.aptcoursework.entity.Laptop;
 import com.aptcoursework.utils.DatabaseConnection;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.math.BigDecimal;
 
 
 //NOTE:  This class is just for testing the DAO while it is building and will be removed in the final version.
