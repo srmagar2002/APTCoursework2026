@@ -31,6 +31,7 @@ public class daoTester {
     public static void main(String[] args) {
         testConnection();
 
+
         System.out.println("Insert 1, Get Laptop By ID 2");
         Scanner input = new Scanner(System.in);
 
