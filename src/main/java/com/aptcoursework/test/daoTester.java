@@ -2,8 +2,11 @@ package com.aptcoursework.test;
 
 import com.aptcoursework.dao.LaptopDao;
 import com.aptcoursework.dao.LaptopDaoImpl;
+import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.Laptop;
+import com.aptcoursework.entity.User;
 import com.aptcoursework.utils.DatabaseConnection;
+import com.aptcoursework.utils.PasswordUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -53,9 +56,80 @@ public class daoTester {
             case 5:
                 Search();
                 break;
+            case 6:
+                insertUser();
+                break;
+            case 7:
+                finduser();
+                break;
+
+            case 8:
+                findbyEmail();
+                break;
+
+                case 9:
+                    testlogin();
+                    break;
 
         }
 
+    }
+
+    static void testlogin(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter username");
+        String username = input.nextLine();
+        System.out.println("Enter password");
+        String password = input.nextLine();
+
+        UserDaoImpl userDaoImpl = new UserDaoImpl();
+        User user = userDaoImpl.findByUsername(username);
+        if(PasswordUtil.checkPassword(password,user.getPasswordHash())){
+            System.out.println("Welcome "+username);
+        }
+        else {
+            System.out.println("Wrong password");
+        }
+    }
+
+    static void findbyEmail() {
+        UserDaoImpl userDao = new UserDaoImpl();
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter email: ");
+        String email = input.nextLine();
+        User user = userDao.findByEmail(email);
+        System.out.println(user.getEmail() + " " + user.getUsername() + " " + user.getPasswordHash());
+
+    }
+
+    static void finduser() {
+        UserDaoImpl userDao = new UserDaoImpl();
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter username: ");
+        String username = input.nextLine();
+        User user = userDao.findByUsername(username);
+        System.out.println(user.getEmail() + " " + user.getUsername() + " " + user.getPasswordHash());
+
+    }
+
+    static void insertUser() {
+        UserDaoImpl userDao = new UserDaoImpl();
+        User user = new User();
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("enter name");
+        user.setUsername(input.nextLine());
+
+        System.out.println("enter email");
+        user.setEmail(input.nextLine());
+
+        System.out.println("enter password");
+        user.setPasswordHash(PasswordUtil.getHashPassword(input.nextLine()));
+
+        System.out.println("enter role");
+        user.setRole_id(input.nextInt());
+
+        userDao.insertUser(user);
 
     }
 

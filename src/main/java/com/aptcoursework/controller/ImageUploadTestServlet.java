@@ -14,7 +14,7 @@ import java.nio.file.StandardCopyOption;
 
 
 import java.io.IOException;
-@WebServlet("/image")
+@WebServlet("/imagetest")
 @MultipartConfig
 public class ImageUploadTestServlet extends HttpServlet {
     @Override
