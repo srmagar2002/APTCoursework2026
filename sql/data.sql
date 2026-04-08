@@ -1,4 +1,7 @@
 USE KHS3LG;
+
+INSERT INTO roles (role_name) VALUES ( 'admin'),('customer');
+
 INSERT INTO laptop (
     brand, model, title, description,category,
     processor, ram, storage, storageType, graphicsCard, screenSize, resolution, operatingSystem,
