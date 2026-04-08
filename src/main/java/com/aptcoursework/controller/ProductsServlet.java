@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet("/products")
-public class LaptopServlet extends HttpServlet {
+public class ProductsServlet extends HttpServlet {
 
     private static final LaptopDaoImpl laptopDao = new LaptopDaoImpl();
     @Override
@@ -25,7 +25,7 @@ public class LaptopServlet extends HttpServlet {
         if (action == null) {
             ArrayList<Laptop> products = laptopDao.fetchAllLaptops();
             request.setAttribute("products", products);
-            request.getRequestDispatcher("/WEB-INF/views/products.jsp")
+            request.getRequestDispatcher("/WEB-INF/views/pages/products.jsp")
                     .forward(request, response);
         }
 
