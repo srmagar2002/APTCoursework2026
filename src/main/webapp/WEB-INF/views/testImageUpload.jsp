@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/image"
+<form action="${pageContext.request.contextPath}/imagetest"
       method="post"
       enctype="multipart/form-data">
 
