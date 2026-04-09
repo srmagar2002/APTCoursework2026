@@ -25,7 +25,7 @@ public class ProductsServlet extends HttpServlet {
         if (action == null) {
             ArrayList<Laptop> products = laptopDao.fetchAllLaptops();
             request.setAttribute("products", products);
-            request.getRequestDispatcher("/WEB-INF/views/pages/products.jsp")
+            request.getRequestDispatcher("/WEB-INF/views/pages/productPage.jsp")
                     .forward(request, response);
         }
 

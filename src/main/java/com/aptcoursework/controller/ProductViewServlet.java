@@ -25,7 +25,7 @@ public class ProductViewServlet extends HttpServlet {
             Laptop laptop = laptopDao.getLaptopById(productId);
             System.out.println(laptop.toString());
             request.setAttribute("laptop", laptop);
-            request.getRequestDispatcher("/WEB-INF/views/pages/productView.jsp")
+            request.getRequestDispatcher("/WEB-INF/views/pages/productViewPage.jsp")
                     .forward(request, response);
         }
     }
