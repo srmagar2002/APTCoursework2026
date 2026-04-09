@@ -24,7 +24,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/pages/register.jsp")
+        request.getRequestDispatcher("/WEB-INF/views/pages/registerPage.jsp")
                 .forward(request, response);
     }
 
@@ -57,11 +57,10 @@ public class RegisterServlet extends HttpServlet {
 
         if (!errors.isEmpty()) {
             request.setAttribute("error", errors.toString().trim());
-            request.getRequestDispatcher("/WEB-INF/views/pages/register.jsp")
+            request.getRequestDispatcher("/WEB-INF/views/pages/registerPage.jsp")
                     .forward(request, response);
             return;
         }
-
 
         String hashedPassword = PasswordUtil.getHashPassword(password);
         User user = new User(username, email, hashedPassword,2);
@@ -70,11 +69,10 @@ public class RegisterServlet extends HttpServlet {
 
         if (!success) {
             request.setAttribute("error", "Username or email already exists.");
-            request.getRequestDispatcher("/WEB-INF/views/pages/register.jsp")
+            request.getRequestDispatcher("/WEB-INF/views/pages/registerPage.jsp")
                     .forward(request, response);
             return;
         }
-
         response.sendRedirect(request.getContextPath() + "/login");
     }
 
