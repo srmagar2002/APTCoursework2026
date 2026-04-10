@@ -1,5 +1,7 @@
 package com.aptcoursework.entity;
 
+import com.aptcoursework.enums.Role;
+
 import java.time.LocalDateTime;
 
 public class User {
@@ -7,26 +9,26 @@ public class User {
     private String username;
     private String email;
     private String passwordHash;
-    private int role_id;
+    private Role role;
     private LocalDateTime created_at;
 
     public User() {
     }
 
-    public User(String username, String email, String passwordHash, int role_id) {
+    public User(String username, String email, String passwordHash, Role role) {
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
-        this.role_id = role_id;
+        this.role = role;
     }
 
 
-    public User(int user_id, String username, String email, String passwordHash, int role_id) {
+    public User(int user_id, String username, String email, String passwordHash, Role role) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
-        this.role_id = role_id;
+        this.role = role;
         this.created_at = LocalDateTime.now();
     }
 
@@ -62,12 +64,12 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public LocalDateTime getCreated_at() {

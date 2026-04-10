@@ -4,6 +4,7 @@ package com.aptcoursework.controller;
 import com.aptcoursework.dao.UserDao;
 import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.User;
+import com.aptcoursework.enums.Role;
 import com.aptcoursework.utils.PasswordUtil;
 import com.aptcoursework.utils.ValidationUtil;
 
@@ -63,7 +64,7 @@ public class RegisterServlet extends HttpServlet {
         }
 
         String hashedPassword = PasswordUtil.getHashPassword(password);
-        User user = new User(username, email, hashedPassword,2);
+        User user = new User(username, email, hashedPassword, Role.CUSTOMER);
 
         boolean success = userDao.insertUser(user);
 

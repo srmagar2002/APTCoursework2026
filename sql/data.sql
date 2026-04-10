@@ -1,9 +1,7 @@
 USE KHS3LG;
 
-INSERT IGNORE INTO roles (role_name) VALUES ( 'admin'),('customer');
-
-INSERT IGNORE INTO users (username,email,password_hash,role_id) VALUES ('admin'
-        ,'admin@admin.com','$2a$10$quyPeY7N5RQHlf/MlQ947equUsDswgunEHrcaKy2j67B7ejWl7nXq',1);
+INSERT IGNORE INTO users (username,email,password_hash,role) VALUES ('admin'
+        ,'admin@admin.com','$2a$10$quyPeY7N5RQHlf/MlQ947equUsDswgunEHrcaKy2j67B7ejWl7nXq','ADMIN');
 /*password:APTadmin&123*/
 
 INSERT INTO laptop (

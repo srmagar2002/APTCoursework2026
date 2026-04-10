@@ -4,20 +4,13 @@ DATABASE IF NOT EXISTS KHS3LG;
 USE
 KHS3LG;
 
-SET FOREIGN_KEY_CHECKS = 0;
-
+SET
+FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS laptop;
-
-SET FOREIGN_KEY_CHECKS = 1;
-
-CREATE TABLE roles
-(
-    role_id   INT AUTO_INCREMENT PRIMARY KEY,
-    role_name VARCHAR(50) NOT NULL UNIQUE
-);
-
+SET
+FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE users
 (
@@ -25,15 +18,10 @@ CREATE TABLE users
     username      VARCHAR(50)  NOT NULL UNIQUE,
     email         VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
-    role_id       INT          NOT NULL,
+    role          VARCHAR(10)  NOT NULL,
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (role_id) REFERENCES roles (role_id)
-        ON DELETE RESTRICT
-        ON UPDATE CASCADE
+    CONSTRAINT role_const CHECK (role IN ('ADMIN','CUSTOMER'))
 );
-
-
-
 
 CREATE TABLE laptop
 (
@@ -84,8 +72,6 @@ CREATE TABLE laptop
     CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Linux')),
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
 )
-
-
 /*
 Category Explanation
 Gaming -	High-performance for gaming

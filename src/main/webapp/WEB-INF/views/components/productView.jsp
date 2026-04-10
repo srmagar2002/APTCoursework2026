@@ -18,7 +18,7 @@
         <li class="productItem">
             <p class="product" >
                 <c:out value="${laptop.title}"/> </p>
-            <img style="max-width: 100px" src="${pageContext.request.contextPath}/imgUpload/${laptop.imgUrl}" alt="${product.batteryLife}">
+            <img style="max-width: 600px" src="${pageContext.request.contextPath}/imgUpload/${laptop.imgUrl}" alt="${product.batteryLife}">
             <p>${laptop.price}</p>
             <p>${laptop.operatingSystem}</p>
             <p>${laptop.description}</p>
