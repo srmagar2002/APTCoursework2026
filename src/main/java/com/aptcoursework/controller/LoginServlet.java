@@ -3,6 +3,7 @@ package com.aptcoursework.controller;
 import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.User;
 import com.aptcoursework.utils.PasswordUtil;
+import com.aptcoursework.utils.SessionUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,7 +38,10 @@ public class LoginServlet extends HttpServlet {
                     .forward(request, response);
             return;
         }
-System.out.println("Login Successful");
+
+        SessionUtil.setAttribute(request, "user", user);
+        System.out.println("Login Successful");
+        
         response.sendRedirect(request.getContextPath() + "/products");
     }
 }

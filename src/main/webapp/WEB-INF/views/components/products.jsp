@@ -8,13 +8,12 @@
 <body>
 <h1>Products</h1>
 
-
 <ul>
 <c:forEach var="product" items="${products}" varStatus="status">
     <li class="productItem">
         <a class="product" href="${pageContext.request.contextPath}/productView?laptopID=${product.laptopID}">${status.count}.
         <c:out value="${product.title}"/> </a>
-        <img style="max-width: 100px" src="${pageContext.request.contextPath}/imgUpload/${product.thumbnailUrl}" alt="${product.batteryLife}">
+        <img style="max-width: 300px" src="${pageContext.request.contextPath}/imgUpload/${product.thumbnailUrl}" alt="${product.batteryLife}">
         <p>${product.price}</p>
     </li>
 </c:forEach>

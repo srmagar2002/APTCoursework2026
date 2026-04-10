@@ -1,6 +1,7 @@
 package com.aptcoursework.dao;
 
 import com.aptcoursework.entity.User;
+import com.aptcoursework.enums.Role;
 import com.aptcoursework.utils.DatabaseConnection;
 
 import java.sql.Connection;
@@ -14,7 +15,7 @@ public class UserDaoImpl implements UserDao {
     public boolean insertUser(User user) {
 
         Connection conn = null;
-        String sql = "INSERT INTO users(username,email,password_hash,role_id)" +
+        String sql = "INSERT INTO users(username,email,password_hash,role)" +
                 "VALUES(?,?,?,?)";
         try {
             conn = DatabaseConnection.getConnection();
@@ -22,7 +23,7 @@ public class UserDaoImpl implements UserDao {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPasswordHash());
-            pstmt.setInt(4, user.getRole_id());
+            pstmt.setString(4, user.getRole().name());
             pstmt.executeUpdate();
             System.out.println("User Added Successfully");
             return true;
@@ -48,7 +49,12 @@ public class UserDaoImpl implements UserDao {
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPasswordHash(rs.getString("password_hash"));
-                user.setRole_id(rs.getInt("role_id"));
+
+                Role role;
+                try{role = Role.valueOf(rs.getString("role").toUpperCase());}
+                catch (IllegalArgumentException | NullPointerException e){ role = Role.CUSTOMER;}
+                user.setRole(role);
+
                 return user;
             }
         } catch (SQLException e) {
@@ -73,7 +79,12 @@ public class UserDaoImpl implements UserDao {
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPasswordHash(rs.getString("password_hash"));
-                user.setRole_id(rs.getInt("role_id"));
+
+                Role role;
+                try{role = Role.valueOf(rs.getString("role").toUpperCase());}
+                catch (IllegalArgumentException | NullPointerException e){ role = Role.CUSTOMER;}
+                user.setRole(role);
+
                 return user;
             }
         } catch (SQLException e) {

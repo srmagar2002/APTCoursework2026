@@ -5,6 +5,7 @@ import com.aptcoursework.dao.LaptopDaoImpl;
 import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.Laptop;
 import com.aptcoursework.entity.User;
+import com.aptcoursework.enums.Role;
 import com.aptcoursework.utils.DatabaseConnection;
 import com.aptcoursework.utils.PasswordUtil;
 
@@ -127,7 +128,7 @@ public class daoTester {
         user.setPasswordHash(PasswordUtil.getHashPassword(input.nextLine()));
 
         System.out.println("enter role");
-        user.setRole_id(input.nextInt());
+        user.setRole(Role.valueOf(input.nextLine()));
 
         userDao.insertUser(user);
 
