@@ -18,7 +18,7 @@
         </a>
         <ul class="nav-links">
             <li><a href="#">About</a></li>
-            <li><a href="#">Products</a></li>
+            <li><a href="${pageContext.request.contextPath}/products">Products</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
         <div class="nav-actions">

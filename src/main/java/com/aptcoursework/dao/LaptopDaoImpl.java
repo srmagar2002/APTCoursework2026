@@ -17,7 +17,7 @@ public class LaptopDaoImpl implements LaptopDao {
         Connection conn = null;
         String sql = "INSERT INTO laptop ( brand, model, title, description, imgUrl, thumbnailUrl, processor, ram, storage, storageType, graphicsCard, screenSize, resolution, " +
                 "operatingSystem,price, discount, stockQuantity, weight, color, batteryLife) " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?)";
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -211,6 +211,8 @@ public class LaptopDaoImpl implements LaptopDao {
                     rs.getString("title"),
                     rs.getString("description"),
                     rs.getString("imgUrl"),
+                    rs.getString("img1Url"),
+                    rs.getString("img2Url"),
                     rs.getString("thumbnailUrl"),
                     rs.getString("processor"),
                     rs.getString("ram"),

@@ -14,6 +14,7 @@
 
 <jsp:include page="../components/navbar.jsp"/>
 <jsp:include page="../components/products.jsp"/>
+<jsp:include page="../components/footer.jsp"/>
 
 
 </body>
