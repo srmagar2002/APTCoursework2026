@@ -2,27 +2,26 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 
-
-    <c:forEach var="product" items="${products}" varStatus="status">
-        <article class="product-card">
-            <a href="${pageContext.request.contextPath}/productView?laptopID=${product.laptopID}">
-                <div class="product-image">
-                    <span class="product-badge">Best Seller</span>
-                    <img src="${pageContext.request.contextPath}/static/imgUpload/${product.thumbnailUrl}" alt="">
+<c:forEach var="product" items="${products}" varStatus="status">
+    <article class="product-card">
+        <a href="${pageContext.request.contextPath}/productView?laptopID=${product.laptopID}">
+            <div class="product-image">
+                <span class="product-badge">Best Seller</span>
+                <img src="${pageContext.request.contextPath}/static/imgUpload/${product.thumbnailUrl}" alt="">
+            </div>
+            <div class="product-content">
+                <span class="product-brand">${product.brand}</span>
+                <h3 class="product-name">${product.model}</h3>
+                <p class="product-specs">${product.processor} | ${product.ram}
+                    | ${product.storage} ${product.storageType}</p>
+                <div class="product-footer">
+                    <span class="product-price">Rs. ${product.price}</span>
+                    <button class="btn btn-primary product-btn">View</button>
                 </div>
-                <div class="product-content">
-                    <span class="product-brand">${product.brand}</span>
-                    <h3 class="product-name">${product.model}</h3>
-                    <p class="product-specs">${product.processor} | ${product.ram}
-                        | ${product.storage} ${product.storageType}</p>
-                    <div class="product-footer">
-                        <span class="product-price">Rs. ${product.price}</span>
-                        <button class="btn btn-primary product-btn">View</button>
-                    </div>
-                </div>
-            </a>
-        </article>
-    </c:forEach>
+            </div>
+        </a>
+    </article>
+</c:forEach>
 
 
 <%--<ul>--%>

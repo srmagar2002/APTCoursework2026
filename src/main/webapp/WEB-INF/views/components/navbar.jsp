@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<header class="header">
     <nav class="nav">
         <a href="#" class="logo">
             <div class="logo-icon">
@@ -58,9 +57,8 @@
                 </c:otherwise>
             </c:choose>
         </div>
-
     </nav>
-</header>
+
 
 <script>
     function toggleTheme() {

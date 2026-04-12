@@ -11,7 +11,9 @@
 <body>
 
 
-<jsp:include page="../components/navbar.jsp"/>
+<header class="header">
+    <jsp:include page="../components/navbar.jsp"/>
+</header>
 
 <main class="page-container">
 
@@ -21,10 +23,7 @@
         <p class="page-description">Browse our collection of premium laptops from top brands</p>
     </div>
 
-    <form action="${pageContext.request.contextPath}/products" method="get" class="filters-bar">
-
-        <!-- hidden action -->
-        <input type="hidden" name="action" value="filter"/>
+    <form action="${pageContext.request.contextPath}/products" method="get" class="filters-bar" id="filtersForm">
 
         <!-- Brand Filter -->
         <div class="filter-group">
@@ -140,7 +139,8 @@
                 <circle cx="11" cy="11" r="8"/>
                 <path d="M21 21l-4.35-4.35"/>
             </svg>
-            <input id="searchInput" type="text" class="filter-search-input" autocomplete="off"
+            <input id="searchInput" name="q" type="text" class="filter-search-input" autocomplete="off"
+                   value="${param.q}"
                    placeholder="Search laptops...">
         </div>
     </form>
@@ -148,19 +148,22 @@
         <jsp:include page="../components/products.jsp"/>
     </div>
 </main>
+
 <jsp:include page="../components/footer.jsp"/>
 
 <script>
-    let debounceTimer;
-    document.getElementById("searchInput").addEventListener("input", function () {
-        const query = this.value;
 
+    let debounceTimer;
+    const filtersForm = document.getElementById("filtersForm");
+    const searchInput = document.getElementById("searchInput");
+
+    searchInput.addEventListener("input", function () {
         clearTimeout(debounceTimer);
 
         debounceTimer = setTimeout(() => {
+            const params = new URLSearchParams(new FormData(filtersForm));
             fetch(
-                "${pageContext.request.contextPath}/products?action=search&q="
-                + encodeURIComponent(query),
+                "${pageContext.request.contextPath}/products?" + params.toString(),
                 {
                     headers: {
                         "X-Requested-With": "XMLHttpRequest"
@@ -172,7 +175,7 @@
                     console.log(html);
                     document.getElementById("products-grid").innerHTML = html;
                 });
-        }, 300);
+        }, 500);
     });
 </script>
 
