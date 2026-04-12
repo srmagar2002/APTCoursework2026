@@ -35,29 +35,98 @@
         <p class="page-description">Browse our collection of premium laptops from top brands</p>
     </div>
 
-    <div class="filters-bar">
+    <form action="${pageContext.request.contextPath}/products" method="get" class="filters-bar">
+
+        <!-- hidden action -->
+        <input type="hidden" name="action" value="filter"/>
+
+        <!-- Brand Filter -->
         <div class="filter-group">
             <span class="filter-label">Brand:</span>
-            <select class="filter-select">
-                <option value="">All Brands</option>
-                <option value="apple">Apple</option>
-                <option value="dell">Dell</option>
-                <option value="hp">HP</option>
-                <option value="lenovo">Lenovo</option>
-                <option value="asus">ASUS</option>
-                <option value="acer">Acer</option>
+            <select class="filter-select" name="brand" onchange="this.form.submit()">
+                <option value=""
+                        <c:if test="${empty param.brand}">selected</c:if>>
+                    All Brands
+                </option>
+
+                <option value="apple"
+                        <c:if test="${param.brand == 'apple'}">selected</c:if>>
+                    Apple
+                </option>
+
+                <option value="dell"
+                        <c:if test="${param.brand == 'dell'}">selected</c:if>>
+                    Dell
+                </option>
+
+                <option value="hp"
+                        <c:if test="${param.brand == 'hp'}">selected</c:if>>
+                    HP
+                </option>
+
+                <option value="lenovo"
+                        <c:if test="${param.brand == 'lenovo'}">selected</c:if>>
+                    Lenovo
+                </option>
+
+                <option value="asus"
+                        <c:if test="${param.brand == 'asus'}">selected</c:if>>
+                    ASUS
+                </option>
+
+                <option value="acer"
+                        <c:if test="${param.brand == 'acer'}">selected</c:if>>
+                    Acer
+                </option>
             </select>
         </div>
+
+        <!-- Category Filter -->
         <div class="filter-group">
             <span class="filter-label">Category:</span>
-            <select class="filter-select">
-                <option value="">All Categories</option>
-                <option value="gaming">Gaming</option>
-                <option value="business">Business</option>
-                <option value="ultrabook">Ultrabook</option>
-                <option value="workstation">Workstation</option>
+            <select class="filter-select" name="category" onchange="this.form.submit()">
+                <option value=""
+                        <c:if test="${empty param.category}">selected</c:if>>
+                    All Categories
+                </option>
+
+                <option value="gaming"
+                        <c:if test="${param.category == 'gaming'}">selected</c:if>>
+                    Gaming
+                </option>
+
+                <option value="ultrabook"
+                        <c:if test="${param.category == 'ultrabook'}">selected</c:if>>
+                    Ultrabook
+                </option>
+
+                <option value="business"
+                        <c:if test="${param.category == 'business'}">selected</c:if>>
+                    Business
+                </option>
+
+                <option value="student"
+                        <c:if test="${param.category == 'student'}">selected</c:if>>
+                    Student
+                </option>
+
+                <option value="convertible"
+                        <c:if test="${param.category == 'convertible'}">selected</c:if>>
+                    Convertible
+                </option>
+
+                <option value="workstation"
+                        <c:if test="${param.category == 'workstation'}">selected</c:if>>
+                    Workstation
+                </option>
+
+                <option value="general"
+                        <c:if test="${param.category == 'general'}">selected</c:if>>
+                    General Default
+                </option>
             </select>
         </div>
+
         <div class="filter-group">
             <span class="filter-label">Price:</span>
             <select class="filter-select">
@@ -70,23 +139,24 @@
             </select>
         </div>
         <div class="filter-group">
-            <span class="filter-label">Sort:</span>
-            <select class="filter-select">
-                <option value="featured">Featured</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="newest">Newest</option>
-                <option value="rating">Top Rated</option>
-            </select>
+            <%--            <span class="filter-label">Sort:</span>--%>
+            <%--            <select class="filter-select">--%>
+            <%--                <option value="featured">Featured</option>--%>
+            <%--                <option value="price-low">Price: Low to High</option>--%>
+            <%--                <option value="price-high">Price: High to Low</option>--%>
+            <%--                <option value="newest">Newest</option>--%>
+            <%--                <option value="rating">Top Rated</option>--%>
+            <%--            </select>--%>
         </div>
         <div class="filter-search">
-            <svg class="filter-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg class="filter-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2">
                 <circle cx="11" cy="11" r="8"/>
                 <path d="M21 21l-4.35-4.35"/>
             </svg>
             <input type="text" class="filter-search-input" placeholder="Search laptops...">
         </div>
-    </div>
+    </form>
 
 
     <div class="products-grid">
