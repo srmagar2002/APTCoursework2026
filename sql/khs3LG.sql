@@ -7,7 +7,6 @@ KHS3LG;
 SET
 FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS laptop;
 SET
 FOREIGN_KEY_CHECKS = 1;
@@ -32,6 +31,8 @@ CREATE TABLE laptop
     title              TEXT           NOT NULL,
     description        TEXT,
     imgUrl             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img/', CAST(laptopID AS CHAR), '.jpg')),
+    img1Url             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img1/', CAST(laptopID AS CHAR), '.jpg')),
+    img2Url             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img2/', CAST(laptopID AS CHAR), '.jpg')),
     thumbnailUrl       VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('thumb/', CAST(laptopID AS CHAR), '.jpg')),
     category           VARCHAR(200)            DEFAULT 'General',
 

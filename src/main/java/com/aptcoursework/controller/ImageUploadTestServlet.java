@@ -35,7 +35,7 @@ public class ImageUploadTestServlet extends HttpServlet {
         String fileName = filePart.getSubmittedFileName();
 
 
-        String projectPath = getServletContext().getRealPath("/imgUpload");
+        String projectPath = getServletContext().getRealPath("static/imgUpload");
         File uploadDir = new File(projectPath);
         if (!uploadDir.exists()) uploadDir.mkdir();
 
@@ -44,7 +44,7 @@ public class ImageUploadTestServlet extends HttpServlet {
             Files.copy(input, file.toPath());
         }
 
-        String imagePath = getServletContext().getRealPath("/imgUpload");
+        String imagePath = getServletContext().getRealPath("/static/imgUpload");
 
         System.out.println("Uploaded image name: " + fileName);
         System.out.println("Uploaded image path: " + imagePath);

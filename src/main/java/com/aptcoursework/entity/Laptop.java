@@ -10,6 +10,8 @@ public class Laptop {
     private String title;
     private String description;
     private String imgUrl;
+    private String img1Url;
+    private String img2Url;
     private String thumbnailUrl;
 
     /* SPECS */
@@ -43,7 +45,7 @@ public class Laptop {
 
     //default constructor
     public Laptop(int laptopID, String brand, String model, String title, String description,
-                  String imgUrl, String thumbnailUrl, String processor, String ram, String storage,
+                  String imgUrl,String img1Url,String img2Url, String thumbnailUrl, String processor, String ram, String storage,
                   String storageType, String graphicsCard, double screenSize, String resolution,
                   String operatingSystem, BigDecimal price, Integer discount, Integer stockQuantity,
                   String availabilityStatus, Integer weight, String color, Integer batteryLife,
@@ -55,6 +57,8 @@ public class Laptop {
         this.title = title;
         this.description = description;
         this.imgUrl = imgUrl;
+        this.img1Url = img1Url;
+        this.img2Url = img2Url;
         this.thumbnailUrl = thumbnailUrl;
         this.processor = processor;
         this.ram = ram;
@@ -92,6 +96,12 @@ public class Laptop {
 
     public String getImgUrl() { return imgUrl; }
     public void setImgUrl(String imgUrl) { this.imgUrl = imgUrl; }
+
+    public String getImg1Url() { return img1Url; }
+    public void setImg1Url(String img1Url) { this.img1Url = img1Url; }
+
+    public String getImg2Url() { return img2Url; }
+    public void setImg2Url(String img2Url) { this.img2Url = img2Url; }
 
     public String getThumbnailUrl() { return thumbnailUrl; }
     public void setThumbnailUrl(String thumbnailUrl) { this.thumbnailUrl = thumbnailUrl; }

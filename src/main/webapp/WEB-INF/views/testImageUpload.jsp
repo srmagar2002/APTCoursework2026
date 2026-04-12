@@ -24,6 +24,6 @@
     <input type="submit" value="Upload">
 </form>
 
-<img src="${pageContext.request.contextPath}/${imagePath}" width="200">
+<img src="${pageContext.request.contextPath}/static/${imagePath}" width="200">
 </body>
 </html>

@@ -17,7 +17,7 @@ public class LaptopDaoImpl implements LaptopDao {
         Connection conn = null;
         String sql = "INSERT INTO laptop ( brand, model, title, description, imgUrl, thumbnailUrl, processor, ram, storage, storageType, graphicsCard, screenSize, resolution, " +
                 "operatingSystem,price, discount, stockQuantity, weight, color, batteryLife) " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?)";
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -149,16 +149,38 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     @Override
-    public ArrayList<Laptop> getLaptopsBySpec(String brand, String category, String os) {
+    public ArrayList<Laptop> getLaptopsBySpec(String brand, String category, String priceCondition) {
         ArrayList<Laptop> laptops = new ArrayList<>();
         Connection conn = null;
-        String sql = "SELECT * FROM laptop WHERE brand=? & category=? AND os=?";
+        String sql = "";
+
+        switch (priceCondition) {
+            case "1":
+                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price <500";
+                break;
+            case "2":
+                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price BETWEEN 500 AND 1000";
+                break;
+            case "3":
+                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price between 1000 AND 1500";
+                break;
+            case "4":
+                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price BETWEEN 1500 AND 2000";
+                break;
+            case "5":
+                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price >2000";
+                break;
+            default:
+                sql = "SELECT * FROM laptop WHERE brand=? AND category=?";
+                break;
+
+        }
+
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, brand == null ? "Dell" : brand);
             stmt.setString(2, category == null ? "General" : category);
-            stmt.setString(3, os == null ? "Windows" : os);
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -211,6 +233,8 @@ public class LaptopDaoImpl implements LaptopDao {
                     rs.getString("title"),
                     rs.getString("description"),
                     rs.getString("imgUrl"),
+                    rs.getString("img1Url"),
+                    rs.getString("img2Url"),
                     rs.getString("thumbnailUrl"),
                     rs.getString("processor"),
                     rs.getString("ram"),

@@ -22,14 +22,14 @@ public class AuthenticationFilter implements Filter {
         String contextPath = req.getContextPath();
         String path = uri.substring(contextPath.length());
 
-        if(path.startsWith("/static/")){
+        if(path.contains("/static/")){
             chain.doFilter(req,res);
             return;
         }
 
         boolean isLoggedIn = SessionUtil.getAttribute(req,"user") != null;
         boolean isAuthPage = "/login".equals(path) || "/register".equals(path) ;
-        boolean isProduct = "/products".equals(path);
+        boolean isProduct = "/products".equals(path) || "/".equals(path);
 
         if(isProduct){
             chain.doFilter(req,res);

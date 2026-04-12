@@ -9,6 +9,6 @@ public interface LaptopDao {
     Laptop getLaptopById(int id);
     boolean updateLaptop(Laptop laptop);
     ArrayList<Laptop> fetchAllLaptops();
-    ArrayList<Laptop> getLaptopsBySpec(String brand, String category, String os);
+    ArrayList<Laptop> getLaptopsBySpec(String brand, String category, String priceCondition);
     ArrayList<Laptop> getLaptopsBySearch(String searchWord);
 }
