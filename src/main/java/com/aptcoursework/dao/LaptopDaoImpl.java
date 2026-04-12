@@ -156,22 +156,22 @@ public class LaptopDaoImpl implements LaptopDao {
 
         switch (priceCondition) {
             case "1":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price <500";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500";
                 break;
             case "2":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price BETWEEN 500 AND 1000";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000";
                 break;
             case "3":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price between 1000 AND 1500";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500";
                 break;
             case "4":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price BETWEEN 1500 AND 2000";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000";
                 break;
             case "5":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price >2000";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000";
                 break;
             default:
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=?";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ?";
                 break;
 
         }
@@ -179,8 +179,8 @@ public class LaptopDaoImpl implements LaptopDao {
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, brand == null ? "Dell" : brand);
-            stmt.setString(2, category == null ? "General" : category);
+            stmt.setString(1, brand == null ? "%dell%" : "%" + brand.toLowerCase() + "%");
+            stmt.setString(2, category == null ? "%general%" : "%" + category.toLowerCase() + "%");
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {

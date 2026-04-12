@@ -28,6 +28,26 @@ public class ProductsServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/views/pages/productPage.jsp")
                     .forward(request, response);
         }
+        if ("filter".equals(action)) {
+            String brand = request.getParameter("brand");
+            String category =request.getParameter("category");
+            String price = request.getParameter("pricerange");
+            ArrayList<Laptop> products = laptopDao.getLaptopsBySpec(brand,category,price);
+            request.setAttribute("products", products);
+            request.getRequestDispatcher("/WEB-INF/views/pages/productPage.jsp").forward(request, response);
+        }
+
+        if("search".equals(action)){
+            String query=request.getParameter("q");
+            if(query==null)query="";
+            query=query.trim();
+
+            ArrayList<Laptop> laptops = laptopDao.getLaptopsBySearch(query);
+            request.setAttribute("laptops", laptops);
+        }
+
+
+
 
 
     }
