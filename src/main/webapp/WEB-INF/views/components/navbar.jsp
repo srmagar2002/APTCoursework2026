@@ -6,30 +6,78 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
+<header class="header">
+    <nav class="nav">
+        <a href="#" class="logo">
+            <div class="logo-icon">
 
-<c:choose>
-    <c:when test="${empty sessionScope.user}">
-        <a href="${pageContext.request.contextPath}/login">Login</a>
-    </c:when>
-
-    <c:otherwise>
-        <p>${sessionScope.user.role}</p>
-
-        <a href="${pageContext.request.contextPath}/logout" class="logout"
-           onclick="return confirm('Are you sure you want to logout?');">
-            Logout
+            </div>
+            KHS3LG
         </a>
-    </c:otherwise>
-</c:choose>
+        <ul class="nav-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <div class="theme-toggle-track">
+                    <svg class="theme-toggle-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="theme-toggle-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </div>
+                <div class="theme-toggle-thumb"></div>
+            </button>
+            <c:choose>
+                <c:when test="${empty sessionScope.user}">
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/login">Login</a>
+                </c:when>
+
+                <c:otherwise>
+                    <p class="btn btn-ghost">${sessionScope.user.role}</p>
+
+                    <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary"
+                       onclick="return confirm('Are you sure you want to logout?');">
+                        Logout
+                    </a>
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+    </nav>
+</header>
+
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    }
+
+    // Load saved theme on page load
+    (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+</script>
 
 
-</div>
-</body>
-</html>
+
+

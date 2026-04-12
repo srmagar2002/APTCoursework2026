@@ -22,7 +22,7 @@ public class AuthenticationFilter implements Filter {
         String contextPath = req.getContextPath();
         String path = uri.substring(contextPath.length());
 
-        if(path.startsWith("/static/")){
+        if(path.contains("/static/")){
             chain.doFilter(req,res);
             return;
         }
