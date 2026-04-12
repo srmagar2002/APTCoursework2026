@@ -149,46 +149,47 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     @Override
-    public ArrayList<Laptop> getLaptopsBySpec(String brand, String category, String priceCondition) {
+    public ArrayList<Laptop> getLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition){
         ArrayList<Laptop> laptops = new ArrayList<>();
         Connection conn = null;
         String sql = "";
 
         switch (priceCondition) {
             case "1":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price <500";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
                 break;
             case "2":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price BETWEEN 500 AND 1000";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
                 break;
             case "3":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price between 1000 AND 1500";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
                 break;
             case "4":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price BETWEEN 1500 AND 2000";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
                 break;
             case "5":
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=? AND price >2000";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
                 break;
             default:
-                sql = "SELECT * FROM laptop WHERE brand=? AND category=?";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
                 break;
 
         }
-
-        try {
-            conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, brand == null ? "Dell" : brand);
-            stmt.setString(2, category == null ? "General" : category);
-
+        try{
+          conn=DatabaseConnection.getConnection();
+          PreparedStatement stmt = conn.prepareStatement(sql);
+            String searchValue = toLikeValue(searchWord);
+            stmt.setString(1, toLikeValue(brand));
+            stmt.setString(2, toLikeValue(category));
+            stmt.setString(3, searchValue);
+            stmt.setString(4, searchValue);
+            stmt.setString(5, searchValue);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Laptop laptop = laptopAssginer(rs);
                 laptops.add(laptop);
             }
             return laptops;
-
         } catch (SQLException e) {
             System.out.println("Error Getting Laptop" + e.getMessage());
         } finally {
@@ -197,30 +198,11 @@ public class LaptopDaoImpl implements LaptopDao {
         return null;
     }
 
-    @Override
-    public ArrayList<Laptop> getLaptopsBySearch(String searchWord) {
-        ArrayList<Laptop> laptops = new ArrayList<Laptop>();
-        Connection conn = null;
-        String sql = "SELECT * FROM laptop WHERE LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?";
-        try {
-            conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, "%" + searchWord.toLowerCase() + "%");
-            stmt.setString(2, "%" + searchWord.toLowerCase() + "%");
-            stmt.setString(3, "%" + searchWord.toLowerCase() + "%");
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Laptop laptop = laptopAssginer(rs);
-                laptops.add(laptop);
-            }
-            return laptops;
-        } catch (SQLException e) {
-            System.out.println("Error Getting Laptop" + e.getMessage());
-        } finally {
-            DatabaseConnection.closeConnection(conn);
+    private String toLikeValue(String value) {
+        if (value == null || value.isBlank()) {
+            return "%";
         }
-        return null;
+        return "%" + value.toLowerCase() + "%";
     }
 
     //This method reduces the redundancy in code while assign the db table to java entity
