@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class ProductsServlet extends HttpServlet {
 
     private static final LaptopDaoImpl laptopDao = new LaptopDaoImpl();
+
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
@@ -30,25 +31,30 @@ public class ProductsServlet extends HttpServlet {
         }
         if ("filter".equals(action)) {
             String brand = request.getParameter("brand");
-            String category =request.getParameter("category");
+            String category = request.getParameter("category");
             String price = request.getParameter("pricerange");
-            ArrayList<Laptop> products = laptopDao.getLaptopsBySpec(brand,category,price);
+            ArrayList<Laptop> products = laptopDao.getLaptopsBySpec(brand, category, price);
             request.setAttribute("products", products);
             request.getRequestDispatcher("/WEB-INF/views/pages/productPage.jsp").forward(request, response);
         }
-
-        if("search".equals(action)){
-            String query=request.getParameter("q");
-            if(query==null)query="";
-            query=query.trim();
+        if ("search".equals(action)) {
+            String query = request.getParameter("q");
+            if (query == null) query = "";
+            query = query.trim();
 
             ArrayList<Laptop> laptops = laptopDao.getLaptopsBySearch(query);
-            request.setAttribute("laptops", laptops);
+            request.setAttribute("products", laptops);
+
+            String isAjax = request.getHeader("X-Requested-With");
+
+            if ("XMLHttpRequest".equals(isAjax)) {
+                request.getRequestDispatcher("/WEB-INF/views/components/products.jsp")
+                        .forward(request, response);
+            } else {
+                request.getRequestDispatcher("/WEB-INF/views/pages/productPage.jsp")
+                        .forward(request, response);
+            }
         }
-
-
-
-
 
     }
 

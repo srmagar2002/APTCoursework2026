@@ -11,4 +11,5 @@ public interface LaptopDao {
     ArrayList<Laptop> fetchAllLaptops();
     ArrayList<Laptop> getLaptopsBySpec(String brand, String category, String priceCondition);
     ArrayList<Laptop> getLaptopsBySearch(String searchWord);
+    ArrayList<Laptop> getLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition);
 }
