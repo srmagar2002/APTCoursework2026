@@ -70,6 +70,21 @@ public class ProductsServlet extends HttpServlet {
                           HttpServletResponse response)
             throws ServletException, IOException {
 
+        String brand = request.getParameter("brand");
+        String title = request.getParameter("title");
+        String model = request.getParameter("model");
+        String price = request.getParameter("price");
+        String discount = request.getParameter("discount");
+        String description = request.getParameter("description");
+        String category = request.getParameter("category");
+        String processor = request.getParameter("processor");
+        String ram = request.getParameter("ram");
+        String storage = request.getParameter("storage");
+        String storageType = request.getParameter("storagetype");
+        String graphics = request.getParameter("graphics");
+        String screen =  request.getParameter("screen");
+        String reso = request.getParameter("reso");
+
 
     }
 

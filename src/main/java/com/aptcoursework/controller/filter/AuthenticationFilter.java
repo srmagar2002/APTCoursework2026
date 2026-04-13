@@ -29,7 +29,7 @@ public class AuthenticationFilter implements Filter {
 
         boolean isLoggedIn = SessionUtil.getAttribute(req,"user") != null;
         boolean isAuthPage = "/login".equals(path) || "/register".equals(path) ;
-        boolean isProduct = "/products".equals(path) || "/".equals(path);
+        boolean isProduct = "/products".equals(path) || "/".equals(path) || "/productView".equals(path);
 
         if(isProduct){
             chain.doFilter(req,res);
