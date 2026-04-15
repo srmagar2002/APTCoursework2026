@@ -1266,22 +1266,63 @@ img {
     color: var(--foreground);
 }
 
-/* Admin Edit Responsive */
+
+/* Admin Edit Mode - 2x2 Gallery Grid */
+.gallery-grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.gallery-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, #1a1a1a 0%, #262626 100%);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(4px);
+    transition: filter 0.3s ease;
+}
+
+.gallery-item:hover img {
+    filter: blur(0px);
+}
+
+.btn-edit-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.btn-edit-image:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+}
+
 @media (max-width: 768px) {
-    .admin-edit-row {
-        flex-direction: column;
-    }
-
-    .edit-input-name {
-        font-size: 1.25rem;
-    }
-
-    .edit-input-price {
-        font-size: 1.5rem;
-        max-width: 100%;
-    }
-
-    .product-meta-admin {
-        flex-direction: column;
+    .gallery-grid-2x2 {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
     }
 }

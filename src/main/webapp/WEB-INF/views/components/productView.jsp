@@ -13,7 +13,7 @@
     <c:when test="${sessionScope.user.role== 'ADMIN' }">
 
         <!-- Main Content -->
-        <form action="${pageContext.request.contextPath}/products" method="post">
+        <form action="${pageContext.request.contextPath}/products" method="post" enctype="multipart/form-data">
 
             <c:if test="${not empty error}">
                 <p class="error"><c:out value="${error}"/></p>
@@ -23,41 +23,46 @@
                 <div class="product-detail">
                     <!-- Product Gallery -->
                     <div class="product-gallery">
-                        <div class="main-image" style="position: relative;">
-                            <img id="mainProductImage"
-                                 src="${pageContext.request.contextPath}/static/imgUpload/${laptop.thumbnailUrl}"
-                                 alt="${laptop.title}">
-                            <button class="btn-change-image"
-                                    onclick="document.getElementById('mainImageUpload').click()">
-                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                                     viewBox="0 0 24 24">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                </svg>
-                                Change
-                            </button>
-                            <input type="file" id="mainImageUpload" accept="image/*" style="display: none;">
-                        </div>
-                        <div class="thumbnail-grid">
-                            <div class="thumbnail active"
-                                 onclick="changeImage(this, '${pageContext.request.contextPath}/static/imgUpload/${laptop.thumbnailUrl}', 'MacBook Pro 16 inch front view')">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.thumbnailUrl}"
-                                     alt="${laptop.title}">
+                        <div class="gallery-grid-2x2">
+                            <div class="gallery-item">
+                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.thumbnailUrl}" id="thumb-img" alt="${laptop.title}">
+                                <button class="btn-edit-image" onclick="document.getElementById('imageUpload1').click()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                </button>
+                                <input type="file" id="imageUpload1"  name="thumbimg" accept="image/*" style="display: none;">
                             </div>
-                            <div class="thumbnail"
-                                 onclick="changeImage(this, '${pageContext.request.contextPath}/static/imgUpload/${laptop.imgUrl}', 'MacBook Pro 16 inch side view')">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.imgUrl}"
-                                     alt="MacBook Pro side view thumbnail" alt="${laptop.title}">
+                            <div class="gallery-item">
+                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.imgUrl}" id="image0" alt="${laptop.title}">
+                                <button class="btn-edit-image" onclick="document.getElementById('imageUpload2').click()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                </button>
+                                <input type="file" id="imageUpload2"  name="img0" accept="image/*" style="display: none;">
                             </div>
-                            <div class="thumbnail"
-                                 onclick="changeImage(this, '${pageContext.request.contextPath}/static/imgUpload/${laptop.img1Url}', 'MacBook Pro 16 inch keyboard view')">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img1Url}"
-                                     alt="${laptop.title}">
+                            <div class="gallery-item">
+                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img1Url}" id="image1" alt="${laptop.title}">
+                                <button class="btn-edit-image" onclick="document.getElementById('imageUpload3').click()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                </button>
+                                <input type="file" id="imageUpload3" name="img1" accept="image/*" style="display: none;">
                             </div>
-                            <div class="thumbnail"
-                                 onclick="changeImage(this, '${pageContext.request.contextPath}/static/imgUpload/${laptop.img2Url}', 'MacBook Pro 16 inch keyboard view')">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img2Url}"
-                                     alt="${laptop.title}">
+                            <div class="gallery-item">
+                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img2Url}" id="image2" alt="${laptop.title}">
+                                <button class="btn-edit-image" onclick="document.getElementById('imageUpload4').click()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                </button>
+                                <input type="file" id="imageUpload4" name="img2" accept="image/*" style="display: none;">
                             </div>
                         </div>
                     </div>
@@ -297,8 +302,44 @@
                     </div>
                 </div>
             </main>
-
         </form>
+
+        <script>
+            const input1 = document.getElementById("imageUpload1");
+            const input2 = document.getElementById("imageUpload2");
+            const input3 = document.getElementById("imageUpload3");
+            const input4 = document.getElementById("imageUpload4");
+
+            const preview1 = document.getElementById("thumb-img");
+            const preview2 = document.getElementById("image0");
+            const preview3 = document.getElementById("image1");
+            const preview4 = document.getElementById("image2");
+
+            function handlePreview(input, preview) {
+                input.addEventListener("change", function () {
+                    const file = this.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function () {
+                            preview.src = this.result;
+                            preview.style.display = "block";
+                        };
+
+                        reader.readAsDataURL(file);
+                    } else {
+                        preview.style.display = "none";
+                        preview.src = "";
+                    }
+                });
+            }
+            handlePreview(input1, preview1);
+            handlePreview(input2, preview2);
+            handlePreview(input3, preview3);
+            handlePreview(input4, preview4);
+        </script>
+
     </c:when>
     <c:when test="${empty sessionScope.user || sessionScope.user.role=='CUSTOMER'}">
         <main class="page-container">
@@ -318,7 +359,7 @@
                     <div class="main-image">
                         <img id="mainProductImage"
                              src="${pageContext.request.contextPath}/static/imgUpload/${laptop.thumbnailUrl}"
-                             alt="MacBook Pro 16 inch front view">
+                             alt="${laptop.title}">
                     </div>
                     <div class="thumbnail-grid">
                         <div class="thumbnail active"
