@@ -13,6 +13,7 @@ public class Laptop {
     private String img1Url;
     private String img2Url;
     private String thumbnailUrl;
+    private String category;
 
     /* SPECS */
     private String processor;
@@ -20,7 +21,7 @@ public class Laptop {
     private String storage;
     private String storageType; // SSD or HDD
     private String graphicsCard;
-    private double screenSize;
+    private String screenSize;
     private String resolution;
     private String operatingSystem; // Windows, macOS, Linux
 
@@ -45,8 +46,8 @@ public class Laptop {
 
     //default constructor
     public Laptop(int laptopID, String brand, String model, String title, String description,
-                  String imgUrl,String img1Url,String img2Url, String thumbnailUrl, String processor, String ram, String storage,
-                  String storageType, String graphicsCard, double screenSize, String resolution,
+                  String imgUrl,String img1Url,String img2Url, String thumbnailUrl,String category, String processor, String ram, String storage,
+                  String storageType, String graphicsCard, String screenSize, String resolution,
                   String operatingSystem, BigDecimal price, Integer discount, Integer stockQuantity,
                   String availabilityStatus, Integer weight, String color, Integer batteryLife,
                   LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -60,6 +61,7 @@ public class Laptop {
         this.img1Url = img1Url;
         this.img2Url = img2Url;
         this.thumbnailUrl = thumbnailUrl;
+        this.category = category;
         this.processor = processor;
         this.ram = ram;
         this.storage = storage;
@@ -106,6 +108,9 @@ public class Laptop {
     public String getThumbnailUrl() { return thumbnailUrl; }
     public void setThumbnailUrl(String thumbnailUrl) { this.thumbnailUrl = thumbnailUrl; }
 
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
     public String getProcessor() { return processor; }
     public void setProcessor(String processor) { this.processor = processor; }
 
@@ -121,8 +126,8 @@ public class Laptop {
     public String getGraphicsCard() { return graphicsCard; }
     public void setGraphicsCard(String graphicsCard) { this.graphicsCard = graphicsCard; }
 
-    public double getScreenSize() { return screenSize; }
-    public void setScreenSize(double screenSize) { this.screenSize = screenSize; }
+    public String getScreenSize() { return screenSize; }
+    public void setScreenSize(String screenSize) { this.screenSize = screenSize; }
 
     public String getResolution() { return resolution; }
     public void setResolution(String resolution) { this.resolution = resolution; }

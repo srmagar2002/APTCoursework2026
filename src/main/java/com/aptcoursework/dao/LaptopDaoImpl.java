@@ -15,7 +15,7 @@ public class LaptopDaoImpl implements LaptopDao {
     public boolean insertLaptop(Laptop laptop) {
 
         Connection conn = null;
-        String sql = "INSERT INTO laptop ( brand, model, title, description, imgUrl, thumbnailUrl, processor, ram, storage, storageType, graphicsCard, screenSize, resolution, " +
+        String sql = "INSERT INTO laptop ( brand, model, title, description, processor, ram, storage, storageType, graphicsCard, screenSize, resolution, " +
                 "operatingSystem,price, discount, stockQuantity, weight, color, batteryLife) " +
                 "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
@@ -26,22 +26,20 @@ public class LaptopDaoImpl implements LaptopDao {
             stmt.setString(2, laptop.getModel());
             stmt.setString(3, laptop.getTitle());
             stmt.setString(4, laptop.getDescription());
-            stmt.setString(5, laptop.getImgUrl());
-            stmt.setString(6, laptop.getThumbnailUrl());
-            stmt.setString(7, laptop.getProcessor());
-            stmt.setString(8, laptop.getRam());
-            stmt.setString(9, laptop.getStorage());
-            stmt.setString(10, laptop.getStorageType());
-            stmt.setString(11, laptop.getGraphicsCard());
-            stmt.setDouble(12, laptop.getScreenSize());
-            stmt.setString(13, laptop.getResolution());
-            stmt.setString(14, laptop.getOperatingSystem());
-            stmt.setBigDecimal(15, laptop.getPrice());
-            stmt.setDouble(16, laptop.getDiscount());
-            stmt.setInt(17, laptop.getStockQuantity());
-            stmt.setDouble(18, laptop.getWeight());
-            stmt.setString(19, laptop.getColor());
-            stmt.setInt(20, laptop.getBatteryLife());
+            stmt.setString(5, laptop.getProcessor());
+            stmt.setString(6, laptop.getRam());
+            stmt.setString(7, laptop.getStorage());
+            stmt.setString(8, laptop.getStorageType());
+            stmt.setString(9, laptop.getGraphicsCard());
+            stmt.setString(10, laptop.getScreenSize());
+            stmt.setString(11, laptop.getResolution());
+            stmt.setString(12, laptop.getOperatingSystem());
+            stmt.setBigDecimal(13, laptop.getPrice());
+            stmt.setDouble(14, laptop.getDiscount());
+            stmt.setInt(15, laptop.getStockQuantity());
+            stmt.setDouble(16, laptop.getWeight());
+            stmt.setString(17, laptop.getColor());
+            stmt.setInt(18, laptop.getBatteryLife());
 
             stmt.executeUpdate();
             return true;
@@ -83,7 +81,7 @@ public class LaptopDaoImpl implements LaptopDao {
         /* Updates Laptop By ID*/
         Connection conn = null;
         String sql = "UPDATE laptop SET brand=?, model=?, title=?, description=?, " +
-                "imgUrl=?, thumbnailUrl=?, processor=?, ram=?, storage=?, " +
+                " processor=?, ram=?, storage=?, " +
                 "storageType=?, graphicsCard=?, screenSize=?, resolution=?, " +
                 "operatingSystem=?, price=?, discount=?, stockQuantity=?, weight=?, " +
                 "color=?, batteryLife=? WHERE laptopID=?";
@@ -96,23 +94,21 @@ public class LaptopDaoImpl implements LaptopDao {
             stmt.setString(2, laptop.getModel());
             stmt.setString(3, laptop.getTitle());
             stmt.setString(4, laptop.getDescription());
-            stmt.setString(5, laptop.getImgUrl());
-            stmt.setString(6, laptop.getThumbnailUrl());
-            stmt.setString(7, laptop.getProcessor());
-            stmt.setString(8, laptop.getRam());
-            stmt.setString(9, laptop.getStorage());
-            stmt.setString(10, laptop.getStorageType());
-            stmt.setString(11, laptop.getGraphicsCard());
-            stmt.setDouble(12, laptop.getScreenSize());
-            stmt.setString(13, laptop.getResolution());
-            stmt.setString(14, laptop.getOperatingSystem());
-            stmt.setBigDecimal(15, laptop.getPrice());
-            stmt.setDouble(16, laptop.getDiscount());
-            stmt.setInt(17, laptop.getStockQuantity());
-            stmt.setDouble(18, laptop.getWeight());
-            stmt.setString(19, laptop.getColor());
-            stmt.setInt(20, laptop.getBatteryLife());
-            stmt.setInt(21, laptop.getLaptopID());
+            stmt.setString(5, laptop.getProcessor());
+            stmt.setString(6, laptop.getRam());
+            stmt.setString(7, laptop.getStorage());
+            stmt.setString(8, laptop.getStorageType());
+            stmt.setString(9, laptop.getGraphicsCard());
+            stmt.setString(10, laptop.getScreenSize());
+            stmt.setString(11, laptop.getResolution());
+            stmt.setString(12, laptop.getOperatingSystem());
+            stmt.setBigDecimal(13, laptop.getPrice());
+            stmt.setDouble(14, laptop.getDiscount());
+            stmt.setInt(15, laptop.getStockQuantity());
+            stmt.setDouble(16, laptop.getWeight());
+            stmt.setString(17, laptop.getColor());
+            stmt.setInt(18, laptop.getBatteryLife());
+            stmt.setInt(19, laptop.getLaptopID());
 
             stmt.executeUpdate();
             System.out.println("Laptop updated successfully");
@@ -156,22 +152,22 @@ public class LaptopDaoImpl implements LaptopDao {
 
         switch (priceCondition) {
             case "1":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "2":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "3":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "4":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "5":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             default:
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ?)";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
 
         }
@@ -184,6 +180,7 @@ public class LaptopDaoImpl implements LaptopDao {
             stmt.setString(3, searchValue);
             stmt.setString(4, searchValue);
             stmt.setString(5, searchValue);
+            stmt.setString(6, searchValue);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Laptop laptop = laptopAssginer(rs);
@@ -218,12 +215,13 @@ public class LaptopDaoImpl implements LaptopDao {
                     rs.getString("img1Url"),
                     rs.getString("img2Url"),
                     rs.getString("thumbnailUrl"),
+                    rs.getString("category"),
                     rs.getString("processor"),
                     rs.getString("ram"),
                     rs.getString("storage"),
                     rs.getString("storageType"),
                     rs.getString("graphicsCard"),
-                    rs.getDouble("screenSize"),
+                    rs.getString("screenSize"),
                     rs.getString("resolution"),
                     rs.getString("operatingSystem"),
                     rs.getBigDecimal("price"),

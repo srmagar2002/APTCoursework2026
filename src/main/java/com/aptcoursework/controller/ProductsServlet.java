@@ -2,7 +2,9 @@ package com.aptcoursework.controller;
 
 import com.aptcoursework.dao.LaptopDaoImpl;
 import com.aptcoursework.entity.Laptop;
+import com.mysql.cj.exceptions.StreamingNotifiable;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet("/products")
+@MultipartConfig
 public class ProductsServlet extends HttpServlet {
 
     private static final LaptopDaoImpl laptopDao = new LaptopDaoImpl();
@@ -69,6 +72,29 @@ public class ProductsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
+
+        String brand = request.getParameter("brand");
+        String title = request.getParameter("title");
+        String model = request.getParameter("model");
+        String price = request.getParameter("price");
+        String discount = request.getParameter("discount");
+        String description = request.getParameter("description");
+        String category = request.getParameter("category");
+        String processor = request.getParameter("processor");
+        String ram = request.getParameter("ram");
+        String storage = request.getParameter("storage");
+        String storageType = request.getParameter("storagetype");
+        String graphics = request.getParameter("graphics");
+        String screen =  request.getParameter("screen");
+        String reso = request.getParameter("reso");
+
+        String thumbimg = request.getParameter("thumbimg");
+        String img0 = request.getParameter("img0");
+        String img1 = request.getParameter("img1");
+        String img2 = request.getParameter("img2");
+
+        System.out.println(thumbimg + " " + img0 + " " + img1 + " " + img2);
+
 
 
     }
