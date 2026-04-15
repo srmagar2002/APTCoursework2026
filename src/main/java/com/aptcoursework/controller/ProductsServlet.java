@@ -9,8 +9,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import jakarta.servlet.jsp.PageContext;
+
+import java.io.File;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.nio.file.Files;
 
 import java.io.IOException;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 @WebServlet("/products")
@@ -35,9 +43,9 @@ public class ProductsServlet extends HttpServlet {
 
         boolean hasFilters =
                 (brand != null && !brand.isBlank()) ||
-                (category != null && !category.isBlank()) ||
-                (price != null && !price.isBlank()) ||
-                !query.isEmpty();
+                        (category != null && !category.isBlank()) ||
+                        (price != null && !price.isBlank()) ||
+                        !query.isEmpty();
 
         if (!hasFilters) {
             ArrayList<Laptop> products = laptopDao.fetchAllLaptops();
@@ -73,30 +81,82 @@ public class ProductsServlet extends HttpServlet {
                           HttpServletResponse response)
             throws ServletException, IOException {
 
-        String brand = request.getParameter("brand");
-        String title = request.getParameter("title");
-        String model = request.getParameter("model");
-        String price = request.getParameter("price");
-        String discount = request.getParameter("discount");
-        String description = request.getParameter("description");
-        String category = request.getParameter("category");
-        String processor = request.getParameter("processor");
-        String ram = request.getParameter("ram");
-        String storage = request.getParameter("storage");
-        String storageType = request.getParameter("storagetype");
-        String graphics = request.getParameter("graphics");
-        String screen =  request.getParameter("screen");
-        String reso = request.getParameter("reso");
+        LaptopDaoImpl laptopDao = new LaptopDaoImpl();
 
-        String thumbimg = request.getParameter("thumbimg");
-        String img0 = request.getParameter("img0");
-        String img1 = request.getParameter("img1");
-        String img2 = request.getParameter("img2");
+        String action = request.getParameter("action");
 
-        System.out.println(thumbimg + " " + img0 + " " + img1 + " " + img2);
+        if ("edit".equals(action)) {
+
+            Laptop laptop = laptopDao.getLaptopById(Integer.parseInt(request.getParameter("laptopid")));
+            laptop.setBrand(request.getParameter("brand"));
+            laptop.setTitle(request.getParameter("title"));
+            laptop.setModel(request.getParameter("model"));
+            laptop.setPrice(new BigDecimal(request.getParameter("price")));
+            laptop.setDiscount(Integer.parseInt(request.getParameter("discount")));
+            laptop.setDescription(request.getParameter("description"));
+            laptop.setCategory(request.getParameter("category"));
+            laptop.setOperatingSystem(request.getParameter("operatingsystem"));
+            laptop.setProcessor(request.getParameter("processor"));
+            laptop.setRam(request.getParameter("ram"));
+            laptop.setStorage(request.getParameter("storage"));
+            laptop.setStorageType(request.getParameter("storagetype"));
+            laptop.setGraphicsCard(request.getParameter("graphics"));
+            laptop.setScreenSize(request.getParameter("screen"));
+            laptop.setResolution(request.getParameter("reso"));
+            laptop.setBatteryLife(Integer.parseInt(request.getParameter("battery")));
+            laptop.setWeight(Integer.parseInt(request.getParameter("weight")));
+            laptop.setColor(request.getParameter("color"));
+            laptop.setStockQuantity(Integer.parseInt(request.getParameter("stockq")));
 
 
+//            System.out.println(laptop.getLaptopID() + " " + laptop.getBrand() + " " + laptop.getTitle() + " " + laptop.getModel()
+//            + " " + laptop.getPrice() + " " + laptop.getDiscount() + " " + laptop.getCategory() + " " + laptop.getOperatingSystem()
+//            + "" + laptop.getProcessor() + " " + laptop.getRam() + " " + laptop.getStorage()+" "+
+//                    laptop.getStorageType() + " " + laptop.getGraphicsCard() + " " + laptop.getScreenSize() + " " + laptop.getResolution()
+//                    + " " + laptop.getBatteryLife() + " " + laptop.getWeight() + " " + laptop.getColor()+
+//                    " " + laptop.getStockQuantity());
+//
+////
+            if (laptopDao.updateLaptop(laptop)) {
+                System.out.println("Laptop " + laptop.getLaptopID() + " updated successfully");
+            } else {
+                System.out.println("Laptop " + laptop.getLaptopID() + " not updated successfully");
+            }
 
+
+            String uploadPath = getServletContext().getRealPath("/static/imgUpload");
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) uploadDir.mkdir();
+
+            Part thumbimg = request.getPart("thumbimg");
+            imageUploader(thumbimg,laptop.getThumbnailUrl(),uploadDir);
+
+            Part img0 = request.getPart("img0");
+            imageUploader(img0,laptop.getImgUrl(),uploadDir);
+
+            Part img1 = request.getPart("img1");
+            imageUploader(img1,laptop.getImg1Url(),uploadDir);
+
+            Part img2 = request.getPart("img2");
+            imageUploader(img2,laptop.getImg2Url(),uploadDir);
+
+            response.sendRedirect(request.getContextPath() +"/products");
+
+        }
     }
+    private void imageUploader(Part part, String filename ,File uploadDir) {
+        if(part != null || part.getSize() > 0) {
 
+            File imgFile = new File(uploadDir,filename);
+
+            try(InputStream input = part.getInputStream()){
+                Files.copy(input,imgFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
+                System.out.println(imgFile.getAbsolutePath());
+            }
+            catch(Exception ex){
+                System.out.println("Error uploading file");
+            }
+        }
+    }
 }
+
