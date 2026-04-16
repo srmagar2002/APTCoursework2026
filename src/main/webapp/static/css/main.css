@@ -15,6 +15,8 @@
     --border: #262626;
     --primary: #f97316;
     --primary-hover: #ea580c;
+    --cancel: #f44a40;
+    --cancel-hover: rgb(255 29 20 / 0.92);
     --muted: #737373;
     --input-bg: #1a1a1a;
     --radius: 8px;
@@ -142,6 +144,14 @@ img {
     background-color: transparent;
     color: var(--foreground);
     border: 1px solid var(--border);
+}
+
+.btn-cancel {
+    background-color: var(--cancel);
+    border: 1px solid var(--border);
+}
+.btn-cancel:hover {
+    background-color: var(--cancel-hover);
 }
 
 .btn-secondary:hover {
