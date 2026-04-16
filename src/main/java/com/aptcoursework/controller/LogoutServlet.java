@@ -1,5 +1,6 @@
 package com.aptcoursework.controller;
 
+import com.aptcoursework.utils.SessionUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,25 +9,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-
-@WebServlet("/APT")
-public class TopicServlet extends HttpServlet {
-
+@WebServlet("/logout")
+public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
-
-
+        SessionUtil.invalidateSession(request);
+        response.sendRedirect(request.getContextPath() + "/login");
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
-            throws ServletException, IOException {
-
-
-    }
-
 }

@@ -17,3 +17,7 @@ desktop.ini
 
 # ── Environment Variables ───────────────────────────
 .env
+
+test/
+
+.smarttomcat/

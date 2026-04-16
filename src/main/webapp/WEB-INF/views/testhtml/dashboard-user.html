@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Dashboard — SKSHS Laptop Gallery</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .chart-bar-wrap { display:flex;align-items:flex-end;gap:6px;height:80px;margin-top:16px; }
+    .chart-bar-item { flex:1;display:flex;flex-direction:column;align-items:center;gap:4px; }
+    .chart-bar {
+      width:100%;border-radius:4px 4px 0 0;
+      background:linear-gradient(to top,var(--c2),var(--c3));
+      transition:height 0.8s ease;
+      min-height:4px;
+    }
+    .chart-bar-label { font-size:0.65rem;color:rgba(245,251,248,0.35); }
+    .mini-order {display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(176,228,204,0.06);}
+    .mini-order:last-child{border-bottom:none;}
+    .activity-item {display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid rgba(176,228,204,0.06);}
+    .activity-item:last-child{border-bottom:none;}
+    .activity-icon {width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+    .activity-icon.green{background:rgba(78,203,113,0.12);}
+    .activity-icon.blue{background:rgba(64,138,113,0.15);}
+    .activity-icon.orange{background:rgba(233,150,100,0.12);}
+  </style>
+</head>
+<body class="bg-dots">
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">SKSHS<span>.</span>Gallery</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="dashboard-user.html" class="active">My Account</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon-btn" onclick="window.location.href='cart.html'" style="position:relative">🛒<span class="badge cart-badge" style="display:none">0</span></button>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="dashboard-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <div class="sidebar-avatar">RS</div>
+      <div>
+        <div class="sidebar-name">Rajesh Sharma</div>
+        <div class="sidebar-role">Premium Member</div>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Main</div>
+      <a href="dashboard-user.html" class="sidebar-link active"><span class="icon">🏠</span> Dashboard</a>
+      <a href="#" class="sidebar-link"><span class="icon">📦</span> My Orders</a>
+      <a href="cart.html" class="sidebar-link"><span class="icon">🛒</span> Cart</a>
+      <a href="#" class="sidebar-link"><span class="icon">❤️</span> Wishlist</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Account</div>
+      <a href="profile-user.html" class="sidebar-link"><span class="icon">👤</span> Profile</a>
+      <a href="#" class="sidebar-link"><span class="icon">🔔</span> Notifications <span style="margin-left:auto;background:var(--c3);color:var(--c1);font-size:0.65rem;padding:2px 6px;border-radius:10px">3</span></a>
+      <a href="payment.html" class="sidebar-link"><span class="icon">💳</span> Payments</a>
+      <a href="#" class="sidebar-link"><span class="icon">📍</span> Addresses</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Support</div>
+      <a href="about.html" class="sidebar-link"><span class="icon">💬</span> Help Center</a>
+      <a href="#" class="sidebar-link" style="color:#e55"><span class="icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:16px">
+      <div>
+        <h1 style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800">Welcome back, <span style="color:var(--c4)">Rajesh</span> 👋</h1>
+        <p style="color:rgba(245,251,248,0.5);font-size:0.9rem;margin-top:4px">Here's what's happening with your account</p>
+      </div>
+      <a href="products.html" class="btn btn-primary">Shop Now →</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid-4" style="margin-bottom:32px">
+      <div class="stat-card reveal">
+        <div class="stat-icon">📦</div>
+        <div class="stat-label">Total Orders</div>
+        <div class="stat-value" data-count="12">0</div>
+        <div class="stat-change up">↑ 2 this month</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-1">
+        <div class="stat-icon">💰</div>
+        <div class="stat-label">Total Spent</div>
+        <div class="stat-value">$<span data-count="8420">0</span></div>
+        <div class="stat-change up">↑ $1,200 this year</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-icon">❤️</div>
+        <div class="stat-label">Wishlist Items</div>
+        <div class="stat-value" data-count="5">0</div>
+        <div class="stat-change" style="color:rgba(245,251,248,0.4)">3 in stock</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-label">Loyalty Points</div>
+        <div class="stat-value" data-count="2840">0</div>
+        <div class="stat-change up">↑ 340 points earned</div>
+      </div>
+    </div>
+
+    <!-- Orders + Activity -->
+    <div class="grid-2" style="margin-bottom:32px;gap:24px">
+      <div class="card reveal" style="padding:28px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <span style="font-family:'Syne',sans-serif;font-weight:700">Recent Orders</span>
+          <a href="#" class="btn btn-ghost btn-sm">View All</a>
+        </div>
+        <div class="mini-order">
+          <div style="width:44px;height:44px;background:rgba(40,90,72,0.4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0">💻</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:600;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">MacBook Air M3</div>
+            <div style="font-size:0.78rem;color:rgba(245,251,248,0.4)">#ORD-001 · Jan 15</div>
+          </div>
+          <span class="order-status delivered">Delivered</span>
+        </div>
+        <div class="mini-order">
+          <div style="width:44px;height:44px;background:rgba(40,90,72,0.4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0">🖥️</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:600;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Dell XPS 15</div>
+            <div style="font-size:0.78rem;color:rgba(245,251,248,0.4)">#ORD-002 · Feb 3</div>
+          </div>
+          <span class="order-status shipped">Shipped</span>
+        </div>
+        <div class="mini-order">
+          <div style="width:44px;height:44px;background:rgba(40,90,72,0.4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0">🎮</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:600;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">ASUS ROG Zephyrus</div>
+            <div style="font-size:0.78rem;color:rgba(245,251,248,0.4)">#ORD-003 · Mar 20</div>
+          </div>
+          <span class="order-status processing">Processing</span>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-1" style="padding:28px">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:20px">Recent Activity</div>
+        <div class="activity-item">
+          <div class="activity-icon green">✅</div>
+          <div style="flex:1"><div style="font-size:0.88rem;font-weight:500">Order Delivered</div><div style="font-size:0.77rem;color:rgba(245,251,248,0.4)">MacBook Air M3 — 2 days ago</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon blue">🛒</div>
+          <div style="flex:1"><div style="font-size:0.88rem;font-weight:500">New Order Placed</div><div style="font-size:0.77rem;color:rgba(245,251,248,0.4)">ASUS ROG — 3 days ago</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon orange">❤️</div>
+          <div style="flex:1"><div style="font-size:0.88rem;font-weight:500">Added to Wishlist</div><div style="font-size:0.77cm;color:rgba(245,251,248,0.4)">Razer Blade 15 — 1 week ago</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon green">⭐</div>
+          <div style="flex:1"><div style="font-size:0.88rem;font-weight:500">Review Submitted</div><div style="font-size:0.77rem;color:rgba(245,251,248,0.4)">Dell XPS 15 — 1 week ago</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon blue">💳</div>
+          <div style="flex:1"><div style="font-size:0.88rem;font-weight:500">Payment Successful</div><div style="font-size:0.77rem;color:rgba(245,251,248,0.4)">$1,849 — 2 weeks ago</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spending Chart + Loyalty -->
+    <div class="grid-2" style="gap:24px">
+      <div class="card reveal" style="padding:28px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <span style="font-family:'Syne',sans-serif;font-weight:700">Monthly Spending</span>
+          <span style="font-size:0.78rem;color:var(--c3)">2025</span>
+        </div>
+        <div style="font-size:0.82rem;color:rgba(245,251,248,0.45)">Total: $8,420</div>
+        <div class="chart-bar-wrap" id="spendChart"></div>
+      </div>
+
+      <div class="card reveal reveal-delay-1" style="padding:28px">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:6px">Loyalty Status</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+          <div class="avatar avatar-md" style="background:linear-gradient(135deg,#e9a,#e66)">🥇</div>
+          <div>
+            <div style="font-weight:700;color:var(--c4)">Gold Member</div>
+            <div style="font-size:0.8rem;color:rgba(245,251,248,0.45)">2,840 / 5,000 points to Platinum</div>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin-bottom:20px"><div class="progress-fill" style="width:57%"></div></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.85rem">
+            <span style="color:rgba(245,251,248,0.55)">🎁 Points value</span>
+            <span style="color:var(--c4);font-weight:600">NPR 2,840</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.85rem">
+            <span style="color:rgba(245,251,248,0.55)">🏷️ Member discount</span>
+            <span style="color:var(--c4);font-weight:600">5% off all orders</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.85rem">
+            <span style="color:rgba(245,251,248,0.55)">🎂 Birthday bonus</span>
+            <span style="color:var(--c4);font-weight:600">Double points</span>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-full" style="margin-top:20px">Redeem Points</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // Animate stat counters
+  document.querySelectorAll('[data-count]').forEach(el => {
+    setTimeout(() => animateCount(el, parseInt(el.dataset.count)), 300);
+  });
+
+  // Spending chart
+  const months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
+  const vals = [0,1200,0,1849,800,0,2200,0,0,0,1371,1000];
+  const max = Math.max(...vals);
+  const chart = document.getElementById('spendChart');
+  months.forEach((m, i) => {
+    const item = document.createElement('div');
+    item.className = 'chart-bar-item';
+    const pct = max > 0 ? (vals[i] / max) * 100 : 0;
+    item.innerHTML = `<div class="chart-bar" style="height:0%" data-height="${pct}%"></div><div class="chart-bar-label">${m}</div>`;
+    chart.appendChild(item);
+  });
+  setTimeout(() => {
+    document.querySelectorAll('.chart-bar').forEach(bar => {
+      bar.style.height = bar.dataset.height;
+    });
+  }, 400);
+
+  initRevealAnimations();
+</script>
+</body>
+</html>
