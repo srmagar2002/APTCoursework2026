@@ -121,7 +121,6 @@ public class ProductsServlet extends HttpServlet {
                 System.out.println("Laptop " + laptop.getLaptopID() + " not updated successfully");
             }
 
-
             String uploadPath = getServletContext().getRealPath("/static/imgUpload");
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) uploadDir.mkdir();
@@ -178,7 +177,6 @@ public class ProductsServlet extends HttpServlet {
                 String uploadPath = getServletContext().getRealPath("/static/imgUpload");
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) uploadDir.mkdir();
-
 
                 Part thumbimg = request.getPart("thumbimg");
                 imageUploader(thumbimg, newlaptop.getThumbnailUrl(), uploadDir);
