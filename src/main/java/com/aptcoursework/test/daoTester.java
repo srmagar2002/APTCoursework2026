@@ -253,7 +253,7 @@ public class daoTester {
         laptop.setGraphicsCard(sc.nextLine());
 
         System.out.print("Screen Size: ");
-        laptop.setScreenSize(sc.nextDouble());
+        laptop.setScreenSize(sc.next());
         sc.nextLine(); // consume newline
 
         System.out.print("Resolution: ");
