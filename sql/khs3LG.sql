@@ -83,7 +83,7 @@ Student -	Affordable, simple laptops
 Convertible -	2-in-1 touch laptops
 Workstation -	Powerful for professional tasks (CAD, rendering)
 General	Default - general-purpose
-  */
+*/
 
 
 
