@@ -47,5 +47,12 @@ INSERT INTO laptop (
        499.99, 5, 18  , 1350, 'Silver', 10),
 
       (UUID(),'Apple', 'MacBook Pro 16', 'Apple MacBook Pro 16 M2 Pro', 'High-end laptop for creators', 'Business',
-       'Apple M2 Pro', '32GB', '1TB', 'SSD', 'Integrated', '16.2 Liquid Retina XDR', '3456x2234', 'MacOS',
+       'Apple M2 Pro', '32GB', '1TB', 'SSD', 'Integrated', 16.2, '3456x2234', 'MacOS',
        2699.99, 10, 7  , 2200, 'Silver', 17);
+
+
+INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 1, 1);
+INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 2, 2);
+INSERT INTO cart (userId, laptopId, quantity) VALUES (2, 1, 1);
+INSERT INTO cart (userId, laptopId, quantity) VALUES (2, 3, 3);
+INSERT INTO cart (userId, laptopId, quantity) VALUES (3, 4, 1);
