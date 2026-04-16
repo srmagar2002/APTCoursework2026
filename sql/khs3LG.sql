@@ -26,6 +26,7 @@ CREATE TABLE laptop
 (
 /*BASIC INFO*/
     laptopID           INT AUTO_INCREMENT PRIMARY KEY,
+    laptopUUID         VARCHAR(300) NOT NULL UNIQUE,
     brand              VARCHAR(200)   NOT NULL,
     model              VARCHAR(200)   NOT NULL,
     title              TEXT           NOT NULL,

@@ -145,6 +145,22 @@
         </div>
     </form>
     <div class="products-grid" id="products-grid">
+        <c:if test="${sessionScope.user.role=='ADMIN'}">
+
+                    <article class="product-card add-product-card">
+                        <a href="${pageContext.request.contextPath}/products?action=add">
+                            <div class="product-image">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"/>
+                                    <line x1="5" y1="12" x2="19" y2="12"/>
+                                </svg>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-name">Add New Product</h3>
+                            </div>
+                        </a>
+                    </article>
+        </c:if>
         <jsp:include page="../components/products.jsp"/>
     </div>
 </main>
@@ -172,7 +188,7 @@
             )
                 .then(res => res.text())
                 .then(html => {
-                    console.log(html);
+                    // console.log(html);
                     document.getElementById("products-grid").innerHTML = html;
                 });
         }, 500);

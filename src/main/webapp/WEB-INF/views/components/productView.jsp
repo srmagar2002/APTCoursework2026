@@ -11,11 +11,11 @@
 
 <c:choose>
     <c:when test="${sessionScope.user.role== 'ADMIN' }">
-
         <!-- Main Content -->
         <form action="${pageContext.request.contextPath}/products" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="edit"/>
             <input type="hidden" value="${laptop.laptopID}" name="laptopid">
+
             <c:if test="${not empty error}">
                 <p class="error"><c:out value="${error}"/></p>
             </c:if>
@@ -152,25 +152,25 @@
                             <div class="admin-edit-field" style="flex: 1;">
                                 <label for="category" class="edit-label">Category</label>
                                 <select id="category" name="category" class="edit-select">
-                                    <option value="gaming" <c:if test="${laptop.category=='Gaming'}">selected</c:if>>
+                                    <option value="Gaming" <c:if test="${laptop.category=='Gaming'}">selected</c:if>>
                                         Gaming
                                     </option>
-                                    <option value="ultrabook"
+                                    <option value="Ultrabook"
                                             <c:if test="${laptop.category=='Ultrabook'}">selected</c:if>>Ultrabook
                                     </option>
-                                    <option value="business"
+                                    <option value="Business"
                                             <c:if test="${laptop.category=='Business'}">selected</c:if>>Business
                                     </option>
-                                    <option value="student" <c:if test="${laptop.category=='Student'}">selected</c:if>>
+                                    <option value="Student" <c:if test="${laptop.category=='Student'}">selected</c:if>>
                                         Student
                                     </option>
-                                    <option value="convertible"
+                                    <option value="Convertible"
                                             <c:if test="${laptop.category=='Convertible'}">selected</c:if>>Convertible
                                     </option>
-                                    <option value="workstation"
+                                    <option value="Workstation"
                                             <c:if test="${laptop.category=='Workstation'}">selected</c:if>>Workstation
                                     </option>
-                                    <option value="general" <c:if test="${laptop.category=='General'}">selected</c:if>>
+                                    <option value="General" <c:if test="${laptop.category=='General'}">selected</c:if>>
                                         General
                                     </option>
                                 </select></div>
@@ -178,15 +178,15 @@
                             <div class="admin-edit-field" style="flex: 1;">
                                 <label for="operatingsystem" class="edit-label">Operating System</label>
                                 <select id="operatingsystem" name="operatingsystem" class="edit-select">
-                                    <option value="windows"
+                                    <option value="Windows"
                                             <c:if test="${laptop.operatingSystem == 'Windows'}">selected</c:if>>
                                         Windows
                                     </option>
-                                    <option value="macos"
+                                    <option value="MacOS"
                                             <c:if test="${laptop.operatingSystem == 'MacOS'}">selected</c:if>>
                                         MacOS
                                     </option>
-                                    <option value="linux"
+                                    <option value="Linux"
                                             <c:if test="${laptop.operatingSystem == 'Linux'}">selected</c:if>>
                                         Linux
                                     </option>
@@ -320,7 +320,6 @@
                 </div>
             </main>
         </form>
-
         <script>
             const input1 = document.getElementById("imageUpload1");
             const input2 = document.getElementById("imageUpload2");
@@ -522,7 +521,6 @@
                 </div>
             </div>
         </main>
-
     </c:when>
 </c:choose>
 
@@ -540,7 +538,6 @@
         mainImage.style.opacity = '1';
     }, 150);
 
-    // Update active thumbnail
     const thumbnails = document.querySelectorAll('.thumbnail');
     thumbnails.forEach(thumb => thumb.classList.remove('active'));
     thumbnail.classList.add('active');

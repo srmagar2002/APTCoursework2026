@@ -16,11 +16,12 @@ public class LaptopDaoImpl implements LaptopDao {
 
         Connection conn = null;
         String sql = "INSERT INTO laptop ( brand, model, title, description, processor, ram, storage, storageType, graphicsCard, screenSize, resolution, " +
-                "operatingSystem,price, discount, stockQuantity, weight, color, batteryLife) " +
+                "operatingSystem,price, discount, stockQuantity, weight, color, batteryLife,category,laptopUUID) " +
                 "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
+
 
             stmt.setString(1, laptop.getBrand());
             stmt.setString(2, laptop.getModel());
@@ -40,6 +41,8 @@ public class LaptopDaoImpl implements LaptopDao {
             stmt.setDouble(16, laptop.getWeight());
             stmt.setString(17, laptop.getColor());
             stmt.setInt(18, laptop.getBatteryLife());
+            stmt.setString(19, laptop.getCategory());
+            stmt.setString(20,laptop.getLaptopUUID());
 
             stmt.executeUpdate();
             return true;
@@ -65,12 +68,33 @@ public class LaptopDaoImpl implements LaptopDao {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Laptop laptop = laptopAssginer(rs);
-
                 return laptop;
             }
         } catch (SQLException e) {
             System.out.println("Error Getting Laptop" + e.getMessage());
         } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return null;
+    }
+    @Override
+    public Laptop getLaptopByUUID(String laptopUUID) {
+        Connection conn = null;
+        String sql = "SELECT * FROM laptop WHERE laptopUUID = ?";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, laptopUUID);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Laptop laptop = laptopAssginer(rs);
+                return laptop;
+            }
+        }
+        catch (SQLException e){
+                System.out.println("Error Getting Laptop" + e.getMessage());
+            }
+        finally {
             DatabaseConnection.closeConnection(conn);
         }
         return null;
@@ -84,7 +108,7 @@ public class LaptopDaoImpl implements LaptopDao {
                 " processor=?, ram=?, storage=?, " +
                 "storageType=?, graphicsCard=?, screenSize=?, resolution=?, " +
                 "operatingSystem=?, price=?, discount=?, stockQuantity=?, weight=?, " +
-                "color=?, batteryLife=? WHERE laptopID=?";
+                "color=?, batteryLife=?, category=? WHERE laptopID=?";
 
         try {
             conn = DatabaseConnection.getConnection();
@@ -108,7 +132,8 @@ public class LaptopDaoImpl implements LaptopDao {
             stmt.setDouble(16, laptop.getWeight());
             stmt.setString(17, laptop.getColor());
             stmt.setInt(18, laptop.getBatteryLife());
-            stmt.setInt(19, laptop.getLaptopID());
+            stmt.setString(19, laptop.getCategory());
+            stmt.setInt(20, laptop.getLaptopID());
 
             stmt.executeUpdate();
             System.out.println("Laptop updated successfully");
@@ -145,7 +170,7 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     @Override
-    public ArrayList<Laptop> getLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition){
+    public ArrayList<Laptop> getLaptopsFilterSearch(String searchWord, String brand, String category, String priceCondition) {
         ArrayList<Laptop> laptops = new ArrayList<>();
         Connection conn = null;
         String sql = "";
@@ -171,9 +196,9 @@ public class LaptopDaoImpl implements LaptopDao {
                 break;
 
         }
-        try{
-          conn=DatabaseConnection.getConnection();
-          PreparedStatement stmt = conn.prepareStatement(sql);
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
             String searchValue = toLikeValue(searchWord);
             stmt.setString(1, toLikeValue(brand));
             stmt.setString(2, toLikeValue(category));
@@ -207,6 +232,7 @@ public class LaptopDaoImpl implements LaptopDao {
         try {
             return new Laptop(
                     rs.getInt("laptopID"),
+                    rs.getString("laptopUUID"),
                     rs.getString("brand"),
                     rs.getString("model"),
                     rs.getString("title"),
