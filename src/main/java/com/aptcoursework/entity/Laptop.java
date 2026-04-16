@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class Laptop {
     /* BASIC INFO */
     private int laptopID;
+    private String laptopUUID;
     private String brand;
     private String model;
     private String title;
@@ -44,8 +45,32 @@ public class Laptop {
     //empty constructor
     public Laptop(){}
 
+    public Laptop(String laptopUUID,String brand,String model,String title,String description,String processor,String ram,String storage,String storageType,String graphicsCard,String screenSize,String resolution,
+                  String operatingSystem, BigDecimal price, Integer discount, Integer stockQuantity,Integer weight, String color, Integer batteryLife,String category){
+        this.laptopUUID = laptopUUID;
+        this.brand = brand;
+        this.model = model;
+        this.title = title;
+        this.description = description;
+        this.processor = processor;
+        this.ram = ram;
+        this.storage = storage;
+        this.storageType = storageType;
+        this.graphicsCard = graphicsCard;
+        this.screenSize = screenSize;
+        this.resolution = resolution;
+        this.operatingSystem = operatingSystem;
+        this.price = price;
+        this.discount = discount;
+        this.stockQuantity = stockQuantity;
+        this.weight = weight;
+        this.color = color;
+        this.batteryLife = batteryLife;
+        this.category = category;
+    }
+
     //default constructor
-    public Laptop(int laptopID, String brand, String model, String title, String description,
+    public Laptop(int laptopID,String laptopUUID, String brand, String model, String title, String description,
                   String imgUrl,String img1Url,String img2Url, String thumbnailUrl,String category, String processor, String ram, String storage,
                   String storageType, String graphicsCard, String screenSize, String resolution,
                   String operatingSystem, BigDecimal price, Integer discount, Integer stockQuantity,
@@ -53,6 +78,7 @@ public class Laptop {
                   LocalDateTime createdAt, LocalDateTime updatedAt) {
 
         this.laptopID = laptopID;
+        this.laptopUUID = laptopUUID;
         this.brand = brand;
         this.model = model;
         this.title = title;
@@ -83,6 +109,9 @@ public class Laptop {
 
     public int getLaptopID() { return laptopID; }
     public void setLaptopID(int laptopID) { this.laptopID = laptopID; }
+
+    public String getLaptopUUID() { return laptopUUID; }
+    public void setLaptopUUID(String laptopUUID) { this.laptopUUID = laptopUUID; }
 
     public String getBrand() { return brand; }
     public void setBrand(String brand) { this.brand = brand; }

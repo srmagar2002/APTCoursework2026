@@ -26,6 +26,7 @@ CREATE TABLE laptop
 (
 /*BASIC INFO*/
     laptopID           INT AUTO_INCREMENT PRIMARY KEY,
+    laptopUUID         VARCHAR(300) NOT NULL UNIQUE,
     brand              VARCHAR(200)   NOT NULL,
     model              VARCHAR(200)   NOT NULL,
     title              TEXT           NOT NULL,
@@ -87,62 +88,62 @@ General	Default - general-purpose
 
 CREATE TABLE cart (
 
-    cart_id      INT PRIMARY KEY AUTO_INCREMENT,
-      user_id      INT,
-      product_id   INT,
-      quantity     INT,
-      added_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    cartId     INT PRIMARY KEY AUTO_INCREMENT,
+    userId     INT,
+    laptopId   INT,
+    quantity   INT,
+    added_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-      FOREIGN KEY (user_id)    REFERENCES users(user_id),
-      FOREIGN KEY (product_id) REFERENCES products(product_id)
+    FOREIGN KEY (Users)  REFERENCES users(user_id),
+    FOREIGN KEY (laptop) REFERENCES products(latopID)
 );
 
-CREATE TABLE orders (
-
-    order_id       INT PRIMARY KEY AUTO_INCREMENT,
-    user_id        INT,
-    total_amount   DECIMAL(10, 2),
-    order_date     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status         VARCHAR(50) DEFAULT 'Processing',
-
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
-);
-
-CREATE TABLE order_items (
-
-     item_id      INT PRIMARY KEY AUTO_INCREMENT,
-     order_id     INT,
-     product_id   INT,
-     quantity     INT,
-     price        DECIMAL(10, 2),   -- price at time of purchase
-
-     FOREIGN KEY (order_id)   REFERENCES orders(order_id),
-     FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
-CREATE TABLE payments (
-      payment_id      INT PRIMARY KEY AUTO_INCREMENT,
-      order_id        INT,
-      user_id         INT,
-      amount          DECIMAL(10, 2),
-      payment_method  VARCHAR(50),
-      payment_status  VARCHAR(50),    --'Success', 'Failed', 'Pending'
-      paid_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-      FOREIGN KEY (order_id) REFERENCES orders(order_id),
-      FOREIGN KEY (user_id)  REFERENCES users(user_id)
-);
-
-
-CREATE TABLE tracking (
-      tracking_id   INT PRIMARY KEY AUTO_INCREMENT,
-      order_id      INT,
-      status        VARCHAR(100),   -- 'Shipped', 'Out for Delivery', 'Delivered'
-      location      VARCHAR(200),
-      updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-      FOREIGN KEY (order_id) REFERENCES orders(order_id)
-);
+-- CREATE TABLE orders (
+--
+--     order_id       INT PRIMARY KEY AUTO_INCREMENT,
+--     user_id        INT,
+--     total_amount   DECIMAL(10, 2),
+--     order_date     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     status         VARCHAR(50) DEFAULT 'Processing',
+--
+--     FOREIGN KEY (user_id) REFERENCES users(user_id)
+-- );
+--
+-- CREATE TABLE order_items (
+--
+--      item_id      INT PRIMARY KEY AUTO_INCREMENT,
+--      order_id     INT,
+--      product_id   INT,
+--      quantity     INT,
+--      price        DECIMAL(10, 2),   -- price at time of purchase
+--
+--      FOREIGN KEY (order_id)   REFERENCES orders(order_id),
+--      FOREIGN KEY (product_id) REFERENCES products(product_id)
+-- );
+--
+-- CREATE TABLE payments (
+--       payment_id      INT PRIMARY KEY AUTO_INCREMENT,
+--       order_id        INT,
+--       user_id         INT,
+--       amount          DECIMAL(10, 2),
+--       payment_method  VARCHAR(50),
+--       payment_status  VARCHAR(50),    --'Success', 'Failed', 'Pending'
+--       paid_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--
+--       FOREIGN KEY (order_id) REFERENCES orders(order_id),
+--       FOREIGN KEY (user_id)  REFERENCES users(user_id)
+-- );
+--
+--
+-- CREATE TABLE tracking (
+--       tracking_id   INT PRIMARY KEY AUTO_INCREMENT,
+--       order_id      INT,
+--       status        VARCHAR(100),   -- 'Shipped', 'Out for Delivery', 'Delivered'
+--       location      VARCHAR(200),
+--       updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--
+--       FOREIGN KEY (order_id) REFERENCES orders(order_id)
+-- );
 
 
 /*

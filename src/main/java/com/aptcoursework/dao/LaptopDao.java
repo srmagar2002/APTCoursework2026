@@ -8,6 +8,7 @@ public interface LaptopDao {
     boolean insertLaptop(Laptop laptop);
     Laptop getLaptopById(int id);
     boolean updateLaptop(Laptop laptop);
+    Laptop getLaptopByUUID(String laptopUUID);
     ArrayList<Laptop> fetchAllLaptops();
     ArrayList<Laptop> getLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition);
 }

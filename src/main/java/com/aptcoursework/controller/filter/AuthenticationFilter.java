@@ -23,6 +23,9 @@ public class AuthenticationFilter implements Filter {
         String path = uri.substring(contextPath.length());
 
         if(path.contains("/static/")){
+            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            res.setHeader("Pragma", "no-cache");
+            res.setDateHeader("Expires", 0);
             chain.doFilter(req,res);
             return;
         }

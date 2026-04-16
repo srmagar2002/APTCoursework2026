@@ -11,9 +11,10 @@
 
 <c:choose>
     <c:when test="${sessionScope.user.role== 'ADMIN' }">
-
         <!-- Main Content -->
         <form action="${pageContext.request.contextPath}/products" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="edit"/>
+            <input type="hidden" value="${laptop.laptopID}" name="laptopid">
 
             <c:if test="${not empty error}">
                 <p class="error"><c:out value="${error}"/></p>
@@ -25,44 +26,57 @@
                     <div class="product-gallery">
                         <div class="gallery-grid-2x2">
                             <div class="gallery-item">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.thumbnailUrl}" id="thumb-img" alt="${laptop.title}">
-                                <button class="btn-edit-image" onclick="document.getElementById('imageUpload1').click()">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.thumbnailUrl}?v=${laptop.updatedAt}"
+                                     id="thumb-img" alt="${laptop.title}">
+                                <div class="btn-edit-image" onclick="document.getElementById('imageUpload1').click()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                         viewBox="0 0 24 24">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                                     </svg>
-                                </button>
-                                <input type="file" id="imageUpload1"  name="thumbimg" accept="image/*" style="display: none;">
+                                </div>
+                                <input type="file" id="imageUpload1" name="thumbimg" accept="image/*"
+                                       style="display: none;">
+
                             </div>
                             <div class="gallery-item">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.imgUrl}" id="image0" alt="${laptop.title}">
-                                <button class="btn-edit-image" onclick="document.getElementById('imageUpload2').click()">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.imgUrl}?v=${laptop.updatedAt}"
+                                     id="image0" alt="${laptop.title}">
+                                <div class="btn-edit-image" onclick="document.getElementById('imageUpload2').click()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                         viewBox="0 0 24 24">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                                     </svg>
-                                </button>
-                                <input type="file" id="imageUpload2"  name="img0" accept="image/*" style="display: none;">
+                                </div>
+                                <input type="file" id="imageUpload2" name="img0" accept="image/*"
+                                       style="display: none;">
                             </div>
                             <div class="gallery-item">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img1Url}" id="image1" alt="${laptop.title}">
-                                <button class="btn-edit-image" onclick="document.getElementById('imageUpload3').click()">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img1Url}?v=${laptop.updatedAt}"
+                                     id="image1" alt="${laptop.title}">
+                                <div class="btn-edit-image" onclick="document.getElementById('imageUpload3').click()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                         viewBox="0 0 24 24">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                                     </svg>
-                                </button>
-                                <input type="file" id="imageUpload3" name="img1" accept="image/*" style="display: none;">
+                                </div>
+                                <input type="file" id="imageUpload3" name="img1" accept="image/*"
+                                       style="display: none;">
                             </div>
                             <div class="gallery-item">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img2Url}" id="image2" alt="${laptop.title}">
-                                <button class="btn-edit-image" onclick="document.getElementById('imageUpload4').click()">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img2Url}?v=${laptop.updatedAt}"
+                                     id="image2" alt="${laptop.title}">
+                                <div class="btn-edit-image" onclick="document.getElementById('imageUpload4').click()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                         viewBox="0 0 24 24">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                                     </svg>
-                                </button>
-                                <input type="file" id="imageUpload4" name="img2" accept="image/*" style="display: none;">
+                                </div>
+                                <input type="file" id="imageUpload4" name="img2" accept="image/*"
+                                       style="display: none;">
                             </div>
                         </div>
                     </div>
@@ -138,25 +152,25 @@
                             <div class="admin-edit-field" style="flex: 1;">
                                 <label for="category" class="edit-label">Category</label>
                                 <select id="category" name="category" class="edit-select">
-                                    <option value="gaming" <c:if test="${laptop.category=='Gaming'}">selected</c:if>>
+                                    <option value="Gaming" <c:if test="${laptop.category=='Gaming'}">selected</c:if>>
                                         Gaming
                                     </option>
-                                    <option value="ultrabook"
+                                    <option value="Ultrabook"
                                             <c:if test="${laptop.category=='Ultrabook'}">selected</c:if>>Ultrabook
                                     </option>
-                                    <option value="business"
+                                    <option value="Business"
                                             <c:if test="${laptop.category=='Business'}">selected</c:if>>Business
                                     </option>
-                                    <option value="student" <c:if test="${laptop.category=='Student'}">selected</c:if>>
+                                    <option value="Student" <c:if test="${laptop.category=='Student'}">selected</c:if>>
                                         Student
                                     </option>
-                                    <option value="convertible"
+                                    <option value="Convertible"
                                             <c:if test="${laptop.category=='Convertible'}">selected</c:if>>Convertible
                                     </option>
-                                    <option value="workstation"
+                                    <option value="Workstation"
                                             <c:if test="${laptop.category=='Workstation'}">selected</c:if>>Workstation
                                     </option>
-                                    <option value="general" <c:if test="${laptop.category=='General'}">selected</c:if>>
+                                    <option value="General" <c:if test="${laptop.category=='General'}">selected</c:if>>
                                         General
                                     </option>
                                 </select></div>
@@ -164,13 +178,16 @@
                             <div class="admin-edit-field" style="flex: 1;">
                                 <label for="operatingsystem" class="edit-label">Operating System</label>
                                 <select id="operatingsystem" name="operatingsystem" class="edit-select">
-                                    <option value="windows" <c:if test="${laptop.operatingSystem == 'Windows'}">selected</c:if>>
+                                    <option value="Windows"
+                                            <c:if test="${laptop.operatingSystem == 'Windows'}">selected</c:if>>
                                         Windows
                                     </option>
-                                    <option value="macos" <c:if test="${laptop.operatingSystem == 'MacOS'}">selected</c:if>>
+                                    <option value="MacOS"
+                                            <c:if test="${laptop.operatingSystem == 'MacOS'}">selected</c:if>>
                                         MacOS
                                     </option>
-                                    <option value="linux" <c:if test="${laptop.operatingSystem == 'Linux'}">selected</c:if>>
+                                    <option value="Linux"
+                                            <c:if test="${laptop.operatingSystem == 'Linux'}">selected</c:if>>
                                         Linux
                                     </option>
                                 </select>
@@ -303,7 +320,6 @@
                 </div>
             </main>
         </form>
-
         <script>
             const input1 = document.getElementById("imageUpload1");
             const input2 = document.getElementById("imageUpload2");
@@ -334,6 +350,7 @@
                     }
                 });
             }
+
             handlePreview(input1, preview1);
             handlePreview(input2, preview2);
             handlePreview(input3, preview3);
@@ -504,7 +521,6 @@
                 </div>
             </div>
         </main>
-
     </c:when>
 </c:choose>
 
@@ -522,7 +538,6 @@
         mainImage.style.opacity = '1';
     }, 150);
 
-    // Update active thumbnail
     const thumbnails = document.querySelectorAll('.thumbnail');
     thumbnails.forEach(thumb => thumb.classList.remove('active'));
     thumbnail.classList.add('active');
