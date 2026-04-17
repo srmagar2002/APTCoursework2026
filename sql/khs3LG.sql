@@ -69,9 +69,9 @@ CREATE TABLE laptop
     updatedAt          TIMESTAMP               DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT categoryCheck CHECK (category IN
                                     ('Gaming', 'Ultrabook', 'Business', 'Student', 'Convertible', 'Workstation',
-                                     'General')),
+                                     'General', 'Professional')),
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
-    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Linux')),
+    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Chrome OS', 'Linux')),
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
 )
 /*
@@ -84,114 +84,5 @@ Convertible -	2-in-1 touch laptops
 Workstation -	Powerful for professional tasks (CAD, rendering)
 General	Default - general-purpose
   */
-
-
-CREATE TABLE cart (
-
-    cartId     INT PRIMARY KEY AUTO_INCREMENT,
-    userId     INT,
-    laptopId   INT,
-    quantity   INT,
-    added_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (Users)  REFERENCES users(user_id),
-    FOREIGN KEY (laptop) REFERENCES products(latopID)
-);
-
--- CREATE TABLE orders (
---
---     order_id       INT PRIMARY KEY AUTO_INCREMENT,
---     user_id        INT,
---     total_amount   DECIMAL(10, 2),
---     order_date     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     status         VARCHAR(50) DEFAULT 'Processing',
---
---     FOREIGN KEY (user_id) REFERENCES users(user_id)
--- );
---
--- CREATE TABLE order_items (
---
---      item_id      INT PRIMARY KEY AUTO_INCREMENT,
---      order_id     INT,
---      product_id   INT,
---      quantity     INT,
---      price        DECIMAL(10, 2),   -- price at time of purchase
---
---      FOREIGN KEY (order_id)   REFERENCES orders(order_id),
---      FOREIGN KEY (product_id) REFERENCES products(product_id)
--- );
---
--- CREATE TABLE payments (
---       payment_id      INT PRIMARY KEY AUTO_INCREMENT,
---       order_id        INT,
---       user_id         INT,
---       amount          DECIMAL(10, 2),
---       payment_method  VARCHAR(50),
---       payment_status  VARCHAR(50),    --'Success', 'Failed', 'Pending'
---       paid_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---
---       FOREIGN KEY (order_id) REFERENCES orders(order_id),
---       FOREIGN KEY (user_id)  REFERENCES users(user_id)
--- );
---
---
--- CREATE TABLE tracking (
---       tracking_id   INT PRIMARY KEY AUTO_INCREMENT,
---       order_id      INT,
---       status        VARCHAR(100),   -- 'Shipped', 'Out for Delivery', 'Delivered'
---       location      VARCHAR(200),
---       updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---
---       FOREIGN KEY (order_id) REFERENCES orders(order_id)
--- );
-
-
-/*
- Recommendation for changes:
-
-
-CREATE TABLE products (
-    product_id   INT PRIMARY KEY AUTO_INCREMENT,
-    name         VARCHAR(100),
-    brand        VARCHAR(50),
-    price        DECIMAL(10,2),
-    stock        INT,
-    image_url    VARCHAR(255),
-    category     VARCHAR(50)    'laptop', 'mouse' 'keyboards' and
-);
-
-
-CREATE TABLE laptop_specs (
-    spec_id       INT PRIMARY KEY AUTO_INCREMENT,
-    product_id    INT UNIQUE,
-    processor     VARCHAR(100),
-    ram           VARCHAR(50),
-    storage       VARCHAR(100),
-    display_size  VARCHAR(20),
-    graphics_card VARCHAR(100),
-    weight        VARCHAR(20),
-
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
- -----WE can add other products specs just like this ---
- mouse_specs, keyboard_specs
-
-
-
-
-
-
-
- */
-
-
-
-
-
-
-
-
-
 
 
