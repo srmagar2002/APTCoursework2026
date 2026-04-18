@@ -34,7 +34,7 @@ CREATE TABLE laptop
     img1Url             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img1/', CAST(laptopID AS CHAR), '.jpg')),
     img2Url             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img2/', CAST(laptopID AS CHAR), '.jpg')),
     thumbnailUrl       VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('thumb/', CAST(laptopID AS CHAR), '.jpg')),
-    category           VARCHAR(200)            DEFAULT 'General',
+    `category`          VARCHAR(200)    DEFAULT 'General',
 
 /*SPECS*/
     processor          VARCHAR(200)   NOT NULL,
@@ -66,13 +66,13 @@ CREATE TABLE laptop
 /*METADATA*/
     createdAt          TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
     updatedAt          TIMESTAMP               DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CONSTRAINT categoryCheck CHECK (category IN
+    CONSTRAINT categoryCheck CHECK (`category` IN
                                     ('Gaming', 'Ultrabook', 'Business', 'Student', 'Convertible', 'Workstation',
                                      'General')),
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
     CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Linux')),
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
-)
+);
 /*
 Category Explanation
 Gaming -	High-performance for gaming
@@ -86,15 +86,14 @@ General	Default - general-purpose
 
 
 CREATE TABLE cart (
+      cartId     INT PRIMARY KEY AUTO_INCREMENT,
+      userId     INT NOT NULL UNIQUE,
+      laptopId   INT NOT NULL UNIQUE,
+      quantity   INT NOT NULL DEFAULT 1,
 
-    cartId     INT PRIMARY KEY AUTO_INCREMENT,
-    userId     INT,
-    laptopId   INT,
-    quantity   INT,
-    added_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_user FOREIGN KEY (userId) REFERENCES users(user_id),
+    CONSTRAINT fk_laptop FOREIGN KEY (laptopId) REFERENCES Laptop(laptopID)
 
-    FOREIGN KEY (Users)  REFERENCES users(user_id),
-    FOREIGN KEY (laptop) REFERENCES products(latopID)
 );
 
 -- CREATE TABLE orders (

@@ -4,6 +4,11 @@ INSERT IGNORE INTO users (username,email,password_hash,role) VALUES ('admin'
         ,'admin@admin.com','$2a$10$quyPeY7N5RQHlf/MlQ947equUsDswgunEHrcaKy2j67B7ejWl7nXq','ADMIN');
 /*password:APTadmin&123*/
 
+
+INSERT IGNORE INTO users(username, email, role) VALUES
+       ("kushal23", "puri@gmail.com", "CUSTOMER"),
+       ("sugam45", "sg@gmail.com", "CUSTOMER");
+
 INSERT INTO laptop (
     brand, model, title, description,category,
     processor, ram, storage, storageType, graphicsCard, screenSize, resolution, operatingSystem,
@@ -51,8 +56,3 @@ INSERT INTO laptop (
        2699.99, 10, 7  , 2200, 'Silver', 17);
 
 
-INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 1, 1);
-INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 2, 2);
-INSERT INTO cart (userId, laptopId, quantity) VALUES (2, 1, 1);
-INSERT INTO cart (userId, laptopId, quantity) VALUES (2, 3, 3);
-INSERT INTO cart (userId, laptopId, quantity) VALUES (3, 4, 1);

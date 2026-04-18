@@ -1,13 +1,155 @@
 package com.aptcoursework.dao;
 
-import com.aptcoursework.entity.Laptop;
-import com.aptcoursework.entity.User;
 
-public class cartDaoImpl {
+import com.aptcoursework.utils.DatabaseConnection;
+import com.aptcoursework.entity.Cart;
 
 
-    public boolean addToCart(User user, Laptop laptop){
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
-        return false;
+public class cartDaoImpl implements cartDao {
+
+//    Queries to perform add and delete operation.
+    String checkLaptop = "SELECT QUANTITY FROM CART WHERE userId = ? AND laptopId = ?";
+    String insertLaptop = "INSERT INTO CART(userId, laptopId, quantity) VALUES (?,?,?)";
+    String addQuantity = "UPDATE cart SET quantity = quantity + 1 WHERE userId=? AND laptopId = ?";
+    String deleteQuantity = "UPDATE cart SET quantity = quantity - 1 WHERE userId=? AND laptopId=?";
+    String deleteItem = "DELETE FROM cart WHERE userId=? AND laptopId=?";
+
+
+    public boolean addToCart(int userId, int laptopId){
+
+         Connection conn = null;
+         try{
+             conn = DatabaseConnection.getConnection();
+             PreparedStatement checkStatement = conn.prepareStatement(checkLaptop);
+             checkStatement.setInt(1, userId);
+             checkStatement.setInt(2, laptopId);
+             ResultSet rs = checkStatement.executeQuery();
+
+            if(rs.next()){
+//                Item already exist and should be updated
+                PreparedStatement updStatement = conn.prepareStatement(addQuantity);
+                updStatement.setInt(1, userId);
+                updStatement.setInt(2, laptopId);
+                int numb = updStatement.executeUpdate();
+                System.out.println(numb+ " rows have been updated");
+                return true;
+
+            }
+            else{
+//                Insert new one
+                PreparedStatement insertStm = conn.prepareStatement(insertLaptop);
+                insertStm.setInt(1, userId);
+                insertStm.setInt(2, laptopId);
+
+                int numb = insertStm.executeUpdate();
+                System.out.println(numb+ " rows have been updatd");
+                return true;
+            }
+
+         }catch(SQLException e){
+             System.out.println("Error while adding cart "+ e.getMessage());
+             return false;
+
+         }finally{
+             DatabaseConnection.closeConnection(conn);
+         }
+
+    }
+
+
+    public ArrayList<Cart> fetchCartItems(){
+        ArrayList<Cart> cartItems = new ArrayList<>();
+
+        Connection conn = null;
+        try{
+            conn = DatabaseConnection.getConnection();
+            String sql = "SELECT * FROM CART";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                Cart cartItem = new Cart(
+                        rs.getInt("cartId"),
+                        rs.getInt("userId"),
+                        rs.getInt("laptopId"),
+                        rs.getInt("quantity")
+                );
+                cartItems.add(cartItem);
+            }
+            return cartItems;
+
+        }catch(SQLException e){
+            System.out.println("Error while fetching "+ e.getMessage());
+            return null;
+        }finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+
+
+    public boolean reduceItem(int userId, int laptopId){
+
+        Connection conn = null;
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement checkStmt = conn.prepareStatement(checkLaptop);
+            checkStmt.setInt(1, userId);
+            checkStmt.setInt(2, laptopId);
+            ResultSet rs = checkStmt.executeQuery();
+
+            if(rs.next()){
+//                if laptop found
+                int quantity = rs.getInt("quantity");
+
+                if(quantity > 1){
+                    PreparedStatement reduceStmt = conn.prepareStatement(deleteQuantity);
+                    reduceStmt.setInt(1, userId);
+                    reduceStmt.setInt(2, laptopId);
+                    int numb = reduceStmt.executeUpdate();
+                    System.out.println(numb+" rows have been update !");
+                    return true;
+                }else{
+                    return false;
+                }
+
+            }
+
+            return true;
+
+        }catch(SQLException e){
+            System.out.println("Eror while deleting quantity "+e.getMessage());
+            return false;
+        }finally{
+            DatabaseConnection.closeConnection(conn);
+        }
+
+    }
+
+
+
+    public boolean deleteItem(int userId, int laptopId){
+
+        Connection conn = null;
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement deleteStmt = conn.prepareStatement(deleteItem);
+            deleteStmt.setInt(1, userId);
+            deleteStmt.setInt(2, laptopId);
+            int numb = deleteStmt.executeUpdate();
+            System.out.println(numb+" rows have been affected");
+            return true;
+
+        }catch(SQLException e){
+            System.out.println("Error while deleting "+e.getMessage());
+            return false;
+
+        }finally{
+            DatabaseConnection.closeConnection(conn);
+        }
     }
 }
