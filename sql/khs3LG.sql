@@ -6,6 +6,12 @@ KHS3LG;
 
 SET
 FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS order_items;
+DROP TABLE IF EXISTS cart;
+DROP TABLE IF EXISTS orders;
+
+
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS laptop;
 SET
@@ -87,101 +93,35 @@ General	Default - general-purpose
 
 CREATE TABLE cart (
       cartId     INT PRIMARY KEY AUTO_INCREMENT,
-      userId     INT NOT NULL UNIQUE,
-      laptopId   INT NOT NULL UNIQUE,
+      userId     INT NOT NULL,
+      laptopId   INT NOT NULL,
       quantity   INT NOT NULL DEFAULT 1,
 
-    CONSTRAINT fk_user FOREIGN KEY (userId) REFERENCES users(user_id),
-    CONSTRAINT fk_laptop FOREIGN KEY (laptopId) REFERENCES Laptop(laptopID)
+    CONSTRAINT fk_user_cart FOREIGN KEY (userId) REFERENCES users(user_id),
+    CONSTRAINT fk_laptop_cart FOREIGN KEY (laptopId) REFERENCES laptop(laptopID)
 
 );
 
--- CREATE TABLE orders (
---
---     order_id       INT PRIMARY KEY AUTO_INCREMENT,
---     user_id        INT,
---     total_amount   DECIMAL(10, 2),
---     order_date     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     status         VARCHAR(50) DEFAULT 'Processing',
---
---     FOREIGN KEY (user_id) REFERENCES users(user_id)
--- );
---
--- CREATE TABLE order_items (
---
---      item_id      INT PRIMARY KEY AUTO_INCREMENT,
---      order_id     INT,
---      product_id   INT,
---      quantity     INT,
---      price        DECIMAL(10, 2),   -- price at time of purchase
---
---      FOREIGN KEY (order_id)   REFERENCES orders(order_id),
---      FOREIGN KEY (product_id) REFERENCES products(product_id)
--- );
---
--- CREATE TABLE payments (
---       payment_id      INT PRIMARY KEY AUTO_INCREMENT,
---       order_id        INT,
---       user_id         INT,
---       amount          DECIMAL(10, 2),
---       payment_method  VARCHAR(50),
---       payment_status  VARCHAR(50),    --'Success', 'Failed', 'Pending'
---       paid_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---
---       FOREIGN KEY (order_id) REFERENCES orders(order_id),
---       FOREIGN KEY (user_id)  REFERENCES users(user_id)
--- );
---
---
--- CREATE TABLE tracking (
---       tracking_id   INT PRIMARY KEY AUTO_INCREMENT,
---       order_id      INT,
---       status        VARCHAR(100),   -- 'Shipped', 'Out for Delivery', 'Delivered'
---       location      VARCHAR(200),
---       updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---
---       FOREIGN KEY (order_id) REFERENCES orders(order_id)
--- );
+CREATE TABLE orders (
+    orderId INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT,
+    totalAmount DECIMAL(10, 2) NOT NULL,
+    status VARCHAR(20),
+    estimatedDelivery DATE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-
-/*
- Recommendation for changes:
-
-
-CREATE TABLE products (
-    product_id   INT PRIMARY KEY AUTO_INCREMENT,
-    name         VARCHAR(100),
-    brand        VARCHAR(50),
-    price        DECIMAL(10,2),
-    stock        INT,
-    image_url    VARCHAR(255),
-    category     VARCHAR(50)    'laptop', 'mouse' 'keyboards' and
+    CONSTRAINT fk_user_orders FOREIGN KEY (userId) REFERENCES users(user_id)
 );
 
+CREATE TABLE order_items (
+     orderItemId INT AUTO_INCREMENT PRIMARY KEY,
+     orderId INT,
+     laptopId INT,
+     quantity INT,
 
-CREATE TABLE laptop_specs (
-    spec_id       INT PRIMARY KEY AUTO_INCREMENT,
-    product_id    INT UNIQUE,
-    processor     VARCHAR(100),
-    ram           VARCHAR(50),
-    storage       VARCHAR(100),
-    display_size  VARCHAR(20),
-    graphics_card VARCHAR(100),
-    weight        VARCHAR(20),
-
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+     CONSTRAINT fk_order_items FOREIGN KEY (orderId) REFERENCES orders(orderId),
+     CONSTRAINT fk_laptop_items FOREIGN KEY (laptopId) REFERENCES laptop(laptopID)
 );
-
- -----WE can add other products specs just like this ---
- mouse_specs, keyboard_specs
-
-
-
-
-
-
-
- */
 
 
 
