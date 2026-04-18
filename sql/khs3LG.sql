@@ -71,7 +71,7 @@ CREATE TABLE laptop
                                     ('Gaming', 'Ultrabook', 'Business', 'Student', 'Convertible', 'Workstation',
                                      'General', 'Professional')),
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
-    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Chrome OS', 'Linux')),
+    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'macOS', 'Chrome OS', 'Linux')),
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
 )
 /*
