@@ -67,8 +67,11 @@ public class OrdersDaoImpl implements OrdersDao{
                 itemStmt.setInt(1, orderId);
                 itemStmt.setInt(2, cartItem.getLaptopId());
                 itemStmt.setInt(3, cartItem.getQuantity());
+//                The add batch holds all the records in the list;
+                itemStmt.addBatch();
             }
-            itemStmt.executeUpdate();
+//            The executeBatch will execute all the stored list of statements and will return array of integer.
+            itemStmt.executeBatch();
             return true;
 
         }catch(SQLException e){
@@ -82,6 +85,8 @@ public class OrdersDaoImpl implements OrdersDao{
 
     @Override
     public ArrayList<Orders> fetchOrdersByUser(int userId) {
+
+
         return null;
     }
 
