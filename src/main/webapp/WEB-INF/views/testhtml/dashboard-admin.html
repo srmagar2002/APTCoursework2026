@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard — SKSHS Laptop Gallery</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .admin-badge { background:rgba(229,85,85,0.12);border:1px solid rgba(229,85,85,0.25);color:#e55;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase; }
+    .chart-area { height:140px;position:relative;margin-top:16px;overflow:hidden; }
+    .line-chart {
+      width:100%;height:100%;
+      stroke:var(--c3);stroke-width:2;fill:none;
+      filter:drop-shadow(0 0 6px rgba(64,138,113,0.4));
+    }
+    .line-chart-fill { fill:url(#lineGrad);stroke:none;opacity:0.3; }
+    .quick-action {
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+      padding:20px 16px;background:var(--glass);border:1px solid var(--glass-border);
+      border-radius:var(--radius);cursor:pointer;transition:all var(--transition);
+      text-align:center;
+    }
+    .quick-action:hover{border-color:var(--c3);background:rgba(64,138,113,0.15);transform:translateY(-3px);}
+    .quick-action .qa-icon{font-size:1.8rem;}
+    .quick-action .qa-label{font-size:0.82rem;font-weight:600;color:rgba(245,251,248,0.7);}
+    .top-product { display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(176,228,204,0.06); }
+    .top-product:last-child{border-bottom:none;}
+    .rank { font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:rgba(245,251,248,0.2);width:24px;flex-shrink:0;text-align:center; }
+    .rank.gold{color:#e9a;} .rank.silver{color:#aaa;} .rank.bronze{color:#c96;}
+  </style>
+</head>
+<body class="bg-dots">
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">SKSHS<span>.</span>Gallery</a>
+  <div class="nav-actions" style="margin-left:auto">
+    <span class="admin-badge">Admin Panel</span>
+    <button class="nav-icon-btn" onclick="showToast('No new notifications','🔔')">🔔</button>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <div class="sidebar-avatar" style="background:linear-gradient(135deg,#e55,#a22)">SK</div>
+      <div><div class="sidebar-name">Suraj Kumar</div><div class="sidebar-role" style="color:#e66">Super Admin</div></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Overview</div>
+      <a href="dashboard-admin.html" class="sidebar-link active"><span class="icon">📊</span> Dashboard</a>
+      <a href="#" class="sidebar-link"><span class="icon">📦</span> Orders <span style="margin-left:auto;background:#e55;color:#fff;font-size:0.65rem;padding:2px 6px;border-radius:10px">12</span></a>
+      <a href="#" class="sidebar-link"><span class="icon">💻</span> Products</a>
+      <a href="#" class="sidebar-link"><span class="icon">👥</span> Customers</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Management</div>
+      <a href="#" class="sidebar-link"><span class="icon">🏷️</span> Categories</a>
+      <a href="#" class="sidebar-link"><span class="icon">🎁</span> Coupons</a>
+      <a href="#" class="sidebar-link"><span class="icon">📢</span> Marketing</a>
+      <a href="#" class="sidebar-link"><span class="icon">🚚</span> Delivery</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">System</div>
+      <a href="profile-admin.html" class="sidebar-link"><span class="icon">👤</span> Admin Profile</a>
+      <a href="#" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
+      <a href="#" class="sidebar-link"><span class="icon">📋</span> Reports</a>
+      <a href="index.html" class="sidebar-link"><span class="icon">🌐</span> View Store</a>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:16px">
+      <div>
+        <h1 style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800">Admin <span style="color:var(--c4)">Dashboard</span></h1>
+        <p style="color:rgba(245,251,248,0.5);font-size:0.9rem;margin-top:4px">Real-time overview of SKSHS Laptop Gallery</p>
+      </div>
+      <div style="display:flex;gap:12px">
+        <button class="btn btn-ghost btn-sm" onclick="showToast('Report exported!','📋')">Export Report</button>
+        <button class="btn btn-primary btn-sm" onclick="window.location.href='products.html'">+ Add Product</button>
+      </div>
+    </div>
+
+    <!-- Stats Row 1 -->
+    <div class="grid-4" style="margin-bottom:24px">
+      <div class="stat-card reveal">
+        <div class="stat-icon">💰</div>
+        <div class="stat-label">Total Revenue</div>
+        <div class="stat-value">$<span data-count="284500">0</span></div>
+        <div class="stat-change up">↑ 18.2% vs last month</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-1">
+        <div class="stat-icon">📦</div>
+        <div class="stat-label">Total Orders</div>
+        <div class="stat-value" data-count="1247">0</div>
+        <div class="stat-change up">↑ 12.5% this month</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-icon">👥</div>
+        <div class="stat-label">Customers</div>
+        <div class="stat-value" data-count="3820">0</div>
+        <div class="stat-change up">↑ 284 new this month</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <div class="stat-icon">💻</div>
+        <div class="stat-label">Products Sold</div>
+        <div class="stat-value" data-count="1891">0</div>
+        <div class="stat-change down">↓ 3.1% vs last month</div>
+      </div>
+    </div>
+
+    <!-- Stats Row 2 -->
+    <div class="grid-4" style="margin-bottom:32px">
+      <div class="stat-card reveal" style="border-color:rgba(229,85,85,0.2)">
+        <div class="stat-icon">⚠️</div>
+        <div class="stat-label">Pending Orders</div>
+        <div class="stat-value" data-count="12">0</div>
+        <div class="stat-change" style="color:#e55">Needs attention</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-1">
+        <div class="stat-icon">🔄</div>
+        <div class="stat-label">Returns</div>
+        <div class="stat-value" data-count="8">0</div>
+        <div class="stat-change" style="color:rgba(245,251,248,0.4)">This month</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-label">Avg. Rating</div>
+        <div class="stat-value">4.8</div>
+        <div class="stat-change up">↑ Based on 1.2k reviews</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <div class="stat-icon">📈</div>
+        <div class="stat-label">Conv. Rate</div>
+        <div class="stat-value">3.2<span style="font-size:1rem;font-weight:400">%</span></div>
+        <div class="stat-change up">↑ 0.4% improvement</div>
+      </div>
+    </div>
+
+    <!-- Revenue Chart + Quick Actions -->
+    <div class="grid-2" style="gap:24px;margin-bottom:28px">
+      <div class="card reveal" style="padding:28px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <span style="font-family:'Syne',sans-serif;font-weight:700">Revenue Overview</span>
+          <select class="sort-select" style="background:rgba(40,90,72,0.2);border:1px solid var(--glass-border);border-radius:8px;padding:6px 12px;color:var(--white);font-size:0.8rem">
+            <option>2025</option><option>2024</option>
+          </select>
+        </div>
+        <div style="font-size:0.82rem;color:rgba(245,251,248,0.4)">Total: $284,500 · Avg: $23,708/mo</div>
+        <div class="chart-area">
+          <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+            <defs>
+              <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#408A71" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#408A71" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path class="line-chart-fill" d="M0 140 L0 100 L33 90 L66 70 L100 80 L133 55 L166 45 L200 30 L233 40 L266 20 L300 35 L333 25 L366 15 L400 10 L400 140 Z"/>
+            <path class="line-chart" d="M0 100 L33 90 L66 70 L100 80 L133 55 L166 45 L200 30 L233 40 L266 20 L300 35 L333 25 L366 15 L400 10" style="stroke-dasharray:600;stroke-dashoffset:600;animation:drawLine 2s ease forwards 0.5s"/>
+            <style>@keyframes drawLine{to{stroke-dashoffset:0}}</style>
+          </svg>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:rgba(245,251,248,0.3);margin-top:4px">
+          <span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-1" style="padding:28px">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:20px">Quick Actions</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+          <div class="quick-action" onclick="showToast('Add product dialog!','💻')"><div class="qa-icon">➕</div><div class="qa-label">Add Product</div></div>
+          <div class="quick-action" onclick="showToast('Order management!','📦')"><div class="qa-icon">📦</div><div class="qa-label">View Orders</div></div>
+          <div class="quick-action" onclick="showToast('Customer list!','👥')"><div class="qa-icon">👥</div><div class="qa-label">Customers</div></div>
+          <div class="quick-action" onclick="showToast('Coupon created!','🎁')"><div class="qa-icon">🎁</div><div class="qa-label">Add Coupon</div></div>
+          <div class="quick-action" onclick="showToast('Report generated!','📊')"><div class="qa-icon">📊</div><div class="qa-label">Analytics</div></div>
+          <div class="quick-action" onclick="showToast('Sending notification!','📢')"><div class="qa-icon">📢</div><div class="qa-label">Broadcast</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Orders + Top Products -->
+    <div class="grid-2" style="gap:24px;margin-bottom:28px">
+      <div class="card reveal" style="padding:28px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <span style="font-family:'Syne',sans-serif;font-weight:700">Latest Orders</span>
+          <a href="#" class="btn btn-ghost btn-sm">View All</a>
+        </div>
+        <div id="latestOrders"></div>
+      </div>
+
+      <div class="card reveal reveal-delay-1" style="padding:28px">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:20px">Top Selling Products</div>
+        <div id="topProducts"></div>
+      </div>
+    </div>
+
+    <!-- Customers Table -->
+    <div class="card reveal" style="padding:28px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+        <span style="font-family:'Syne',sans-serif;font-weight:700">Recent Customers</span>
+        <div style="display:flex;gap:12px">
+          <div class="search-bar" style="max-width:220px">
+            <input type="text" placeholder="Search customers..." style="font-size:0.82rem"/>
+            <button>🔍</button>
+          </div>
+          <button class="btn btn-ghost btn-sm">Export CSV</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Customer</th><th>Email</th><th>Orders</th><th>Total Spent</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar avatar-sm">RS</div><span>Rajesh Sharma</span></div></td>
+              <td style="color:var(--c3)">rajesh@email.com</td>
+              <td>12</td>
+              <td style="color:var(--c4);font-weight:600">$8,420</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><div class="status-dot online"></div> Active</div></td>
+              <td><button class="btn btn-ghost btn-sm" onclick="showToast('Customer profile opened!','👤')">View</button></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar avatar-sm">SG</div><span>Sita Gurung</span></div></td>
+              <td style="color:var(--c3)">sita@email.com</td>
+              <td>7</td>
+              <td style="color:var(--c4);font-weight:600">$4,200</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><div class="status-dot online"></div> Active</div></td>
+              <td><button class="btn btn-ghost btn-sm" onclick="showToast('Customer profile opened!','👤')">View</button></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar avatar-sm">BT</div><span>Bijay Thapa</span></div></td>
+              <td style="color:var(--c3)">bijay@email.com</td>
+              <td>3</td>
+              <td style="color:var(--c4);font-weight:600">$2,150</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><div class="status-dot pending"></div> Inactive</div></td>
+              <td><button class="btn btn-ghost btn-sm" onclick="showToast('Customer profile opened!','👤')">View</button></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar avatar-sm">MK</div><span>Maya KC</span></div></td>
+              <td style="color:var(--c3)">maya@email.com</td>
+              <td>5</td>
+              <td style="color:var(--c4);font-weight:600">$3,899</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><div class="status-dot online"></div> Active</div></td>
+              <td><button class="btn btn-ghost btn-sm" onclick="showToast('Customer profile opened!','👤')">View</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // Animate counters
+  document.querySelectorAll('[data-count]').forEach(el => {
+    setTimeout(() => animateCount(el, parseInt(el.dataset.count)), 300);
+  });
+
+  // Latest orders
+  const orders = [
+    {id:'#3847',name:'MacBook Air M3',customer:'Rajesh S.',price:'$1,299',status:'processing'},
+    {id:'#3846',name:'Dell XPS 15',customer:'Sita G.',price:'$1,849',status:'shipped'},
+    {id:'#3845',name:'ASUS ROG',customer:'Bijay T.',price:'$2,799',status:'delivered'},
+    {id:'#3844',name:'HP Spectre',customer:'Maya K.',price:'$1,549',status:'cancelled'},
+    {id:'#3843',name:'Razer Blade 15',customer:'Arun S.',price:'$3,299',status:'delivered'},
+  ];
+  const ordContainer = document.getElementById('latestOrders');
+  orders.forEach(o => {
+    const div = document.createElement('div');
+    div.style.cssText = 'display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(176,228,204,0.06);';
+    div.innerHTML = `
+      <div style="flex:1;min-width:0">
+        <div style="font-size:0.88rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${o.name}</div>
+        <div style="font-size:0.76rem;color:rgba(245,251,248,0.4)">${o.id} · ${o.customer}</div>
+      </div>
+      <div style="font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:var(--c4);flex-shrink:0">${o.price}</div>
+      <span class="order-status ${o.status}" style="flex-shrink:0">${o.status.charAt(0).toUpperCase()+o.status.slice(1)}</span>
+    `;
+    ordContainer.appendChild(div);
+  });
+
+  // Top products
+  const topProds = [
+    {rank:'1',rankClass:'gold',emoji:'💻',name:'MacBook Air M3',sales:48,revenue:'$62,352'},
+    {rank:'2',rankClass:'silver',emoji:'🎮',name:'ASUS ROG Zephyrus',sales:32,revenue:'$89,568'},
+    {rank:'3',rankClass:'bronze',emoji:'🖥️',name:'Dell XPS 15',sales:29,revenue:'$53,621'},
+    {rank:'4',rankClass:'',emoji:'💻',name:'Lenovo ThinkPad X1',sales:21,revenue:'$46,179'},
+    {rank:'5',rankClass:'',emoji:'💻',name:'HP Spectre x360',sales:18,revenue:'$27,882'},
+  ];
+  const tpContainer = document.getElementById('topProducts');
+  topProds.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'top-product';
+    div.innerHTML = `
+      <div class="rank ${p.rankClass}">${p.rank}</div>
+      <div style="width:36px;height:36px;background:rgba(40,90,72,0.4);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">${p.emoji}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:0.88rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>
+        <div style="font-size:0.76rem;color:rgba(245,251,248,0.4)">${p.sales} sold</div>
+      </div>
+      <div style="font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:var(--c4)">${p.revenue}</div>
+    `;
+    tpContainer.appendChild(div);
+  });
+
+  initRevealAnimations();
+</script>
+</body>
+</html>

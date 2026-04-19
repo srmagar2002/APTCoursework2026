@@ -5,12 +5,16 @@ import java.time.LocalDateTime;
 public class Laptop {
     /* BASIC INFO */
     private int laptopID;
+    private String laptopUUID;
     private String brand;
     private String model;
     private String title;
     private String description;
     private String imgUrl;
+    private String img1Url;
+    private String img2Url;
     private String thumbnailUrl;
+    private String category;
 
     /* SPECS */
     private String processor;
@@ -18,7 +22,7 @@ public class Laptop {
     private String storage;
     private String storageType; // SSD or HDD
     private String graphicsCard;
-    private double screenSize;
+    private String screenSize;
     private String resolution;
     private String operatingSystem; // Windows, macOS, Linux
 
@@ -41,21 +45,49 @@ public class Laptop {
     //empty constructor
     public Laptop(){}
 
+    public Laptop(String laptopUUID,String brand,String model,String title,String description,String processor,String ram,String storage,String storageType,String graphicsCard,String screenSize,String resolution,
+                  String operatingSystem, BigDecimal price, Integer discount, Integer stockQuantity,Integer weight, String color, Integer batteryLife,String category){
+        this.laptopUUID = laptopUUID;
+        this.brand = brand;
+        this.model = model;
+        this.title = title;
+        this.description = description;
+        this.processor = processor;
+        this.ram = ram;
+        this.storage = storage;
+        this.storageType = storageType;
+        this.graphicsCard = graphicsCard;
+        this.screenSize = screenSize;
+        this.resolution = resolution;
+        this.operatingSystem = operatingSystem;
+        this.price = price;
+        this.discount = discount;
+        this.stockQuantity = stockQuantity;
+        this.weight = weight;
+        this.color = color;
+        this.batteryLife = batteryLife;
+        this.category = category;
+    }
+
     //default constructor
-    public Laptop(int laptopID, String brand, String model, String title, String description,
-                  String imgUrl, String thumbnailUrl, String processor, String ram, String storage,
-                  String storageType, String graphicsCard, double screenSize, String resolution,
+    public Laptop(int laptopID,String laptopUUID, String brand, String model, String title, String description,
+                  String imgUrl,String img1Url,String img2Url, String thumbnailUrl,String category, String processor, String ram, String storage,
+                  String storageType, String graphicsCard, String screenSize, String resolution,
                   String operatingSystem, BigDecimal price, Integer discount, Integer stockQuantity,
                   String availabilityStatus, Integer weight, String color, Integer batteryLife,
                   LocalDateTime createdAt, LocalDateTime updatedAt) {
 
         this.laptopID = laptopID;
+        this.laptopUUID = laptopUUID;
         this.brand = brand;
         this.model = model;
         this.title = title;
         this.description = description;
         this.imgUrl = imgUrl;
+        this.img1Url = img1Url;
+        this.img2Url = img2Url;
         this.thumbnailUrl = thumbnailUrl;
+        this.category = category;
         this.processor = processor;
         this.ram = ram;
         this.storage = storage;
@@ -78,6 +110,9 @@ public class Laptop {
     public int getLaptopID() { return laptopID; }
     public void setLaptopID(int laptopID) { this.laptopID = laptopID; }
 
+    public String getLaptopUUID() { return laptopUUID; }
+    public void setLaptopUUID(String laptopUUID) { this.laptopUUID = laptopUUID; }
+
     public String getBrand() { return brand; }
     public void setBrand(String brand) { this.brand = brand; }
 
@@ -93,8 +128,17 @@ public class Laptop {
     public String getImgUrl() { return imgUrl; }
     public void setImgUrl(String imgUrl) { this.imgUrl = imgUrl; }
 
+    public String getImg1Url() { return img1Url; }
+    public void setImg1Url(String img1Url) { this.img1Url = img1Url; }
+
+    public String getImg2Url() { return img2Url; }
+    public void setImg2Url(String img2Url) { this.img2Url = img2Url; }
+
     public String getThumbnailUrl() { return thumbnailUrl; }
     public void setThumbnailUrl(String thumbnailUrl) { this.thumbnailUrl = thumbnailUrl; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
 
     public String getProcessor() { return processor; }
     public void setProcessor(String processor) { this.processor = processor; }
@@ -111,8 +155,8 @@ public class Laptop {
     public String getGraphicsCard() { return graphicsCard; }
     public void setGraphicsCard(String graphicsCard) { this.graphicsCard = graphicsCard; }
 
-    public double getScreenSize() { return screenSize; }
-    public void setScreenSize(double screenSize) { this.screenSize = screenSize; }
+    public String getScreenSize() { return screenSize; }
+    public void setScreenSize(String screenSize) { this.screenSize = screenSize; }
 
     public String getResolution() { return resolution; }
     public void setResolution(String resolution) { this.resolution = resolution; }

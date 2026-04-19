@@ -6,7 +6,17 @@ import java.sql.SQLException;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class DatabaseConnection {
-    private static final Dotenv dotenv = Dotenv.load();
+    private static Dotenv dotenv;
+        static {
+            try {
+                dotenv = Dotenv.configure()
+                        .ignoreIfMissing()
+                        .load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     private static final String DB_URL = dotenv.get("DB_URL");
     private static final String DB_USER = dotenv.get("DB_USER");
     private static final String DB_PASSWORD = dotenv.get("DB_PASSWORD");

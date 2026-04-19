@@ -95,7 +95,7 @@
 
                     <configuration>
                         <properties>
-                            <cargo.servlet.port>8082</cargo.servlet.port>
+                            <cargo.servlet.port>8083</cargo.servlet.port>
                         </properties>
                     </configuration>
 
@@ -105,7 +105,7 @@
                             <artifactId>${project.artifactId}</artifactId>
                             <type>war</type>
                             <properties>
-                                <context>/learning-logs</context>
+                                <context>/aptcoursework</context>
                             </properties>
                         </deployable>
                     </deployables>

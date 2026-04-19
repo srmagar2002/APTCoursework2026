@@ -1,15 +1,18 @@
-package com.aptcoursework.dao;
+package com.aptcoursework.test;
 
+import com.aptcoursework.dao.LaptopDao;
+import com.aptcoursework.dao.LaptopDaoImpl;
+import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.Laptop;
+import com.aptcoursework.entity.User;
+import com.aptcoursework.enums.Role;
 import com.aptcoursework.utils.DatabaseConnection;
+import com.aptcoursework.utils.PasswordUtil;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.math.BigDecimal;
 
 
 //NOTE:  This class is just for testing the DAO while it is building and will be removed in the final version.
@@ -32,6 +35,7 @@ public class daoTester {
     public static void main(String[] args) {
         testConnection();
 
+
         System.out.println("Insert 1, Get Laptop By ID 2");
         Scanner input = new Scanner(System.in);
 
@@ -50,25 +54,83 @@ public class daoTester {
             case 4:
                 fetchallLaptop();
                 break;
-            case 5:
-                Search();
+            case 6:
+                insertUser();
+                break;
+            case 7:
+                finduser();
                 break;
 
-        }
+            case 8:
+                findbyEmail();
+                break;
 
+                case 9:
+                    testlogin();
+                    break;
+
+        }
 
     }
 
-    static void Search() {
-        LaptopDaoImpl dao = new LaptopDaoImpl();
-        System.out.println("Enter something");
+    static void testlogin(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter username");
+        String username = input.nextLine();
+        System.out.println("Enter password");
+        String password = input.nextLine();
+
+        UserDaoImpl userDaoImpl = new UserDaoImpl();
+        User user = userDaoImpl.findByUsername(username);
+        if(PasswordUtil.checkPassword(password,user.getPasswordHash())){
+            System.out.println("Welcome "+username);
+        }
+        else {
+            System.out.println("Wrong password");
+        }
+    }
+
+    static void findbyEmail() {
+        UserDaoImpl userDao = new UserDaoImpl();
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter email: ");
+        String email = input.nextLine();
+        User user = userDao.findByEmail(email);
+        System.out.println(user.getEmail() + " " + user.getUsername() + " " + user.getPasswordHash());
+
+    }
+
+    static void finduser() {
+        UserDaoImpl userDao = new UserDaoImpl();
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter username: ");
+        String username = input.nextLine();
+        User user = userDao.findByUsername(username);
+        System.out.println(user.getEmail() + " " + user.getUsername() + " " + user.getPasswordHash());
+
+    }
+
+    static void insertUser() {
+        UserDaoImpl userDao = new UserDaoImpl();
+        User user = new User();
         Scanner input = new Scanner(System.in);
 
-        ArrayList<Laptop> laptops = dao.getLaptopsBySearch(input.next());
-        for (Laptop laptop : laptops) {
-            presentLaptop(laptop);
-        }
+        System.out.println("enter name");
+        user.setUsername(input.nextLine());
+
+        System.out.println("enter email");
+        user.setEmail(input.nextLine());
+
+        System.out.println("enter password");
+        user.setPasswordHash(PasswordUtil.getHashPassword(input.nextLine()));
+
+        System.out.println("enter role");
+        user.setRole(Role.valueOf(input.nextLine()));
+
+        userDao.insertUser(user);
+
     }
+
 
     static void fetchallLaptop() {
         LaptopDao laptopDao = new LaptopDaoImpl();
@@ -191,7 +253,7 @@ public class daoTester {
         laptop.setGraphicsCard(sc.nextLine());
 
         System.out.print("Screen Size: ");
-        laptop.setScreenSize(sc.nextDouble());
+        laptop.setScreenSize(sc.next());
         sc.nextLine(); // consume newline
 
         System.out.print("Resolution: ");
