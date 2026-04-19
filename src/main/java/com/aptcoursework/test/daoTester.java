@@ -2,8 +2,10 @@ package com.aptcoursework.test;
 
 import com.aptcoursework.dao.LaptopDao;
 import com.aptcoursework.dao.LaptopDaoImpl;
+import com.aptcoursework.dao.RatingDaoImpl;
 import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.Laptop;
+import com.aptcoursework.entity.Rating;
 import com.aptcoursework.entity.User;
 import com.aptcoursework.enums.Role;
 import com.aptcoursework.utils.DatabaseConnection;
@@ -41,11 +43,11 @@ public class daoTester {
 
         switch (input.nextInt()) {
             case 1:
-                insertLaptop();
+                insertrating();
                 break;
 
             case 2:
-                laptopByID();
+                getrating();
                 break;
 
             case 3:
@@ -65,15 +67,59 @@ public class daoTester {
                 findbyEmail();
                 break;
 
-                case 9:
-                    testlogin();
-                    break;
+            case 9:
+                testlogin();
+                break;
 
         }
 
     }
+    static void getrating(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter Rating: ");
+        int rating = input.nextInt();
 
-    static void testlogin(){
+        RatingDaoImpl ratingDao = new RatingDaoImpl();
+        ArrayList<Rating> ratings = ratingDao.getRatingsByLaptop(rating);
+        System.out.println(ratings.size());
+        for (Rating r:ratings){
+            System.out.println(r.getLaptopID());
+            System.out.println(r.getRating());
+            System.out.println(r.getUserID());
+            System.out.println(r.getRatingDate());
+        }
+    }
+    static void insertrating(){
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter userID : ");
+        int userID  = input.nextInt();
+        System.out.print("Enter laptopID : ");
+        int laptopID  = input.nextInt();
+        System.out.print("Enter rating : ");
+        int rate = input.nextInt();
+        System.out.print("Enter review : ");
+        String email = input.next();
+
+        Rating rating = new Rating(userID,laptopID,rate,email);
+
+//        Rating rating = new Rating();
+//        rating.setUserID(userID);
+//        rating.setLaptopID(laptopID);
+//        rating.setRating(rate);
+//        rating.setReview(email);
+
+        RatingDaoImpl ratingDao = new RatingDaoImpl();
+        if(ratingDao.addRating(rating)){
+            System.out.println("Rating Added Successfully");
+        }
+        else{
+            System.out.println("Rating Added Failed");
+        }
+
+    }
+
+    static void testlogin() {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter username");
         String username = input.nextLine();
@@ -82,10 +128,9 @@ public class daoTester {
 
         UserDaoImpl userDaoImpl = new UserDaoImpl();
         User user = userDaoImpl.findByUsername(username);
-        if(PasswordUtil.checkPassword(password,user.getPasswordHash())){
-            System.out.println("Welcome "+username);
-        }
-        else {
+        if (PasswordUtil.checkPassword(password, user.getPasswordHash())) {
+            System.out.println("Welcome " + username);
+        } else {
             System.out.println("Wrong password");
         }
     }

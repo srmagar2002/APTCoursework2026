@@ -6,8 +6,8 @@ KHS3LG;
 
 SET
 FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS rating;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS laptop;
 SET
 FOREIGN_KEY_CHECKS = 1;
@@ -80,12 +80,16 @@ CREATE TABLE laptop
 CREATE TABLE rating
 (
     ratingID INT AUTO_INCREMENT PRIMARY KEY,
-    userID INT,
-    laptopID INT,
-    rating INT DEFAULT 0,
+    userID INT NOT NULL ,
+    laptopID INT NOT NULL ,
+    rating INT DEFAULT NULL,
     review TEXT,
+    ratingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
     CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users(user_id),
-    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID)
+    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID),
+    CONSTRAINT ratingCheck CHECK (rating BETWEEN 1 AND 5 ),
+    CONSTRAINT unique_user_laptop UNIQUE (userID, laptopID)
 );
 
 /*

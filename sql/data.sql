@@ -1,10 +1,25 @@
-USE KHS3LG;
+USE
+KHS3LG;
 
-INSERT IGNORE INTO users (username,email,password_hash,role) VALUES ('admin'
+/* admin */
+INSERT
+IGNORE INTO users (username,email,password_hash,role) VALUES ('admin'
         ,'admin@admin.com','$2a$10$quyPeY7N5RQHlf/MlQ947equUsDswgunEHrcaKy2j67B7ejWl7nXq','ADMIN');
 /*password:APTadmin&123*/
 
-INSERT INTO laptop (
+/* customers */
+INSERT
+IGNORE INTO users (username,email,password_hash,role) VALUES
+       ('sugam','sugam@sugam.com','$2a$10$jegFIlpCS74MO/mB25e9nulmuAj6chcLnQ764sHR7sfKZd6/PmTW2' /*Sugam&123*/,'CUSTOMER'),
+       ('heaven','heaven@heaven.com','$2a$10$lOk71gYCTkRFKE29aG604OkuhWAZC579NuvOCpbIj9gFTogsvSCjq' /*Heaven&123*/,'CUSTOMER'),
+       ('kushal','kushal@kushal.com','$2a$10$WRY2N7z77ruGR7JX8POeTe3gvsGrs5Dp582fr6ZXVhkPOn8VxUmGW' /*Kushal&123*/,'CUSTOMER'),
+       ('paras','paras@paras.com','$2a$10$6IReMXxVy84EOiYzOBNH5OasR8dMUvzPVKPcP/Tcc66QPQl.aZYXC'/*Paras&123*/,'CUSTOMER'),
+       ('suzan','suzan@suzan.com','$2a$10$cxgcPQEt6w.QoHa1whbVDu.WEg5b8sJ2LMSIeWXPjh1HicJJvtudy' /*Suzan&123*/,'CUSTOMER');
+
+
+
+INSERT
+IGNORE INTO laptop (
     laptopUUID,brand, model, title, description,category,
     processor, ram, storage, storageType, graphicsCard, screenSize, resolution, operatingSystem,
     price, discount, stockQuantity,
