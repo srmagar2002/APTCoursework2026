@@ -7,6 +7,7 @@ KHS3LG;
 SET
 FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS rating;
 DROP TABLE IF EXISTS laptop;
 SET
 FOREIGN_KEY_CHECKS = 1;
@@ -26,7 +27,7 @@ CREATE TABLE laptop
 (
 /*BASIC INFO*/
     laptopID           INT AUTO_INCREMENT PRIMARY KEY,
-    laptopUUID         VARCHAR(300) NOT NULL UNIQUE,
+    laptopUUID         VARCHAR(300)   NOT NULL UNIQUE,
     brand              VARCHAR(200)   NOT NULL,
     model              VARCHAR(200)   NOT NULL,
     title              TEXT           NOT NULL,
@@ -73,7 +74,20 @@ CREATE TABLE laptop
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
     CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Linux')),
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
-)
+
+);
+
+CREATE TABLE rating
+(
+    ratingID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT,
+    laptopID INT,
+    rating INT DEFAULT 0,
+    review TEXT,
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users(user_id),
+    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID)
+);
+
 /*
 Category Explanation
 Gaming -	High-performance for gaming
