@@ -69,9 +69,9 @@ CREATE TABLE laptop
     updatedAt          TIMESTAMP               DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT categoryCheck CHECK (category IN
                                     ('Gaming', 'Ultrabook', 'Business', 'Student', 'Convertible', 'Workstation',
-                                     'General')),
+                                     'General', 'Professional')),
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
-    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Linux')),
+    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'macOS', 'Chrome OS', 'Linux')),
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
 )
 /*
@@ -84,6 +84,16 @@ Convertible -	2-in-1 touch laptops
 Workstation -	Powerful for professional tasks (CAD, rendering)
 General	Default - general-purpose
   */
+
+
+
+
+
+
+
+ */
+
+
 
 
 
