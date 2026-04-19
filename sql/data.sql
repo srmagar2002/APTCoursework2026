@@ -10,9 +10,97 @@ INSERT INTO laptop (
     price, discount, stockQuantity,
     weight, color, batteryLife
 ) VALUES
-      (UUID(),'Dell', 'XPS 13', 'Dell XPS 13 2026', 'Compact high-end laptop','Gaming',
-       'Intel i7-1365U', '16GB', '512GB', 'SSD', 'Intel Iris Xe', '16.2 Liquid Retina XDR', '1920x1200', 'Windows',
-       1499.99, 10, 25, 1200, 'Silver', 12),
+      (UUID(),'Dell','XPS 15','Dell XPS 15 2026','The Dell XPS 15 2026 is a premium ultrabook designed for high performance and sleek portability. Powered by an Intel i7-13700H processor and NVIDIA RTX 4050 graphics, it handles demanding tasks effortlessly. Its 15.6-inch 2560x1600 display delivers sharp visuals, while the 1TB SSD ensures fast storage and responsiveness.','Ultrabook',
+       'Intel i7-13700H','16GB','1TB','SSD','NVIDIA RTX 4050','15.6','2560x1600','Windows',
+       1899.99,8,20,1800,'Silver',10),
+
+      (UUID(),'Dell','XPS 17','Dell XPS 17 2026','The Dell XPS 17 2026 is a high-end ultrabook built for power users who need a large, immersive display. Featuring an Intel i9-13900H processor, 32GB RAM, and NVIDIA RTX 4060 graphics, it delivers exceptional performance. Its 17-inch 4K display ensures stunning clarity, while the 1TB SSD provides fast and reliable storage.','Ultrabook',
+       'Intel i9-13900H','32GB','1TB','SSD','NVIDIA RTX 4060','17','3840x2400','Windows',
+       2499.99,5,15,2200,'Black',9),
+
+      (UUID(),'Dell','Inspiron 15','Dell Inspiron 15','The Dell Inspiron 15 is an affordable and reliable laptop designed for everyday use. Powered by an Intel i5-1335U processor with 8GB RAM, it handles daily tasks smoothly. The 15.6-inch Full HD display offers clear visuals, while the 512GB SSD ensures quick boot times and efficient storage.','General',
+       'Intel i5-1335U','8GB','512GB','SSD','Intel Iris Xe','15.6','1920x1080','Windows',
+       799.99,12,40,1900,'Blue',8),
+
+      (UUID(),'Dell','Inspiron 14','Dell Inspiron 14','The Dell Inspiron 14 is a compact and budget-friendly laptop ideal for users on the go. Equipped with an Intel i5-1235U processor and 8GB RAM, it handles everyday tasks efficiently. Its 14-inch Full HD display offers clear visuals, while the 256GB SSD provides fast performance and essential storage.','General',
+       'Intel i5-1235U','8GB','256GB','SSD','Intel UHD','14','1920x1080','Windows',
+       649.99,15,50,1600,'Silver',9),
+
+      (UUID(),'Dell','Alienware M16','Dell Alienware M16','The Dell Alienware M16 is a powerful gaming laptop built for extreme performance and immersive gameplay. Featuring an Intel i9-13900HX processor, 32GB RAM, and NVIDIA RTX 4080 graphics, it handles the latest AAA titles with ease. Its 16-inch high-resolution display and 2TB SSD deliver stunning visuals and massive, fast storage.','Gaming',
+       'Intel i9-13900HX','32GB','2TB','SSD','NVIDIA RTX 4080','16','2560x1600','Windows',
+       2999.99,7,10,2800,'Black',6),
+
+      (UUID(),'Dell','Alienware X14','Dell Alienware X14','The Dell Alienware X14 is a slim and portable gaming laptop designed for performance on the go. Powered by an Intel i7-13700H processor, 16GB RAM, and NVIDIA RTX 4060 graphics, it delivers smooth gameplay. Its 14-inch high-resolution display and 1TB SSD ensure fast performance and vibrant visuals.','Gaming',
+       'Intel i7-13700H','16GB','1TB','SSD','NVIDIA RTX 4060','14','2560x1440','Windows',
+       2199.99,6,12,1900,'White',7),
+
+      (UUID(),'Dell','Latitude 7440','Dell Latitude 7440','The Dell Latitude 7440 is a business-class laptop designed for productivity and reliability. Powered by an Intel i7-1365U processor with 16GB RAM, it ensures smooth multitasking and efficient performance. Its 14-inch Full HD+ display offers clear visuals, while the 512GB SSD provides fast and secure storage for professional use.','Business',
+       'Intel i7-1365U','16GB','512GB','SSD','Intel Iris Xe','14','1920x1200','Windows',
+       1599.99,10,30,1400,'Gray',13),
+
+      (UUID(),'Dell','Latitude 5540','Dell Latitude 5540','The Dell Latitude 5540 is a reliable office laptop built for everyday business tasks. Featuring an Intel i5-1345U processor and 8GB RAM, it delivers consistent performance for productivity. Its 15.6-inch Full HD display ensures clear visuals, while the 512GB SSD offers fast storage and quick system responsiveness.','Business',
+       'Intel i5-1345U','8GB','512GB','SSD','Intel Iris Xe','15.6','1920x1080','Windows',
+       1199.99,9,35,1700,'Black',11),
+
+      (UUID(),'Dell','Vostro 3520','Dell Vostro 3520','The Dell Vostro 3520 is a practical laptop designed for small business users and daily office tasks. Powered by an Intel i5-1235U processor and 8GB RAM, it delivers reliable performance. Its 15.6-inch Full HD display ensures clear visuals, while the 512GB SSD provides fast storage and smooth system operation.','Business',
+       'Intel i5-1235U','8GB','512GB','SSD','Intel UHD','15.6','1920x1080','Windows',
+       899.99,11,45,1800,'Gray',10),
+
+      (UUID(),'Dell','G15 5530','Dell G15 Gaming Laptop','The Dell G15 5530 is a mid-range gaming laptop designed for smooth and responsive gameplay. Powered by an Intel i7-13650HX processor, 16GB RAM, and NVIDIA RTX 4050 graphics, it handles modern games with ease. Its 15.6-inch Full HD display and 1TB SSD deliver fast performance and immersive visuals.','Gaming',
+       'Intel i7-13650HX','16GB','1TB','SSD','NVIDIA RTX 4050','15.6','1920x1080','Windows',
+       1399.99,10,22,2500,'Black',7),
+
+      (UUID(),'Apple','MacBook Air M2','MacBook Air 13 M2','The MacBook Air M2 is a lightweight and highly efficient ultrabook designed for everyday productivity and portability. Powered by Apple’s M2 chip with an integrated 8-core GPU, it delivers smooth performance and excellent battery life. Its 13.6-inch high-resolution display offers vibrant visuals, while the fast SSD ensures quick responsiveness and reliable storage.','Ultrabook',
+       'Apple M2','8GB','256GB','SSD','Integrated 8-core GPU','13.6','2560x1664','macOS',
+       1199.99,5,30,1240,'Silver',18),
+
+      (UUID(),'Apple','MacBook Air M3','MacBook Air 13 M3','The MacBook Air M3 is Apple’s latest lightweight ultrabook, powered by the efficient M3 chip with a 10-core integrated GPU. It delivers fast, silent performance ideal for everyday productivity and creative tasks. With a 13.6-inch high-resolution display and 512GB SSD, it offers vibrant visuals, smooth multitasking, and ample storage in a sleek, portable design.','Ultrabook',
+       'Apple M3','8GB','512GB','SSD','Integrated 10-core GPU','13.6','2560x1664','macOS',
+       1399.99,4,25,1240,'Starlight',20),
+
+      (UUID(),'Apple','MacBook Air 15 M2','MacBook Air 15 M2','The MacBook Air 15 M2 is a thin and lightweight ultrabook featuring a larger 15.3-inch Liquid Retina display for enhanced viewing comfort. Powered by Apple’s M2 chip with a 10-core GPU and 16GB RAM, it delivers smooth multitasking and strong performance. Its 512GB SSD ensures fast storage, making it ideal for productivity and creative work on the go.','Ultrabook',
+       'Apple M2','16GB','512GB','SSD','Integrated 10-core GPU','15.3','2880x1864','macOS',
+       1599.99,6,20,1480,'Midnight',18),
+
+      (UUID(),'Apple','MacBook Air 15 M3','MacBook Air 15 M3','The MacBook Air 15 M3 combines power and portability in a sleek large-screen ultrabook. Powered by Apple’s M3 chip with a 10-core GPU and 16GB RAM, it delivers fast, efficient performance for demanding everyday tasks. Its 15.3-inch Liquid Retina display offers sharp, vibrant visuals, while the 512GB SSD ensures smooth, responsive storage access.','Ultrabook',
+       'Apple M3','16GB','512GB','SSD','Integrated 10-core GPU','15.3','2880x1864','macOS',
+       1699.99,5,18,1480,'Space Gray',20),
+
+      (UUID(),'Apple','MacBook Pro 13 M2','MacBook Pro 13-inch M2','The MacBook Pro 13-inch M2 is a compact professional laptop designed for strong performance and efficiency. Powered by Apple’s M2 chip with a 10-core GPU and 8GB RAM, it handles demanding workloads smoothly. Its 13.3-inch Retina display delivers sharp visuals, while the 512GB SSD ensures fast storage and responsive performance for creative and professional tasks.','Professional',
+       'Apple M2','8GB','512GB','SSD','Integrated 10-core GPU','13.3','2560x1600','macOS',
+       1499.99,7,22,1400,'Space Gray',20),
+
+      (UUID(),'Apple','MacBook Pro 14 M3','MacBook Pro 14 M3','The MacBook Pro 14 M3 is a high-performance professional laptop built for demanding creative and technical workloads. Powered by the Apple M3 Pro chip with an integrated 14-core GPU and 18GB RAM, it delivers exceptional speed and efficiency. Its 14.2-inch Liquid Retina XDR display offers stunning clarity, while the 512GB SSD ensures fast, reliable storage performance.','Professional',
+       'Apple M3 Pro','18GB','512GB','SSD','Integrated 14-core GPU','14.2','3024x1964','macOS',
+       1999.99,5,15,1600,'Silver',18),
+
+      (UUID(),'Apple','MacBook Pro 14 M3 Max','MacBook Pro 14 M3 Max','The MacBook Pro 14 M3 Max is an extreme-performance professional laptop built for the most demanding workflows. Powered by the Apple M3 Max chip with a 30-core integrated GPU and 36GB RAM, it delivers outstanding speed for rendering, development, and AI tasks. Its 14.2-inch Liquid Retina XDR display and 1TB SSD ensure exceptional visuals and ultra-fast storage performance.','Professional',
+       'Apple M3 Max','36GB','1TB','SSD','Integrated 30-core GPU','14.2','3024x1964','macOS',
+       2999.99,3,10,1620,'Space Black',16),
+
+      (UUID(),'Apple','MacBook Pro 16 M3 Pro','MacBook Pro 16 M3 Pro','The MacBook Pro 16 M3 Pro is a large-screen professional laptop designed for high-end productivity and creative workflows. Powered by the Apple M3 Pro chip with an 18-core integrated GPU and 18GB RAM, it delivers strong, efficient performance. Its 16.2-inch Liquid Retina XDR display offers stunning detail, while the 512GB SSD ensures fast and reliable storage access.','Professional',
+       'Apple M3 Pro','18GB','512GB','SSD','Integrated 18-core GPU','16.2','3456x2234','macOS',
+       2499.99,4,12,2100,'Silver',20),
+
+      (UUID(),'Apple','MacBook Pro 16 M3 Max','MacBook Pro 16 M3 Max','The MacBook Pro 16 M3 Max is the ultimate professional laptop, engineered for extreme performance and heavy workloads. Powered by the Apple M3 Max chip with a 40-core integrated GPU and 48GB RAM, it delivers unmatched speed for 3D rendering, video production, and advanced computing. Its 16.2-inch Liquid Retina XDR display and 1TB SSD ensure stunning visuals and ultra-fast, reliable storage performance.','Professional',
+       'Apple M3 Max','48GB','1TB','SSD','Integrated 40-core GPU','16.2','3456x2234','macOS',
+       3499.99,2,8,2150,'Space Black',18),
+
+      (UUID(),'Apple','MacBook Pro 13 M1','MacBook Pro 13-inch M1','The MacBook Pro 13-inch M1 is a reliable and efficient professional laptop designed for smooth everyday performance. Powered by Apple’s M1 chip with an 8-core integrated GPU and 8GB RAM, it handles productivity and creative tasks with ease. Its 13.3-inch Retina display delivers sharp visuals, while the 256GB SSD ensures fast boot times and responsive storage.','Professional',
+       'Apple M1','8GB','256GB','SSD','Integrated 8-core GPU','13.3','2560x1600','macOS',
+       1099.99,10,35,1400,'Silver',20),
+
+      (UUID(),'Acer','Aspire 5','Acer Aspire 5','The Acer Aspire 5 is an affordable everyday laptop designed for smooth and reliable performance. Powered by an Intel i5-1335U processor with 8GB RAM, it handles daily tasks like browsing, office work, and media consumption efficiently. Its 15.6-inch Full HD display offers clear visuals, while the 512GB SSD ensures fast boot times and responsive storage.','General',
+       'Intel i5-1335U','8GB','512GB','SSD','Intel Iris Xe','15.6','1920x1080','Windows',
+       699.99,12,40,1800,'Silver',8),
+
+      (UUID(),'Acer','Aspire 7','Acer Aspire 7','The Acer Aspire 7 is a versatile entry-level performance laptop designed for everyday productivity and light gaming. Powered by an Intel i7-12650H processor, 16GB RAM, and fast 512GB SSD storage, it ensures smooth multitasking. Its 15.6-inch Full HD display and GTX 1650 graphics deliver solid visual performance in a sleek black design.','General',
+       'Intel i7-12650H','16GB','512GB','SSD','NVIDIA GTX 1650','15.6','1920x1080','Windows',
+       999.99,10,30,2100,'Black',7),
+
+      (UUID(),'Acer','Swift 3','Acer Swift 3','The Acer Swift 3 is a slim, lightweight ultrabook built for portability and performance. Featuring an Intel i7-1360P processor, 16GB RAM, and 512GB SSD, it handles multitasking with ease. Its 14-inch 2560×1600 display offers crisp visuals, while Intel Iris Xe graphics ensure smooth everyday performance in a stylish blue finish.','Ultrabook',
+       'Intel i7-1360P','16GB','512GB','SSD','Intel Iris Xe','14','2560x1600','Windows',
+       1099.99,8,25,1250,'Blue',12),
 
       (UUID(),'Acer','Swift X','Acer Swift X','The Acer Swift X is a portable ultrabook that blends power and mobility with ease. Equipped with an AMD Ryzen 7 7840U, 16GB RAM, and a spacious 1TB SSD, it delivers fast performance. The 14-inch Full HD display and RTX 3050 graphics make it great for creative work and light gaming.','Ultrabook',
        'AMD Ryzen 7 7840U','16GB','1TB','SSD','NVIDIA RTX 3050','14','1920x1080','Windows',
