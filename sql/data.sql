@@ -4,6 +4,14 @@ INSERT IGNORE INTO users (username,email,password_hash,role) VALUES ('admin'
         ,'admin@admin.com','$2a$10$quyPeY7N5RQHlf/MlQ947equUsDswgunEHrcaKy2j67B7ejWl7nXq','ADMIN');
 /*password:APTadmin&123*/
 
+/*5 Customer details
+Username: User1 Password: User1@321 Gmail: User1@gmail.com
+Username: User2 Password: User2@321 Gmail: User2@gmail.com
+Username: User3 Password: User3@321 Gmail: User3@gmail.com
+Username: User4 Password: User4@321 Gmail: User4@gmail.com
+Username: User5 Password: User5@321 Gmail: User5@gmail.com */
+
+
 INSERT INTO laptop (
     laptopUUID,brand, model, title, description,category,
     processor, ram, storage, storageType, graphicsCard, screenSize, resolution, operatingSystem,
