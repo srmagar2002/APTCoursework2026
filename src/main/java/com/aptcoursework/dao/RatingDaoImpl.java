@@ -11,6 +11,29 @@ import java.util.ArrayList;
 
 public class RatingDaoImpl implements RatingDao {
     @Override
+    public double getAvgRatingbyLaptop(int laptopID) {
+        String sql = "SELECT AVG(rating) FROM rating WHERE laptopID = ?";
+        double avgRating = 0.0;
+        Connection connection = null;
+        try{
+            connection = DatabaseConnection.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1,laptopID);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                avgRating = rs.getDouble(1);
+            }
+            return avgRating;
+        }
+        catch (SQLException e){
+            System.out.println("Error Getting Rating : " + e.getMessage());
+        }
+        finally {
+            DatabaseConnection.closeConnection(connection);
+        }
+        return 0;
+    }
+    @Override
     public int getTotalRatingbyStars(int laptopID,int rating){
         String sql = "SELECT COUNT(*) FROM rating WHERE laptopID = ? AND rating = ?";
         int count = 0;
