@@ -10,10 +10,34 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RatingDaoImpl implements RatingDao {
+    @Override
+    public int getTotalRatingbyStars(int laptopID,int rating){
+        String sql = "SELECT COUNT(*) FROM rating WHERE laptopID = ? AND rating = ?";
+        int count = 0;
+        Connection connection = null;
+        try{
+            connection=DatabaseConnection.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1,laptopID);
+            stmt.setInt(2,rating);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+            return count;
+        }
+        catch(SQLException e){
+            System.out.println("Error in getTotalRating : " + e.getMessage());
+        }
+        finally{
+            DatabaseConnection.closeConnection(connection);
+        }
+        return 0;
+    }
 
     @Override
     public ArrayList<Rating> getRatingsByLaptop(int laptopID) {
-        String sql = "SELECT * FROM rating WHERE laptopID = ?";
+        String sql = "SELECT r.ratingID,r.userID,r.laptopID,r.rating,r.review,r.ratingDate,u.username FROM rating r LEFT JOIN users u ON r.userID = u.user_id WHERE laptopID = ?;";
         ArrayList<Rating> ratings = new ArrayList<>();
         Connection connection = null;
         try {
@@ -28,8 +52,10 @@ public class RatingDaoImpl implements RatingDao {
                         rs.getInt("laptopID"),
                         rs.getInt("rating"),
                         rs.getString("review"),
-                        rs.getTimestamp("ratingDate")
+                        rs.getTimestamp("ratingDate"),
+                        rs.getString("username")
                 );
+                System.out.println("UserID:"+rating.getUserID()+" Username : " +rating.getUsername()+" LaptopID"+rating.getLaptopID() +" Rating:"+rating.getRating()+ " Review:"+rating.getReview() + " Date:" + rating.getRatingDate() );
                 ratings.add(rating);
             }
             return ratings;

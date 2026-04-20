@@ -579,11 +579,6 @@ img {
     flex-direction: column;
 }
 
-/*.product-gallery {*/
-/*    position: sticky;*/
-/*    top: 100px;*/
-/*}*/
-
 .main-image {
     aspect-ratio: 4/3;
     background: linear-gradient(135deg, #1a1a1a 0%, #262626 100%);

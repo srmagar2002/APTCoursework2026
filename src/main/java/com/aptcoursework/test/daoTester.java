@@ -51,7 +51,7 @@ public class daoTester {
                 break;
 
             case 3:
-                updateLaptop();
+                gettotalrating();
                 break;
             case 4:
                 fetchallLaptop();
@@ -74,6 +74,16 @@ public class daoTester {
         }
 
     }
+
+    static void gettotalrating(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter id : ");
+        int id = input.nextInt();
+        RatingDaoImpl ratingDao=new RatingDaoImpl();
+        System.out.println(ratingDao.getTotalRating(id));
+
+    }
+
     static void getrating(){
         Scanner input = new Scanner(System.in);
         System.out.print("Enter Rating: ");

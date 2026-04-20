@@ -10,6 +10,7 @@ public class Rating {
     int rating;
     String review;
     Timestamp ratingDate;
+    String username;
 
     public Rating() {
     }
@@ -21,6 +22,16 @@ public class Rating {
         this.laptopID = laptopID;
         this.rating = rating;
         this.review = review;
+    }
+
+    public Rating(int ratingID, int userID, int laptopID, int rating, String review, Timestamp ratingDate, String username) {
+        this.ratingID = ratingID;
+        this.userID = userID;
+        this.laptopID = laptopID;
+        this.rating = rating;
+        this.review = review;
+        this.ratingDate = ratingDate;
+        this.username = username;
     }
 
     public Rating(int ratingID, int userID, int laptopID, int rating, String review, Timestamp ratingDate) {
@@ -77,6 +88,14 @@ public class Rating {
     }
 
     public void setRatingDate(Timestamp ratingDate) {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
 
