@@ -419,7 +419,11 @@
                                 <button class="btn-close" onclick="closeReviewModal()">&times;</button>
                             </div>
 
-                            <form class="review-form" onsubmit="submitReview(event)">
+                            <form class="review-form" action="${pageContext.request.contextPath}/rate" method="post">
+                                <input type="hidden" name="action" value="add"/>
+                                <input type="hidden" name="laptopid" value="${laptop.laptopID}"/>
+                                <input type="hidden" name="userid" value="${sessionScope.user.user_id}">
+                                <input type="hidden" name="newrating" value="" id="newrating">
                                 <div class="form-group">
                                     <label>Your Rating</label>
                                     <div class="stars interactive modal-stars" id="modalRatingStars">
@@ -466,7 +470,8 @@
                                     <textarea id="reviewText"
                                               placeholder="Share your experience with this product (optional)"
                                               maxlength="500"
-                                              rows="6"></textarea>
+                                              rows="6"
+                                    name="review"></textarea>
                                     <div class="char-count">
                                         <span id="charCount">0</span>/500
                                     </div>
@@ -478,7 +483,7 @@
                                     photo.</p>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-ghost" onclick="closeReviewModal()">Cancel
+                                    <button type="submit" class="btn btn-ghost">Cancel
                                     </button>
                                     <button type="submit" class="btn btn-primary">Submit Review</button>
                                 </div>
@@ -616,104 +621,107 @@
 
 <script>
     function changeImage(thumbnail, imageSrc, imageAlt) {
-    //Image Gallery
-    const mainImage = document.getElementById('mainProductImage');
-    mainImage.style.opacity = '0';
+        //Image Gallery
+        const mainImage = document.getElementById('mainProductImage');
+        mainImage.style.opacity = '0';
 
-    setTimeout(() => {
-        mainImage.src = imageSrc;
-        mainImage.alt = imageAlt;
-        mainImage.style.opacity = '1';
-    }, 150);
+        setTimeout(() => {
+            mainImage.src = imageSrc;
+            mainImage.alt = imageAlt;
+            mainImage.style.opacity = '1';
+        }, 150);
 
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach(thumb => thumb.classList.remove('active'));
-    thumbnail.classList.add('active');
-}
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+        thumbnail.classList.add('active');
+    }
 
-document.addEventListener("DOMContentLoaded", function () {
-    displayReview(${laptop.laptopID});
-});
+    document.addEventListener("DOMContentLoaded", function () {
+        displayReview(${laptop.laptopID});
+    });
 
-function displayReview(id)
-{
-    fetch(
-        "${pageContext.request.contextPath}/rate?laptopID="+id.toString(),
-        {
-            headers:{
-                "X-Requested-With": "XMLHttpRequest"
+    function displayReview(id) {
+        fetch(
+            "${pageContext.request.contextPath}/rate?laptopID=" + id.toString(),
+            {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
             }
+        ).then(res => res.text())
+            .then(html => {
+                document.getElementById('rating-review-section').innerHTML = html;
+            })
+    }
+
+    //Review Sec
+    // Rating system variables
+
+    let currentRating = 0;
+    let modalRating = 0;
+
+    // Handle star click in main section
+    function handleStarClick(value) {
+        currentRating = value;
+        updateStars('ratingStars', value);
+        openReviewModal();
+    }
+
+    // Update star display
+    function updateStars(elementId, rating) {
+        const stars = document.getElementById(elementId).querySelectorAll('.star-interactive');
+
+        stars.forEach(star => {
+            const value = parseInt(star.dataset.value);
+
+            if (value <= rating) {
+                star.style.color = 'var(--primary)';
+                star.style.opacity = '1';
+            } else {
+                star.style.color = 'var(--muted)';
+                star.style.opacity = '0.3';
+            }
+        });
+    }
+
+    // Handle star click in modal
+    function handleModalStarClick(value) {
+        modalRating = value;
+        document.getElementById('newrating').value = modalRating;
+        updateStars('modalRatingStars', value);
+    }
+
+    function openReviewModal() {
+        const modal = document.getElementById('reviewModal');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        if (currentRating > 0) {
+            modalRating = currentRating;
+            updateStars('modalRatingStars', currentRating);
         }
-    ).then(res=>res.text())
-        .then(html=>{
-            document.getElementById('rating-review-section').innerHTML = html;
-        })
-}
+    }
 
-//Review Sec
-// Rating system variables
+    // Close review modal
+    function closeReviewModal(event) {
+        currentRating = 0;
+        modalRating = 0;
+        updateStars('modalRatingStars', modalRating);
+        updateStars('ratingStars', currentRating);
+        if (event && event.target.id !== 'reviewModal') return;
+        const modal = document.getElementById('reviewModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 
-let currentRating = 0;
-let modalRating = 0;
-
-// Handle star click in main section
-function handleStarClick(value) {
-    currentRating = value;
-    updateStars('ratingStars', value);
-    openReviewModal();
-}
-
-
-// Update star display
-function updateStars(elementId, rating) {
-    const stars = document.getElementById(elementId).querySelectorAll('.star-interactive');
-
-    stars.forEach(star => {
-        const value = parseInt(star.dataset.value);
-
-        if (value <= rating) {
-            star.style.color = 'var(--primary)';
-            star.style.opacity = '1';
-        } else {
-            star.style.color = 'var(--muted)';
-            star.style.opacity = '0.3';
+    // Close modal with Escape key
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeReviewModal();
         }
     });
-}
-
-// Handle star click in modal
-function handleModalStarClick(value) {
-    modalRating = value;
-    updateStars('modalRatingStars', value);
-}
-
-function openReviewModal() {
-    const modal = document.getElementById('reviewModal');
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    if (currentRating > 0) {
-        modalRating = currentRating;
-        updateStars('modalRatingStars', currentRating);
-    }
-}
-
-// Close review modal
-function closeReviewModal(event) {
-    if (event && event.target.id !== 'reviewModal') return;
-    const modal = document.getElementById('reviewModal');
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Close modal with Escape key
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-        closeReviewModal();
-    }
-});
-document.getElementById('reviewText')?.addEventListener('input', function () {
-    document.getElementById('charCount').textContent = this.value.length;
-});
+    document.getElementById('reviewText')?.addEventListener('input', function () {
+        document.getElementById('charCount').textContent = this.value.length;
+    });
 
 </script>
 

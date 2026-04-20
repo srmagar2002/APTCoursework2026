@@ -150,13 +150,13 @@
             </div>
             <p class="review-text"><c:out value="${rating.review}"/>
             </p>
-            <div class="review-footer">
-                <span class="helpful-count">12 people found this helpful</span>
-                <div class="helpful-buttons">
-                    <button class="btn-helpful">Yes</button>
-                    <button class="btn-helpful">No</button>
-                </div>
-            </div>
+<%--            <div class="review-footer">--%>
+<%--                <span class="helpful-count">12 people found this helpful</span>--%>
+<%--                <div class="helpful-buttons">--%>
+<%--                    <button class="btn-helpful">Yes</button>--%>
+<%--                    <button class="btn-helpful">No</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
         </div>
     </c:forEach>
 </div>

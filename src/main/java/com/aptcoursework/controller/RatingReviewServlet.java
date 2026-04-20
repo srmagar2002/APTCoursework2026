@@ -65,5 +65,34 @@ public class RatingReviewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String action = request.getParameter("action");
+
+        if ("add".equals(action)) {
+            Rating rating = new Rating();
+
+            String laptopID = request.getParameter("laptopid");
+            rating.setLaptopID(Integer.parseInt(laptopID));
+
+            String userID = request.getParameter("userid");
+            rating.setUserID(Integer.parseInt(userID));
+            String newrating = request.getParameter("newrating");
+            rating.setRating(Integer.parseInt(newrating));
+            String review = request.getParameter("review");
+            rating.setReview(review);
+
+            System.out.println(userID + " " + laptopID + " " + newrating + " " + review);
+            RatingDaoImpl ratingDao = new RatingDaoImpl();
+            boolean isAdded = ratingDao.addRating(rating);
+
+            if (isAdded) {
+                System.out.println("Successfully added rating");
+            } else {
+                System.out.println("Failed to add rating");
+            }
+
+            response.sendRedirect(request.getContextPath() + "/productView?laptopID=" + laptopID);
+        }
+
+
     }
 }
