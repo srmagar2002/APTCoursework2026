@@ -15,7 +15,7 @@ IGNORE INTO users (username,email,password_hash,role) VALUES
        ('kushal','kushal@kushal.com','$2a$10$WRY2N7z77ruGR7JX8POeTe3gvsGrs5Dp582fr6ZXVhkPOn8VxUmGW' /*Kushal&123*/,'CUSTOMER'),
        ('paras','paras@paras.com','$2a$10$6IReMXxVy84EOiYzOBNH5OasR8dMUvzPVKPcP/Tcc66QPQl.aZYXC'/*Paras&123*/,'CUSTOMER'),
        ('suzan','suzan@suzan.com','$2a$10$cxgcPQEt6w.QoHa1whbVDu.WEg5b8sJ2LMSIeWXPjh1HicJJvtudy' /*Suzan&123*/,'CUSTOMER'),
-('sangam','sangam@sangam.com','$2a$10$cMoHlU259yfNhbxrQgkPuOj3tK1PvAojNVbKizjtosCuy5nPBENl2' /*Sangam&123*/,'CUSTOMER');
+       ('sangam','sangam@sangam.com','$2a$10$cMoHlU259yfNhbxrQgkPuOj3tK1PvAojNVbKizjtosCuy5nPBENl2' /*Sangam&123*/,'CUSTOMER');
 
 
 
