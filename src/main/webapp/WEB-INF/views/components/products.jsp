@@ -16,7 +16,16 @@
                     | ${product.storage} ${product.storageType}</p>
                 <div class="product-footer">
                     <span class="product-price">Rs. ${product.price}</span>
-                    <button class="btn btn-primary product-btn">View</button>
+                    <button class="btn btn-primary product-btn">
+                    <c:choose>
+                        <c:when test="${sessionScope.user.role== 'ADMIN' }">
+                            Edit
+                        </c:when>
+                        <c:when test="${empty sessionScope.user || sessionScope.user.role=='CUSTOMER'}">
+                            View
+                        </c:when>
+                    </c:choose>
+                    </button>
                 </div>
             </div>
         </a>
