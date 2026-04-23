@@ -87,11 +87,17 @@ public class OrdersDaoImpl implements OrdersDao{
     public ArrayList<Orders> fetchOrdersByUser(int userId) {
 
 
+
+
+
         return null;
     }
 
     @Override
     public boolean updateOrderStatus(int orderId, String status) {
+
+
+
         return false;
     }
 }
