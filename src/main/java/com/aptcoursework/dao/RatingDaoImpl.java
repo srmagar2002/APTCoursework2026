@@ -1,3 +1,9 @@
+/**
+ *
+ *
+ * */
+
+
 package com.aptcoursework.dao;
 
 import com.aptcoursework.entity.Rating;

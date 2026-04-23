@@ -10,6 +10,7 @@
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!-- Rating and Review Section -->
+<c:if test="${sessionScope.user.role=='CUSTOMER'}">
 <div class="rating-header">
     <div>
         <h2 style="margin: 0 0 0.5rem 0;">Rate this product</h2>
@@ -47,7 +48,7 @@
         </svg>
     </div>
 </div>
-
+</c:if>
 <div class="rating-breakdown">
     <div class="breakdown-header">
         <h3>Ratings and reviews</h3>

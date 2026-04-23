@@ -485,7 +485,7 @@
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-ghost">Cancel
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                                    <button type="submit" onsubmit="submitjs()" class="btn btn-primary">Submit Review</button>
                                 </div>
                             </form>
                         </div>
@@ -660,6 +660,8 @@
     let currentRating = 0;
     let modalRating = 0;
 
+    const hellos = document.getElementById('ratingStars').querySelectorAll('.star-interactive');
+
     // Handle star click in main section
     function handleStarClick(value) {
         currentRating = value;
@@ -670,10 +672,8 @@
     // Update star display
     function updateStars(elementId, rating) {
         const stars = document.getElementById(elementId).querySelectorAll('.star-interactive');
-
         stars.forEach(star => {
             const value = parseInt(star.dataset.value);
-
             if (value <= rating) {
                 star.style.color = 'var(--primary)';
                 star.style.opacity = '1';
@@ -708,6 +708,14 @@
         updateStars('modalRatingStars', modalRating);
         updateStars('ratingStars', currentRating);
         if (event && event.target.id !== 'reviewModal') return;
+
+        const stars = document.querySelectorAll('.star-interactive');
+
+        stars.forEach(star => {
+            star.style.removeProperty('color');
+            star.style.removeProperty('opacity');
+        });
+
         const modal = document.getElementById('reviewModal');
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
