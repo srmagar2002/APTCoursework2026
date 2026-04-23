@@ -1,10 +1,27 @@
-USE KHS3LG;
+USE
+KHS3LG;
 
-INSERT IGNORE INTO users (username,email,password_hash,role) VALUES ('admin'
+/* admin */
+INSERT
+IGNORE INTO users (username,email,password_hash,role) VALUES ('admin'
         ,'admin@admin.com','$2a$10$quyPeY7N5RQHlf/MlQ947equUsDswgunEHrcaKy2j67B7ejWl7nXq','ADMIN');
 /*password:APTadmin&123*/
 
-INSERT INTO laptop (
+/* customers */
+INSERT
+IGNORE INTO users (username,email,password_hash,role) VALUES
+       ('sugam','sugam@sugam.com','$2a$10$jegFIlpCS74MO/mB25e9nulmuAj6chcLnQ764sHR7sfKZd6/PmTW2' /*Sugam&123*/,'CUSTOMER'),
+       ('heaven','heaven@heaven.com','$2a$10$lOk71gYCTkRFKE29aG604OkuhWAZC579NuvOCpbIj9gFTogsvSCjq' /*Heaven&123*/,'CUSTOMER'),
+       ('kushal','kushal@kushal.com','$2a$10$WRY2N7z77ruGR7JX8POeTe3gvsGrs5Dp582fr6ZXVhkPOn8VxUmGW' /*Kushal&123*/,'CUSTOMER'),
+       ('paras','paras@paras.com','$2a$10$6IReMXxVy84EOiYzOBNH5OasR8dMUvzPVKPcP/Tcc66QPQl.aZYXC'/*Paras&123*/,'CUSTOMER'),
+       ('suzan','suzan@suzan.com','$2a$10$cxgcPQEt6w.QoHa1whbVDu.WEg5b8sJ2LMSIeWXPjh1HicJJvtudy' /*Suzan&123*/,'CUSTOMER'),
+('sangam','sangam@sangam.com','$2a$10$cMoHlU259yfNhbxrQgkPuOj3tK1PvAojNVbKizjtosCuy5nPBENl2' /*Sangam&123*/,'CUSTOMER');
+
+
+
+
+INSERT
+IGNORE INTO laptop (
     laptopUUID,brand, model, title, description,category,
     processor, ram, storage, storageType, graphicsCard, screenSize, resolution, operatingSystem,
     price, discount, stockQuantity,
@@ -249,3 +266,60 @@ INSERT INTO laptop (
       (UUID(),'Lenovo','ThinkPad P16','Lenovo ThinkPad P16','The Lenovo ThinkPad P16 is a powerful mobile workstation designed for professionals handling demanding workloads. Equipped with an Intel i9-13950HX, 32GB RAM, and a 1TB SSD, it delivers exceptional performance and reliability. Its 16-inch 1920×1200 display and RTX A3000 graphics make it ideal for engineering, design, and advanced creative tasks.','Workstation',
        'Intel i9-13950HX','32GB','1TB','SSD','NVIDIA RTX A3000','16','1920x1200','Windows',
        2799.99,4,10,2900,'Black',8);
+
+
+INSERT INTO rating (userID, laptopID, rating, review)
+VALUES (2, 1, 5, 'Excellent performance'),
+       (2, 2, 4, 'Very good laptop'),
+       (2, 3, 3, 'Average experience'),
+
+       (3, 1, 4, 'Good but pricey'),
+       (3, 4, 5, 'Loved it'),
+       (3, 5, 2, 'Not worth it'),
+
+       (4, 2, 3, 'Decent overall'),
+       (4, 3, 4, 'Pretty solid'),
+       (4, 6, 5, 'Amazing device'),
+
+       (5, 1, 2, 'Battery is weak'),
+       (5, 7, 4, 'Good for work'),
+       (5, 8, 5, 'Fantastic'),
+
+       (6, 2, 1, 'Terrible experience'),
+       (6, 9, 3, 'Okayish'),
+       (6, 10, 4, 'Nice build quality'),
+
+       (7, 3, 5, 'Best laptop ever'),
+       (7, 4, 4, 'Very reliable'),
+       (7, 5, 3, 'Average'),
+       (7, 6, 2, 'Could be better'),
+       (7, 7, 4, 'Good value'),
+       (2, 4, 5, 'Super fast and smooth'),
+       (2, 5, 3, 'Okay performance'),
+
+       (3, 2, 4, 'Good for daily use'),
+       (3, 6, 2, 'Not impressed'),
+
+       (4, 1, 5, 'Excellent build quality'),
+       (4, 7, 4, 'Very reliable machine'),
+
+       (5, 2, 3, 'Average battery life'),
+       (5, 3, 5, 'Amazing display'),
+
+       (6, 1, 4, 'Solid choice'),
+       (6, 4, 2, 'Too slow for my needs'),
+
+       (7, 1, 5, 'Perfect laptop'),
+       (7, 2, 4, 'Great value for money'),
+
+       (2, 6, 3, 'Decent but noisy fan'),
+       (3, 7, 5, 'Outstanding performance'),
+
+       (4, 8, 4, 'Nice design'),
+       (5, 9, 2, 'Disappointing experience'),
+
+       (6, 8, 5, 'Very powerful'),
+       (7, 9, 3, 'Average specs'),
+
+       (2, 7, 4, 'Good portability'),
+       (3, 8, 5, 'Excellent for students');

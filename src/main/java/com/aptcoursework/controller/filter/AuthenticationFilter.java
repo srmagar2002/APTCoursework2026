@@ -23,16 +23,13 @@ public class AuthenticationFilter implements Filter {
         String path = uri.substring(contextPath.length());
 
         if(path.contains("/static/")){
-            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-            res.setHeader("Pragma", "no-cache");
-            res.setDateHeader("Expires", 0);
             chain.doFilter(req,res);
             return;
         }
 
         boolean isLoggedIn = SessionUtil.getAttribute(req,"user") != null;
         boolean isAuthPage = "/login".equals(path) || "/register".equals(path) ;
-        boolean isProduct = "/products".equals(path) || "/".equals(path) || "/productView".equals(path);
+        boolean isProduct = "/products".equals(path) || "/".equals(path) || "/productView".equals(path) || "/rate".equals(path);
 
         if(isProduct){
             chain.doFilter(req,res);

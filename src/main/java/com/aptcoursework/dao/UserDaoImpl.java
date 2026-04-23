@@ -46,6 +46,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 User user = new User();
+                user.setUser_id(rs.getInt("user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPasswordHash(rs.getString("password_hash"));
