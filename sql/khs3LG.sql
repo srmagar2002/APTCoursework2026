@@ -6,6 +6,7 @@ KHS3LG;
 
 SET
 FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS rating;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS laptop;
 SET
@@ -26,7 +27,7 @@ CREATE TABLE laptop
 (
 /*BASIC INFO*/
     laptopID           INT AUTO_INCREMENT PRIMARY KEY,
-    laptopUUID         VARCHAR(300) NOT NULL UNIQUE,
+    laptopUUID         VARCHAR(300)   NOT NULL UNIQUE,
     brand              VARCHAR(200)   NOT NULL,
     model              VARCHAR(200)   NOT NULL,
     title              TEXT           NOT NULL,
@@ -73,7 +74,24 @@ CREATE TABLE laptop
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
     CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'macOS', 'Chrome OS', 'Linux')),
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
-)
+
+);
+
+CREATE TABLE rating
+(
+    ratingID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL ,
+    laptopID INT NOT NULL ,
+    rating INT DEFAULT NULL,
+    review TEXT,
+    ratingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users(user_id),
+    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID),
+    CONSTRAINT ratingCheck CHECK (rating BETWEEN 1 AND 5 ),
+    CONSTRAINT unique_user_laptop UNIQUE (userID, laptopID)
+);
+
 /*
 Category Explanation
 Gaming -	High-performance for gaming
@@ -83,6 +101,6 @@ Student -	Affordable, simple laptops
 Convertible -	2-in-1 touch laptops
 Workstation -	Powerful for professional tasks (CAD, rendering)
 General	Default - general-purpose
-  */
+*/
 
 
