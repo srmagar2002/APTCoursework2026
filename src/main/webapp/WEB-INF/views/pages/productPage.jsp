@@ -175,7 +175,6 @@
 
     searchInput.addEventListener("input", function () {
         clearTimeout(debounceTimer);
-
         debounceTimer = setTimeout(() => {
             const params = new URLSearchParams(new FormData(filtersForm));
             fetch(
