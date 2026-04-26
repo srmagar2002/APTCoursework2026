@@ -25,9 +25,15 @@ public class ProductViewServlet extends HttpServlet {
 
         Laptop laptop = laptopDao.getLaptopById(productId);
         System.out.println(laptop.toString());
-        request.setAttribute("laptop", laptop);
-        request.getRequestDispatcher("/WEB-INF/views/pages/productViewPage.jsp")
-                .forward(request, response);
+        if(action == null) {
+            request.setAttribute("laptop", laptop);
+            request.getRequestDispatcher("/WEB-INF/views/pages/productViewPage.jsp")
+                    .forward(request, response);
+        }
+        else if("delete".equals(action)){
+            
+        }
+
 
     }
     @Override

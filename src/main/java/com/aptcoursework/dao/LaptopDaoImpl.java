@@ -12,6 +12,25 @@ import java.util.ArrayList;
 
 public class LaptopDaoImpl implements LaptopDao {
     @Override
+    public boolean deleteByLaptopID(int laptopID) {
+        Connection connection = null;
+        String sql = "delete from Laptop where laptopID = ?";
+        try{
+            connection = DatabaseConnection.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, laptopID);
+            stmt.executeUpdate();
+            return true;
+        }
+        catch(SQLException e){
+            System.out.println("Error while Deleting Laptop" + e.getMessage());
+            return false;
+        }
+        finally{
+            DatabaseConnection.closeConnection(connection);
+        }
+    }
+    @Override
     public boolean insertLaptop(Laptop laptop) {
 
         Connection conn = null;

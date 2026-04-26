@@ -17,6 +17,45 @@ import java.util.ArrayList;
 
 public class RatingDaoImpl implements RatingDao {
     @Override
+    public Boolean deleteRatingByLaptopID(int laptopID) {
+
+        Connection conn = null;
+        String sql = "delete from rating where laptopID=?";
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,laptopID);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error While deleting rating : "+e.getMessage());
+            return false;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+
+    @Override
+    public Boolean deleteRatingByUserID(int userID, int laptopID){
+        Connection conn = null;
+        String sql = "delete from rating where userID=? AND laptopID=?";
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,userID);
+            stmt.setInt(2,laptopID);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error While deleting rating : "+e.getMessage());
+            return false;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+    @Override
     public double getAvgRatingbyLaptop(int laptopID) {
         String sql = "SELECT AVG(rating) FROM rating WHERE laptopID = ?";
         double avgRating = 0.0;

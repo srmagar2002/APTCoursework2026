@@ -23,298 +23,326 @@
             <main class="page-container">
                 <div class="product-detail">
                     <!-- Product Gallery -->
-                    <div class="product-gallery">
-                        <div class="gallery-grid-2x2">
-                            <div class="gallery-item">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.thumbnailUrl}?v=${laptop.updatedAt}"
-                                     id="thumb-img" alt="${laptop.title}">
-                                <div class="btn-edit-image" onclick="document.getElementById('imageUpload1').click()">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                                         viewBox="0 0 24 24">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
-                                </div>
-                                <input type="file" id="imageUpload1" name="thumbimg" accept="image/*"
-                                       style="display: none;">
+                    <div class="product-left-column">
+                        <div class="product-gallery">
+                            <div class="gallery-grid-2x2">
+                                <div class="gallery-item">
+                                    <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.thumbnailUrl}?v=${laptop.updatedAt}"
+                                         id="thumb-img" alt="${laptop.title}">
+                                    <div class="btn-edit-image"
+                                         onclick="document.getElementById('imageUpload1').click()">
+                                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                             viewBox="0 0 24 24">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        </svg>
+                                    </div>
+                                    <input type="file" id="imageUpload1" name="thumbimg" accept="image/jpeg"
+                                           style="display: none;">
 
-                            </div>
-                            <div class="gallery-item">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.imgUrl}?v=${laptop.updatedAt}"
-                                     id="image0" alt="${laptop.title}">
-                                <div class="btn-edit-image" onclick="document.getElementById('imageUpload2').click()">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                                         viewBox="0 0 24 24">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
                                 </div>
-                                <input type="file" id="imageUpload2" name="img0" accept="image/*"
-                                       style="display: none;">
-                            </div>
-                            <div class="gallery-item">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img1Url}?v=${laptop.updatedAt}"
-                                     id="image1" alt="${laptop.title}">
-                                <div class="btn-edit-image" onclick="document.getElementById('imageUpload3').click()">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                                         viewBox="0 0 24 24">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
+                                <div class="gallery-item">
+                                    <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.imgUrl}?v=${laptop.updatedAt}"
+                                         id="image0" alt="${laptop.title}">
+                                    <div class="btn-edit-image"
+                                         onclick="document.getElementById('imageUpload2').click()">
+                                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                             viewBox="0 0 24 24">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        </svg>
+                                    </div>
+                                    <input type="file" id="imageUpload2" name="img0" accept="image/jpeg"
+                                           style="display: none;">
                                 </div>
-                                <input type="file" id="imageUpload3" name="img1" accept="image/*"
-                                       style="display: none;">
-                            </div>
-                            <div class="gallery-item">
-                                <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img2Url}?v=${laptop.updatedAt}"
-                                     id="image2" alt="${laptop.title}">
-                                <div class="btn-edit-image" onclick="document.getElementById('imageUpload4').click()">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                                         viewBox="0 0 24 24">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
+                                <div class="gallery-item">
+                                    <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img1Url}?v=${laptop.updatedAt}"
+                                         id="image1" alt="${laptop.title}">
+                                    <div class="btn-edit-image"
+                                         onclick="document.getElementById('imageUpload3').click()">
+                                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                             viewBox="0 0 24 24">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        </svg>
+                                    </div>
+                                    <input type="file" id="imageUpload3" name="img1" accept="image/jpeg"
+                                           style="display: none;">
                                 </div>
-                                <input type="file" id="imageUpload4" name="img2" accept="image/*"
-                                       style="display: none;">
+                                <div class="gallery-item">
+                                    <img src="${pageContext.request.contextPath}/static/imgUpload/${laptop.img2Url}?v=${laptop.updatedAt}"
+                                         id="image2" alt="${laptop.title}">
+                                    <div class="btn-edit-image"
+                                         onclick="document.getElementById('imageUpload4').click()">
+                                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                             viewBox="0 0 24 24">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        </svg>
+                                    </div>
+                                    <input type="file" id="imageUpload4" name="img2" accept="image/jpeg"
+                                           style="display: none;">
+                                </div>
                             </div>
+                        </div>
+
+                        <div class="rating-review-section" id="rating-review-section">
                         </div>
                     </div>
 
-                    <!-- Product Info (Editable) -->
-                    <div class="product-info">
-                        <div class="admin-edit-field">
-                            <label for="brand" class="edit-label">Brand</label>
-                            <input name="brand" id="brand" type="text" class="edit-input edit-input-brand"
-                                   value="<c:out value="${laptop.brand}" default=""/>"
-                                   placeholder="Enter brand name" required>
-                        </div>
-
-                        <div class="admin-edit-field">
-                            <label for="title" class="edit-label">Title</label>
-                            <input name="title" id="title" type="text" class="edit-input edit-input-name"
-                                   value="<c:out value="${laptop.title}" default=""/>" placeholder="Enter title"
-                                   required>
-                        </div>
-
-                        <div class="admin-edit-field">
-                            <label for="model" class="edit-label">Model</label>
-                            <input name="model" id="model" type="text" class="edit-input edit-input-name"
-                                   value="<c:out value="${laptop.model}" default=""/>" placeholder="Enter model name"
-                                   required>
-                        </div>
-
-                        <div class="product-rating">
-                            <div class="stars">
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                            </div>
-                            <span class="rating-text">4.9 (128 reviews)</span>
-                        </div>
-
-                        <div class="specs-grid specs-grid-admin">
+                    <div class="product-right-column">
+                        <!-- Product Info (Editable) -->
+                        <div class="product-info">
                             <div class="admin-edit-field">
-                                <label for="price" class="edit-label">Price ($)</label>
-                                <input name="price" id="price" type="number" class="edit-input edit-input-price"
-                                       value="<c:out value="${laptop.price}" default="0.00"/>" placeholder="0.00"
-                                       step="0.01">
-                            </div>
-                            <div class="admin-edit-field">
-                                <label for="discount" class="edit-label">Discount (%)</label>
-                                <input name="discount" id="discount" type="number" class="edit-input edit-input-price"
-                                       value="<c:out value="${laptop.discount}" default="0.00"/>" placeholder="0.00"
-                                       step="0.01">
-                            </div>
-                        </div>
-
-                        <div class="admin-edit-field">
-                            <label for="description" class="edit-label">Description</label>
-                            <textarea id="description" name="description" class="edit-textarea" rows="4"
-                                      placeholder="Enter product description"><c:out value="${laptop.description}"
-                                                                                     default=""/></textarea>
-                        </div>
-
-                        <!-- Specs Grid (Editable) -->
-                        <div class="specs-grid specs-grid-admin">
-                            <div class="admin-edit-field" style="flex: 1;">
-                                <label for="category" class="edit-label">Category</label>
-                                <select id="category" name="category" class="edit-select">
-                                    <option value="Gaming" <c:if test="${laptop.category=='Gaming'}">selected</c:if>>
-                                        Gaming
-                                    </option>
-                                    <option value="Ultrabook"
-                                            <c:if test="${laptop.category=='Ultrabook'}">selected</c:if>>Ultrabook
-                                    </option>
-                                    <option value="Business"
-                                            <c:if test="${laptop.category=='Business'}">selected</c:if>>Business
-                                    </option>
-                                    <option value="Student" <c:if test="${laptop.category=='Student'}">selected</c:if>>
-                                        Student
-                                    </option>
-                                    <option value="Convertible"
-                                            <c:if test="${laptop.category=='Convertible'}">selected</c:if>>Convertible
-                                    </option>
-                                    <option value="Workstation"
-                                            <c:if test="${laptop.category=='Workstation'}">selected</c:if>>Workstation
-                                    </option>
-                                    <option value="General" <c:if test="${laptop.category=='General'}">selected</c:if>>
-                                        General
-                                    </option>
-                                </select></div>
-
-                            <div class="admin-edit-field" style="flex: 1;">
-                                <label for="operatingsystem" class="edit-label">Operating System</label>
-                                <select id="operatingsystem" name="operatingsystem" class="edit-select">
-                                    <option value="Windows"
-                                            <c:if test="${laptop.operatingSystem == 'Windows'}">selected</c:if>>
-                                        Windows
-                                    </option>
-                                    <option value="MacOS"
-                                            <c:if test="${laptop.operatingSystem == 'MacOS'}">selected</c:if>>
-                                        MacOS
-                                    </option>
-                                    <option value="Linux"
-                                            <c:if test="${laptop.operatingSystem == 'Linux'}">selected</c:if>>
-                                        Linux
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="admin-edit-field" style="flex: 1;">
-                                <label for="processor" class="edit-label">Processor</label>
-                                <input name="processor" id="processor" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.processor}" default=""/>">
-                            </div>
-                            <div class="admin-edit-field">
-                                <label for="ram" class="edit-label">Memory</label>
-                                <input id="ram" name="ram" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.ram}" default=""/>">
-                            </div>
-                            <div class="admin-edit-field">
-                                <label for="storage" class="edit-label">Storage</label>
-                                <input id="storage" name="storage" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.storage}" default=""/>">
+                                <label for="brand" class="edit-label">Brand</label>
+                                <input name="brand" id="brand" type="text" class="edit-input edit-input-brand"
+                                       value="<c:out value="${laptop.brand}" default=""/>"
+                                       placeholder="Enter brand name" required>
                             </div>
 
                             <div class="admin-edit-field">
-                                <label for="storagetype" class="edit-label">Storage Type</label>
-                                <input id="storagetype" name="storagetype" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.storageType}" default=""/>"/>
+                                <label for="title" class="edit-label">Title</label>
+                                <input name="title" id="title" type="text" class="edit-input edit-input-name"
+                                       value="<c:out value="${laptop.title}" default=""/>" placeholder="Enter title"
+                                       required>
                             </div>
 
                             <div class="admin-edit-field">
-                                <label for="graphics" class="edit-label">Graphics Card</label>
-                                <input id="graphics" name="graphics" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.graphicsCard}" default=""/>">
+                                <label for="model" class="edit-label">Model</label>
+                                <input name="model" id="model" type="text" class="edit-input edit-input-name"
+                                       value="<c:out value="${laptop.model}" default=""/>"
+                                       placeholder="Enter model name"
+                                       required>
+                            </div>
+
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                </div>
+                                <span class="rating-text">4.9 (128 reviews)</span>
+                            </div>
+
+                            <div class="specs-grid specs-grid-admin">
+                                <div class="admin-edit-field">
+                                    <label for="price" class="edit-label">Price ($)</label>
+                                    <input name="price" id="price" type="number" class="edit-input edit-input-price"
+                                           value="<c:out value="${laptop.price}" default="0.00"/>" placeholder="0.00"
+                                           step="0.01">
+                                </div>
+                                <div class="admin-edit-field">
+                                    <label for="discount" class="edit-label">Discount (%)</label>
+                                    <input name="discount" id="discount" type="number"
+                                           class="edit-input edit-input-price"
+                                           value="<c:out value="${laptop.discount}" default="0.00"/>" placeholder="0.00"
+                                           step="0.01">
+                                </div>
                             </div>
 
                             <div class="admin-edit-field">
-                                <label for="screen" class="edit-label">Display</label>
-                                <input id="screen" name="screen" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.screenSize}" default=""/>">
+                                <label for="description" class="edit-label">Description</label>
+                                <textarea id="description" name="description" class="edit-textarea" rows="4"
+                                          placeholder="Enter product description"><c:out value="${laptop.description}"
+                                                                                         default=""/></textarea>
                             </div>
 
-                            <div class="admin-edit-field">
-                                <label for="reso" class="edit-label">Resolution</label>
-                                <input id="reso" name="reso" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.resolution}" default=""/>">
+                            <!-- Specs Grid (Editable) -->
+                            <div class="specs-grid specs-grid-admin">
+                                <div class="admin-edit-field" style="flex: 1;">
+                                    <label for="category" class="edit-label">Category</label>
+                                    <select id="category" name="category" class="edit-select">
+                                        <option value="Gaming"
+                                                <c:if test="${laptop.category=='Gaming'}">selected</c:if>>
+                                            Gaming
+                                        </option>
+                                        <option value="Ultrabook"
+                                                <c:if test="${laptop.category=='Ultrabook'}">selected</c:if>>Ultrabook
+                                        </option>
+                                        <option value="Business"
+                                                <c:if test="${laptop.category=='Business'}">selected</c:if>>Business
+                                        </option>
+                                        <option value="Student"
+                                                <c:if test="${laptop.category=='Student'}">selected</c:if>>
+                                            Student
+                                        </option>
+                                        <option value="Convertible"
+                                                <c:if test="${laptop.category=='Convertible'}">selected</c:if>>
+                                            Convertible
+                                        </option>
+                                        <option value="Workstation"
+                                                <c:if test="${laptop.category=='Workstation'}">selected</c:if>>
+                                            Workstation
+                                        </option>
+                                        <option value="General"
+                                                <c:if test="${laptop.category=='General'}">selected</c:if>>
+                                            General
+                                        </option>
+                                    </select></div>
+
+                                <div class="admin-edit-field" style="flex: 1;">
+                                    <label for="operatingsystem" class="edit-label">Operating System</label>
+                                    <select id="operatingsystem" name="operatingsystem" class="edit-select">
+                                        <option value="Windows"
+                                                <c:if test="${laptop.operatingSystem == 'Windows'}">selected</c:if>>
+                                            Windows
+                                        </option>
+                                        <option value="MacOS"
+                                                <c:if test="${laptop.operatingSystem == 'MacOS'}">selected</c:if>>
+                                            MacOS
+                                        </option>
+                                        <option value="Linux"
+                                                <c:if test="${laptop.operatingSystem == 'Linux'}">selected</c:if>>
+                                            Linux
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="admin-edit-field" style="flex: 1;">
+                                    <label for="processor" class="edit-label">Processor</label>
+                                    <input name="processor" id="processor" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.processor}" default=""/>">
+                                </div>
+                                <div class="admin-edit-field">
+                                    <label for="ram" class="edit-label">Memory</label>
+                                    <input id="ram" name="ram" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.ram}" default=""/>">
+                                </div>
+                                <div class="admin-edit-field">
+                                    <label for="storage" class="edit-label">Storage</label>
+                                    <input id="storage" name="storage" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.storage}" default=""/>">
+                                </div>
+
+                                <div class="admin-edit-field">
+                                    <label for="storagetype" class="edit-label">Storage Type</label>
+                                    <input id="storagetype" name="storagetype" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.storageType}" default=""/>"/>
+                                </div>
+
+                                <div class="admin-edit-field">
+                                    <label for="graphics" class="edit-label">Graphics Card</label>
+                                    <input id="graphics" name="graphics" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.graphicsCard}" default=""/>">
+                                </div>
+
+                                <div class="admin-edit-field">
+                                    <label for="screen" class="edit-label">Display</label>
+                                    <input id="screen" name="screen" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.screenSize}" default=""/>">
+                                </div>
+
+                                <div class="admin-edit-field">
+                                    <label for="reso" class="edit-label">Resolution</label>
+                                    <input id="reso" name="reso" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.resolution}" default=""/>">
+                                </div>
+
+                            </div>
+                            <div class="admin-edit-row">
+                                <div class="admin-edit-field" style="flex: 1;">
+                                    <label for="battery" class="edit-label">Battery</label>
+                                    <input id="battery" name="battery" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.batteryLife}" default=""/>">
+                                </div>
+                                <div class="admin-edit-field" style="flex: 1;">
+                                    <label for="weight" class="edit-label">Weight(g)</label>
+                                    <input id="weight" name="weight" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.weight}" default=""/>">
+                                </div>
+
+                                <div class="admin-edit-field" style="flex: 1;">
+                                    <label for="color" class="edit-label">Color</label>
+                                    <input id="color" name="color" type="text" class="edit-input"
+                                           value="<c:out value="${laptop.color}" default=""/>">
+                                </div>
                             </div>
 
-                        </div>
-                        <div class="admin-edit-row">
-                            <div class="admin-edit-field" style="flex: 1;">
-                                <label for="battery" class="edit-label">Battery</label>
-                                <input id="battery" name="battery" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.batteryLife}" default=""/>">
-                            </div>
-                            <div class="admin-edit-field" style="flex: 1;">
-                                <label for="weight" class="edit-label">Weight(g)</label>
-                                <input id="weight" name="weight" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.weight}" default=""/>">
-                            </div>
+                            <!-- Stock Quantity -->
+                            <div class="admin-edit-row">
+                                <div class="admin-edit-field" style="flex: 1;">
+                                    <label for="stockq" class="edit-label">Stock Quantity</label>
+                                    <input id="stockq" name="stockq" type="number" class="edit-input"
+                                           value="<c:out value="${laptop.stockQuantity}" default=''/>" placeholder="0">
+                                </div>
 
-                            <div class="admin-edit-field" style="flex: 1;">
-                                <label for="color" class="edit-label">Color</label>
-                                <input id="color" name="color" type="text" class="edit-input"
-                                       value="<c:out value="${laptop.color}" default=""/>">
-                            </div>
-                        </div>
 
-                        <!-- Stock Quantity -->
-                        <div class="admin-edit-row">
-                            <div class="admin-edit-field" style="flex: 1;">
-                                <label for="stockq" class="edit-label">Stock Quantity</label>
-                                <input id="stockq" name="stockq" type="number" class="edit-input"
-                                       value="<c:out value="${laptop.stockQuantity}" default=''/>" placeholder="0">
+                                <div class="admin-edit-field" style="flex: 1;">
+                                    <label class="edit-label">Badge</label>
+                                    <select class="edit-select">
+                                        <option value="none">None</option>
+                                        <option value="bestseller" selected>Best Seller</option>
+                                        <option value="new">New</option>
+                                        <option value="sale">Sale</option>
+                                        <option value="popular">Popular</option>
+                                    </select>
+                                </div>
                             </div>
 
+                            <!-- Action Buttons -->
+                            <div class="action-buttons">
+                                <button type="submit" class="btn btn-primary btn-done">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                         viewBox="0 0 24 24" style="margin-right: 0.5rem;">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    Done
+                                </button>
+                                <a href="${pageContext.request.contextPath}/products" class="btn btn-cancel">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"/>
+                                        <line x1="6" y1="6" x2="18" y2="18"/>
+                                    </svg>
+                                    Cancel
+                                </a>
 
-                            <div class="admin-edit-field" style="flex: 1;">
-                                <label class="edit-label">Badge</label>
-                                <select class="edit-select">
-                                    <option value="none">None</option>
-                                    <option value="bestseller" selected>Best Seller</option>
-                                    <option value="new">New</option>
-                                    <option value="sale">Sale</option>
-                                    <option value="popular">Popular</option>
-                                </select>
+                                <a href="${pageContext.request.contextPath}/productView?action=delete&laptopID=${laptop.laptopID}" class="btn btn-danger">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                    Delete
+                                </a>
                             </div>
-                        </div>
 
-                        <!-- Action Buttons -->
-                        <div class="action-buttons">
-                            <button type="submit" class="btn btn-primary btn-done" onclick="saveProduct()">
-                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                                     viewBox="0 0 24 24" style="margin-right: 0.5rem;">
-                                    <polyline points="20 6 9 17 4 12"/>
-                                </svg>
-                                Done
-                            </button>
-                            <a href="${pageContext.request.contextPath}/products" class="btn btn-cancel">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="18" y1="6" x2="6" y2="18"/>
-                                    <line x1="6" y1="6" x2="18" y2="18"/>
-                                </svg>
-                                Cancel
-                            </a>
-                        </div>
-
-                        <!-- Product Meta (Toggles) -->
-                        <div class="product-meta product-meta-admin">
-                            <label class="toggle-item-inline">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider-small"></span>
-                                <span>Free shipping</span>
-                            </label>
-                            <label class="toggle-item-inline">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider-small"></span>
-                                <span>In stock</span>
-                            </label>
-                            <label class="toggle-item-inline">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider-small"></span>
-                                <span>30-day returns</span>
-                            </label>
-                            <label class="toggle-item-inline">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider-small"></span>
-                                <span>Warranty included</span>
-                            </label>
+                            <!-- Product Meta (Toggles) -->
+                            <div class="product-meta product-meta-admin">
+                                <label class="toggle-item-inline">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider-small"></span>
+                                    <span>Free shipping</span>
+                                </label>
+                                <label class="toggle-item-inline">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider-small"></span>
+                                    <span>In stock</span>
+                                </label>
+                                <label class="toggle-item-inline">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider-small"></span>
+                                    <span>30-day returns</span>
+                                </label>
+                                <label class="toggle-item-inline">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider-small"></span>
+                                    <span>Warranty included</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -471,7 +499,7 @@
                                               placeholder="Share your experience with this product (optional)"
                                               maxlength="500"
                                               rows="6"
-                                    name="review"></textarea>
+                                              name="review"></textarea>
                                     <div class="char-count">
                                         <span id="charCount">0</span>/500
                                     </div>
@@ -485,7 +513,8 @@
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-ghost">Cancel
                                     </button>
-                                    <button type="submit" onsubmit="submitjs()" class="btn btn-primary">Submit Review</button>
+                                    <button type="submit" onsubmit="submitjs()" class="btn btn-primary">Submit Review
+                                    </button>
                                 </div>
                             </form>
                         </div>
