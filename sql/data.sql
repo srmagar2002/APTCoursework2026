@@ -17,9 +17,6 @@ IGNORE INTO users (username,email,password_hash,role) VALUES
        ('suzan','suzan@suzan.com','$2a$10$cxgcPQEt6w.QoHa1whbVDu.WEg5b8sJ2LMSIeWXPjh1HicJJvtudy' /*Suzan&123*/,'CUSTOMER'),
 ('sangam','sangam@sangam.com','$2a$10$cMoHlU259yfNhbxrQgkPuOj3tK1PvAojNVbKizjtosCuy5nPBENl2' /*Sangam&123*/,'CUSTOMER');
 
-
-
-
 INSERT
 IGNORE INTO laptop (
     laptopUUID,brand, model, title, description,category,
@@ -268,7 +265,7 @@ IGNORE INTO laptop (
        2799.99,4,10,2900,'Black',8);
 
 
-INSERT INTO rating (userID, laptopID, rating, review)
+INSERT IGNORE INTO rating (userID, laptopID, rating, review)
 VALUES (2, 1, 5, 'Excellent performance'),
        (2, 2, 4, 'Very good laptop'),
        (2, 3, 3, 'Average experience'),

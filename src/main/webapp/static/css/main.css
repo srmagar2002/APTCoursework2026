@@ -176,6 +176,127 @@ img {
     width: 100%;
 }
 
+.btn-danger {
+    background-color: #dc2626;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+}
+
+/* Modal Styles */
+.delete-modal {
+    position: fixed;
+    display: flex;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+
+.delete-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.delete-modal-content {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.delete-modal-danger {
+    border-color: #dc2626;
+    border-left: 4px solid #dc2626;
+}
+
+.delete-modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-modal-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--foreground);
+}
+
+.delete-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.delete-modal-close:hover {
+    color: var(--foreground);
+}
+
+.delete-modal-body {
+    padding: 1.5rem;
+}
+
+.delete-modal-body p {
+    margin: 0.5rem 0;
+    color: var(--foreground);
+}
+
+.warning-text {
+    color: #dc2626;
+    font-weight: 500;
+    margin-top: 1rem !important;
+}
+
+.delete-modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.delete-modal-footer .btn {
+    min-width: 100px;
+}
+
+
 /* Form Elements */
 .form-group {
     margin-bottom: 1.25rem;
@@ -473,6 +594,51 @@ img {
     color: var(--primary);
 }
 
+
+
+.btn-delete-product {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(239, 68, 68, 0.9);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0;
+    z-index: 10;
+}
+
+.product-card:hover .btn-delete-product {
+    opacity: 1;
+}
+
+.btn-delete-product:hover {
+    background-color: #dc2626;
+    transform: scale(1.1);
+}
+
+.btn-delete-product svg {
+    width: 18px;
+    height: 18px;
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
 
 
 .product-image {

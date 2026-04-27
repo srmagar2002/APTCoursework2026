@@ -85,8 +85,8 @@ CREATE TABLE rating
     review TEXT,
     ratingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users(user_id),
-    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID),
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users(user_id) ON DELETE CASCADE,
+    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID) ON DELETE CASCADE,
     CONSTRAINT ratingCheck CHECK (rating BETWEEN 1 AND 5 ),
     CONSTRAINT unique_user_laptop UNIQUE (userID, laptopID)
 );

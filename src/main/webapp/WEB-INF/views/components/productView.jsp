@@ -308,20 +308,20 @@
                                     </svg>
                                     Cancel
                                 </a>
-
-                                <a href="${pageContext.request.contextPath}/productView?action=delete&laptopID=${laptop.laptopID}" class="btn btn-danger">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <button type="button" class="btn btn-danger" id="deleteBtn" onclick="openDeleteModal('${laptop.title}', '${laptop.laptopID}')" style="margin-left: auto;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;">
                                         <polyline points="3 6 5 6 21 6"></polyline>
                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                         <line x1="10" y1="11" x2="10" y2="17"></line>
                                         <line x1="14" y1="11" x2="14" y2="17"></line>
                                     </svg>
                                     Delete
-                                </a>
+                                </button>
                             </div>
 
                             <!-- Product Meta (Toggles) -->
-                            <div class="product-meta product-meta-admin">
+                          <!--  <div class="product-meta product-meta-admin">
                                 <label class="toggle-item-inline">
                                     <input type="checkbox" checked>
                                     <span class="toggle-slider-small"></span>
@@ -342,12 +342,35 @@
                                     <span class="toggle-slider-small"></span>
                                     <span>Warranty included</span>
                                 </label>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
             </main>
         </form>
+
+        <!-- Delete Confirmation Modal -->
+        <div id="deleteModal" class="delete-modal">
+            <div class="delete-modal-content delete-modal-danger">
+                <div class="delete-modal-header">
+                    <h2>Delete Product</h2>
+                    <button type="button" class="delete-modal-close" onclick="closeDeleteModal()">&times;</button>
+                </div>
+                <div class="delete-modal-body">
+                    <p>Are you sure you want to delete <strong id="deleteProductName"></strong>?</p>
+                    <p class="warning-text">This action cannot be undone.</p>
+                </div>
+                <div class="delete-modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                    <form action="${pageContext.request.contextPath}/products" method="post" style="display: inline;">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" id="deleteProductId" name="laptopid">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
         <script>
             const input1 = document.getElementById("imageUpload1");
             const input2 = document.getElementById("imageUpload2");
@@ -383,6 +406,26 @@
             handlePreview(input2, preview2);
             handlePreview(input3, preview3);
             handlePreview(input4, preview4);
+
+            // Delete Modal Functions
+            function openDeleteModal(productName, productId) {
+                document.body.style.overflow = 'hidden';
+                document.getElementById('deleteProductName').textContent = productName;
+                document.getElementById('deleteProductId').value = productId;
+                document.getElementById('deleteModal').classList.add('show');
+            }
+
+            function closeDeleteModal() {
+                document.body.style.overflow = 'auto';
+                document.getElementById('deleteModal').classList.remove('show');
+            }
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('deleteModal');
+                if (event.target === modal) {
+                   closeDeleteModal();
+                }
+            }
         </script>
 
     </c:when>
@@ -519,7 +562,6 @@
                             </form>
                         </div>
                     </div>
-
 
                 </div>
 
@@ -695,6 +737,7 @@
     function handleStarClick(value) {
         currentRating = value;
         updateStars('ratingStars', value);
+        // document.getElementById('newrating').value = currentRating;
         openReviewModal();
     }
 

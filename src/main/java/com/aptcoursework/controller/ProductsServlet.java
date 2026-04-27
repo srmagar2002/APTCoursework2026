@@ -90,6 +90,7 @@ public class ProductsServlet extends HttpServlet {
         LaptopDaoImpl laptopDao = new LaptopDaoImpl();
 
         String action = request.getParameter("action");
+        int laptopId = Integer.parseInt(request.getParameter("laptopid"));
 
         if ("edit".equals(action)) {
 
@@ -191,8 +192,17 @@ public class ProductsServlet extends HttpServlet {
                 imageUploader(img2, newlaptop.getImg2Url(), uploadDir);
 
                 response.sendRedirect(request.getContextPath() + "/products");
-
-
+        }
+        else if("delete".equals(action)){
+            System.out.println(laptopId);
+            boolean isDeleted = laptopDao.deleteByLaptopID(laptopId);
+            if(isDeleted) {
+                System.out.println("Laptop " + laptopId + " is deleted");
+            }
+            else  {
+                System.out.println("Laptop " + laptopId + " is deleted");
+            }
+            response.sendRedirect(request.getContextPath() + "/products");
         }
     }
     private void imageUploader(Part part, String filename ,File uploadDir) {
