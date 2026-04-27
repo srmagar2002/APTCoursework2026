@@ -11,7 +11,7 @@ import java.nio.file.StandardCopyOption;
 
 public class ImageUtil {
 
-    private static String imageUploader(Part part, String filename , String uploadPath) {
+    public static String imageUploader(Part part, String filename , String uploadPath) {
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) uploadDir.mkdir();
 
