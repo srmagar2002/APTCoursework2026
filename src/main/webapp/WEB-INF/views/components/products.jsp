@@ -19,7 +19,7 @@
 
         <a href="${pageContext.request.contextPath}/productView?laptopID=${product.laptopID}">
             <div class="product-image">
-                <span class="product-badge">Best Seller</span>
+<%--                <span class="product-badge">Best Seller</span>--%>
                 <img src="${pageContext.request.contextPath}/static/imgUpload/${product.thumbnailUrl}" alt="">
             </div>
             <div class="product-content">

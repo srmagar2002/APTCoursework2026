@@ -2,6 +2,7 @@ package com.aptcoursework.controller;
 
 import com.aptcoursework.dao.LaptopDaoImpl;
 import com.aptcoursework.entity.Laptop;
+import com.aptcoursework.utils.ImageUtil;
 import com.mysql.cj.exceptions.StreamingNotifiable;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -195,7 +196,16 @@ public class ProductsServlet extends HttpServlet {
         }
         else if("delete".equals(action)){
             System.out.println(laptopId);
+            Laptop laptop = laptopDao.getLaptopById(Integer.parseInt(request.getParameter("laptopid")));
+
+            System.out.println(getServletContext().getRealPath("/static/imgUpload")+"/"+laptop.getThumbnailUrl());
+            ImageUtil.imageDeleter( getServletContext().getRealPath("/static/imgUpload")+"/"+laptop.getImgUrl());
+            ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload")+"/"+laptop.getImg1Url());
+            ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload")+"/"+laptop.getImg2Url());
+            ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload")+"/"+laptop.getThumbnailUrl());
+
             boolean isDeleted = laptopDao.deleteByLaptopID(laptopId);
+
             if(isDeleted) {
                 System.out.println("Laptop " + laptopId + " is deleted");
             }
