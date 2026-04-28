@@ -218,7 +218,7 @@ public class ProductsServlet extends HttpServlet {
                 Files.copy(input, imgFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println(imgFile.getAbsolutePath());
             } catch (Exception ex) {
-                System.out.println("Error uploading file");
+                System.out.println("Error uploading file" + ex.getMessage());
             }
         }
     }
