@@ -308,8 +308,11 @@
                                     </svg>
                                     Cancel
                                 </a>
-                                <button type="button" class="btn btn-danger" id="deleteBtn" onclick="openDeleteModal('${laptop.title}', '${laptop.laptopID}')" style="margin-left: auto;">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                <button type="button" class="btn btn-danger" id="deleteBtn"
+                                        onclick="openDeleteModal('${laptop.title}', '${laptop.laptopID}')"
+                                        style="margin-left: auto;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2"
                                          stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;">
                                         <polyline points="3 6 5 6 21 6"></polyline>
                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -321,28 +324,28 @@
                             </div>
 
                             <!-- Product Meta (Toggles) -->
-                          <!--  <div class="product-meta product-meta-admin">
-                                <label class="toggle-item-inline">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider-small"></span>
-                                    <span>Free shipping</span>
-                                </label>
-                                <label class="toggle-item-inline">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider-small"></span>
-                                    <span>In stock</span>
-                                </label>
-                                <label class="toggle-item-inline">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider-small"></span>
-                                    <span>30-day returns</span>
-                                </label>
-                                <label class="toggle-item-inline">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider-small"></span>
-                                    <span>Warranty included</span>
-                                </label>
-                            </div>-->
+                            <!--  <div class="product-meta product-meta-admin">
+                                  <label class="toggle-item-inline">
+                                      <input type="checkbox" checked>
+                                      <span class="toggle-slider-small"></span>
+                                      <span>Free shipping</span>
+                                  </label>
+                                  <label class="toggle-item-inline">
+                                      <input type="checkbox" checked>
+                                      <span class="toggle-slider-small"></span>
+                                      <span>In stock</span>
+                                  </label>
+                                  <label class="toggle-item-inline">
+                                      <input type="checkbox" checked>
+                                      <span class="toggle-slider-small"></span>
+                                      <span>30-day returns</span>
+                                  </label>
+                                  <label class="toggle-item-inline">
+                                      <input type="checkbox" checked>
+                                      <span class="toggle-slider-small"></span>
+                                      <span>Warranty included</span>
+                                  </label>
+                              </div>-->
                         </div>
                     </div>
                 </div>
@@ -370,7 +373,7 @@
                 </div>
             </div>
         </div>
-        
+
         <script>
             const input1 = document.getElementById("imageUpload1");
             const input2 = document.getElementById("imageUpload2");
@@ -419,11 +422,12 @@
                 document.body.style.overflow = 'auto';
                 document.getElementById('deleteModal').classList.remove('show');
             }
+
             // Close modal when clicking outside
-            window.onclick = function(event) {
+            window.onclick = function (event) {
                 const modal = document.getElementById('deleteModal');
                 if (event.target === modal) {
-                   closeDeleteModal();
+                    closeDeleteModal();
                 }
             }
         </script>
@@ -692,7 +696,7 @@
 
 <script>
     function changeImage(thumbnail, imageSrc, imageAlt) {
-        //Image Gallery
+//Image Gallery
         const mainImage = document.getElementById('mainProductImage');
         mainImage.style.opacity = '0';
 
@@ -713,7 +717,15 @@
 
     function displayReview(id) {
         fetch(
-            "${pageContext.request.contextPath}/rate?laptopID=" + id.toString(),
+            <c:choose>
+            <c:when test="${empty sessionScope.user}">
+            "${pageContext.request.contextPath}/rate?laptopID=" + id.toString()
+            </c:when>
+<%--        <c:when test="${sessionScope.user.role=='CUSTOMER'}">--%>
+<%--        "${pageContext.request.contextPath}/rate?laptopID=" + id.toString() + "&userID=" + sessionScope.user.userID--%>
+<%--            </c:when>--%>
+            </c:choose>
+            ,
             {
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
@@ -735,9 +747,10 @@
 
     // Handle star click in main section
     function handleStarClick(value) {
+        console.log(value);
         currentRating = value;
         updateStars('ratingStars', value);
-        // document.getElementById('newrating').value = currentRating;
+        document.getElementById('newrating').value = currentRating;
         openReviewModal();
     }
 

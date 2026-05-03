@@ -1,7 +1,8 @@
 /**
  *
  *
- * */
+ *
+ */
 
 
 package com.aptcoursework.dao;
@@ -16,88 +17,114 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RatingDaoImpl implements RatingDao {
+
+    @Override
+    public Rating getRatingByUserID(int userID, int laptopID) {
+        Connection conn = null;
+        String sql = "select * from rating where userID = ? and laptopID = ?";
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,userID);
+            ps.setInt(2,laptopID);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return new Rating(
+                        rs.getInt("ratingID"),
+                        rs.getInt("userID"),
+                        rs.getInt("laptopID"),
+                        rs.getInt("rating"),
+                        rs.getString("review"),
+                        rs.getTimestamp("ratingDate"));
+            }
+        }catch(SQLException e){
+            System.out.println("SQLException: "+e);
+            return null;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    return null;
+    }
+
     @Override
     public Boolean deleteRatingByLaptopID(int laptopID) {
 
         Connection conn = null;
         String sql = "delete from rating where laptopID=?";
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1,laptopID);
+            stmt.setInt(1, laptopID);
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println("Error While deleting rating : "+e.getMessage());
+            System.out.println("Error While deleting rating : " + e.getMessage());
             return false;
-        }
-        finally {
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
     }
 
     @Override
-    public Boolean deleteRatingByUserID(int userID, int laptopID){
+    public Boolean deleteRatingByUserID(int userID, int laptopID) {
         Connection conn = null;
         String sql = "delete from rating where userID=? AND laptopID=?";
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1,userID);
-            stmt.setInt(2,laptopID);
+            stmt.setInt(1, userID);
+            stmt.setInt(2, laptopID);
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println("Error While deleting rating : "+e.getMessage());
+            System.out.println("Error While deleting rating : " + e.getMessage());
             return false;
-        }
-        finally {
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
     }
+
     @Override
     public double getAvgRatingbyLaptop(int laptopID) {
         String sql = "SELECT AVG(rating) FROM rating WHERE laptopID = ?";
         double avgRating = 0.0;
         Connection connection = null;
-        try{
+        try {
             connection = DatabaseConnection.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1,laptopID);
+            stmt.setInt(1, laptopID);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 avgRating = rs.getDouble(1);
             }
             return avgRating;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error Getting Rating : " + e.getMessage());
-        }
-        finally {
+        } finally {
             DatabaseConnection.closeConnection(connection);
         }
         return 0;
     }
+
     @Override
-    public int getTotalRatingbyStars(int laptopID,int rating){
+    public int getTotalRatingbyStars(int laptopID, int rating) {
         String sql = "SELECT COUNT(*) FROM rating WHERE laptopID = ? AND rating = ?";
         int count = 0;
         Connection connection = null;
-        try{
-            connection=DatabaseConnection.getConnection();
+        try {
+            connection = DatabaseConnection.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1,laptopID);
-            stmt.setInt(2,rating);
+            stmt.setInt(1, laptopID);
+            stmt.setInt(2, rating);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 count = rs.getInt(1);
             }
             return count;
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error in getTotalRating : " + e.getMessage());
-        }
-        finally{
+        } finally {
             DatabaseConnection.closeConnection(connection);
         }
         return 0;
@@ -123,7 +150,7 @@ public class RatingDaoImpl implements RatingDao {
                         rs.getTimestamp("ratingDate"),
                         rs.getString("username")
                 );
-                System.out.println("UserID:"+rating.getUserID()+" Username : " +rating.getUsername()+" LaptopID"+rating.getLaptopID() +" Rating:"+rating.getRating()+ " Review:"+rating.getReview() + " Date:" + rating.getRatingDate() );
+                System.out.println("UserID:" + rating.getUserID() + " Username : " + rating.getUsername() + " LaptopID" + rating.getLaptopID() + " Rating:" + rating.getRating() + " Review:" + rating.getReview() + " Date:" + rating.getRatingDate());
                 ratings.add(rating);
             }
             return ratings;
@@ -154,8 +181,7 @@ public class RatingDaoImpl implements RatingDao {
         } catch (SQLException e) {
             System.out.println("Error Adding Rating : " + e.getMessage());
             return false;
-        }
-        finally {
+        } finally {
             DatabaseConnection.closeConnection(connection);
         }
     }

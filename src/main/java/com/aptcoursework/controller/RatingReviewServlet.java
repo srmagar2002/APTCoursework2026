@@ -20,6 +20,8 @@ public class RatingReviewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println(request.getParameter("userID"));
+
         int laptopID = Integer.parseInt(request.getParameter("laptopID"));
         RatingDaoImpl ratingDao = new RatingDaoImpl();
 

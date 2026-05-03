@@ -10,6 +10,7 @@
 
 <!-- Rating and Review Section -->
 <c:if test="${sessionScope.user.role=='CUSTOMER'}">
+
     <div class="rating-header">
         <div>
             <h2 style="margin: 0 0 0.5rem 0;">Rate this product</h2>

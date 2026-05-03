@@ -5,6 +5,7 @@ import com.aptcoursework.entity.Rating;
 import java.util.ArrayList;
 
 public interface RatingDao {
+    Rating getRatingByUserID(int userID, int laptopID);
     Boolean deleteRatingByLaptopID(int laptopID);
     Boolean deleteRatingByUserID(int userID, int laptopID);
     double getAvgRatingbyLaptop(int laptopID);
