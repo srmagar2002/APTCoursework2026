@@ -59,7 +59,6 @@ CREATE TABLE laptop
             END
         ) STORED,
 
-
 /*OTHER*/
     weight             INT,
     color              VARCHAR(200),

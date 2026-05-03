@@ -79,8 +79,10 @@ public class daoTester {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter id : ");
         int id = input.nextInt();
+        System.out.print("Enter rate: ");
+        int rate = input.nextInt();
         RatingDaoImpl ratingDao=new RatingDaoImpl();
-        System.out.println(ratingDao.getTotalRating(id));
+        System.out.println(ratingDao.getTotalRatingbyStars(id,rate));
 
     }
 

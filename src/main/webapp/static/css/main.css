@@ -1437,6 +1437,7 @@ img {
 
 .stars.interactive {
     display: flex;
+    flex-direction: row-reverse;
     gap: 0.5rem;
 }
 
@@ -1447,10 +1448,11 @@ img {
     transition: all 0.2s;
 }
 
-.star-interactive:hover {
+.star-interactive:hover,
+.star-interactive:hover ~ svg {
     opacity: 1;
     color: var(--primary);
-    transform: scale(1.1);
+    /*transform: scale(1.1);*/
 }
 
 .rating-breakdown {
