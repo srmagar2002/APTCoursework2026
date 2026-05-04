@@ -1,16 +1,53 @@
+
 package com.aptcoursework.dao;
 
 import com.aptcoursework.entity.Laptop;
 import com.aptcoursework.utils.DatabaseConnection;
-
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+**@author Sugam Rana Magar
+*
+ * */
+
 public class LaptopDaoImpl implements LaptopDao {
+
+    /**
+     * <p>Deletes Laptop By Laptop ID</p>
+     *
+     * @param laptopID
+     * @return boolean value
+     */
+    @Override
+    public boolean deleteByLaptopID(int laptopID) {
+        Connection connection = null;
+        String sql = "delete from Laptop where laptopID = ?";
+        try{
+            connection = DatabaseConnection.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, laptopID);
+            stmt.executeUpdate();
+            return true;
+        }
+        catch(SQLException e){
+            System.out.println("Error while Deleting Laptop" + e.getMessage());
+            return false;
+        }
+        finally{
+            DatabaseConnection.closeConnection(connection);
+        }
+    }
+
+    /**
+     * <p>Inserts a new Laptop record in laptop Table</p>
+     *
+     * @param laptop
+     * @return true if insert was successful, false if insert failed
+     */
     @Override
     public boolean insertLaptop(Laptop laptop) {
 
@@ -55,6 +92,11 @@ public class LaptopDaoImpl implements LaptopDao {
 
     }
 
+    /**
+     * <p>Get laptop by laptop id</p>
+     * @param id
+     * @return laptop object
+     */
     @Override
     public Laptop getLaptopById(int id) {
         /* Fetch Laptop By ID*/
@@ -77,6 +119,7 @@ public class LaptopDaoImpl implements LaptopDao {
         }
         return null;
     }
+
     @Override
     public Laptop getLaptopByUUID(String laptopUUID) {
         Connection conn = null;

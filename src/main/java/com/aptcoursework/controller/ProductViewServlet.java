@@ -14,6 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author Sugam Rana Magar
+ */
+
 @WebServlet("/productView")
 public class ProductViewServlet extends HttpServlet {
 
@@ -25,9 +29,12 @@ public class ProductViewServlet extends HttpServlet {
 
         Laptop laptop = laptopDao.getLaptopById(productId);
         System.out.println(laptop.toString());
-        request.setAttribute("laptop", laptop);
-        request.getRequestDispatcher("/WEB-INF/views/pages/productViewPage.jsp")
-                .forward(request, response);
+
+            request.setAttribute("laptop", laptop);
+            request.getRequestDispatcher("/WEB-INF/views/pages/productViewPage.jsp")
+                    .forward(request, response);
+
+
 
     }
     @Override
