@@ -81,13 +81,14 @@ public class RatingReviewServlet extends HttpServlet {
         ratingTotal.put("four", percentageForFour);
         ratingTotal.put("five", percentageForFive);
         request.setAttribute("ratingTotal", ratingTotal);
-
-
+        
         request.getRequestDispatcher("/WEB-INF/views/components/ratingAndReview.jsp").forward(request, response);
-
-
     }
 
+    /**
+     * Handles POST requests by adding a new rating and review for a product.
+     * Validates and stores the rating, then redirects back to the product view page.
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
