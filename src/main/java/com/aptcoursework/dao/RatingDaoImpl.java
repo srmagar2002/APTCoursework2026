@@ -39,8 +39,6 @@ public class RatingDaoImpl implements RatingDao {
 
     /**
      *
-     * javadocs @author Heaven Gurung
-     * Code @author Sugam Rana Magar
      * Retrieves a specific rating given by a user for a particular laptop.
      *
      * <p>This method queries the database to find a rating entry based on the
@@ -89,8 +87,6 @@ public class RatingDaoImpl implements RatingDao {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * Code @author Sugam Rana Magar
      * Deletes all ratings associated with a specific laptop ID.
      *
      * <p>This method executes a SQL DELETE statement to remove all records
@@ -103,7 +99,9 @@ public class RatingDaoImpl implements RatingDao {
      * @param laptopID the unique identifier of the laptop whose ratings are to be deleted
      * @return {@code true} if the ratings were successfully deleted;
      *         {@code false} if an error occurs
-     */
+     *
+     *
+     * */
     @Override
     public Boolean deleteRatingByLaptopID(int laptopID) {
 
@@ -126,8 +124,6 @@ public class RatingDaoImpl implements RatingDao {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Deletes a specific rating given by a user for a particular laptop.
      *
      * <p>This method executes a SQL DELETE query to remove a rating record
@@ -142,7 +138,9 @@ public class RatingDaoImpl implements RatingDao {
      * @param laptopID the unique identifier of the laptop for which the rating was given
      * @return {@code true} if the rating was successfully deleted;
      *         {@code false} if an error occurs
-     */
+     *
+     *
+     * */
 
     @Override
     public Boolean deleteRatingByUserID(int userID, int laptopID) {
@@ -166,8 +164,6 @@ public class RatingDaoImpl implements RatingDao {
 
     /**
      *
-     * javadocs @author Heaven Gurung
-     * codedocs @author Sugam Rana Magar
      * Calculates the average rating for a specific laptop.
      *
      * <p>This method executes a SQL query using the {@code AVG()} aggregate
@@ -207,8 +203,6 @@ public class RatingDaoImpl implements RatingDao {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Counts the total number of ratings for a specific laptop with a given star value.
      *
      * <p>This method executes a SQL query using the {@code COUNT(*)} aggregate
@@ -248,8 +242,6 @@ public class RatingDaoImpl implements RatingDao {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Retrieves all ratings associated with a specific laptop.
      *
      * <p>This method executes a SQL query to fetch all rating records for the
@@ -301,8 +293,6 @@ public class RatingDaoImpl implements RatingDao {
 
     /**
      *
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Adds a new rating record to the database.
      *
      * <p>This method inserts a new entry into the {@code rating} table using
