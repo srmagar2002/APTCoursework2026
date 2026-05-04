@@ -6,8 +6,6 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
  * Utility class for managing HTTP session operations.
  *
  * <p>This class provides helper methods for handling session-related tasks
@@ -16,6 +14,9 @@ import jakarta.servlet.http.HttpSession;
  * in web applications.</p>
  *
  * <p>This class is designed as a utility class and should not be instantiated.</p>
+ *
+ * @author Heaven Gurung
+ * @author Sugam Rana Magar
  */
 public class SessionUtil {
 

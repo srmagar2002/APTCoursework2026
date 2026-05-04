@@ -3,8 +3,6 @@ package com.aptcoursework.utils;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
  * Utility class for handling password security operations.
  *
  * <p>This class provides methods for securely hashing passwords and
@@ -15,6 +13,9 @@ import org.mindrot.jbcrypt.BCrypt;
  * database and never saved in plain text.</p>
  *
  * <p>This class is designed as a utility class and should not be instantiated.</p>
+ *
+ * @author Heaven Gurung
+ * @author Sugam Rana Magar
  */
 public class PasswordUtil {
 

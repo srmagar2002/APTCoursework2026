@@ -6,8 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * @author Heaven Gurung 
- * @author Sugam Rana Magar
+
  * Utility class for handling HTTP cookie operations.
  *
  * <p>This class provides helper methods to create, retrieve, and delete
@@ -24,13 +23,13 @@ import jakarta.servlet.http.HttpServletResponse;
  * <p>All cookies created through this utility are configured with a root path
  * ("/") and HTTP-only flag where applicable to improve security and accessibility
  * across the application.</p>
+ * @author Heaven Gurung
+ * @author Sugam Rana Magar
  */
 public class CookieUtil {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Utility method for creating and adding an HTTP cookie to the response.
      *
      * <p>This method creates a new {@link Cookie} with the specified name and value,
@@ -57,8 +56,6 @@ public class CookieUtil {
 
     /**
      *
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Retrieves the value of a specific cookie from the HTTP request.
      *
      * <p>This method searches through all cookies present in the
@@ -88,8 +85,6 @@ public class CookieUtil {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Deletes a cookie from the client's browser.
      *
      * <p>This method creates a new {@link Cookie} with the specified name and

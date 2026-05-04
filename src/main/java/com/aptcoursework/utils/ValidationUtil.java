@@ -3,8 +3,6 @@ package com.aptcoursework.utils;
 import java.util.regex.Pattern;
 
 /**
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
  * Utility class for validating user input data.
  *
  * <p>This class provides reusable validation methods for common input fields
@@ -16,6 +14,8 @@ import java.util.regex.Pattern;
  * enforcing consistent validation rules across the system.</p>
  *
  * <p>This class is designed as a utility class and should not be instantiated.</p>
+ * @author Heaven Gurung
+ * @author Sugam Rana Magar
  */
 public class ValidationUtil {
 
