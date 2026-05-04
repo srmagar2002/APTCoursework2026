@@ -17,8 +17,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * Servlet handling the retrieval and calculation of product ratings and reviews.
+ * Computes average ratings, rating distribution statistics, and user rating status.
+ * @author Sugam Rana Magar
+ */
 @WebServlet("/rate")
 public class RatingReviewServlet extends HttpServlet {
+    /**
+     * Handles GET requests by retrieving ratings for a product and calculating statistics.
+     * Aggregates average rating, total count, and rating distribution by star value.
+     * Also checks if a specific user has already rated the product.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
