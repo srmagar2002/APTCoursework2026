@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * Servlet handling the display of individual laptop product details.
+ * Retrieves product information and associated ratings to display on the product view page.
+ *
  * @author Sugam Rana Magar
  */
 
@@ -22,6 +25,10 @@ import java.util.ArrayList;
 public class ProductViewServlet extends HttpServlet {
 
     private static final LaptopDaoImpl laptopDao = new LaptopDaoImpl();
+    /**
+     * Handles GET requests by retrieving and displaying detailed product information.
+     * Fetches laptop details by ID and forwards to the product view page.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");

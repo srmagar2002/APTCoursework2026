@@ -14,11 +14,19 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * Servlet handling user account registration and validation.
+ * Processes registration form submissions with input validation and password hashing.
+ * @author Sugam Rana Magar
+ */
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
     UserDaoImpl userDao = new UserDaoImpl();
 
+    /**
+     * Handles GET requests by displaying the registration form page.
+     */
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
@@ -27,6 +35,11 @@ public class RegisterServlet extends HttpServlet {
                 .forward(request, response);
     }
 
+    /**
+     * Handles POST requests by validating registration input and creating a new user account.
+     * Validates username format, email, password strength, and checks for duplicate credentials.
+     * Redirects to login page on success or back to registration with error messages on failure.
+     */
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)

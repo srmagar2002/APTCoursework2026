@@ -2,12 +2,11 @@ package com.aptcoursework.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a laptop product entity with detailed specifications, pricing, and metadata.
+ * @author Sugam Rana Magar
+ */
 public class Laptop {
-
-    /**
-     * <p>Laptop Entity Class</p>
-     * @author Sugam Rana Magar
-     */
 
     /* BASIC INFO */
     private int laptopID;
@@ -47,10 +46,36 @@ public class Laptop {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    //This Constructor can be overridden later.
-    //empty constructor
+    /**
+     * Default constructor that creates an empty Laptop instance.
+     */
     public Laptop(){}
 
+    /**
+     * Constructs a Laptop instance with essential product and specification details.
+     * Used for creating new laptop records without database-assigned values.
+     *
+     * @param laptopUUID unique identifier for the laptop
+     * @param brand laptop manufacturer
+     * @param model product model name
+     * @param title product title
+     * @param description detailed product description
+     * @param processor CPU specifications
+     * @param ram memory size
+     * @param storage storage capacity
+     * @param storageType storage medium (SSD or HDD)
+     * @param graphicsCard GPU specifications
+     * @param screenSize display size
+     * @param resolution screen resolution
+     * @param operatingSystem operating system
+     * @param price product price
+     * @param discount discount percentage (nullable)
+     * @param stockQuantity available quantity (nullable)
+     * @param weight device weight in grams (nullable)
+     * @param color product color
+     * @param batteryLife battery life in hours (nullable)
+     * @param category product category
+     */
     public Laptop(String laptopUUID,String brand,String model,String title,String description,String processor,String ram,String storage,String storageType,String graphicsCard,String screenSize,String resolution,
                   String operatingSystem, BigDecimal price, Integer discount, Integer stockQuantity,Integer weight, String color, Integer batteryLife,String category){
         this.laptopUUID = laptopUUID;
@@ -75,7 +100,39 @@ public class Laptop {
         this.category = category;
     }
 
-    //default constructor
+    /**
+     * Constructs a complete Laptop instance with all fields including database identifiers and metadata.
+     * Used for retrieving and initializing laptop records from the database.
+     *
+     * @param laptopID database primary key
+     * @param laptopUUID unique identifier for the laptop
+     * @param brand laptop manufacturer
+     * @param model product model name
+     * @param title product title
+     * @param description detailed product description
+     * @param imgUrl primary product image URL
+     * @param img1Url secondary image URL
+     * @param img2Url tertiary image URL
+     * @param thumbnailUrl thumbnail image URL
+     * @param category product category
+     * @param processor CPU specifications
+     * @param ram memory size
+     * @param storage storage capacity
+     * @param storageType storage medium (SSD or HDD)
+     * @param graphicsCard GPU specifications
+     * @param screenSize display size
+     * @param resolution screen resolution
+     * @param operatingSystem operating system
+     * @param price product price
+     * @param discount discount percentage (nullable)
+     * @param stockQuantity available quantity (nullable)
+     * @param availabilityStatus stock availability status
+     * @param weight device weight in grams (nullable)
+     * @param color product color
+     * @param batteryLife battery life in hours (nullable)
+     * @param createdAt record creation timestamp
+     * @param updatedAt record last update timestamp
+     */
     public Laptop(int laptopID,String laptopUUID, String brand, String model, String title, String description,
                   String imgUrl,String img1Url,String img2Url, String thumbnailUrl,String category, String processor, String ram, String storage,
                   String storageType, String graphicsCard, String screenSize, String resolution,

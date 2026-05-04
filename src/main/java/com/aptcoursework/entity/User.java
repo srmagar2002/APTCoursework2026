@@ -4,6 +4,10 @@ import com.aptcoursework.enums.Role;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a user account with authentication credentials, role information, and account metadata.
+ * @author Sugam Rana Magar
+ */
 public class User {
     private int user_id;
     private String username;
@@ -12,9 +16,21 @@ public class User {
     private Role role;
     private LocalDateTime created_at;
 
+    /**
+     * Default constructor that creates an empty User instance.
+     */
     public User() {
     }
 
+    /**
+     * Constructs a User instance with authentication and role details.
+     * Used for creating new user accounts without database-assigned identifiers.
+     *
+     * @param username unique username for login
+     * @param email user's email address
+     * @param passwordHash hashed password for security
+     * @param role user's role in the system
+     */
     public User(String username, String email, String passwordHash, Role role) {
         this.username = username;
         this.email = email;
@@ -22,7 +38,16 @@ public class User {
         this.role = role;
     }
 
-
+    /**
+     * Constructs a complete User instance with all fields including database identifier.
+     * Used for retrieving user records from the database.
+     *
+     * @param user_id database primary key
+     * @param username unique username for login
+     * @param email user's email address
+     * @param passwordHash hashed password for security
+     * @param role user's role in the system
+     */
     public User(int user_id, String username, String email, String passwordHash, Role role) {
         this.user_id = user_id;
         this.username = username;
