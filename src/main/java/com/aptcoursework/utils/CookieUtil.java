@@ -6,8 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
+ * @author Heaven Gurung 
+ * @author Sugam Rana Magar
  * Utility class for handling HTTP cookie operations.
  *
  * <p>This class provides helper methods to create, retrieve, and delete
