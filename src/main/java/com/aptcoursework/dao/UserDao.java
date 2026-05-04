@@ -4,8 +4,7 @@ import com.aptcoursework.entity.User;
 
 
 /**
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
+
  * Data Access Object (DAO) interface for managing User-related database operations.
  *
  * <p>This interface defines the contract for performing user-related persistence
@@ -22,6 +21,8 @@ import com.aptcoursework.entity.User;
  *
  * <p>Implementations of this interface handle the actual database interaction
  * using JDBC or any other persistence technology.</p>
+ * @author Heaven Gurung
+ * @author Sugam Rana Magar
  */
 
 public interface UserDao {

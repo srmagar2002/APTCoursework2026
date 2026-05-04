@@ -18,8 +18,8 @@ import java.util.ArrayList;
  * <p>This abstraction allows separation of business logic from data access logic,
  * making the system more modular, maintainable, and scalable.</p>
  *
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
+ * @author Heaven Gurung
+ * @author Sugam Rana Magar
  */
 public interface RatingDao {
     Rating getRatingByUserID(int userID, int laptopID);

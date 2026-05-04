@@ -11,8 +11,6 @@ import java.nio.file.StandardCopyOption;
 
 /**
  *
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
  * Utility class for handling image-related file operations.
  *
  * <p>This class provides helper methods for uploading, saving, and deleting
@@ -27,6 +25,9 @@ import java.nio.file.StandardCopyOption;
  * </ul>
  *
  * <p>This class is designed as a utility class and should not be instantiated.</p>
+ *
+ * @author Heaven Gurung
+ * @author Sugam Rana Magar
  */
 public class ImageUtil {
 
@@ -77,8 +78,6 @@ public class ImageUtil {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Deletes an image file from the file system.
      *
      * <p>This method checks whether the provided file path is valid and whether

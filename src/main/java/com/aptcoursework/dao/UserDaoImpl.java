@@ -26,15 +26,13 @@ import java.sql.SQLException;
  * <p>This class acts as the Data Access Layer (DAL) for user management,
  * separating database logic from business logic.</p>
  *
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
+ * @author Heaven Gurung
+ * @author Sugam Rana Magar
  */
 public class UserDaoImpl implements UserDao {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Inserts a new user into the database.
      *
      * <p>This method adds a new record into the {@code users} table using the
@@ -76,8 +74,6 @@ public class UserDaoImpl implements UserDao {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Finds a user in the database by username (case-insensitive).
      *
      * <p>This method executes a SQL query to retrieve a user record from the
@@ -131,8 +127,6 @@ public class UserDaoImpl implements UserDao {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Finds a user in the database by email address (case-insensitive).
      *
      * <p>This method executes a SQL query to retrieve a user record from the
@@ -186,8 +180,6 @@ public class UserDaoImpl implements UserDao {
 
     /**
      *
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Retrieves the username associated with a given user ID.
      *
      * <p>This method executes a SQL query on the {@code users} table to find

@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import io.github.cdimascio.dotenv.Dotenv;
 
 /**
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
  * Utility class responsible for managing database connectivity.
  *
  * <p>This class provides methods to establish and close connections to the
@@ -22,6 +20,8 @@ import io.github.cdimascio.dotenv.Dotenv;
  *
  * <p>This class follows a utility design pattern and is not intended to be
  * instantiated.</p>
+ *  @author Heaven Gurung
+ *  @author Sugam Rana Magar
  */
 public class DatabaseConnection {
 
@@ -76,8 +76,6 @@ public class DatabaseConnection {
 
     /**
      *
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Establishes and returns a connection to the database.
      *
      * <p>This method uses the {@link DriverManager} to create a connection
@@ -95,8 +93,6 @@ public class DatabaseConnection {
 
 
     /**
-     * javadocs @author Heaven Gurung
-     * code @author Sugam Rana Magar
      * Closes the given database connection safely.
      *
      * <p>This method checks whether the provided {@link Connection} object is

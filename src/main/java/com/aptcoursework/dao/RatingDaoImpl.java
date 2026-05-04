@@ -30,8 +30,8 @@ import java.util.ArrayList;
  * <p>All database connections are managed manually and closed in a finally block
  * to ensure proper resource management.</p>
  *
- * javadocs @author Heaven Gurung
- * code @author Sugam Rana Magar
+ * @author Heaven Gurung
+ * @author Sugam Rana Magar
  */
 
 
