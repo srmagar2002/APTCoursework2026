@@ -8,6 +8,7 @@ SET
 FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS order_items;
+DROP TABLE IF EXISTS rating;
 DROP TABLE IF EXISTS cart;
 DROP TABLE IF EXISTS orders;
 
@@ -122,4 +123,19 @@ CREATE TABLE order_items (
 
      CONSTRAINT fk_order_items FOREIGN KEY (orderId) REFERENCES orders(orderId),
      CONSTRAINT fk_laptop_items FOREIGN KEY (laptopId) REFERENCES laptop(laptopID)
+);
+
+CREATE TABLE rating
+(
+    ratingID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL ,
+    laptopID INT NOT NULL ,
+    rating INT DEFAULT NULL,
+    review TEXT,
+    ratingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users(user_id) ON DELETE CASCADE,
+    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID) ON DELETE CASCADE,
+    CONSTRAINT ratingCheck CHECK (rating BETWEEN 1 AND 5 ),
+    CONSTRAINT unique_user_laptop UNIQUE (userID, laptopID)
 );
