@@ -25,6 +25,9 @@ import java.util.UUID;
 
 
 /**
+ * Servlet handling laptop product management and display.
+ * Supports viewing products with filtering and search, adding new products, and editing existing products.
+ *
  * @author Sugam Rana Magar
  */
 
@@ -34,6 +37,11 @@ public class ProductsServlet extends HttpServlet {
 
     private static final LaptopDaoImpl laptopDao = new LaptopDaoImpl();
 
+    /**
+     * Handles GET requests for displaying products.
+     * Retrieves all products or filters by brand, category, price, and search query.
+     * Supports both full page and AJAX requests.
+     */
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
@@ -88,6 +96,10 @@ public class ProductsServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Handles POST requests for adding and editing laptop products.
+     * Processes form data, updates product information, and manages image uploads.
+     */
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
