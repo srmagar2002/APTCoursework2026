@@ -1,7 +1,9 @@
 package com.aptcoursework.controller;
 
 import com.aptcoursework.dao.RatingDaoImpl;
+import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.Rating;
+import com.aptcoursework.entity.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,11 +22,23 @@ public class RatingReviewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println(request.getParameter("userID"));
-
+        String userIDstring= request.getParameter("userID");
         int laptopID = Integer.parseInt(request.getParameter("laptopID"));
         RatingDaoImpl ratingDao = new RatingDaoImpl();
 
+       if(userIDstring != null) {
+           int userID = Integer.parseInt(userIDstring);
+           Rating rating = ratingDao.getRatingByUserID(userID, laptopID);
+           if (rating != null) {
+               request.setAttribute("isRated", true);
+               System.out.println(rating.getUsername() + "has rated");
+           } else {
+               UserDaoImpl userDao = new UserDaoImpl();
+               String username = userDao.usernameByUserID(userID);
+               request.setAttribute("isRated", false);
+               System.out.println(username + "has not rated");
+           }
+       }
         ArrayList<Rating> ratings = ratingDao.getRatingsByLaptop(laptopID);
         request.setAttribute("ratings", ratings);
 

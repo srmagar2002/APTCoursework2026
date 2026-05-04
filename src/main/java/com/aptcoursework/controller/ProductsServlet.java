@@ -23,6 +23,11 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.UUID;
 
+
+/**
+ * @author Sugam Rana Magar
+ */
+
 @WebServlet("/products")
 @MultipartConfig
 public class ProductsServlet extends HttpServlet {
@@ -206,20 +211,6 @@ public class ProductsServlet extends HttpServlet {
                 System.out.println("Laptop " + laptopId + " is deleted");
             }
             response.sendRedirect(request.getContextPath() + "/products");
-        }
-    }
-
-    private void imageUploader(Part part, String filename, File uploadDir) {
-        if (part != null && part.getSize() > 0) {
-
-            File imgFile = new File(uploadDir, filename);
-
-            try (InputStream input = part.getInputStream()) {
-                Files.copy(input, imgFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println(imgFile.getAbsolutePath());
-            } catch (Exception ex) {
-                System.out.println("Error uploading file" + ex.getMessage());
-            }
         }
     }
 }

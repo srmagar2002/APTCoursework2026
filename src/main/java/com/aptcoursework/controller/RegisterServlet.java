@@ -1,6 +1,4 @@
 package com.aptcoursework.controller;
-
-
 import com.aptcoursework.dao.UserDao;
 import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.User;

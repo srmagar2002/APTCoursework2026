@@ -14,6 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author Sugam Rana Magar
+ */
+
 @WebServlet("/productView")
 public class ProductViewServlet extends HttpServlet {
 

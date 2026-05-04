@@ -716,15 +716,17 @@
     });
 
     function displayReview(id) {
+        let url;
+        <c:choose>
+        <c:when test="${empty sessionScope.user}">
+        url = "${pageContext.request.contextPath}/rate?laptopID=" + id.toString()
+        </c:when>
+        <c:when test="${sessionScope.user.role=='CUSTOMER'}">
+         url = "${pageContext.request.contextPath}/rate?laptopID=" + id.toString() + "&userID=${sessionScope.user.user_id}"
+        </c:when>
+        </c:choose>
         fetch(
-            <c:choose>
-            <c:when test="${empty sessionScope.user}">
-            "${pageContext.request.contextPath}/rate?laptopID=" + id.toString()
-            </c:when>
-<%--        <c:when test="${sessionScope.user.role=='CUSTOMER'}">--%>
-<%--        "${pageContext.request.contextPath}/rate?laptopID=" + id.toString() + "&userID=" + sessionScope.user.userID--%>
-<%--            </c:when>--%>
-            </c:choose>
+            url
             ,
             {
                 headers: {

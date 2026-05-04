@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * @author Sugam Rana Magar
+ */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 

@@ -3,6 +3,12 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Laptop {
+
+    /**
+     * <p>Laptop Entity Class</p>
+     * @author Sugam Rana Magar
+     */
+
     /* BASIC INFO */
     private int laptopID;
     private String laptopUUID;

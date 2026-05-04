@@ -4,6 +4,9 @@ import com.aptcoursework.entity.Rating;
 
 import java.util.ArrayList;
 
+/**
+ * @author Sugam Rana Magar
+ */
 public interface RatingDao {
     Rating getRatingByUserID(int userID, int laptopID);
     Boolean deleteRatingByLaptopID(int laptopID);

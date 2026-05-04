@@ -9,6 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/**
+ * @author Sugam Rana Magar
+ */
+
 public class UserDaoImpl implements UserDao {
 
     @Override
@@ -52,8 +57,11 @@ public class UserDaoImpl implements UserDao {
                 user.setPasswordHash(rs.getString("password_hash"));
 
                 Role role;
-                try{role = Role.valueOf(rs.getString("role").toUpperCase());}
-                catch (IllegalArgumentException | NullPointerException e){ role = Role.CUSTOMER;}
+                try {
+                    role = Role.valueOf(rs.getString("role").toUpperCase());
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    role = Role.CUSTOMER;
+                }
                 user.setRole(role);
 
                 return user;
@@ -82,14 +90,40 @@ public class UserDaoImpl implements UserDao {
                 user.setPasswordHash(rs.getString("password_hash"));
 
                 Role role;
-                try{role = Role.valueOf(rs.getString("role").toUpperCase());}
-                catch (IllegalArgumentException | NullPointerException e){ role = Role.CUSTOMER;}
+                try {
+                    role = Role.valueOf(rs.getString("role").toUpperCase());
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    role = Role.CUSTOMER;
+                }
                 user.setRole(role);
 
                 return user;
             }
         } catch (SQLException e) {
             System.out.println("Error in getting user" + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return null;
+    }
+
+    @Override
+    public String usernameByUserID(int userID) {
+        Connection conn = null;
+        String sql = "SELECT * FROM users WHERE user_id=?";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+
+                return rs.getString("username");
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getting user" + e.getMessage());
+            return null;
         } finally {
             DatabaseConnection.closeConnection(conn);
         }

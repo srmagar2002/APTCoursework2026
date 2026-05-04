@@ -1,8 +1,3 @@
-/**
- *
- *
- *
- */
 
 
 package com.aptcoursework.dao;
@@ -16,12 +11,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Sugam Rana Magar
+ *
+ */
+
 public class RatingDaoImpl implements RatingDao {
 
     @Override
     public Rating getRatingByUserID(int userID, int laptopID) {
         Connection conn = null;
-        String sql = "select * from rating where userID = ? and laptopID = ?";
+        String sql = "SELECT r.ratingID,r.userID,r.laptopID,r.rating,r.review,r.ratingDate,u.username FROM rating r LEFT JOIN users u ON r.userID = u.user_id where r.userID = ? and r.laptopID = ?";
         try{
             conn = DatabaseConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -35,7 +36,8 @@ public class RatingDaoImpl implements RatingDao {
                         rs.getInt("laptopID"),
                         rs.getInt("rating"),
                         rs.getString("review"),
-                        rs.getTimestamp("ratingDate"));
+                        rs.getTimestamp("ratingDate"),
+                        rs.getString("username"));
             }
         }catch(SQLException e){
             System.out.println("SQLException: "+e);
