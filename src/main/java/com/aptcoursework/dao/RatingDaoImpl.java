@@ -277,7 +277,7 @@ public class RatingDaoImpl implements RatingDao {
                         rs.getTimestamp("ratingDate"),
                         rs.getString("username")
                 );
-                System.out.println("UserID:" + rating.getUserID() + " Username : " + rating.getUsername() + " LaptopID" + rating.getLaptopID() + " Rating:" + rating.getRating() + " Review:" + rating.getReview() + " Date:" + rating.getRatingDate());
+//                System.out.println("UserID:" + rating.getUserID() + " Username : " + rating.getUsername() + " LaptopID" + rating.getLaptopID() + " Rating:" + rating.getRating() + " Review:" + rating.getReview() + " Date:" + rating.getRatingDate());
                 ratings.add(rating);
             }
             return ratings;

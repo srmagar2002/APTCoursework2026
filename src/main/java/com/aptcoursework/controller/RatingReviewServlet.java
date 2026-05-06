@@ -41,12 +41,13 @@ public class RatingReviewServlet extends HttpServlet {
            Rating rating = ratingDao.getRatingByUserID(userID, laptopID);
            if (rating != null) {
                request.setAttribute("isRated", true);
-               System.out.println(rating.getUsername() + "has rated");
+               request.setAttribute("userRating", rating);
+               System.out.println(rating.getUsername() + " has rated");
            } else {
                UserDaoImpl userDao = new UserDaoImpl();
                String username = userDao.usernameByUserID(userID);
                request.setAttribute("isRated", false);
-               System.out.println(username + "has not rated");
+               System.out.println(username + " has not rated");
            }
        }
         ArrayList<Rating> ratings = ratingDao.getRatingsByLaptop(laptopID);
@@ -118,6 +119,10 @@ public class RatingReviewServlet extends HttpServlet {
             }
 
             response.sendRedirect(request.getContextPath() + "/productView?laptopID=" + laptopID);
+        }
+
+        if("update".equals(action)) {
+            System.out.println("HELLO IS UPDATED WORKING");
         }
 
 

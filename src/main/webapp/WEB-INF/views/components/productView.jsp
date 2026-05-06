@@ -495,7 +495,9 @@
                             </div>
 
                             <form class="review-form" action="${pageContext.request.contextPath}/rate" method="post">
-                                <input type="hidden" name="action" value="add"/>
+
+                                <input type="hidden" id="ratingAction" name="action" value="add"/>
+
                                 <input type="hidden" name="laptopid" value="${laptop.laptopID}"/>
                                 <input type="hidden" name="userid" value="${sessionScope.user.user_id}">
                                 <input type="hidden" name="newrating" value="" id="newrating">
@@ -558,15 +560,14 @@
                                     photo.</p>
 
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-ghost">Cancel
+                                    <button type="button" onclick="closeReviewModal()" class="btn btn-ghost">Cancel
                                     </button>
-                                    <button type="submit" onsubmit="submitjs()" class="btn btn-primary">Submit Review
+                                    <button type="submit" class="btn btn-primary">Submit Review
                                     </button>
                                 </div>
                             </form>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="product-right-column">
@@ -742,10 +743,13 @@
     //Review Sec
     // Rating system variables
 
+
+    function setAction(value) {
+        document.getElementById("ratingAction").value = value;
+    }
+
     let currentRating = 0;
     let modalRating = 0;
-
-    const hellos = document.getElementById('ratingStars').querySelectorAll('.star-interactive');
 
     // Handle star click in main section
     function handleStarClick(value) {
@@ -758,7 +762,9 @@
 
     // Update star display
     function updateStars(elementId, rating) {
-        const stars = document.getElementById(elementId).querySelectorAll('.star-interactive');
+        const element = document.getElementById(elementId);
+        if (!element) return; // Exit if element doesn't exist
+        const stars = element.querySelectorAll('.star-interactive');
         stars.forEach(star => {
             const value = parseInt(star.dataset.value);
             if (value <= rating) {
@@ -782,6 +788,7 @@
         const modal = document.getElementById('reviewModal');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+
         if (currentRating > 0) {
             modalRating = currentRating;
             updateStars('modalRatingStars', currentRating);
@@ -790,6 +797,7 @@
 
     // Close review modal
     function closeReviewModal(event) {
+        console.log("frickarino");
         currentRating = 0;
         modalRating = 0;
         updateStars('modalRatingStars', modalRating);
