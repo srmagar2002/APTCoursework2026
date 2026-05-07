@@ -122,7 +122,19 @@ public class RatingReviewServlet extends HttpServlet {
         }
 
         if("update".equals(action)) {
-            System.out.println("HELLO IS UPDATED WORKING");
+
+            String laptopID = request.getParameter("laptopid");
+            String userID = request.getParameter("userid");
+            String newrating = request.getParameter("newrating");
+            String review = request.getParameter("review");
+
+            RatingDaoImpl ratingDao = new RatingDaoImpl();
+            Boolean isUpdated = ratingDao.updateRatingReviewByLaptopUser(Integer.parseInt(userID), Integer.parseInt(laptopID), Integer.parseInt(newrating), review);
+
+            if(isUpdated) {
+                response.sendRedirect(request.getContextPath() + "/productView?laptopID=" + laptopID);
+            }
+
         }
 
 

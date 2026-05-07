@@ -37,6 +37,40 @@ import java.util.ArrayList;
 
 public class RatingDaoImpl implements RatingDao {
 
+
+    @Override
+    public Boolean updateRatingReviewByLaptopUser(int userID, int laptopID,int rating, String review) {
+
+        Connection conn = null;
+        String sql = "UPDATE rating SET review = ?, rating=?  WHERE userID = ? AND laptopID = ? ";
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1,review);
+            stmt.setInt(2,rating);
+            stmt.setInt(3,userID);
+            stmt.setInt(4,laptopID);
+
+            if(stmt.executeUpdate() != 0){
+                System.out.println("Review is Updated");
+                return true;
+            }
+            else{
+                System.out.println("Review is Not Updated");
+                return false;
+            }
+
+        }
+        catch(SQLException e){
+            System.out.println( "Failed to update" + e.getMessage());
+        }
+        finally{
+            DatabaseConnection.closeConnection(conn);
+        }
+
+        return false;
+    }
+
     /**
      *
      * Retrieves a specific rating given by a user for a particular laptop.

@@ -723,7 +723,7 @@
         url = "${pageContext.request.contextPath}/rate?laptopID=" + id.toString()
         </c:when>
         <c:when test="${sessionScope.user.role=='CUSTOMER'}">
-         url = "${pageContext.request.contextPath}/rate?laptopID=" + id.toString() + "&userID=${sessionScope.user.user_id}"
+        url = "${pageContext.request.contextPath}/rate?laptopID=" + id.toString() + "&userID=${sessionScope.user.user_id}"
         </c:when>
         </c:choose>
         fetch(
@@ -766,6 +766,7 @@
         if (!element) return; // Exit if element doesn't exist
         const stars = element.querySelectorAll('.star-interactive');
         stars.forEach(star => {
+            console.log(rating)
             const value = parseInt(star.dataset.value);
             if (value <= rating) {
                 star.style.color = 'var(--primary)';
@@ -784,20 +785,31 @@
         updateStars('modalRatingStars', value);
     }
 
-    function openReviewModal() {
+    function openReviewModal(rating) {
+
         const modal = document.getElementById('reviewModal');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
 
-        if (currentRating > 0) {
-            modalRating = currentRating;
-            updateStars('modalRatingStars', currentRating);
+        console.log(document.getElementById("ratingAction").value);
+
+        if (document.getElementById("ratingAction").value == 'add') {
+            if (currentRating > 0) {
+                modalRating = currentRating;
+                updateStars('modalRatingStars', currentRating);
+            }
+        }
+        else if ( document.getElementById("ratingAction").value== 'update'){
+            if (rating > 0) {
+                modalRating = rating;
+                console.log(modalRating)
+                updateStars('modalRatingStars', modalRating);
+            }
         }
     }
 
     // Close review modal
     function closeReviewModal(event) {
-        console.log("frickarino");
         currentRating = 0;
         modalRating = 0;
         updateStars('modalRatingStars', modalRating);
