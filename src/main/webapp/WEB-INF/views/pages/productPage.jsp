@@ -210,7 +210,7 @@
             )
                 .then(res => res.text())
                 .then(html => {
-                    // console.log(html);
+                    console.log(html);
                     document.getElementById("products-grid").innerHTML = html;
                 });
         }, 500);

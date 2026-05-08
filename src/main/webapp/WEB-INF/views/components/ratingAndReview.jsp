@@ -83,7 +83,7 @@
                             <fmt:formatDate value="${userRating.ratingDate}" pattern="MMM dd, yyyy"/>
                         </span>
                     </div>
-                    <p class="my-review-text">${userRating.review}</p>
+                    <p class="my-review-text" id="user-rating-review">${userRating.review}</p>
                     <button class="btn btn-primary" onclick=" setAction('update');openReviewModal(${userRating.rating});">Edit your review</button>
                 </div>
             </div>

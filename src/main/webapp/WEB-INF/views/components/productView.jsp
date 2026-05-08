@@ -791,18 +791,20 @@
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
 
-        console.log(document.getElementById("ratingAction").value);
+        // console.log(document.getElementById("ratingAction").value);
 
         if (document.getElementById("ratingAction").value == 'add') {
             if (currentRating > 0) {
                 modalRating = currentRating;
                 updateStars('modalRatingStars', currentRating);
             }
-        }
-        else if ( document.getElementById("ratingAction").value== 'update'){
+        } else if (document.getElementById("ratingAction").value == 'update') {
             if (rating > 0) {
                 modalRating = rating;
-                console.log(modalRating)
+                // console.log(modalRating)
+
+                let userReview = document.getElementById('user-rating-review').textContent;
+                document.getElementById('reviewText').value = userReview;
                 updateStars('modalRatingStars', modalRating);
             }
         }
