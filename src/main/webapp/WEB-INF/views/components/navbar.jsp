@@ -21,6 +21,7 @@
             <li><a href="#">Contact</a></li>
         </ul>
         <div class="nav-actions">
+            <a href="${pageContext.request.contextPath}/cart">Cart</a>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                 <div class="theme-toggle-track">
                     <svg class="theme-toggle-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"

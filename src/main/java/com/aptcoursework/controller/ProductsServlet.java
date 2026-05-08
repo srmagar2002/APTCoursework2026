@@ -52,6 +52,7 @@ public class ProductsServlet extends HttpServlet {
 
             if (!hasFilters) {
                 ArrayList<Laptop> products = laptopDao.fetchAllLaptops();
+//                System.out.println(products);
                 request.setAttribute("products", products);
                 String isAjax = request.getHeader("X-Requested-With");
                 if ("XMLHttpRequest".equals(isAjax)) {
