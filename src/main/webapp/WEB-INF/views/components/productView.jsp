@@ -419,25 +419,15 @@
                                 <button class="btn-close" onclick="closeReviewModal()">&times;</button>
                             </div>
 
-                            <form class="review-form" onsubmit="submitReview(event)">
+                            <form class="review-form" action="${pageContext.request.contextPath}/rate" method="post">
+                                <input type="hidden" name="action" value="add"/>
+                                <input type="hidden" name="laptopid" value="${laptop.laptopID}"/>
+                                <input type="hidden" name="userid" value="${sessionScope.user.user_id}">
+                                <input type="hidden" name="newrating" value="" id="newrating">
                                 <div class="form-group">
                                     <label>Your Rating</label>
                                     <div class="stars interactive modal-stars" id="modalRatingStars">
-                                        <svg class="star-interactive" data-value="1" onclick="handleModalStarClick(1)"
-                                             width="32"
-                                             height="32"
-                                             fill="currentColor" viewBox="0 0 20 20">
-                                            <path
-                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                        </svg>
-                                        <svg class="star-interactive" data-value="2" onclick="handleModalStarClick(2)"
-                                             width="32"
-                                             height="32"
-                                             fill="currentColor" viewBox="0 0 20 20">
-                                            <path
-                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                        </svg>
-                                        <svg class="star-interactive" data-value="3" onclick="handleModalStarClick(3)"
+                                        <svg class="star-interactive" data-value="5" onclick="handleModalStarClick(5)"
                                              width="32"
                                              height="32"
                                              fill="currentColor" viewBox="0 0 20 20">
@@ -451,7 +441,21 @@
                                             <path
                                                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                                         </svg>
-                                        <svg class="star-interactive" data-value="5" onclick="handleModalStarClick(5)"
+                                        <svg class="star-interactive" data-value="3" onclick="handleModalStarClick(3)"
+                                             width="32"
+                                             height="32"
+                                             fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="star-interactive" data-value="2" onclick="handleModalStarClick(2)"
+                                             width="32"
+                                             height="32"
+                                             fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="star-interactive" data-value="1" onclick="handleModalStarClick(1)"
                                              width="32"
                                              height="32"
                                              fill="currentColor" viewBox="0 0 20 20">
@@ -466,7 +470,8 @@
                                     <textarea id="reviewText"
                                               placeholder="Share your experience with this product (optional)"
                                               maxlength="500"
-                                              rows="6"></textarea>
+                                              rows="6"
+                                    name="review"></textarea>
                                     <div class="char-count">
                                         <span id="charCount">0</span>/500
                                     </div>
@@ -478,9 +483,9 @@
                                     photo.</p>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-ghost" onclick="closeReviewModal()">Cancel
+                                    <button type="submit" class="btn btn-ghost">Cancel
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                                    <button type="submit" onsubmit="submitjs()" class="btn btn-primary">Submit Review</button>
                                 </div>
                             </form>
                         </div>
@@ -614,100 +619,117 @@
 <!-- Main Content -->
 
 
-<script>   function changeImage(thumbnail, imageSrc, imageAlt) {
-    //Image Gallery
-    const mainImage = document.getElementById('mainProductImage');
-    mainImage.style.opacity = '0';
+<script>
+    function changeImage(thumbnail, imageSrc, imageAlt) {
+        //Image Gallery
+        const mainImage = document.getElementById('mainProductImage');
+        mainImage.style.opacity = '0';
 
-    setTimeout(() => {
-        mainImage.src = imageSrc;
-        mainImage.alt = imageAlt;
-        mainImage.style.opacity = '1';
-    }, 150);
+        setTimeout(() => {
+            mainImage.src = imageSrc;
+            mainImage.alt = imageAlt;
+            mainImage.style.opacity = '1';
+        }, 150);
 
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach(thumb => thumb.classList.remove('active'));
-    thumbnail.classList.add('active');
-}
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+        thumbnail.classList.add('active');
+    }
 
-document.addEventListener("DOMContentLoaded", function () {
-    displayReview(${laptop.laptopID});
-});
+    document.addEventListener("DOMContentLoaded", function () {
+        displayReview(${laptop.laptopID});
+    });
 
-function displayReview(id)
-{
-    fetch(
-        "${pageContext.request.contextPath}/rate?laptopID="+id.toString(),
-        {
-            headers:{
-                "X-Requested-With": "XMLHttpRequest"
+    function displayReview(id) {
+        fetch(
+            "${pageContext.request.contextPath}/rate?laptopID=" + id.toString(),
+            {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
             }
+        ).then(res => res.text())
+            .then(html => {
+                document.getElementById('rating-review-section').innerHTML = html;
+            })
+    }
+
+    //Review Sec
+    // Rating system variables
+
+    let currentRating = 0;
+    let modalRating = 0;
+
+    const hellos = document.getElementById('ratingStars').querySelectorAll('.star-interactive');
+
+    // Handle star click in main section
+    function handleStarClick(value) {
+        currentRating = value;
+        updateStars('ratingStars', value);
+        openReviewModal();
+    }
+
+    // Update star display
+    function updateStars(elementId, rating) {
+        const stars = document.getElementById(elementId).querySelectorAll('.star-interactive');
+        stars.forEach(star => {
+            const value = parseInt(star.dataset.value);
+            if (value <= rating) {
+                star.style.color = 'var(--primary)';
+                star.style.opacity = '1';
+            } else {
+                star.style.color = 'var(--muted)';
+                star.style.opacity = '0.3';
+            }
+        });
+    }
+
+    // Handle star click in modal
+    function handleModalStarClick(value) {
+        modalRating = value;
+        document.getElementById('newrating').value = modalRating;
+        updateStars('modalRatingStars', value);
+    }
+
+    function openReviewModal() {
+        const modal = document.getElementById('reviewModal');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        if (currentRating > 0) {
+            modalRating = currentRating;
+            updateStars('modalRatingStars', currentRating);
         }
-    ).then(res=>res.text())
-        .then(html=>{
-            document.getElementById('rating-review-section').innerHTML = html;
-        })
-}
+    }
 
-//Review Sec
-// Rating system variables
-let currentRating = 0;
-let modalRating = 0;
+    // Close review modal
+    function closeReviewModal(event) {
+        currentRating = 0;
+        modalRating = 0;
+        updateStars('modalRatingStars', modalRating);
+        updateStars('ratingStars', currentRating);
+        if (event && event.target.id !== 'reviewModal') return;
 
-// Handle star click in main section
-function handleStarClick(value) {
-    currentRating = value;
-    updateStars('ratingStars', value);
-    openReviewModal();
-}
+        const stars = document.querySelectorAll('.star-interactive');
 
-// Handle star click in modal
-function handleModalStarClick(value) {
-    modalRating = value;
-    updateStars('modalRatingStars', value);
-}
+        stars.forEach(star => {
+            star.style.removeProperty('color');
+            star.style.removeProperty('opacity');
+        });
 
-// Update star display
-function updateStars(elementId, rating) {
-    const stars = document.getElementById(elementId).querySelectorAll('.star-interactive');
-    stars.forEach((star, index) => {
-        if (index < rating) {
-            star.style.color = 'var(--primary)';
-            star.style.opacity = '1';
-        } else {
-            star.style.color = 'var(--muted)';
-            star.style.opacity = '0.3';
+        const modal = document.getElementById('reviewModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeReviewModal();
         }
     });
-}
-
-function openReviewModal() {
-    const modal = document.getElementById('reviewModal');
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    if (currentRating > 0) {
-        modalRating = currentRating;
-        updateStars('modalRatingStars', currentRating);
-    }
-}
-
-// Close review modal
-function closeReviewModal(event) {
-    if (event && event.target.id !== 'reviewModal') return;
-    const modal = document.getElementById('reviewModal');
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Close modal with Escape key
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-        closeReviewModal();
-    }
-});
-document.getElementById('reviewText')?.addEventListener('input', function () {
-    document.getElementById('charCount').textContent = this.value.length;
-});
+    document.getElementById('reviewText')?.addEventListener('input', function () {
+        document.getElementById('charCount').textContent = this.value.length;
+    });
 
 </script>
 
