@@ -6,12 +6,16 @@ KHS3LG;
 
 SET
 FOREIGN_KEY_CHECKS = 0;
+<<<<<<< HEAD
 
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS cart;
 DROP TABLE IF EXISTS orders;
 
 
+=======
+DROP TABLE IF EXISTS rating;
+>>>>>>> heaven
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS laptop;
 SET
@@ -25,20 +29,21 @@ CREATE TABLE users
     password_hash VARCHAR(255) NOT NULL,
     role          VARCHAR(10)  NOT NULL,
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT role_const CHECK (role IN ('ADMIN','CUSTOMER'))
+    CONSTRAINT role_const CHECK (role IN ('ADMIN', 'CUSTOMER'))
 );
 
 CREATE TABLE laptop
 (
 /*BASIC INFO*/
     laptopID           INT AUTO_INCREMENT PRIMARY KEY,
+    laptopUUID         VARCHAR(300)   NOT NULL UNIQUE,
     brand              VARCHAR(200)   NOT NULL,
     model              VARCHAR(200)   NOT NULL,
     title              TEXT           NOT NULL,
     description        TEXT,
     imgUrl             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img/', CAST(laptopID AS CHAR), '.jpg')),
-    img1Url             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img1/', CAST(laptopID AS CHAR), '.jpg')),
-    img2Url             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img2/', CAST(laptopID AS CHAR), '.jpg')),
+    img1Url            VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img1/', CAST(laptopID AS CHAR), '.jpg')),
+    img2Url            VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img2/', CAST(laptopID AS CHAR), '.jpg')),
     thumbnailUrl       VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('thumb/', CAST(laptopID AS CHAR), '.jpg')),
     `category`          VARCHAR(200)    DEFAULT 'General',
 
@@ -48,7 +53,7 @@ CREATE TABLE laptop
     storage            VARCHAR(200)   NOT NULL,
     storageType        VARCHAR(200)   NOT NULL,
     graphicsCard       VARCHAR(200)   NOT NULL,
-    screenSize         DECIMAL(10, 2) NOT NULL,
+    screenSize         VARCHAR(200)   NOT NULL,
     resolution         VARCHAR(200)   NOT NULL,
     operatingSystem    VARCHAR(200)   NOT NULL DEFAULT 'Windows',
 
@@ -74,11 +79,32 @@ CREATE TABLE laptop
     updatedAt          TIMESTAMP               DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT categoryCheck CHECK (`category` IN
                                     ('Gaming', 'Ultrabook', 'Business', 'Student', 'Convertible', 'Workstation',
-                                     'General')),
+                                     'General', 'Professional')),
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
-    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Linux')),
+    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'macOS', 'Chrome OS', 'Linux')),
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
+<<<<<<< HEAD
 );
+=======
+
+);
+
+CREATE TABLE rating
+(
+    ratingID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL ,
+    laptopID INT NOT NULL ,
+    rating INT DEFAULT NULL,
+    review TEXT,
+    ratingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users(user_id),
+    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID),
+    CONSTRAINT ratingCheck CHECK (rating BETWEEN 1 AND 5 ),
+    CONSTRAINT unique_user_laptop UNIQUE (userID, laptopID)
+);
+
+>>>>>>> heaven
 /*
 Category Explanation
 Gaming -	High-performance for gaming
@@ -88,6 +114,7 @@ Student -	Affordable, simple laptops
 Convertible -	2-in-1 touch laptops
 Workstation -	Powerful for professional tasks (CAD, rendering)
 General	Default - general-purpose
+<<<<<<< HEAD
   */
 
 
@@ -131,5 +158,8 @@ CREATE TABLE order_items (
 
 
 
+=======
+*/
+>>>>>>> heaven
 
 
