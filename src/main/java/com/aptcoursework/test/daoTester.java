@@ -75,6 +75,10 @@ public class daoTester {
 
     }
 
+    static void insertuser() {
+
+    }
+
     static void gettotalrating(){
         Scanner input = new Scanner(System.in);
         System.out.print("Enter id : ");

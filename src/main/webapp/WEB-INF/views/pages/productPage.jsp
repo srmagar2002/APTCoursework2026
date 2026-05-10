@@ -147,19 +147,20 @@
     <div class="products-grid" id="products-grid">
         <c:if test="${sessionScope.user.role=='ADMIN'}">
 
-                    <article class="product-card add-product-card">
-                        <a href="${pageContext.request.contextPath}/products?action=add">
-                            <div class="product-image">
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="12" y1="5" x2="12" y2="19"/>
-                                    <line x1="5" y1="12" x2="19" y2="12"/>
-                                </svg>
-                            </div>
-                            <div class="product-content">
-                                <h3 class="product-name">Add New Product</h3>
-                            </div>
-                        </a>
-                    </article>
+            <article class="product-card add-product-card">
+                <a href="${pageContext.request.contextPath}/products?action=add">
+                    <div class="product-image">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Add New Product</h3>
+                    </div>
+                </a>
+            </article>
         </c:if>
         <jsp:include page="../components/products.jsp"/>
     </div>
@@ -167,6 +168,28 @@
 
 <jsp:include page="../components/footer.jsp"/>
 
+<c:if test="${sessionScope.user.role=='ADMIN'}">
+    <div id="deleteModal" class="delete-modal">
+        <div class="delete-modal-content delete-modal-danger">
+            <div class="delete-modal-header">
+                <h2>Delete Product</h2>
+                <button type="button" class="delete-modal-close" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            <div class="delete-modal-body">
+                <p>Are you sure you want to delete <strong id="deleteProductName"></strong>?</p>
+                <p class="warning-text">This action cannot be undone.</p>
+            </div>
+            <div class="delete-modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                <form action="${pageContext.request.contextPath}/products" method="post" style="display: inline;">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" id="deleteProductId" name="laptopid">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</c:if>
 <script>
 
     let debounceTimer;
@@ -187,7 +210,7 @@
             )
                 .then(res => res.text())
                 .then(html => {
-                    // console.log(html);
+                    console.log(html);
                     document.getElementById("products-grid").innerHTML = html;
                 });
         }, 500);

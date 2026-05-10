@@ -14,10 +14,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Servlet handling the display of individual laptop product details.
+ * Retrieves product information and associated ratings to display on the product view page.
+ *
+ * @author Sugam Rana Magar
+ */
+
 @WebServlet("/productView")
 public class ProductViewServlet extends HttpServlet {
 
     private static final LaptopDaoImpl laptopDao = new LaptopDaoImpl();
+    /**
+     * Handles GET requests by retrieving and displaying detailed product information.
+     * Fetches laptop details by ID and forwards to the product view page.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -25,9 +36,11 @@ public class ProductViewServlet extends HttpServlet {
 
         Laptop laptop = laptopDao.getLaptopById(productId);
         System.out.println(laptop.toString());
-        request.setAttribute("laptop", laptop);
-        request.getRequestDispatcher("/WEB-INF/views/pages/productViewPage.jsp")
-                .forward(request, response);
+
+            request.setAttribute("laptop", laptop);
+            request.getRequestDispatcher("/WEB-INF/views/pages/productViewPage.jsp")
+                    .forward(request, response);
+
 
     }
     @Override
