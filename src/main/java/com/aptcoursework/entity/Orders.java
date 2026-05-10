@@ -2,6 +2,7 @@ package com.aptcoursework.entity;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class Orders {
 
@@ -11,6 +12,7 @@ public class Orders {
     private String status;
     private Date estimatedDelivery;
     private Timestamp createdAt;
+    private ArrayList<OrderItems> orderItems;
 
 
     public Orders(int userId, double totalAmount, String status, Date estimatedDelivery) {
@@ -22,6 +24,14 @@ public class Orders {
 
     public int getOrderId() {
         return orderId;
+    }
+
+    public ArrayList<OrderItems> getItems(){
+        return orderItems;
+    }
+
+    public void setOrderItems(ArrayList<OrderItems> orderItems){
+        this.orderItems = orderItems;
     }
 
     public int getUserId() {

@@ -8,6 +8,7 @@ IGNORE INTO users (username,email,password_hash,role) VALUES ('admin'
 /*password:APTadmin&123*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 INSERT IGNORE INTO users(username, email, role) VALUES
        ("kushal23", "puri@gmail.com", "CUSTOMER"),
@@ -16,6 +17,8 @@ INSERT IGNORE INTO users(username, email, role) VALUES
 INSERT INTO laptop (
     brand, model, title, description,category,
 =======
+=======
+>>>>>>> origin/kushal
 /* customers */
 INSERT
 IGNORE INTO users (username,email,password_hash,role) VALUES
@@ -32,7 +35,10 @@ IGNORE INTO users (username,email,password_hash,role) VALUES
 INSERT
 IGNORE INTO laptop (
     laptopUUID,brand, model, title, description,category,
+<<<<<<< HEAD
 >>>>>>> heaven
+=======
+>>>>>>> origin/kushal
     processor, ram, storage, storageType, graphicsCard, screenSize, resolution, operatingSystem,
     price, discount, stockQuantity,
     weight, color, batteryLife
@@ -337,5 +343,9 @@ VALUES (2, 1, 5, 'Excellent performance'),
        (7, 9, 3, 'Average specs'),
 
        (2, 7, 4, 'Good portability'),
+<<<<<<< HEAD
        (3, 8, 5, 'Excellent for students');
 >>>>>>> origin/paras
+=======
+       (3, 8, 5, 'Excellent for students');
+>>>>>>> origin/kushal
