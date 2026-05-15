@@ -11,9 +11,8 @@
 <body>
 
 
-<header class="header">
-    <jsp:include page="../components/navbar.jsp"/>
-</header>
+<jsp:include page="../components/navbar.jsp"/>
+
 
 <main class="page-container">
 

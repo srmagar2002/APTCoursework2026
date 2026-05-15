@@ -4,10 +4,8 @@ import com.aptcoursework.entity.User;
 import com.aptcoursework.enums.Role;
 import com.aptcoursework.utils.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 
 
 /**
@@ -30,6 +28,25 @@ import java.sql.SQLException;
  * @author Sugam Rana Magar
  */
 public class UserDaoImpl implements UserDao {
+
+    @Override
+    public void updateLastLogin(int userID){
+        Connection conn = null;
+        String sql = "UPDATE users SET lastLogin = ? WHERE user_id = ?";
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+            pstmt.setInt(2, userID);
+            pstmt.executeUpdate();
+        }
+        catch (SQLException e){
+            System.out.println("Failed to update last login " + e.getMessage());
+        }
+        finally{
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
 
 
     /**
@@ -242,4 +259,56 @@ public class UserDaoImpl implements UserDao {
         }
         return null;
     }
+
+    @Override
+    public User findByUserID(int userID){
+        Connection conn = null;
+        String sql = "SELECT * FROM users WHERE user_id=?";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Role role;
+                try {
+                    role = Role.valueOf(rs.getString("role").toUpperCase());
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    role = Role.CUSTOMER;
+                }
+                return new User(
+                rs.getInt("user_id"),
+                rs.getString("username"),
+                rs.getString("email"),
+                rs.getString("password_hash"),
+                rs.getString("profileImg"),
+                role,
+                rs.getTimestamp("lastLogin").toLocalDateTime(),
+                rs.getTimestamp("created_at").toLocalDateTime()
+                );
+//                User user = new User();
+//                user.setUser_id(rs.getInt("user_id"));
+//                user.setUsername(rs.getString("username"));
+//                user.setEmail(rs.getString("email"));
+//                user.setPasswordHash(rs.getString("password_hash"));
+//                Role role;
+//                try {
+//                    role = Role.valueOf(rs.getString("role").toUpperCase());
+//                } catch (IllegalArgumentException | NullPointerException e) {
+//                    role = Role.CUSTOMER;
+//                }
+//                user.setRole(role);
+//                user.setProfileImg(rs.getString("profileImg"));
+//                user.setLastLogin(rs.getTimestamp("lastLogin").toLocalDateTime());
+//                user.setCreated_at((rs.getTimestamp("created_at").toLocalDateTime());
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getting user" + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return null;
+    }
+
 }

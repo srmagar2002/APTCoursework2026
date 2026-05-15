@@ -2,6 +2,8 @@ package com.aptcoursework.dao;
 
 import com.aptcoursework.entity.User;
 
+import java.time.LocalDateTime;
+
 
 /**
 
@@ -26,9 +28,11 @@ import com.aptcoursework.entity.User;
  */
 
 public interface UserDao {
+    void updateLastLogin(int userID);
     boolean insertUser(User user);
     boolean insertImgProfilePath(String path, int userID);
     User findByUsername(String username);
     User findByEmail(String email);
     String usernameByUserID(int userID);
+    User findByUserID(int userID);
 }

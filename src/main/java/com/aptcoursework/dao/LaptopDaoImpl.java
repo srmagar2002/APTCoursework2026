@@ -303,7 +303,7 @@ public class LaptopDaoImpl implements LaptopDao {
         /* Fetches All Laptops*/
         ArrayList<Laptop> laptops = new ArrayList<>();
         Connection conn = null;
-        String sql = "SELECT * FROM laptop ORDER BY laptopID";
+        String sql = "SELECT * FROM laptop ORDER BY laptopID";  /* RAND() aggregate function to randomize the output when rendering all laptops*/
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
