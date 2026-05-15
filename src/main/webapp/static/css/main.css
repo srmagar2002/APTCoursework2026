@@ -1715,6 +1715,15 @@ img {
     font-size: 0.8125rem;
 }
 
+
+.user-avatar-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
 .my-review-name {
     font-weight: 500;
     font-size: 0.9375rem;

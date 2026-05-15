@@ -799,6 +799,9 @@
                 updateStars('modalRatingStars', currentRating);
             }
         } else if (document.getElementById("ratingAction").value == 'update') {
+
+            document.getElementById('newrating').value = rating;
+
             if (rating > 0) {
                 modalRating = rating;
                 // console.log(modalRating)

@@ -57,7 +57,7 @@
                 <div class="my-review-card">
                     <div class="my-review-header">
                         <div class="my-review-user">
-                            <div class="my-review-avatar">SM</div>
+                            <img src="${pageContext.request.contextPath}/static/imgUpload/${userRating.profileImage}" alt="" class="user-avatar-img">
                             <span class="my-review-name">${userRating.username}</span>
                         </div>
                         <button class="btn-menu" onclick="alert('More options')">&#8942;</button>
@@ -159,7 +159,7 @@
         <div class="review-card">
             <div class="review-header">
                 <div class="review-user">
-                    <div class="user-avatar">JD</div>
+                  <img src="${pageContext.request.contextPath}/static/imgUpload/${rating.profileImage}" alt="" class="user-avatar-img">
                     <div>
                         <div class="user-name"><c:out value="${rating.username}"/></div>
                         <div class="review-date"><c:out value="${rating.ratingDate}"/></div>

@@ -21,6 +21,11 @@
 
         <%--        <div class="auth-divider">OR CONTINUE WITH EMAIL</div>--%>
 
+
+        <form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data">
+            <c:if test="${not empty error}">
+                <p class="error"><c:out value="${error}"/></p>
+            </c:if>
         <div class="image-upload-section">
             <div class="image-upload-preview" id="imagePreview">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -39,11 +44,6 @@
                     onchange="previewImage(event)"
             >
         </div>
-
-        <form action="${pageContext.request.contextPath}/register" method="post">
-            <c:if test="${not empty error}">
-                <p class="error"><c:out value="${error}"/></p>
-            </c:if>
             <div class="form-group">
                 <label for="username" class="form-label">Username</label>
                 <input

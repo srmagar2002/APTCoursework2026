@@ -209,7 +209,8 @@ public class ProductsServlet extends HttpServlet {
             System.out.println(laptopId);
             Laptop laptop = laptopDao.getLaptopById(Integer.parseInt(request.getParameter("laptopid")));
 
-            System.out.println(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getThumbnailUrl());
+//            System.out.println(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getThumbnailUrl());
+
             ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getImgUrl());
             ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getImg1Url());
             ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getImg2Url());

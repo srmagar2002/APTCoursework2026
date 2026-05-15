@@ -14,6 +14,7 @@ public class User {
     private String email;
     private String passwordHash;
     private Role role;
+    private String profileImg;
     private LocalDateTime created_at;
 
     /**
@@ -48,12 +49,13 @@ public class User {
      * @param passwordHash hashed password for security
      * @param role user's role in the system
      */
-    public User(int user_id, String username, String email, String passwordHash, Role role) {
+    public User(int user_id, String username, String email, String passwordHash,String profileImg, Role role) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
         this.role = role;
+        this.profileImg = profileImg;
         this.created_at = LocalDateTime.now();
     }
 
@@ -95,6 +97,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 
     public LocalDateTime getCreated_at() {

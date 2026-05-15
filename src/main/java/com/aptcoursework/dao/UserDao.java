@@ -27,6 +27,7 @@ import com.aptcoursework.entity.User;
 
 public interface UserDao {
     boolean insertUser(User user);
+    boolean insertImgProfilePath(String path, int userID);
     User findByUsername(String username);
     User findByEmail(String email);
     String usernameByUserID(int userID);

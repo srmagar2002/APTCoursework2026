@@ -73,6 +73,34 @@ public class UserDaoImpl implements UserDao {
 
 
 
+    @Override
+    public boolean insertImgProfilePath(String path, int userID) {
+
+        Connection conn = null;
+        String sql = "UPDATE users set profileImg=? where user_id=?";
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, path);
+            pstmt.setInt(2, userID);
+            int isInserted = pstmt.executeUpdate();
+            if(isInserted > 0){
+                return true;
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in inserting img profile path" + e.getMessage());
+            return false;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return false;
+    }
+
+
+
+
     /**
      * Finds a user in the database by username (case-insensitive).
      *

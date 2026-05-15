@@ -1,7 +1,5 @@
 package com.aptcoursework.utils;
 
-import jakarta.servlet.ServletContextListener;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.Part;
 
 import java.io.File;
@@ -32,6 +30,33 @@ import java.nio.file.StandardCopyOption;
 public class ImageUtil {
 
 
+    public static String userProfilePictureUploader(Part partUser, int userID, String uploadPath) {
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) uploadDir.mkdir();
+
+        String filename = partUser.getSubmittedFileName();
+        String extension = filename.substring(filename.lastIndexOf(".")).toLowerCase();
+        String newFilename = "userImg/"+ userID + extension;
+
+
+        if(partUser != null && partUser.getSize() > 0) {
+
+            File imgFile = new File(uploadDir,newFilename);
+
+            System.out.println("HELLOOOOOOOOOOOOOOOWW");
+
+            try(InputStream input = partUser.getInputStream()){
+                Files.copy(input,imgFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println(imgFile.getAbsolutePath());
+            }
+            catch(Exception ex){
+                System.out.println("Error uploading file" +  ex.getMessage());
+            }
+        }
+        return newFilename;
+
+    }
+
     /**
      * Uploads an image file to the specified server directory.
      *
@@ -45,19 +70,17 @@ public class ImageUtil {
      * <p>If the upload is successful, the absolute file path of the saved image
      * is returned.</p>
      *
-     * @param part        the uploaded file part from the HTTP request
-     * @param filename    the original name of the uploaded file
-     * @param uploadPath  the directory path where the file should be saved
-     * @return the absolute path of the uploaded image if successful;
-     *         otherwise {@code null}
+     * @param part       the uploaded file part from the HTTP request
+     * @param filename   the original name of the uploaded file
+     * @param uploadPath the directory path where the file should be saved
      */
-    public static String imageUploader(Part part, String filename , String uploadPath) {
+    public static void imageUploader(Part part, String filename , String uploadPath) {
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) uploadDir.mkdir();
 
         String extension = filename.substring(filename.lastIndexOf(".")).toLowerCase();
         if (!extension.equals(".jpg") && !extension.equals(".jpeg")) {
-            return null;
+            return;
         }
 
         if(part != null && part.getSize() > 0) {
@@ -67,16 +90,12 @@ public class ImageUtil {
             try(InputStream input = part.getInputStream()){
                 Files.copy(input,imgFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println(imgFile.getAbsolutePath());
-                return imgFile.getAbsolutePath();
             }
             catch(Exception ex){
                 System.out.println("Error uploading file" +  ex.getMessage());
             }
         }
-        return null;
     }
-
-
     /**
      * Deletes an image file from the file system.
      *
@@ -107,8 +126,6 @@ public class ImageUtil {
             } else {
                 System.out.println("File not found: " + filePath);
             }
-
-            return;
 
     }
 }
