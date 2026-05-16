@@ -98,6 +98,17 @@ public class User {
         this.bio = bio;
     }
 
+    public User(int user_id,String username,String email, String firstName, String lastName,
+                String phoNo, String bio) {
+        this.user_id = user_id;
+        this.username = username;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoNo = phoNo;
+        this.bio = bio;
+    }
+
     public int getUser_id() {
         return user_id;
     }

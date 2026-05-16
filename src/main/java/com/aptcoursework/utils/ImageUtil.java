@@ -31,23 +31,29 @@ public class ImageUtil {
 
 
     public static String userProfilePictureUploader(Part partUser, int userID, String uploadPath) {
+
+
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) uploadDir.mkdir();
 
-        String filename = partUser.getSubmittedFileName();
-        String extension = filename.substring(filename.lastIndexOf(".")).toLowerCase();
-        String newFilename = "userImg/"+ userID + extension;
-
+        String newFilename = "";
+        try {
+            String filename = partUser.getSubmittedFileName();
+            String extension = filename.substring(filename.lastIndexOf(".")).toLowerCase();
+            newFilename = "userImg/" + userID + extension;
+        }
+        catch (StringIndexOutOfBoundsException e) {
+            return "userDefaultimg/default0.gif";
+        }
 
         if(partUser != null && partUser.getSize() > 0) {
 
             File imgFile = new File(uploadDir,newFilename);
 
-            System.out.println("HELLOOOOOOOOOOOOOOOWW");
 
             try(InputStream input = partUser.getInputStream()){
                 Files.copy(input,imgFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println(imgFile.getAbsolutePath());
+                System.out.println("User Profile Image Uploaded, Path : " + imgFile.getAbsolutePath());
             }
             catch(Exception ex){
                 System.out.println("Error uploading file" +  ex.getMessage());

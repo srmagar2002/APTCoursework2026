@@ -14,7 +14,7 @@
         <!-- Main Content -->
         <form action="${pageContext.request.contextPath}/products" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="edit"/>
-            <input type="hidden" value="${laptop.laptopID}" name="laptopid">
+            <input type="hidden" name="laptopid" value="${laptop.laptopID}">
 
             <c:if test="${not empty error}">
                 <p class="error"><c:out value="${error}"/></p>

@@ -43,7 +43,10 @@
                 <div class="profile-container">
                     <!-- Profile Information Section -->
                     <div class="profile-info-section">
-                        <div class="profile-info-card">
+                        <form method="post" action="${pageContext.request.contextPath}/dashboard" enctype="multipart/form-data" class="profile-info-card">
+                            <input type="hidden" name="action" value="update">
+                            <input type="hidden" name="userID" value="${user.user_id}">
+
                             <h3>Account Information</h3>
                             <!-- Profile Picture Section -->
                             <div class="profile-picture-section-inline">
@@ -54,12 +57,12 @@
                                              alt="Profile picture">
                                     </div>
                                     <div class="profile-picture-actions">
-                                        <button class="btn btn-primary"
+                                        <button type="button" class="btn btn-primary"
                                                 onclick="document.getElementById('profilePictureInput').click()">
                                             Change Picture
                                         </button>
                                         <input type="file" id="profilePictureInput" accept="image/*"
-                                               style="display: none;" onchange="updateProfilePicture(event)">
+                                               style="display: none;" name="profileImg" onchange="updateProfilePicture(event)">
                                     </div>
                                 </div>
                             </div>
@@ -67,34 +70,34 @@
                             <div class="profile-form">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label>First Name</label>
-                                        <input type="text" value="<c:out value="${user.firstName}" default=""/>" class="profile-input">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" name="firstName" value="<c:out value="${user.firstName}" default=""/>" class="profile-input">
                                     </div>
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input type="text" value="<c:out value="${user.lastName}" default=""/>" class="profile-input">
+                                        <input type="text" name="lastName" value="<c:out value="${user.lastName}" default=""/>" class="profile-input">
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input type="email" value="${user.username}" class="profile-input">
+                                        <input type="text" name="username" value="${user.username}" class="profile-input">
                                     </div>
                                     <div class="form-group">
                                         <label>Email Address</label>
-                                        <input type="email" value="${user.email}" class="profile-input">
+                                        <input type="email" name="email" value="${user.email}" class="profile-input">
                                     </div>
                                     <div class="form-group">
                                         <label>Phone Number</label>
-                                        <input type="tel" value="<c:out value="${user.phoNo}" default=""/>" class="profile-input">
+                                        <input type="tel" name="phoNo" value="<c:out value="${user.phoNo}" default=""/>" class="profile-input">
                                     </div>
                                 </div>
 
                                 <div class="form-row full-width">
                                     <div class="form-group">
                                         <label>Bio</label>
-                                        <textarea class="profile-input" rows="4"
+                                        <textarea name="bio" class="profile-input" rows="4"
                                                   placeholder="Tell us about yourself..."><c:out value="${user.bio}" default=""/></textarea>
                                     </div>
                                 </div>
@@ -102,15 +105,15 @@
 
                                     <div class="form-group">
                                         <label>Role</label>
-                                        <input type="text" value="${user.role}" class="profile-input" disabled>
+                                        <input type="text" name="role" value="${user.role}" class="profile-input" disabled>
                                     </div>
                                 </div>
 
                                 <div class="profile-actions">
-                                    <button class="btn btn-primary">Save Changes</button>
-                                    <button class="btn btn-ghost">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    <button type="reset" class="btn btn-ghost">Cancel</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                         <!-- Account Details Card -->

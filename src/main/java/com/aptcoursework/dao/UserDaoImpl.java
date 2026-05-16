@@ -46,6 +46,39 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    @Override
+    public boolean updateUserProfile(User user) {
+        Connection conn = null;
+        String sql = "UPDATE users SET username = ?, " +
+                "email = ?, firstName=?, lastName=?, phoNo=?, bio=? WHERE user_id = ?";
+
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getEmail());
+            pstmt.setString(3, user.getFirstName());
+            pstmt.setString(4, user.getLastName());
+            pstmt.setString(5, user.getPhoNo());
+            pstmt.setString(6, user.getBio());
+            pstmt.setInt(7,user.getUser_id());
+            int updateCount = pstmt.executeUpdate();
+            if(updateCount > 0){
+                return true;
+            }
+            else{
+                System.out.println("Update Count is zero");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to update user profile " + e.getMessage());
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return false;
+    }
 
     /**
      * Inserts a new user into the database.

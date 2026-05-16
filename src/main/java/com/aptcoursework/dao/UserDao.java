@@ -29,6 +29,7 @@ import java.time.LocalDateTime;
 
 public interface UserDao {
     void updateLastLogin(int userID);
+    boolean updateUserProfile(User user);
     boolean insertUser(User user);
     boolean insertImgProfilePath(String path, int userID);
     User findByUsername(String username);
