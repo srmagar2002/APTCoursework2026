@@ -567,7 +567,12 @@
 
                         <!-- Action Buttons -->
                         <div class="action-buttons">
-                            <button class="btn btn-primary">Add to Cart</button>
+                        <%--          edited by kushal                  --%>
+                            <form action="${pageContext.request.contextPath}/cart" method="post" id="addToCartForm">
+                                <input type="hidden" name="action" value="add"/>
+                                <input type="hidden" name="laptopId" value="${laptop.laptopID}"/>
+                                <button type="submit" class="btn btn-primary" id="addToCartButton" onclick="handleAddToCart()">Add to Cart</button>
+                            </form>
                             <button class="btn btn-secondary">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                      viewBox="0 0 24 24" style="margin-right: 0.5rem;">
@@ -620,6 +625,30 @@
 
 
 <script>
+
+    //For the corfirmation of product Added to cart
+    function handleAddToCart() {
+
+        const btn = document.getElementById('addToCartButton');
+        const form = document.getElementById('addToCartForm');
+
+        // Change button to green "Added" confirmation state
+        btn.innerHTML = '✔✔ Added!';
+        btn.style.backgroundColor = '#22c55e';
+        btn.style.color = '#fff';
+        btn.disabled = true; // prevent double clicking during the 1 second
+
+        // After 1 second, reset button back to normal and submit the form
+        setTimeout(function() {
+            btn.innerHTML = 'Add to Cart';
+            btn.style.backgroundColor = ''; // revert to original CSS color
+            btn.style.color = '';
+            btn.disabled = false;
+            form.submit(); // normal form submission to CartServlet
+        }, 700);
+    }
+
+
     function changeImage(thumbnail, imageSrc, imageAlt) {
         //Image Gallery
         const mainImage = document.getElementById('mainProductImage');

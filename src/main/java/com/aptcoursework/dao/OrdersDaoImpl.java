@@ -26,7 +26,7 @@ public class OrdersDaoImpl implements OrdersDao{
     public boolean placeOrder(int userId) {
 
 //        getting cart Items
-        ArrayList<Cart> cartItems = cartdao.fetchCartItems();
+        ArrayList<Cart> cartItems = cartdao.fetchCartItemsByUserId(userId);
 
 //        getting total amount
         BigDecimal totalAmount = new BigDecimal(0);

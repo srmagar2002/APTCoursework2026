@@ -23,7 +23,11 @@ void main() {
 
         switch (choice){
             case 1 -> {
-                ArrayList<Cart> cartItems = cartdao.fetchCartItems();
+
+                System.out.print("Enter your user ID: ");
+                int user = sc.nextInt();
+
+                ArrayList<Cart> cartItems = cartdao.fetchCartItemsByUserId(user);
 
                 System.out.println("Your Cart Items");
                 System.out.println("=================================");
