@@ -36,9 +36,18 @@ public class daoTester {
 
     public static void main(String[] args) {
         testConnection();
+        String oldImagePath = "userDefaultimg/default0.jpg";
+
+        if("userdefaultimg".equalsIgnoreCase(oldImagePath.substring(0,oldImagePath.indexOf("/"))))
+        {
+            System.out.println("what is this");
+        }
+        else{
+            System.out.println("this is what");
+        }
 
 
-        System.out.println("Insert 1, Get Laptop By ID 2");
+                System.out.println("Insert 1, Get Laptop By ID 2");
         Scanner input = new Scanner(System.in);
 
         switch (input.nextInt()) {
@@ -79,18 +88,18 @@ public class daoTester {
 
     }
 
-    static void gettotalrating(){
+    static void gettotalrating() {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter id : ");
         int id = input.nextInt();
         System.out.print("Enter rate: ");
         int rate = input.nextInt();
-        RatingDaoImpl ratingDao=new RatingDaoImpl();
-        System.out.println(ratingDao.getTotalRatingbyStars(id,rate));
+        RatingDaoImpl ratingDao = new RatingDaoImpl();
+        System.out.println(ratingDao.getTotalRatingbyStars(id, rate));
 
     }
 
-    static void getrating(){
+    static void getrating() {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter Rating: ");
         int rating = input.nextInt();
@@ -98,26 +107,27 @@ public class daoTester {
         RatingDaoImpl ratingDao = new RatingDaoImpl();
         ArrayList<Rating> ratings = ratingDao.getRatingsByLaptop(rating);
         System.out.println(ratings.size());
-        for (Rating r:ratings){
+        for (Rating r : ratings) {
             System.out.println(r.getLaptopID());
             System.out.println(r.getRating());
             System.out.println(r.getUserID());
             System.out.println(r.getRatingDate());
         }
     }
-    static void insertrating(){
+
+    static void insertrating() {
         Scanner input = new Scanner(System.in);
 
         System.out.print("Enter userID : ");
-        int userID  = input.nextInt();
+        int userID = input.nextInt();
         System.out.print("Enter laptopID : ");
-        int laptopID  = input.nextInt();
+        int laptopID = input.nextInt();
         System.out.print("Enter rating : ");
         int rate = input.nextInt();
         System.out.print("Enter review : ");
         String email = input.next();
 
-        Rating rating = new Rating(userID,laptopID,rate,email);
+        Rating rating = new Rating(userID, laptopID, rate, email);
 
 //        Rating rating = new Rating();
 //        rating.setUserID(userID);
@@ -126,10 +136,9 @@ public class daoTester {
 //        rating.setReview(email);
 
         RatingDaoImpl ratingDao = new RatingDaoImpl();
-        if(ratingDao.addRating(rating)){
+        if (ratingDao.addRating(rating)) {
             System.out.println("Rating Added Successfully");
-        }
-        else{
+        } else {
             System.out.println("Rating Added Failed");
         }
 

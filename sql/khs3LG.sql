@@ -21,7 +21,7 @@ CREATE TABLE users
     role          VARCHAR(10)  NOT NULL,
     created_at    TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
     lastLogin     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
-    profileImg    VARCHAR(255) DEFAULT 'userDefaultimg/default0.gif',
+    profileImg    VARCHAR(255) DEFAULT 'userDefaultimg/default0.png',
 
     firstName     VARCHAR(100) ,
     lastName      VARCHAR(100) ,

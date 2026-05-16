@@ -66,8 +66,11 @@ public class DashboardServlet extends HttpServlet {
 
             if (profileImg != null && profileImg.getSize() > 0) {
                 String oldImagePath = userDaoImpl.findByUserID(userID).getProfileImg();
-                ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload")+"/"+oldImagePath);
 
+                if(!"userDefaultimg".equals(oldImagePath.substring(0,oldImagePath.indexOf("/")))) {
+                    ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload") + "/" + oldImagePath);
+                }
+                
                 String uploadPath = getServletContext().getRealPath("/static/imgUpload");
                 String profileImgPath = ImageUtil.userProfilePictureUploader(profileImg, userID, uploadPath);
                 userDaoImpl.insertImgProfilePath(profileImgPath, userID);

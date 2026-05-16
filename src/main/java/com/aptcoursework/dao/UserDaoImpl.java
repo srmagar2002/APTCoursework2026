@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao {
         String sql = "UPDATE users SET username = ?, " +
                 "email = ?, firstName=?, lastName=?, phoNo=?, bio=? WHERE user_id = ?";
 
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, user.getUsername());
@@ -61,20 +61,18 @@ public class UserDaoImpl implements UserDao {
             pstmt.setString(4, user.getLastName());
             pstmt.setString(5, user.getPhoNo());
             pstmt.setString(6, user.getBio());
-            pstmt.setInt(7,user.getUser_id());
+            pstmt.setInt(7, user.getUser_id());
             int updateCount = pstmt.executeUpdate();
-            if(updateCount > 0){
+            if (updateCount > 0) {
                 return true;
-            }
-            else{
+            } else {
                 System.out.println("Update Count is zero");
                 return false;
             }
 
         } catch (SQLException e) {
             System.out.println("Failed to update user profile " + e.getMessage());
-        }
-        finally {
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
         return false;
