@@ -30,20 +30,18 @@ import java.time.LocalDateTime;
 public class UserDaoImpl implements UserDao {
 
     @Override
-    public void updateLastLogin(int userID){
+    public void updateLastLogin(int userID) {
         Connection conn = null;
         String sql = "UPDATE users SET lastLogin = ? WHERE user_id = ?";
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
             pstmt.setInt(2, userID);
             pstmt.executeUpdate();
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Failed to update last login " + e.getMessage());
-        }
-        finally{
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
     }
@@ -62,7 +60,7 @@ public class UserDaoImpl implements UserDao {
      *
      * @param user the {@link User} object containing user details to be inserted
      * @return {@code true} if the user is successfully added;
-     *         {@code false} if an error occurs
+     * {@code false} if an error occurs
      */
     @Override
     public boolean insertUser(User user) {
@@ -89,33 +87,28 @@ public class UserDaoImpl implements UserDao {
     }
 
 
-
     @Override
     public boolean insertImgProfilePath(String path, int userID) {
 
         Connection conn = null;
         String sql = "UPDATE users set profileImg=? where user_id=?";
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, path);
             pstmt.setInt(2, userID);
             int isInserted = pstmt.executeUpdate();
-            if(isInserted > 0){
+            if (isInserted > 0) {
                 return true;
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error in inserting img profile path" + e.getMessage());
             return false;
-        }
-        finally {
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
         return false;
     }
-
-
 
 
     /**
@@ -261,7 +254,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByUserID(int userID){
+    public User findByUserID(int userID) {
         Connection conn = null;
         String sql = "SELECT * FROM users WHERE user_id=?";
         try {
@@ -277,31 +270,19 @@ public class UserDaoImpl implements UserDao {
                     role = Role.CUSTOMER;
                 }
                 return new User(
-                rs.getInt("user_id"),
-                rs.getString("username"),
-                rs.getString("email"),
-                rs.getString("password_hash"),
-                rs.getString("profileImg"),
-                role,
-                rs.getTimestamp("lastLogin").toLocalDateTime(),
-                rs.getTimestamp("created_at").toLocalDateTime()
+                        rs.getInt("user_id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("password_hash"),
+                        rs.getString("profileImg"),
+                        role,
+                        rs.getTimestamp("lastLogin").toLocalDateTime(),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("phoNo"),
+                        rs.getString("bio")
                 );
-//                User user = new User();
-//                user.setUser_id(rs.getInt("user_id"));
-//                user.setUsername(rs.getString("username"));
-//                user.setEmail(rs.getString("email"));
-//                user.setPasswordHash(rs.getString("password_hash"));
-//                Role role;
-//                try {
-//                    role = Role.valueOf(rs.getString("role").toUpperCase());
-//                } catch (IllegalArgumentException | NullPointerException e) {
-//                    role = Role.CUSTOMER;
-//                }
-//                user.setRole(role);
-//                user.setProfileImg(rs.getString("profileImg"));
-//                user.setLastLogin(rs.getTimestamp("lastLogin").toLocalDateTime());
-//                user.setCreated_at((rs.getTimestamp("created_at").toLocalDateTime());
-
             }
         } catch (SQLException e) {
             System.out.println("Error in getting user" + e.getMessage());

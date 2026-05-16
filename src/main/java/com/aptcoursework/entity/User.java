@@ -19,6 +19,11 @@ public class User {
     private LocalDateTime lastLogin;
     private LocalDateTime created_at;
 
+    private String firstName;
+    private String lastName;
+    private String phoNo;
+    private String bio;
+
     /**
      * Default constructor that creates an empty User instance.
      */
@@ -66,7 +71,18 @@ public class User {
         this.lastLogin = lastLogin;
     }
 
-    public User(int user_id, String username, String email, String passwordHash, String profileImg, Role role, LocalDateTime lastLogin, LocalDateTime created_at) {
+    public User(int user_id,
+                String username,
+                String email,
+                String passwordHash,
+                String profileImg,
+                Role role,
+                LocalDateTime lastLogin,
+                LocalDateTime created_at,
+                String firstName,
+                String lastName,
+                String phoNo,
+                String bio) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
@@ -75,6 +91,11 @@ public class User {
         this.profileImg = profileImg;
         this.lastLogin = lastLogin;
         this.created_at = created_at;
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoNo = phoNo;
+        this.bio = bio;
     }
 
     public int getUser_id() {
@@ -134,6 +155,7 @@ public class User {
     }
 
     public LocalDateTime getCreated_at() {
+
         return created_at;
     }
 
@@ -141,8 +163,33 @@ public class User {
         this.created_at = created_at;
     }
 
-    public void getCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
+
+    public String getFirstName() {
+        return firstName;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+    public  void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public String getPhoNo() {
+        return phoNo;
+    }
+    public void setPhoNo(String phoNo) {
+        this.phoNo = phoNo;
+    }
+    public String getBio() {
+        return bio;
+    }
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
 
 }

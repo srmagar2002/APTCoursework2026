@@ -68,11 +68,11 @@
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label>First Name</label>
-                                        <input type="text" value="Admin" class="profile-input">
+                                        <input type="text" value="<c:out value="${user.firstName}" default=""/>" class="profile-input">
                                     </div>
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input type="text" value="User" class="profile-input">
+                                        <input type="text" value="<c:out value="${user.lastName}" default=""/>" class="profile-input">
                                     </div>
                                 </div>
 
@@ -83,11 +83,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Email Address</label>
-                                        <input type="email" value="admin@laptopstore.com" class="profile-input">
+                                        <input type="email" value="${user.email}" class="profile-input">
                                     </div>
                                     <div class="form-group">
                                         <label>Phone Number</label>
-                                        <input type="tel" value="+1 (555) 123-4567" class="profile-input">
+                                        <input type="tel" value="<c:out value="${user.phoNo}" default=""/>" class="profile-input">
                                     </div>
                                 </div>
 
@@ -95,7 +95,7 @@
                                     <div class="form-group">
                                         <label>Bio</label>
                                         <textarea class="profile-input" rows="4"
-                                                  placeholder="Tell us about yourself...">Experienced admin managing laptop store operations and customer relations.</textarea>
+                                                  placeholder="Tell us about yourself..."><c:out value="${user.bio}" default=""/></textarea>
                                     </div>
                                 </div>
 

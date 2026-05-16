@@ -22,10 +22,12 @@ CREATE TABLE users
     created_at    TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
     lastLogin     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
     profileImg    VARCHAR(255) DEFAULT 'userImg/default0.gif',
-    firstName     VARCHAR(100) DEFAULT 'NA',
-    lastName      VARCHAR(100) DEFAULT 'NA',
+
+    firstName     VARCHAR(100) ,
+    lastName      VARCHAR(100) ,
     phoNo         VARCHAR(20),
     bio            TEXT,
+
     CONSTRAINT role_const CHECK (role IN ('ADMIN', 'CUSTOMER'))
 );
 
