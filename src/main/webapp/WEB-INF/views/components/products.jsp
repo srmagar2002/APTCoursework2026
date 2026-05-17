@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<div class="products-grid" id="products-grid">
+
     <c:if test="${sessionScope.user.role=='ADMIN'}">
 
         <article class="product-card add-product-card">
@@ -61,66 +61,6 @@
             </a>
         </article>
     </c:forEach>
-
-</div>
-
-<div class="pagination-section">
-    <c:choose>
-        <c:when test="${hasFilters}">
-            <button type="button"
-                    class="pagination-btn pagination-prev"
-                    <c:if test="${currentPage==1}">disabled</c:if>
-                    onclick="previousPage()" id="prevBtn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-                Previous
-            </button>
-        </c:when>
-        <c:otherwise>
-            <a href="${pageContext.request.contextPath}/products?page=${currentPage-1}"
-               class="pagination-btn pagination-prev  <c:if test="${currentPage==1}">disabled</c:if>"
-               onclick="previousPage()" id="prevBtn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-                Previous
-            </a></c:otherwise>
-    </c:choose>
-
-    <div class="pagination-info">
-        <span class="current-page" id="currentPage">${currentPage}</span>
-        <input type="hidden" name="page" id="currentPageInput" value="${currentPage}" form="filtersForm">
-        <span class="pagination-divider">of</span>
-        <span class="total-pages" id="totalPages">${totalPages}</span>
-    </div>
-
-    <c:choose>
-        <c:when test="${hasFilters}">
-            <button type="button"
-                    class="pagination-btn pagination-next"
-                    <c:if test="${currentPage>=totalPages}">disabled</c:if>
-                    onclick="nextPage()" id="nextBtn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-                Next
-            </button>
-        </c:when>
-        <c:otherwise>
-            <a href="${pageContext.request.contextPath}/products?page=${currentPage+1}"
-               class="pagination-btn pagination-next <c:if test="${currentPage>=totalPages}">disabled</c:if>"
-               onclick="nextPage()" id="nextBtn">
-                Next
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-            </a>
-        </c:otherwise>
-    </c:choose>
-</div>
-
-
 <script>
     // Delete Modal Functions
     function openDeleteModal(productName, productId) {
@@ -142,38 +82,6 @@
             closeDeleteModal();
         }
     }
-
-    let currentPage = <c:out value="${currentPage}" default="1"/> ;
-    const totalPages = ${totalPages};
-
-    function updatePaginationState() {
-        document.getElementById('currentPage').textContent = currentPage;
-        document.getElementById('currentPageInput').value = currentPage;
-        if(${hasFilters}){
-            document.getElementById('filtersForm').submit;
-        }
-
-    }
-
-    function previousPage() {
-        if (currentPage > 1) {
-            currentPage--;
-            updatePaginationState();
-            console.log(`[v0] Navigated to page ${currentPage}`);
-        }
-    }
-
-    function nextPage() {
-        if (currentPage < totalPages) {
-            currentPage++;
-            updatePaginationState();
-            console.log(`[v0] Navigated to page ${currentPage}`);
-        }
-    }
-
-    // Initialize pagination on page load
-    window.addEventListener('DOMContentLoaded', updatePaginationState);
-
 </script>
 
 <%--<ul>--%>
