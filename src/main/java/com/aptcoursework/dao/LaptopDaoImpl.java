@@ -312,6 +312,12 @@ public class LaptopDaoImpl implements LaptopDao {
                 Laptop laptop = laptopAssginer(rs);
                 laptops.add(laptop);
             }
+
+            for(Laptop laptop: laptops){
+                System.out.println(
+                        "Hello"+laptop.getTitle());
+            }
+
             System.out.println("Laptops fetched successfully");
             return laptops;
         } catch (SQLException e) {
