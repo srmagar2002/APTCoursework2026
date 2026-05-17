@@ -49,6 +49,19 @@ public class ProductsServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         if (action == null) {
+            int recordsPerPage = 12;
+            int currentPage = 1;
+
+            if (request.getParameter("page") != null) {
+                currentPage = Integer.parseInt(request.getParameter("page"));
+            }
+            int start = (currentPage - 1) * recordsPerPage;
+
+            int totalRecords = laptopDao.totalLaptops();
+            int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
+            System.out.println("Total Records: " + totalPages);
+
+
             String brand = request.getParameter("brand");
             String category = request.getParameter("category");
             String price = request.getParameter("pricerange");
@@ -65,8 +78,11 @@ public class ProductsServlet extends HttpServlet {
                             !query.isEmpty();
 
             if (!hasFilters) {
-                ArrayList<Laptop> products = laptopDao.fetchAllLaptops();
+                ArrayList<Laptop> products = laptopDao.fetchAllLaptops(start, recordsPerPage);
                 request.setAttribute("products", products);
+                request.setAttribute("currentPage", currentPage);
+                request.setAttribute("totalPages", totalPages);
+
                 String isAjax = request.getHeader("X-Requested-With");
                 if ("XMLHttpRequest".equals(isAjax)) {
                     request.getRequestDispatcher("/WEB-INF/views/components/products.jsp")

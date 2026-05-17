@@ -204,7 +204,7 @@ public class daoTester {
 
     static void fetchallLaptop() {
         LaptopDao laptopDao = new LaptopDaoImpl();
-        ArrayList<Laptop> laptops = laptopDao.fetchAllLaptops();
+        ArrayList<Laptop> laptops = laptopDao.fetchAllLaptops(1,10);
 
         for (Laptop laptop : laptops) {
             presentLaptop(laptop);

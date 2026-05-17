@@ -299,14 +299,16 @@ public class LaptopDaoImpl implements LaptopDao {
      *           <code>finally</code> block for proper resource management.
      */
     @Override
-    public ArrayList<Laptop> fetchAllLaptops() {
+    public ArrayList<Laptop> fetchAllLaptops(int start, int limit) {
         /* Fetches All Laptops*/
         ArrayList<Laptop> laptops = new ArrayList<>();
         Connection conn = null;
-        String sql = "SELECT * FROM laptop ORDER BY laptopID";  /* RAND() aggregate function to randomize the output when rendering all laptops*/
+        String sql = "SELECT * FROM laptop ORDER BY laptopID LIMIT ?,?";  /* RAND() aggregate function to randomize the output when rendering all laptops*/
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, start);
+            stmt.setInt(2, limit);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Laptop laptop = laptopAssginer(rs);
@@ -318,6 +320,30 @@ public class LaptopDaoImpl implements LaptopDao {
             System.out.println("Error Getting Laptop" + e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public int totalLaptops(){
+
+        Connection conn = null;
+        String sql = "SELECT COUNT(*) FROM laptop";
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error Getting Laptop Count " + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+
+        return 0;
     }
 
     /**
