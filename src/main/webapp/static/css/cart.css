@@ -1,0 +1,428 @@
+
+
+/*
+   cart.css — Cart page styles
+  */
+
+/* ── Cart icon in navbar ── */
+.cart-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    margin-top: 6px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ef4444;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    line-height: 1;
+}
+
+/* ── Back link ── */
+.cart-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    transition: color 0.2s;
+}
+
+.cart-back:hover {
+    color: var(--foreground);
+}
+
+/* ── Page title ── */
+.cart-page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.75rem;
+}
+
+/* ── Success flash message ── */
+.cart-success {
+    background-color: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/*
+   Empty Cart State
+  */
+.cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 5rem 2rem;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.cart-empty p {
+    font-size: 1.1rem;
+}
+
+/*
+   Two-column layout: items | summary
+*/
+.cart-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/*
+   LEFT — Cart Items Section
+ */
+.cart-items-section {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+ /*Header row: cart icon + "My cart" */
+.cart-items-header {
+    display: flex;
+    align-items: end;
+    gap: 0.6rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+
+
+/* ── Individual Cart Item ── */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.2s;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item:hover {
+    background-color: var(--card-hover);
+}
+
+/* ── Checkbox ── */
+.cart-checkbox-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Hide the native checkbox */
+.cart-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Custom styled checkbox */
+.cart-checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--primary);
+    background-color: var(--input-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+/* Checked state — orange fill with checkmark */
+.cart-checkbox:checked + .cart-checkbox-custom {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.cart-checkbox:checked + .cart-checkbox-custom::after {
+    content: '';
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translateY(-1px);
+    display: block;
+}
+
+/* ── Item Image ── */
+.cart-item-image {
+    width: 100px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #262626 100%);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ── Item Info (name, specs, quantity controls) ── */
+.cart-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+}
+
+.cart-item-name {
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cart-item-specs {
+    font-size: 0.8125rem;
+    color: var(--muted);
+}
+
+/* Quantity row */
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* +/- buttons */
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    line-height: 1;
+}
+
+.qty-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.qty-value {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9375rem;
+}
+
+/* ── Right side: price + delete ── */
+.cart-item-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.cart-item-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.cart-delete-btn {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.cart-delete-btn:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* RIGHT — Order Summary*/
+
+.cart-summary {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: sticky;
+    top: 90px; /* clears the sticky header */
+}
+
+.summary-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+}
+
+.summary-value-cart {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.summary-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.summary-label {
+    color: var(--muted);
+}
+
+
+.summary-divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 0.25rem 0;
+}
+
+/* Total row */
+.summary-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
+    margin-top: 0.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.summary-total-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.summary-total-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Place order button */
+.btn-place-order {
+    display: block;
+    margin:0 auto;
+    width: 80%;
+    padding: 0.875rem;
+    background-color: #f5c518; /* yellow — matches your screenshot */
+    color: #0a0a0a;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    letter-spacing: 0.01em;
+}
+
+.btn-place-order:hover {
+    background-color: #e6b800;
+}
+
+.btn-place-order:active {
+    transform: scale(0.98);
+}
+
+/*
+   Responsive — stack on smaller screens
+ */
+@media (max-width: 900px) {
+    .cart-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-summary {
+        position: static;
+    }
+}
+
+@media (max-width: 560px) {
+    .cart-item {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .cart-item-right {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .cart-item-image {
+        width: 80px;
+        height: 65px;
+    }
+}
