@@ -48,7 +48,13 @@ public class LoginServlet extends HttpServlet {
 //        this shows the cart items in cartIcon right after login
         cartDao cartdao = new cartDaoImpl();
         ArrayList<Cart> items = cartdao.fetchCartItemsByUserId(user.getUser_id());
-        int count = (items != null) ? items.size() : 0;
+        // CORRECT version sum quantities
+        int count = 0;
+        if (items != null) {
+            for (Cart item : items) {
+                count += item.getQuantity();
+            }
+        }
         SessionUtil.setAttribute(request, "cartCount", count);
 
         System.out.println("Login Successful");

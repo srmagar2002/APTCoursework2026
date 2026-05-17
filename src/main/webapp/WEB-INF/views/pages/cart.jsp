@@ -208,6 +208,40 @@
 
     // it says when the html is fully loaded, then immediately cll this function
     document.addEventListener('DOMContentLoaded', updateSummary);
+
+
+    function placeOrder() {
+        const items = getCartItems();
+
+        // Get only the checked items
+        const checkedItems = items.filter(item =>
+            item.querySelector('.cart-checkbox').checked
+        );
+
+        // If no items are checked, alert and stop
+        if (checkedItems.length === 0) {
+            alert('Please select at least one item to place an order.');
+            return;
+        }
+
+        // Build a hidden form dynamically and submit to OrderServlet
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '${pageContext.request.contextPath}/orders';
+
+        // Add each checked laptopId as a hidden input
+        checkedItems.forEach(item => {
+            const input = document.createElement('input');
+            input.type  = 'hidden';
+            input.name  = 'laptopIds';
+            input.value = item.dataset.laptopId; // reads data-laptop-id from the article tag
+            form.appendChild(input);
+        });
+
+        // Attach form to body and submit — goes to OrderServlet.doPost()
+        document.body.appendChild(form);
+        form.submit();
+    }
 </script>
 </body>
 

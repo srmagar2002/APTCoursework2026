@@ -110,7 +110,7 @@ CREATE TABLE orders (
     userId INT,
     totalAmount DECIMAL(10, 2) NOT NULL,
     status VARCHAR(20),
-    estimatedDelivery DATE,
+    estimatedDelivery TIMESTAMP,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_user_orders FOREIGN KEY (userId) REFERENCES users(user_id)
@@ -121,6 +121,7 @@ CREATE TABLE order_items (
      orderId INT,
      laptopId INT,
      quantity INT,
+     price    DECIMAL(10, 2) NOT NULL,
 
      CONSTRAINT fk_order_items FOREIGN KEY (orderId) REFERENCES orders(orderId),
      CONSTRAINT fk_laptop_items FOREIGN KEY (laptopId) REFERENCES laptop(laptopID)

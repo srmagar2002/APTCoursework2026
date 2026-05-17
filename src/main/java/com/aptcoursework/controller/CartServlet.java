@@ -23,7 +23,14 @@ public class CartServlet extends HttpServlet {
 
     private void updateCartCount(HttpServletRequest request, int userId) {
         ArrayList<Cart> items = cartdao.fetchCartItemsByUserId(userId);
-        int count = (items != null) ? items.size() : 0;
+
+        // Sum of quantities across all items
+        int count = 0;
+        if (items != null) {
+            for (Cart item : items) {
+                count += item.getQuantity(); //  adding quantity,
+            }
+        }
         SessionUtil.setAttribute(request, "cartCount", count);
     }
 

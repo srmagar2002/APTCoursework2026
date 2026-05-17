@@ -1,7 +1,9 @@
 package com.aptcoursework.entity;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Orders {
@@ -10,12 +12,12 @@ public class Orders {
     private int userId;
     private double totalAmount;
     private String status;
-    private Date estimatedDelivery;
+    private Timestamp estimatedDelivery;
     private Timestamp createdAt;
     private ArrayList<OrderItems> orderItems;
 
 
-    public Orders(int userId, double totalAmount, String status, Date estimatedDelivery) {
+    public Orders(int userId, double totalAmount, String status, Timestamp estimatedDelivery) {
         this.userId = userId;
         this.totalAmount = totalAmount;
         this.status = status;
@@ -24,6 +26,14 @@ public class Orders {
 
     public int getOrderId() {
         return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
     public ArrayList<OrderItems> getItems(){
@@ -46,7 +56,7 @@ public class Orders {
         return status;
     }
 
-    public Date getEstimatedDelivery() {
+    public Timestamp getEstimatedDelivery() {
         return estimatedDelivery;
     }
 
