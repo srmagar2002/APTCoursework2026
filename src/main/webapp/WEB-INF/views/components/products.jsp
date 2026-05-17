@@ -65,25 +65,28 @@
 </div>
 
 <div class="pagination-section">
-    <button class="pagination-btn pagination-prev" id="prevBtn">
+    <a href="${pageContext.request.contextPath}/products?page=${currentPage-1}" class="pagination-btn pagination-prev  <c:if test="${currentPage==1}">disabled</c:if>"
+       onclick="previousPage()" id="prevBtn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
         Previous
-    </button>
+    </a>
     <div class="pagination-info">
-        <span class="current-page">${currentPage}</span>
-        <input type="hidden" name="page" value="${currentPage}" form="filtersForm" onchange="this.form.submit()">
+        <span class="current-page" id="currentPage">${currentPage}</span>
+        <input type="hidden" name="page" id="currentPageInput" value="${currentPage}">
         <span class="pagination-divider">of</span>
         <span class="total-pages" id="totalPages">${totalPages}</span>
     </div>
-    <button class="pagination-btn pagination-next" onclick="nextPage()" id="nextBtn">
+    <a href="${pageContext.request.contextPath}/products?page=${currentPage+1}" class="pagination-btn pagination-next <c:if test="${currentPage>=totalPages}">disabled</c:if>"
+       onclick="nextPage()" id="nextBtn">
         Next
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
-    </button>
+    </a>
 </div>
+
 
 <script>
     // Delete Modal Functions

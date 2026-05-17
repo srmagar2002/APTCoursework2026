@@ -2177,14 +2177,14 @@ img {
     transition: all 0.2s;
 }
 
-.pagination-btn:hover:not(:disabled) {
+.pagination-btn:hover:not(.disabled) {
     background-color: var(--primary);
     border-color: var(--primary);
     color: #fff;
     transform: translateY(-2px);
 }
 
-.pagination-btn:disabled {
+.pagination-btn.disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
