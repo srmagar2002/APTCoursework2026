@@ -25,6 +25,8 @@ public interface LaptopDao {
     Laptop getLaptopById(int id);
     boolean updateLaptop(Laptop laptop);
     Laptop getLaptopByUUID(String laptopUUID);
-    ArrayList<Laptop> fetchAllLaptops();
-    ArrayList<Laptop> getLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition);
+    ArrayList<Laptop> fetchAllLaptops(int start, int limit);
+    int totalLaptops();
+    ArrayList<Laptop> getLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition,int start,int limit);
+    int countLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition);
 }

@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
         SessionUtil.setAttribute(request, "cartCount", count);
 
         System.out.println("Login Successful");
-
+        userDao.updateLastLogin(user.getUser_id());
         response.sendRedirect(request.getContextPath() + "/products");
     }
 }

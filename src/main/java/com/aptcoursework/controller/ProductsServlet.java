@@ -49,6 +49,9 @@ public class ProductsServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         if (action == null) {
+            int recordsPerPage = 12;
+            int currentPage = 1;
+
             String brand = request.getParameter("brand");
             String category = request.getParameter("category");
             String price = request.getParameter("pricerange");
@@ -64,10 +67,21 @@ public class ProductsServlet extends HttpServlet {
                             (price != null && !price.isBlank()) ||
                             !query.isEmpty();
 
+            request.setAttribute("hasFilters", hasFilters);
+
             if (!hasFilters) {
-                ArrayList<Laptop> products = laptopDao.fetchAllLaptops();
-//                System.out.println(products);
+                if (request.getParameter("page") != null) {
+                    currentPage = Integer.parseInt(request.getParameter("page"));
+                }
+                int start = (currentPage - 1) * recordsPerPage;
+                int totalRecords = laptopDao.totalLaptops();
+                int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
+
+                ArrayList<Laptop> products = laptopDao.fetchAllLaptops(start, recordsPerPage);
                 request.setAttribute("products", products);
+                request.setAttribute("currentPage", currentPage);
+                request.setAttribute("totalPages", totalPages);
+
                 String isAjax = request.getHeader("X-Requested-With");
                 if ("XMLHttpRequest".equals(isAjax)) {
                     request.getRequestDispatcher("/WEB-INF/views/components/products.jsp")
@@ -77,19 +91,35 @@ public class ProductsServlet extends HttpServlet {
                             .forward(request, response);
                 }
                 return;
-            }
-
-            ArrayList<Laptop> laptops = laptopDao.getLaptopsFilterSearch(query, brand, category, price);
-            request.setAttribute("products", laptops);
-
-            String isAjax = request.getHeader("X-Requested-With");
-
-            if ("XMLHttpRequest".equals(isAjax)) {
-                request.getRequestDispatcher("/WEB-INF/views/components/products.jsp")
-                        .forward(request, response);
             } else {
-                request.getRequestDispatcher("/WEB-INF/views/pages/productPage.jsp")
-                        .forward(request, response);
+
+                int totalRecordsFilter = laptopDao.countLaptopsFilterSearch(query, brand, category, price);
+                int totalFilterPages = (int) Math.ceil(totalRecordsFilter * 1.0 / recordsPerPage);
+                if (request.getParameter("page") != null) {
+                    currentPage = Integer.parseInt(request.getParameter("page"));
+                }
+                if(currentPage > totalFilterPages) {
+                    currentPage = 1;
+                }
+
+                int start = (currentPage - 1) * recordsPerPage;
+
+                System.out.println( "Total Pages after Filter: " + totalFilterPages);
+
+                ArrayList<Laptop> laptops = laptopDao.getLaptopsFilterSearch(query, brand, category, price, start, recordsPerPage);
+                request.setAttribute("currentPage", currentPage);
+                request.setAttribute("totalPages", totalFilterPages);
+                request.setAttribute("products", laptops);
+
+                String isAjax = request.getHeader("X-Requested-With");
+
+                if ("XMLHttpRequest".equals(isAjax)) {
+                    request.getRequestDispatcher("/WEB-INF/views/components/products.jsp")
+                            .forward(request, response);
+                } else {
+                    request.getRequestDispatcher("/WEB-INF/views/pages/productPage.jsp")
+                            .forward(request, response);
+                }
             }
         }
         if ("add".equals(action)) {
@@ -203,14 +233,13 @@ public class ProductsServlet extends HttpServlet {
             ImageUtil.imageUploader(img2, newlaptop.getImg2Url(), uploadPath);
 
             response.sendRedirect(request.getContextPath() + "/products");
-        }
-
-        else if ("delete".equals(action)) {
+        } else if ("delete".equals(action)) {
             int laptopId = Integer.parseInt(request.getParameter("laptopid"));
             System.out.println(laptopId);
             Laptop laptop = laptopDao.getLaptopById(Integer.parseInt(request.getParameter("laptopid")));
 
-            System.out.println(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getThumbnailUrl());
+//            System.out.println(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getThumbnailUrl());
+
             ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getImgUrl());
             ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getImg1Url());
             ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload") + "/" + laptop.getImg2Url());

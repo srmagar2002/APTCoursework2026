@@ -15,6 +15,7 @@ public class Rating {
     String review;
     Timestamp ratingDate;
     String username;
+    String profileImage;
 
     /**
      * Default constructor that creates an empty Rating instance.
@@ -50,7 +51,7 @@ public class Rating {
      * @param ratingDate timestamp of when the rating was submitted
      * @param username name of the user who submitted the rating
      */
-    public Rating(int ratingID, int userID, int laptopID, int rating, String review, Timestamp ratingDate, String username) {
+    public Rating(int ratingID, int userID, int laptopID, int rating, String review, Timestamp ratingDate, String username, String profileImage) {
         this.ratingID = ratingID;
         this.userID = userID;
         this.laptopID = laptopID;
@@ -58,6 +59,7 @@ public class Rating {
         this.review = review;
         this.ratingDate = ratingDate;
         this.username = username;
+        this.profileImage = profileImage;
     }
 
     /**
@@ -133,6 +135,13 @@ public class Rating {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }
 

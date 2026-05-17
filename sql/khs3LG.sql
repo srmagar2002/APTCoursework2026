@@ -25,8 +25,16 @@ CREATE TABLE users
     email         VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     role          VARCHAR(10)  NOT NULL,
-    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT role_const CHECK (role IN ('ADMIN','CUSTOMER'))
+    created_at    TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    lastLogin     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    profileImg    VARCHAR(255) DEFAULT 'userDefaultimg/default0.png',
+
+    firstName     VARCHAR(100) ,
+    lastName      VARCHAR(100) ,
+    phoNo         VARCHAR(20),
+    bio            TEXT,
+
+    CONSTRAINT role_const CHECK (role IN ('ADMIN', 'CUSTOMER'))
 );
 
 CREATE TABLE laptop
@@ -128,15 +136,15 @@ CREATE TABLE order_items (
 
 CREATE TABLE rating
 (
-    ratingID INT AUTO_INCREMENT PRIMARY KEY,
-    userID INT NOT NULL ,
-    laptopID INT NOT NULL ,
-    rating INT DEFAULT NULL,
-    review TEXT,
+    ratingID   INT AUTO_INCREMENT PRIMARY KEY,
+    userID     INT NOT NULL,
+    laptopID   INT NOT NULL,
+    rating     INT       DEFAULT NULL,
+    review     TEXT,
     ratingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users(user_id) ON DELETE CASCADE,
-    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID) ON DELETE CASCADE,
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users (user_id) ON DELETE CASCADE,
+    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop (laptopID) ON DELETE CASCADE,
     CONSTRAINT ratingCheck CHECK (rating BETWEEN 1 AND 5 ),
     CONSTRAINT unique_user_laptop UNIQUE (userID, laptopID)
 );

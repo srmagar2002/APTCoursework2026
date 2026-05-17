@@ -10,6 +10,8 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/dashboard.css">
 </head>
 <body>
 
@@ -23,8 +25,6 @@
         <jsp:include page="../components/userDashboard.jsp"/>
     </c:when>
 </c:choose>
-
-<jsp:include page="../components/footer.jsp"/>
 
 
 </body>

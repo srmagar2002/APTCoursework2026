@@ -177,7 +177,7 @@ Verify build succeeds with `BUILD SUCCESS` message.
    - Tomcat server: Download or select existing
    - Deployment directory: Select your project
    - Context path: `/` (root context)
-   - Server port: Make sure to select an unused port like 9090,etc.
+   - Server port: Default 8080 or Make sure to select an unused port like 9090,etc.
   
 
 3. **Run the Application:**
@@ -186,7 +186,7 @@ Verify build succeeds with `BUILD SUCCESS` message.
    - Wait for deployment to complete
 
 4. **Access Application:**
-   - Open browser and go to: `http://localhost:8080`
+   - Open browser and go to: `http://localhost:8080` 
    - Application should load successfully
 
 #### Redeploy Without Resetting:

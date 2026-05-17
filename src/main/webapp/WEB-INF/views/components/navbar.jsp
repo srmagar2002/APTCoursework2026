@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
+<header class="header">
     <nav class="nav">
         <a href="#" class="logo">
             <div class="logo-icon">
@@ -63,7 +64,7 @@
                 </c:when>
 
                 <c:otherwise>
-                    <p class="btn btn-ghost">${sessionScope.user.role}</p>
+                    <a href="${pageContext.request.contextPath}/dashboard?userID=${sessionScope.user.user_id}" class="btn btn-ghost">${sessionScope.user.username}</a>
 
                     <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary"
                        onclick="return confirm('Are you sure you want to logout?');">
@@ -73,7 +74,7 @@
             </c:choose>
         </div>
     </nav>
-
+</header>
 
 <script>
     function toggleTheme() {

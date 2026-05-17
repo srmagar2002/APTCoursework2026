@@ -50,13 +50,14 @@ public class RatingReviewServlet extends HttpServlet {
                System.out.println(username + " has not rated");
            }
        }
+
         ArrayList<Rating> ratings = ratingDao.getRatingsByLaptop(laptopID);
         request.setAttribute("ratings", ratings);
 
         double avgRating = ratingDao.getAvgRatingbyLaptop(laptopID);
         DecimalFormat df = new DecimalFormat("#.#");
         request.setAttribute("avgRating", df.format(avgRating));
-
+        request.setAttribute("avgRatingRounded", (int) avgRating);
 
         int totalRating = ratings.size();
         request.setAttribute("totalRating", totalRating);
