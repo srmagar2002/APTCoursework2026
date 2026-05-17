@@ -15,7 +15,6 @@
 
 
 <main class="page-container">
-
     <!-- Page Header -->
     <div class="page-header" id="products">
         <h2 class="page-title">All Laptops</h2>
