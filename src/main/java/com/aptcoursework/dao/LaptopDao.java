@@ -1,6 +1,7 @@
 package com.aptcoursework.dao;
 
 import com.aptcoursework.entity.Laptop;
+import com.aptcoursework.wrappers.FilterSearchResultWrapper;
 
 import java.util.ArrayList;
 
@@ -27,5 +28,5 @@ public interface LaptopDao {
     Laptop getLaptopByUUID(String laptopUUID);
     ArrayList<Laptop> fetchAllLaptops(int start, int limit);
     int totalLaptops();
-    ArrayList<Laptop> getLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition);
+    FilterSearchResultWrapper getLaptopsFilterSearch(String searchWord, String brand, String category, String priceCondition, int start, int limit);
 }

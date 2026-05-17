@@ -3,6 +3,8 @@ package com.aptcoursework.dao;
 
 import com.aptcoursework.entity.Laptop;
 import com.aptcoursework.utils.DatabaseConnection;
+import com.aptcoursework.wrappers.FilterSearchResultWrapper;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -383,31 +385,38 @@ public class LaptopDaoImpl implements LaptopDao {
      *           block to ensure proper resource management and prevent leaks.
      */
     @Override
-    public ArrayList<Laptop> getLaptopsFilterSearch(String searchWord, String brand, String category, String priceCondition) {
+    public FilterSearchResultWrapper getLaptopsFilterSearch(String searchWord, String brand, String category, String priceCondition, int start, int limit) {
         ArrayList<Laptop> laptops = new ArrayList<>();
+        int recordCount = 0;
         Connection conn = null;
         String sql = "";
+        String sqlCount = "";
 
         switch (priceCondition) {
             case "1":
                 sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sqlCount =  "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "2":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sqlCount = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "3":
                 sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sqlCount = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "4":
                 sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sqlCount = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "5":
                 sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sqlCount = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             default:
                 sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sqlCount =  "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
-
         }
         try {
             conn = DatabaseConnection.getConnection();
@@ -424,7 +433,14 @@ public class LaptopDaoImpl implements LaptopDao {
                 Laptop laptop = laptopAssginer(rs);
                 laptops.add(laptop);
             }
-            return laptops;
+
+            PreparedStatement countStmt = conn.prepareStatement(sqlCount);
+            ResultSet rsCount = countStmt.executeQuery();
+            while (rsCount.next()) {
+                recordCount = rsCount.getInt(1);
+            }
+        return
+
         } catch (SQLException e) {
             System.out.println("Error Getting Laptop" + e.getMessage());
         } finally {
@@ -500,5 +516,4 @@ public class LaptopDaoImpl implements LaptopDao {
         }
         return null;
     }
-
 }

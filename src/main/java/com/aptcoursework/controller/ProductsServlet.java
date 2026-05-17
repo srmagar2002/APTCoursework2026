@@ -77,6 +77,8 @@ public class ProductsServlet extends HttpServlet {
                             (price != null && !price.isBlank()) ||
                             !query.isEmpty();
 
+            request.setAttribute("hasFilters", hasFilters);
+
             if (!hasFilters) {
                 ArrayList<Laptop> products = laptopDao.fetchAllLaptops(start, recordsPerPage);
                 request.setAttribute("products", products);
