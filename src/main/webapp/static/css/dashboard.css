@@ -395,14 +395,18 @@
 
 .btn-action {
     padding: 0.5rem 1rem;
-    border: 1px solid var(--border);
-    background-color: transparent;
+    /*border: 1px solid var(--border);*/
+    /*background-color: transparent;*/
+    /*color: var(--foreground);*/
     border-radius: 6px;
-    color: var(--foreground);
     cursor: pointer;
     font-size: 0.8125rem;
     font-weight: 500;
     transition: all 0.2s;
+
+    background-color: #dc2626;
+    color: #fff;
+    border: none;
 }
 
 .btn-action.edit:hover {

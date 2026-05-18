@@ -76,7 +76,7 @@ public class LoginServlet extends HttpServlet {
         System.out.println("Login Successful");
         userDao.updateLastLogin(user.getUser_id());
         if (user.getRole() == Role.ADMIN) {
-        SessionUtil.setAttribute(request, "recordsPerPage", 11);
+            SessionUtil.setAttribute(request, "recordsPerPage", 11);
         }
         response.sendRedirect(request.getContextPath() + "/products");
     }

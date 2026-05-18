@@ -20,7 +20,7 @@
         <aside class="dashboard-sidebar">
             <nav class="sidebar-nav">
                 <ul class="sidebar-menu">
-                    <li class="menu-item active" onclick="switchTab('overview')">
+                    <li class="menu-item <c:if test="${tab=='overview'}">active</c:if>" onclick="switchTab('overview')">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2">
                             <rect x="3" y="3" width="7" height="7"/>
@@ -30,7 +30,7 @@
                         </svg>
                         <span>Overview</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('sales')">
+                    <li class="menu-item <c:if test="${tab=='sales'}">active</c:if>" onclick="switchTab('sales')">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2">
                             <line x1="12" y1="2" x2="12" y2="22"/>
@@ -38,7 +38,7 @@
                         </svg>
                         <span>Sales</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('products')">
+                    <li class="menu-item <c:if test="${tab=='products'}">active</c:if>" onclick="switchTab('products')">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2">
                             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -47,7 +47,7 @@
                         </svg>
                         <span>Products</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('orders')">
+                    <li class="menu-item <c:if test="${tab=='orders'}">active</c:if>" onclick="switchTab('orders')">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2">
                             <circle cx="9" cy="21" r="1"/>
@@ -56,7 +56,7 @@
                         </svg>
                         <span>Orders</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('users')">
+                    <li class="menu-item <c:if test="${tab=='users'}">active</c:if>" onclick="switchTab('users')">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -66,7 +66,7 @@
                         </svg>
                         <span>Users</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('reports')">
+                    <li class="menu-item <c:if test="${tab=='reports'}">active</c:if>" onclick="switchTab('reports')">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2">
                             <line x1="12" y1="2" x2="12" y2="22"/>
@@ -74,7 +74,7 @@
                         </svg>
                         <span>Reports</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('profile')">
+                    <li class="menu-item <c:if test="${tab=='profile'}">active</c:if>" onclick="switchTab('profile')">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -89,7 +89,7 @@
         <!-- Main Content -->
         <section class="dashboard-content">
             <!-- Overview Tab -->
-            <div id="overview-tab" class="dashboard-tab active">
+            <div id="overview-tab" class="dashboard-tab <c:if test="${tab=='overview'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Dashboard Overview</h1>
                     <p class="dashboard-subtitle">Welcome to your admin dashboard</p>
@@ -216,7 +216,7 @@
             </div>
 
             <!-- Sales Tab -->
-            <div id="sales-tab" class="dashboard-tab">
+            <div id="sales-tab" class="dashboard-tab <c:if test="${tab=='sales'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Sales Analytics</h1>
                     <p class="dashboard-subtitle">Track your sales performance</p>
@@ -291,7 +291,7 @@
             </div>
 
             <!-- Products Tab -->
-            <div id="products-tab" class="dashboard-tab">
+            <div id="products-tab" class="dashboard-tab <c:if test="${tab=='products'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Product Management</h1>
                     <p class="dashboard-subtitle">Manage your laptop inventory</p>
@@ -363,7 +363,7 @@
             </div>
 
             <!-- Orders Tab -->
-            <div id="orders-tab" class="dashboard-tab">
+            <div id="orders-tab" class="dashboard-tab <c:if test="${tab=='orders'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Orders Management</h1>
                     <p class="dashboard-subtitle">View and manage customer orders</p>
@@ -425,7 +425,7 @@
             </div>
 
             <!-- Users Tab -->
-            <div id="users-tab" class="dashboard-tab">
+            <div id="users-tab" class="dashboard-tab <c:if test="${tab=='users'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>User Management</h1>
                     <p class="dashboard-subtitle">Manage registered users and customers</p>
@@ -445,7 +445,7 @@
                         </thead>
                         <tbody>
 
-                        <c:forEach var="user" items="${users}" >
+                        <c:forEach var="user" items="${users}">
                             <tr>
                                 <td>${user.user_id}</td>
                                 <td>
@@ -457,10 +457,10 @@
                                 </td>
                                 <td>${user.email}</td>
                                 <td><span class="role customer">${user.role}</span></td>
-                                <td><fmt:formatDate value="${Timestamp.valueof(user.created_at)}"
-                                                    pattern="MMM dd, yyyy hh:mm a"/></td>
+                                <td><fmt:formatDate value="${user.created_at}"
+                                                    pattern="yyyy-mm-dd"/></td>
                                 <td>
-                                    <button class="btn-action view">Delete</button>
+                                    <button class="btn-action view" onclick="openDeleteModal()">Delete</button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -469,8 +469,53 @@
                 </div>
             </div>
 
+            <div id="deleteModal" class="delete-modal">
+                <div class="delete-modal-content delete-modal-danger">
+                    <div class="delete-modal-header">
+                        <h2>Delete User</h2>
+                        <button type="button" class="delete-modal-close" onclick="closeDeleteModal()">&times;</button>
+                    </div>
+                    <div class="delete-modal-body">
+                        <p>Are you sure you want to delete <strong id="deleteUserName"></strong>?</p>
+                        <p class="warning-text">This action cannot be undone.</p>
+                    </div>
+                    <div class="delete-modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                        <form action="${pageContext.request.contextPath}/dashboard" method="post"
+                              style="display: inline;">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" id="deleteUserID" name="userID">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                function openDeleteModal(userName, userID) {
+                    document.body.style.overflow = 'hidden';
+                    document.getElementById('deleteUserName').textContent = userName;
+                    document.getElementById('deleteUserID').value = userID;
+                    document.getElementById('deleteModal').classList.add('show');
+                }
+
+                function closeDeleteModal() {
+                    document.body.style.overflow = 'auto';
+                    document.getElementById('deleteModal').classList.remove('show');
+                }
+
+                // Close modal when clicking outside
+                window.onclick = function (event) {
+                    const modal = document.getElementById('deleteModal');
+                    if (event.target === modal) {
+                        closeDeleteModal();
+                    }
+                }
+            </script>
+
+
             <!-- Reports Tab -->
-            <div id="reports-tab" class="dashboard-tab">
+            <div id="reports-tab" class="dashboard-tab <c:if test="${tab=='reports'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Reports & Analytics</h1>
                     <p class="dashboard-subtitle">Comprehensive business reports</p>
@@ -544,7 +589,7 @@
             </div>
 
             <!-- Profile Tab -->
-            <div id="profile-tab" class="dashboard-tab">
+            <div id="profile-tab" class="dashboard-tab <c:if test="${tab=='profile'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>My Profile</h1>
                     <p class="dashboard-subtitle">Manage your account information and preferences</p>
@@ -705,6 +750,9 @@
 <script>
     function switchTab(tabName) {
         // Hide all tabs
+
+
+
         const tabs = document.querySelectorAll('.dashboard-tab');
         tabs.forEach(tab => tab.classList.remove('active'));
 
@@ -717,9 +765,15 @@
         if (selectedTab) {
             selectedTab.classList.add('active');
         }
+        event.target.closest('.menu-item').classList.add('active');
+
+
+        const url = new URL(window.location.href);
+        url.searchParams.set("tab", tabName);
+        window.location.href = url.toString();
 
         // Add active class to clicked menu item
-        event.target.closest('.menu-item').classList.add('active');
+        document.getElementById("tabInput").value = tabName;
     }
 
     // Profile Picture Update
