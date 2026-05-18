@@ -104,7 +104,13 @@ public class RatingReviewServlet extends HttpServlet {
 
             String userID = request.getParameter("userid");
             rating.setUserID(Integer.parseInt(userID));
+
             String newrating = request.getParameter("newrating");
+
+            if (newrating == null || newrating.isEmpty()) {
+                newrating = "1";
+            }
+
             rating.setRating(Integer.parseInt(newrating));
             String review = request.getParameter("review");
             rating.setReview(review);

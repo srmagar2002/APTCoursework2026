@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <html>
 <head>
     <title>Title</title>
@@ -18,8 +20,9 @@
         <aside class="dashboard-sidebar">
             <nav class="sidebar-nav">
                 <ul class="sidebar-menu">
-                    <li class="menu-item active" onclick="switchTab('overview')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <li class="menu-item <c:if test="${tab=='overview'}">active</c:if>" onclick="switchTab('overview')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <rect x="3" y="3" width="7" height="7"/>
                             <rect x="14" y="3" width="7" height="7"/>
                             <rect x="14" y="14" width="7" height="7"/>
@@ -27,31 +30,35 @@
                         </svg>
                         <span>Overview</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('sales')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <li class="menu-item <c:if test="${tab=='sales'}">active</c:if>" onclick="switchTab('sales')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <line x1="12" y1="2" x2="12" y2="22"/>
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                         </svg>
                         <span>Sales</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('products')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <li class="menu-item <c:if test="${tab=='products'}">active</c:if>" onclick="switchTab('products')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                             <line x1="3" y1="6" x2="21" y2="6"/>
                             <path d="M16 10a4 4 0 0 1-8 0"/>
                         </svg>
                         <span>Products</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('orders')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <li class="menu-item <c:if test="${tab=='orders'}">active</c:if>" onclick="switchTab('orders')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <circle cx="9" cy="21" r="1"/>
                             <circle cx="20" cy="21" r="1"/>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                         </svg>
                         <span>Orders</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('users')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <li class="menu-item <c:if test="${tab=='users'}">active</c:if>" onclick="switchTab('users')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                             <circle cx="9" cy="7" r="4"/>
                             <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
@@ -59,15 +66,17 @@
                         </svg>
                         <span>Users</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('reports')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <li class="menu-item <c:if test="${tab=='reports'}">active</c:if>" onclick="switchTab('reports')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <line x1="12" y1="2" x2="12" y2="22"/>
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                         </svg>
                         <span>Reports</span>
                     </li>
-                    <li class="menu-item" onclick="switchTab('profile')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <li class="menu-item <c:if test="${tab=='profile'}">active</c:if>" onclick="switchTab('profile')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                             <circle cx="12" cy="7" r="4"/>
                         </svg>
@@ -80,7 +89,7 @@
         <!-- Main Content -->
         <section class="dashboard-content">
             <!-- Overview Tab -->
-            <div id="overview-tab" class="dashboard-tab active">
+            <div id="overview-tab" class="dashboard-tab <c:if test="${tab=='overview'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Dashboard Overview</h1>
                     <p class="dashboard-subtitle">Welcome to your admin dashboard</p>
@@ -91,7 +100,8 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-label">Total Revenue</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <line x1="12" y1="2" x2="12" y2="22"/>
                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                             </svg>
@@ -103,7 +113,8 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-label">Total Orders</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <circle cx="9" cy="21" r="1"/>
                                 <circle cx="20" cy="21" r="1"/>
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
@@ -116,7 +127,8 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-label">Active Users</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
                             </svg>
@@ -128,7 +140,8 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-label">Conversion Rate</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"/>
                                 <polyline points="12 12 20 7.5"/>
                                 <polyline points="12 12 12 21"/>
@@ -203,7 +216,7 @@
             </div>
 
             <!-- Sales Tab -->
-            <div id="sales-tab" class="dashboard-tab">
+            <div id="sales-tab" class="dashboard-tab <c:if test="${tab=='sales'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Sales Analytics</h1>
                     <p class="dashboard-subtitle">Track your sales performance</p>
@@ -278,7 +291,7 @@
             </div>
 
             <!-- Products Tab -->
-            <div id="products-tab" class="dashboard-tab">
+            <div id="products-tab" class="dashboard-tab <c:if test="${tab=='products'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Product Management</h1>
                     <p class="dashboard-subtitle">Manage your laptop inventory</p>
@@ -307,7 +320,9 @@
                             <td><span class="stock high">45</span></td>
                             <td>Premium</td>
                             <td>4.9/5</td>
-                            <td><button class="btn-action edit">Edit</button></td>
+                            <td>
+                                <button class="btn-action edit">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>Dell XPS 15</td>
@@ -316,7 +331,9 @@
                             <td><span class="stock low">8</span></td>
                             <td>Ultrabook</td>
                             <td>4.7/5</td>
-                            <td><button class="btn-action edit">Edit</button></td>
+                            <td>
+                                <button class="btn-action edit">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>HP Spectre 16</td>
@@ -325,7 +342,9 @@
                             <td><span class="stock high">32</span></td>
                             <td>Ultrabook</td>
                             <td>4.6/5</td>
-                            <td><button class="btn-action edit">Edit</button></td>
+                            <td>
+                                <button class="btn-action edit">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>ASUS ROG Gaming</td>
@@ -334,7 +353,9 @@
                             <td><span class="stock medium">15</span></td>
                             <td>Gaming</td>
                             <td>4.8/5</td>
-                            <td><button class="btn-action edit">Edit</button></td>
+                            <td>
+                                <button class="btn-action edit">Edit</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -342,7 +363,7 @@
             </div>
 
             <!-- Orders Tab -->
-            <div id="orders-tab" class="dashboard-tab">
+            <div id="orders-tab" class="dashboard-tab <c:if test="${tab=='orders'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Orders Management</h1>
                     <p class="dashboard-subtitle">View and manage customer orders</p>
@@ -404,7 +425,7 @@
             </div>
 
             <!-- Users Tab -->
-            <div id="users-tab" class="dashboard-tab">
+            <div id="users-tab" class="dashboard-tab <c:if test="${tab=='users'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>User Management</h1>
                     <p class="dashboard-subtitle">Manage registered users and customers</p>
@@ -415,49 +436,86 @@
                         <thead>
                         <tr>
                             <th>User ID</th>
-                            <th>Name</th>
+                            <th>Username</th>
                             <th>Email</th>
                             <th>Role</th>
                             <th>Join Date</th>
-                            <th>Orders</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#USR-001</td>
-                            <td>John Doe</td>
-                            <td>john@example.com</td>
-                            <td><span class="role customer">Customer</span></td>
-                            <td>2024-01-15</td>
-                            <td>5</td>
-                            <td><button class="btn-action view">View</button></td>
-                        </tr>
-                        <tr>
-                            <td>#USR-002</td>
-                            <td>Jane Smith</td>
-                            <td>jane@example.com</td>
-                            <td><span class="role customer">Customer</span></td>
-                            <td>2024-02-10</td>
-                            <td>3</td>
-                            <td><button class="btn-action view">View</button></td>
-                        </tr>
-                        <tr>
-                            <td>#USR-003</td>
-                            <td>Bob Johnson</td>
-                            <td>bob@example.com</td>
-                            <td><span class="role admin">Admin</span></td>
-                            <td>2023-12-01</td>
-                            <td>—</td>
-                            <td><button class="btn-action view">View</button></td>
-                        </tr>
+
+                        <c:forEach var="user" items="${users}">
+                            <tr>
+                                <td>${user.user_id}</td>
+                                <td>
+                                    <div class="user-cell">
+                                        <img src="${pageContext.request.contextPath}/static/imgUpload/${user.profileImg}"
+                                             alt="User" class="user-avatar">
+                                        <span>${user.username}</span>
+                                    </div>
+                                </td>
+                                <td>${user.email}</td>
+                                <td><span class="role customer">${user.role}</span></td>
+                                <td><fmt:formatDate value="${user.created_at}"
+                                                    pattern="yyyy-mm-dd"/></td>
+                                <td>
+                                    <button class="btn-action view" onclick="openDeleteModal()">Delete</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
 
+            <div id="deleteModal" class="delete-modal">
+                <div class="delete-modal-content delete-modal-danger">
+                    <div class="delete-modal-header">
+                        <h2>Delete User</h2>
+                        <button type="button" class="delete-modal-close" onclick="closeDeleteModal()">&times;</button>
+                    </div>
+                    <div class="delete-modal-body">
+                        <p>Are you sure you want to delete <strong id="deleteUserName"></strong>?</p>
+                        <p class="warning-text">This action cannot be undone.</p>
+                    </div>
+                    <div class="delete-modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                        <form action="${pageContext.request.contextPath}/dashboard" method="post"
+                              style="display: inline;">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" id="deleteUserID" name="userID">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                function openDeleteModal(userName, userID) {
+                    document.body.style.overflow = 'hidden';
+                    document.getElementById('deleteUserName').textContent = userName;
+                    document.getElementById('deleteUserID').value = userID;
+                    document.getElementById('deleteModal').classList.add('show');
+                }
+
+                function closeDeleteModal() {
+                    document.body.style.overflow = 'auto';
+                    document.getElementById('deleteModal').classList.remove('show');
+                }
+
+                // Close modal when clicking outside
+                window.onclick = function (event) {
+                    const modal = document.getElementById('deleteModal');
+                    if (event.target === modal) {
+                        closeDeleteModal();
+                    }
+                }
+            </script>
+
+
             <!-- Reports Tab -->
-            <div id="reports-tab" class="dashboard-tab">
+            <div id="reports-tab" class="dashboard-tab <c:if test="${tab=='reports'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>Reports & Analytics</h1>
                     <p class="dashboard-subtitle">Comprehensive business reports</p>
@@ -531,7 +589,7 @@
             </div>
 
             <!-- Profile Tab -->
-            <div id="profile-tab" class="dashboard-tab">
+            <div id="profile-tab" class="dashboard-tab <c:if test="${tab=='profile'}">active</c:if>">
                 <div class="dashboard-header">
                     <h1>My Profile</h1>
                     <p class="dashboard-subtitle">Manage your account information and preferences</p>
@@ -540,19 +598,28 @@
                 <div class="profile-container">
                     <!-- Profile Information Section -->
                     <div class="profile-info-section">
-                        <div class="profile-info-card">
+                        <form method="post" action="${pageContext.request.contextPath}/dashboard"
+                              enctype="multipart/form-data" class="profile-info-card">
+                            <input type="hidden" name="action" value="update">
+                            <input type="hidden" name="userID" value="${user.user_id}">
+
                             <h3>Account Information</h3>
                             <!-- Profile Picture Section -->
                             <div class="profile-picture-section-inline">
                                 <div class="profile-picture-card-inline">
                                     <div class="profile-picture-wrapper">
-                                        <img id="profilePicturePreview" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=faces" alt="Profile picture">
+                                        <img id="profilePicturePreview"
+                                             src="${pageContext.request.contextPath}/static/imgUpload/${user.profileImg}"
+                                             alt="Profile picture">
                                     </div>
                                     <div class="profile-picture-actions">
-                                        <button class="btn btn-primary" onclick="document.getElementById('profilePictureInput').click()">
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="document.getElementById('profilePictureInput').click()">
                                             Change Picture
                                         </button>
-                                        <input type="file" id="profilePictureInput" accept="image/*" style="display: none;" onchange="updateProfilePicture(event)">
+                                        <input type="file" id="profilePictureInput" accept="image/*"
+                                               style="display: none;" name="profileImg"
+                                               onchange="updateProfilePicture(event)">
                                     </div>
                                 </div>
                             </div>
@@ -560,113 +627,118 @@
                             <div class="profile-form">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label>First Name</label>
-                                        <input type="text" value="Admin" class="profile-input">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" name="firstName"
+                                               value="<c:out value="${user.firstName}" default=""/>"
+                                               class="profile-input">
                                     </div>
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input type="text" value="User" class="profile-input">
+                                        <input type="text" name="lastName"
+                                               value="<c:out value="${user.lastName}" default=""/>"
+                                               class="profile-input">
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" name="username" value="${user.username}"
+                                               class="profile-input">
+                                    </div>
+                                    <div class="form-group">
                                         <label>Email Address</label>
-                                        <input type="email" value="admin@laptopstore.com" class="profile-input">
+                                        <input type="email" name="email" value="${user.email}" class="profile-input">
                                     </div>
                                     <div class="form-group">
                                         <label>Phone Number</label>
-                                        <input type="tel" value="+1 (555) 123-4567" class="profile-input">
+                                        <input type="tel" name="phoNo" value="<c:out value="${user.phoNo}" default=""/>"
+                                               class="profile-input">
                                     </div>
                                 </div>
 
                                 <div class="form-row full-width">
                                     <div class="form-group">
                                         <label>Bio</label>
-                                        <textarea class="profile-input" rows="4" placeholder="Tell us about yourself...">Experienced admin managing laptop store operations and customer relations.</textarea>
+                                        <textarea name="bio" class="profile-input" rows="4"
+                                                  placeholder="Tell us about yourself..."><c:out value="${user.bio}"
+                                                                                                 default=""/></textarea>
                                     </div>
                                 </div>
 
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label>Department</label>
-                                        <select class="profile-input">
-                                            <option>Management</option>
-                                            <option>Sales</option>
-                                            <option>Support</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Role</label>
-                                        <input type="text" value="Administrator" class="profile-input" disabled>
-                                    </div>
-                                </div>
 
-                                <div class="profile-actions">
-                                    <button class="btn btn-primary">Save Changes</button>
-                                    <button class="btn btn-ghost">Cancel</button>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <input type="text" name="role" value="${user.role}" class="profile-input" disabled>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Account Details Card -->
-                        <div class="profile-info-card">
-                            <h3>Account Details</h3>
+                            <div class="profile-actions">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="reset" class="btn btn-ghost">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
 
-                            <div class="details-list">
-                                <div class="detail-item">
-                                    <span class="detail-label">Account Status</span>
-                                    <span class="detail-value">
+                    <!-- Account Details Card -->
+                    <div class="profile-info-card">
+                        <h3>Account Details</h3>
+
+                        <div class="details-list">
+                            <div class="detail-item">
+                                <span class="detail-label">Account Status</span>
+                                <span class="detail-value">
                       <span class="status active">Active</span>
                     </span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Member Since</span>
-                                    <span class="detail-value">January 15, 2024</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Last Login</span>
-                                    <span class="detail-value">Today at 2:30 PM</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Total Orders Managed</span>
-                                    <span class="detail-value">1,284</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Account Type</span>
-                                    <span class="detail-value">
-                      <span class="role admin">Administrator</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Member Since</span>
+                                <span class="detail-value"><fmt:formatDate value="${createdAt}"
+                                                                           pattern="MMM dd, yyyy hh:mm a"/></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Last Login</span>
+                                <span class="detail-value"><fmt:formatDate value="${lastLogin}"
+                                                                           pattern="MMM dd, yyyy hh:mm a"/></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Total Orders</span>
+                                <span class="detail-value">1,284</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Account Type</span>
+                                <span class="detail-value">
+                      <span class="role admin">Customer</span>
                     </span>
-                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Security Card -->
-                        <div class="profile-info-card">
-                            <h3>Security</h3>
+                    <!-- Security Card -->
+                    <div class="profile-info-card">
+                        <h3>Security</h3>
 
-                            <div class="security-options">
-                                <div class="security-item">
-                                    <div>
-                                        <h4>Password</h4>
-                                        <p class="muted">Change your password regularly to keep your account secure</p>
-                                    </div>
-                                    <button class="btn btn-ghost">Change Password</button>
+                        <div class="security-options">
+                            <div class="security-item">
+                                <div>
+                                    <h4>Password</h4>
+                                    <p class="muted">Change your password regularly to keep your account secure</p>
                                 </div>
-                                <div class="security-item">
-                                    <div>
-                                        <h4>Two-Factor Authentication</h4>
-                                        <p class="muted">Add an extra layer of security to your account</p>
-                                    </div>
-                                    <button class="btn btn-ghost">Enable 2FA</button>
+                                <button class="btn btn-ghost">Change Password</button>
+                            </div>
+                            <div class="security-item">
+                                <div>
+                                    <h4>Two-Factor Authentication</h4>
+                                    <p class="muted">Add an extra layer of security to your account</p>
                                 </div>
-                                <div class="security-item">
-                                    <div>
-                                        <h4>Active Sessions</h4>
-                                        <p class="muted">Manage your active sessions and devices</p>
-                                    </div>
-                                    <button class="btn btn-ghost">View Sessions</button>
+                                <button class="btn btn-ghost">Enable 2FA</button>
+                            </div>
+                            <div class="security-item">
+                                <div>
+                                    <h4>Active Sessions</h4>
+                                    <p class="muted">Manage your active sessions and devices</p>
                                 </div>
+                                <button class="btn btn-ghost">View Sessions</button>
                             </div>
                         </div>
                     </div>
@@ -678,6 +750,9 @@
 <script>
     function switchTab(tabName) {
         // Hide all tabs
+
+
+
         const tabs = document.querySelectorAll('.dashboard-tab');
         tabs.forEach(tab => tab.classList.remove('active'));
 
@@ -690,9 +765,15 @@
         if (selectedTab) {
             selectedTab.classList.add('active');
         }
+        event.target.closest('.menu-item').classList.add('active');
+
+
+        const url = new URL(window.location.href);
+        url.searchParams.set("tab", tabName);
+        window.location.href = url.toString();
 
         // Add active class to clicked menu item
-        event.target.closest('.menu-item').classList.add('active');
+        document.getElementById("tabInput").value = tabName;
     }
 
     // Profile Picture Update
@@ -700,7 +781,7 @@
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 document.getElementById('profilePicturePreview').src = e.target.result;
             };
             reader.readAsDataURL(file);
