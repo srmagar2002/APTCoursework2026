@@ -14,7 +14,7 @@
         <!-- Main Content -->
         <form action="${pageContext.request.contextPath}/products" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="edit"/>
-            <input type="hidden" value="${laptop.laptopID}" name="laptopid">
+            <input type="hidden" name="laptopid" value="${laptop.laptopID}">
 
             <c:if test="${not empty error}">
                 <p class="error"><c:out value="${error}"/></p>
@@ -88,6 +88,7 @@
 
                         <div class="rating-review-section" id="rating-review-section">
                         </div>
+
                     </div>
 
                     <div class="product-right-column">
@@ -495,7 +496,9 @@
                             </div>
 
                             <form class="review-form" action="${pageContext.request.contextPath}/rate" method="post">
-                                <input type="hidden" name="action" value="add"/>
+
+                                <input type="hidden" id="ratingAction" name="action" value="add"/>
+
                                 <input type="hidden" name="laptopid" value="${laptop.laptopID}"/>
                                 <input type="hidden" name="userid" value="${sessionScope.user.user_id}">
                                 <input type="hidden" name="newrating" value="" id="newrating">
@@ -558,15 +561,14 @@
                                     photo.</p>
 
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-ghost">Cancel
+                                    <button type="button" onclick="closeReviewModal()" class="btn btn-ghost">Cancel
                                     </button>
-                                    <button type="submit" onsubmit="submitjs()" class="btn btn-primary">Submit Review
+                                    <button type="submit" class="btn btn-primary">Submit Review
                                     </button>
                                 </div>
                             </form>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="product-right-column">
@@ -577,23 +579,22 @@
 
                         <div class="product-rating">
                             <div class="stars">
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
+                                <c:forEach begin="1" end="5" var="starIndex">
+                                    <c:choose>
+                                        <c:when test="${starIndex <= productAvgRatingRounded}">
+                                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                            </svg>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                            </svg>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
                             </div>
-                            <span class="rating-text">4.9 (128 reviews)</span>
+                            <span class="rating-text">${productAvgRating} (${productTotalRating} reviews)</span>
                         </div>
 
                         <span class="product-price">$${laptop.price}</span>
@@ -642,7 +643,12 @@
 
                         <!-- Action Buttons -->
                         <div class="action-buttons">
-                            <button class="btn btn-primary">Add to Cart</button>
+                        <%--          edited by kushal                  --%>
+                            <form action="${pageContext.request.contextPath}/cart" method="post" id="addToCartForm">
+                                <input type="hidden" name="action" value="add"/>
+                                <input type="hidden" name="laptopId" value="${laptop.laptopID}"/>
+                                <button type="submit" class="btn btn-primary" id="addToCartButton" onclick="handleAddToCart()">Add to Cart</button>
+                            </form>
                             <button class="btn btn-secondary">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                      viewBox="0 0 24 24" style="margin-right: 0.5rem;">
@@ -695,6 +701,30 @@
 
 
 <script>
+
+    //For the corfirmation of product Added to cart
+    function handleAddToCart() {
+
+        const btn = document.getElementById('addToCartButton');
+        const form = document.getElementById('addToCartForm');
+
+        // Change button to green "Added" confirmation state
+        btn.innerHTML = '✔✔ Added!';
+        btn.style.backgroundColor = '#22c55e';
+        btn.style.color = '#fff';
+        btn.disabled = true; // prevent double clicking during the 1 second
+
+        // After 1 second, reset button back to normal and submit the form
+        setTimeout(function() {
+            btn.innerHTML = 'Add to Cart';
+            btn.style.backgroundColor = ''; // revert to original CSS color
+            btn.style.color = '';
+            btn.disabled = false;
+            form.submit(); // normal form submission to CartServlet
+        }, 700);
+    }
+
+
     function changeImage(thumbnail, imageSrc, imageAlt) {
 //Image Gallery
         const mainImage = document.getElementById('mainProductImage');
@@ -718,11 +748,11 @@
     function displayReview(id) {
         let url;
         <c:choose>
-        <c:when test="${empty sessionScope.user}">
+        <c:when test="${empty sessionScope.user || sessionScope.user.role=='ADMIN'}">
         url = "${pageContext.request.contextPath}/rate?laptopID=" + id.toString()
         </c:when>
         <c:when test="${sessionScope.user.role=='CUSTOMER'}">
-         url = "${pageContext.request.contextPath}/rate?laptopID=" + id.toString() + "&userID=${sessionScope.user.user_id}"
+        url = "${pageContext.request.contextPath}/rate?laptopID=" + id.toString() + "&userID=${sessionScope.user.user_id}"
         </c:when>
         </c:choose>
         fetch(
@@ -742,10 +772,13 @@
     //Review Sec
     // Rating system variables
 
+
+    function setAction(value) {
+        document.getElementById("ratingAction").value = value;
+    }
+
     let currentRating = 0;
     let modalRating = 0;
-
-    const hellos = document.getElementById('ratingStars').querySelectorAll('.star-interactive');
 
     // Handle star click in main section
     function handleStarClick(value) {
@@ -758,8 +791,11 @@
 
     // Update star display
     function updateStars(elementId, rating) {
-        const stars = document.getElementById(elementId).querySelectorAll('.star-interactive');
+        const element = document.getElementById(elementId);
+        if (!element) return; // Exit if element doesn't exist
+        const stars = element.querySelectorAll('.star-interactive');
         stars.forEach(star => {
+            console.log(rating)
             const value = parseInt(star.dataset.value);
             if (value <= rating) {
                 star.style.color = 'var(--primary)';
@@ -778,13 +814,31 @@
         updateStars('modalRatingStars', value);
     }
 
-    function openReviewModal() {
+    function openReviewModal(rating) {
+
         const modal = document.getElementById('reviewModal');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        if (currentRating > 0) {
-            modalRating = currentRating;
-            updateStars('modalRatingStars', currentRating);
+
+        // console.log(document.getElementById("ratingAction").value);
+
+        if (document.getElementById("ratingAction").value == 'add') {
+            if (currentRating > 0) {
+                modalRating = currentRating;
+                updateStars('modalRatingStars', currentRating);
+            }
+        } else if (document.getElementById("ratingAction").value == 'update') {
+
+            document.getElementById('newrating').value = rating;
+
+            if (rating > 0) {
+                modalRating = rating;
+                // console.log(modalRating)
+
+                let userReview = document.getElementById('user-rating-review').textContent;
+                document.getElementById('reviewText').value = userReview;
+                updateStars('modalRatingStars', modalRating);
+            }
         }
     }
 

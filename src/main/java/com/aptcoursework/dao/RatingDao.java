@@ -22,6 +22,7 @@ import java.util.ArrayList;
  * @author Sugam Rana Magar
  */
 public interface RatingDao {
+    Boolean updateRatingReviewByLaptopUser(int userID, int laptopID,int rating, String review);
     Rating getRatingByUserID(int userID, int laptopID);
     Boolean deleteRatingByLaptopID(int laptopID);
     Boolean deleteRatingByUserID(int userID, int laptopID);

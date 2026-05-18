@@ -41,21 +41,23 @@ public class RatingReviewServlet extends HttpServlet {
            Rating rating = ratingDao.getRatingByUserID(userID, laptopID);
            if (rating != null) {
                request.setAttribute("isRated", true);
-               System.out.println(rating.getUsername() + "has rated");
+               request.setAttribute("userRating", rating);
+               System.out.println(rating.getUsername() + " has rated");
            } else {
                UserDaoImpl userDao = new UserDaoImpl();
                String username = userDao.usernameByUserID(userID);
                request.setAttribute("isRated", false);
-               System.out.println(username + "has not rated");
+               System.out.println(username + " has not rated");
            }
        }
+
         ArrayList<Rating> ratings = ratingDao.getRatingsByLaptop(laptopID);
         request.setAttribute("ratings", ratings);
 
         double avgRating = ratingDao.getAvgRatingbyLaptop(laptopID);
         DecimalFormat df = new DecimalFormat("#.#");
         request.setAttribute("avgRating", df.format(avgRating));
-
+        request.setAttribute("avgRatingRounded", (int) avgRating);
 
         int totalRating = ratings.size();
         request.setAttribute("totalRating", totalRating);
@@ -81,13 +83,14 @@ public class RatingReviewServlet extends HttpServlet {
         ratingTotal.put("four", percentageForFour);
         ratingTotal.put("five", percentageForFive);
         request.setAttribute("ratingTotal", ratingTotal);
-
-
+        
         request.getRequestDispatcher("/WEB-INF/views/components/ratingAndReview.jsp").forward(request, response);
-
-
     }
 
+    /**
+     * Handles POST requests by adding a new rating and review for a product.
+     * Validates and stores the rating, then redirects back to the product view page.
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -117,6 +120,22 @@ public class RatingReviewServlet extends HttpServlet {
             }
 
             response.sendRedirect(request.getContextPath() + "/productView?laptopID=" + laptopID);
+        }
+
+        if("update".equals(action)) {
+
+            String laptopID = request.getParameter("laptopid");
+            String userID = request.getParameter("userid");
+            String newrating = request.getParameter("newrating");
+            String review = request.getParameter("review");
+
+            RatingDaoImpl ratingDao = new RatingDaoImpl();
+            Boolean isUpdated = ratingDao.updateRatingReviewByLaptopUser(Integer.parseInt(userID), Integer.parseInt(laptopID), Integer.parseInt(newrating), review);
+
+            if(isUpdated) {
+                response.sendRedirect(request.getContextPath() + "/productView?laptopID=" + laptopID);
+            }
+
         }
 
 

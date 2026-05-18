@@ -4,10 +4,8 @@ import com.aptcoursework.entity.User;
 import com.aptcoursework.enums.Role;
 import com.aptcoursework.utils.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 
 
 /**
@@ -31,6 +29,54 @@ import java.sql.SQLException;
  */
 public class UserDaoImpl implements UserDao {
 
+    @Override
+    public void updateLastLogin(int userID) {
+        Connection conn = null;
+        String sql = "UPDATE users SET lastLogin = ? WHERE user_id = ?";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+            pstmt.setInt(2, userID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Failed to update last login " + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+
+    @Override
+    public boolean updateUserProfile(User user) {
+        Connection conn = null;
+        String sql = "UPDATE users SET username = ?, " +
+                "email = ?, firstName=?, lastName=?, phoNo=?, bio=? WHERE user_id = ?";
+
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getEmail());
+            pstmt.setString(3, user.getFirstName());
+            pstmt.setString(4, user.getLastName());
+            pstmt.setString(5, user.getPhoNo());
+            pstmt.setString(6, user.getBio());
+            pstmt.setInt(7, user.getUser_id());
+            int updateCount = pstmt.executeUpdate();
+            if (updateCount > 0) {
+                return true;
+            } else {
+                System.out.println("Update Count is zero");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to update user profile " + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return false;
+    }
 
     /**
      * Inserts a new user into the database.
@@ -45,7 +91,7 @@ public class UserDaoImpl implements UserDao {
      *
      * @param user the {@link User} object containing user details to be inserted
      * @return {@code true} if the user is successfully added;
-     *         {@code false} if an error occurs
+     * {@code false} if an error occurs
      */
     @Override
     public boolean insertUser(User user) {
@@ -71,6 +117,29 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+
+    @Override
+    public boolean insertImgProfilePath(String path, int userID) {
+
+        Connection conn = null;
+        String sql = "UPDATE users set profileImg=? where user_id=?";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, path);
+            pstmt.setInt(2, userID);
+            int isInserted = pstmt.executeUpdate();
+            if (isInserted > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in inserting img profile path" + e.getMessage());
+            return false;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return false;
+    }
 
 
     /**
@@ -214,4 +283,44 @@ public class UserDaoImpl implements UserDao {
         }
         return null;
     }
+
+    @Override
+    public User findByUserID(int userID) {
+        Connection conn = null;
+        String sql = "SELECT * FROM users WHERE user_id=?";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Role role;
+                try {
+                    role = Role.valueOf(rs.getString("role").toUpperCase());
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    role = Role.CUSTOMER;
+                }
+                return new User(
+                        rs.getInt("user_id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("password_hash"),
+                        rs.getString("profileImg"),
+                        role,
+                        rs.getTimestamp("lastLogin").toLocalDateTime(),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("phoNo"),
+                        rs.getString("bio")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getting user" + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return null;
+    }
+
 }

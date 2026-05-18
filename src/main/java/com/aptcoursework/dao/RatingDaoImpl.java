@@ -37,6 +37,37 @@ import java.util.ArrayList;
 
 public class RatingDaoImpl implements RatingDao {
 
+
+    @Override
+    public Boolean updateRatingReviewByLaptopUser(int userID, int laptopID, int rating, String review) {
+
+        Connection conn = null;
+        String sql = "UPDATE rating SET review = ?, rating=?  WHERE userID = ? AND laptopID = ? ";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, review);
+            stmt.setInt(2, rating);
+            stmt.setInt(3, userID);
+            stmt.setInt(4, laptopID);
+
+            if (stmt.executeUpdate() != 0) {
+                System.out.println("Review is Updated");
+                return true;
+            } else {
+                System.out.println("Review is Not Updated");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to update" + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+
+        return false;
+    }
+
     /**
      *
      * Retrieves a specific rating given by a user for a particular laptop.
@@ -49,8 +80,7 @@ public class RatingDaoImpl implements RatingDao {
      * @param userID   the unique ID of the user who gave the rating
      * @param laptopID the unique ID of the laptop being rated
      * @return a {@link Rating} object containing rating details if found;
-     *         otherwise, {@code null}
-     *
+     * otherwise, {@code null}
      * @throws Exception no exception is thrown directly, but SQL exceptions
      *                   are caught and logged internally
      */
@@ -58,14 +88,14 @@ public class RatingDaoImpl implements RatingDao {
     @Override
     public Rating getRatingByUserID(int userID, int laptopID) {
         Connection conn = null;
-        String sql = "SELECT r.ratingID,r.userID,r.laptopID,r.rating,r.review,r.ratingDate,u.username FROM rating r LEFT JOIN users u ON r.userID = u.user_id where r.userID = ? and r.laptopID = ?";
-        try{
+        String sql = "SELECT r.ratingID,r.userID,r.laptopID,r.rating,r.review,r.ratingDate,u.username,u.profileImg FROM rating r LEFT JOIN users u ON r.userID = u.user_id where r.userID = ? and r.laptopID = ?";
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1,userID);
-            ps.setInt(2,laptopID);
+            ps.setInt(1, userID);
+            ps.setInt(2, laptopID);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return new Rating(
                         rs.getInt("ratingID"),
                         rs.getInt("userID"),
@@ -73,16 +103,17 @@ public class RatingDaoImpl implements RatingDao {
                         rs.getInt("rating"),
                         rs.getString("review"),
                         rs.getTimestamp("ratingDate"),
-                        rs.getString("username"));
+                        rs.getString("username"),
+                        rs.getString("profileImg")
+                );
             }
-        }catch(SQLException e){
-            System.out.println("SQLException: "+e);
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e);
             return null;
-        }
-        finally {
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
-    return null;
+        return null;
     }
 
 
@@ -98,7 +129,10 @@ public class RatingDaoImpl implements RatingDao {
      *
      * @param laptopID the unique identifier of the laptop whose ratings are to be deleted
      * @return {@code true} if the ratings were successfully deleted;
-     *         {@code false} if an error occurs
+     * {@code false} if an error occurs
+     *
+     *
+     *
      */
     @Override
     public Boolean deleteRatingByLaptopID(int laptopID) {
@@ -120,7 +154,6 @@ public class RatingDaoImpl implements RatingDao {
     }
 
 
-
     /**
      * Deletes a specific rating given by a user for a particular laptop.
      *
@@ -135,7 +168,10 @@ public class RatingDaoImpl implements RatingDao {
      * @param userID   the unique identifier of the user whose rating is to be deleted
      * @param laptopID the unique identifier of the laptop for which the rating was given
      * @return {@code true} if the rating was successfully deleted;
-     *         {@code false} if an error occurs
+     * {@code false} if an error occurs
+     *
+     *
+     *
      */
 
     @Override
@@ -171,7 +207,7 @@ public class RatingDaoImpl implements RatingDao {
      *
      * @param laptopID the unique identifier of the laptop
      * @return the average rating of the laptop as a {@code double};
-     *         returns {@code 0.0} if no ratings exist or an error occurs
+     * returns {@code 0.0} if no ratings exist or an error occurs
      */
 
     @Override
@@ -197,7 +233,6 @@ public class RatingDaoImpl implements RatingDao {
     }
 
 
-
     /**
      * Counts the total number of ratings for a specific laptop with a given star value.
      *
@@ -211,7 +246,7 @@ public class RatingDaoImpl implements RatingDao {
      * @param laptopID the unique identifier of the laptop
      * @param rating   the star rating value to count (e.g., 1 to 5)
      * @return the total number of ratings matching the given criteria;
-     *         returns {@code 0} if none are found or an error occurs
+     * returns {@code 0} if none are found or an error occurs
      */
     @Override
     public int getTotalRatingbyStars(int laptopID, int rating) {
@@ -251,11 +286,11 @@ public class RatingDaoImpl implements RatingDao {
      *
      * @param laptopID the unique identifier of the laptop
      * @return an {@link ArrayList} of {@link Rating} objects containing all ratings
-     *         for the specified laptop; returns {@code null} if an error occurs
+     * for the specified laptop; returns {@code null} if an error occurs
      */
     @Override
     public ArrayList<Rating> getRatingsByLaptop(int laptopID) {
-        String sql = "SELECT r.ratingID,r.userID,r.laptopID,r.rating,r.review,r.ratingDate,u.username FROM rating r LEFT JOIN users u ON r.userID = u.user_id WHERE laptopID = ?;";
+        String sql = "SELECT r.ratingID,r.userID,r.laptopID,r.rating,r.review,r.ratingDate,u.username,u.profileImg FROM rating r LEFT JOIN users u ON r.userID = u.user_id WHERE laptopID = ?;";
         ArrayList<Rating> ratings = new ArrayList<>();
         Connection connection = null;
         try {
@@ -271,9 +306,10 @@ public class RatingDaoImpl implements RatingDao {
                         rs.getInt("rating"),
                         rs.getString("review"),
                         rs.getTimestamp("ratingDate"),
-                        rs.getString("username")
+                        rs.getString("username"),
+                        rs.getString("profileImg")
                 );
-                System.out.println("UserID:" + rating.getUserID() + " Username : " + rating.getUsername() + " LaptopID" + rating.getLaptopID() + " Rating:" + rating.getRating() + " Review:" + rating.getReview() + " Date:" + rating.getRatingDate());
+//                System.out.println("UserID:" + rating.getUserID() + " Username : " + rating.getUsername() + " LaptopID" + rating.getLaptopID() + " Rating:" + rating.getRating() + " Review:" + rating.getReview() + " Date:" + rating.getRatingDate());
                 ratings.add(rating);
             }
             return ratings;
@@ -284,7 +320,6 @@ public class RatingDaoImpl implements RatingDao {
         }
         return null;
     }
-
 
 
     /**
@@ -301,7 +336,7 @@ public class RatingDaoImpl implements RatingDao {
      *
      * @param rating the {@link Rating} object containing the rating details to be added
      * @return {@code true} if the rating is successfully added;
-     *         {@code false} if an error occurs
+     * {@code false} if an error occurs
      */
     @Override
     public Boolean addRating(Rating rating) {

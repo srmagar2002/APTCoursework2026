@@ -11,12 +11,14 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/cart.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
 </head>
 <body>
 
 
 <jsp:include page="../components/navbar.jsp"/>
+
 <jsp:include page="../components/productView.jsp"/>
 <jsp:include page="../components/footer.jsp"/>
 </body>

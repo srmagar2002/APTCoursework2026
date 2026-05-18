@@ -1,24 +1,31 @@
 package com.aptcoursework.controller;
+
 import com.aptcoursework.dao.UserDao;
 import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.User;
 import com.aptcoursework.enums.Role;
+import com.aptcoursework.utils.ImageUtil;
 import com.aptcoursework.utils.PasswordUtil;
 import com.aptcoursework.utils.ValidationUtil;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 
 /**
  * Servlet handling user account registration and validation.
  * Processes registration form submissions with input validation and password hashing.
+ *
  * @author Sugam Rana Magar
  */
+
+@MultipartConfig
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
@@ -79,11 +86,28 @@ public class RegisterServlet extends HttpServlet {
 
         boolean success = userDao.insertUser(user);
 
+
+
         if (!success) {
             request.setAttribute("error", "Username or email already exists.");
             request.getRequestDispatcher("/WEB-INF/views/pages/registerPage.jsp")
                     .forward(request, response);
             return;
+        } else{
+
+            String uploadPath = getServletContext().getRealPath("/static/imgUpload");
+            Part filePart = request.getPart("profileImage");
+
+            System.out.println(filePart.getSubmittedFileName());
+
+            int userID = userDao.findByUsername(username).getUser_id();
+
+            System.out.println("THIS IS USER ID : "+userID);
+
+            String imagePath = ImageUtil.userProfilePictureUploader(filePart, userID, uploadPath);
+
+            userDao.insertImgProfilePath(imagePath, userID);
+
         }
         response.sendRedirect(request.getContextPath() + "/login");
     }

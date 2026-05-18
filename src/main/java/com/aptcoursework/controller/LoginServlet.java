@@ -1,6 +1,9 @@
 package com.aptcoursework.controller;
 
 import com.aptcoursework.dao.UserDaoImpl;
+import com.aptcoursework.dao.cartDao;
+import com.aptcoursework.dao.cartDaoImpl;
+import com.aptcoursework.entity.Cart;
 import com.aptcoursework.entity.User;
 import com.aptcoursework.utils.PasswordUtil;
 import com.aptcoursework.utils.SessionUtil;
@@ -11,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -54,8 +58,21 @@ public class LoginServlet extends HttpServlet {
         }
 
         SessionUtil.setAttribute(request, "user", user);
-        System.out.println("Login Successful");
 
+//        this shows the cart items in cartIcon right after login
+        cartDao cartdao = new cartDaoImpl();
+        ArrayList<Cart> items = cartdao.fetchCartItemsByUserId(user.getUser_id());
+        // CORRECT version sum quantities
+        int count = 0;
+        if (items != null) {
+            for (Cart item : items) {
+                count += item.getQuantity();
+            }
+        }
+        SessionUtil.setAttribute(request, "cartCount", count);
+
+        System.out.println("Login Successful");
+        userDao.updateLastLogin(user.getUser_id());
         response.sendRedirect(request.getContextPath() + "/products");
     }
 }

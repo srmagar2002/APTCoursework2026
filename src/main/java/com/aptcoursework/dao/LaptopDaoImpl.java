@@ -3,6 +3,7 @@ package com.aptcoursework.dao;
 
 import com.aptcoursework.entity.Laptop;
 import com.aptcoursework.utils.DatabaseConnection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -299,25 +300,57 @@ public class LaptopDaoImpl implements LaptopDao {
      *           <code>finally</code> block for proper resource management.
      */
     @Override
-    public ArrayList<Laptop> fetchAllLaptops() {
+    public ArrayList<Laptop> fetchAllLaptops(int start, int limit) {
         /* Fetches All Laptops*/
         ArrayList<Laptop> laptops = new ArrayList<>();
         Connection conn = null;
-        String sql = "SELECT * FROM laptop ORDER BY laptopID";
+        String sql = "SELECT * FROM laptop ORDER BY laptopID LIMIT ?,?";  /* RAND() aggregate function to randomize the output when rendering all laptops*/
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, start);
+            stmt.setInt(2, limit);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Laptop laptop = laptopAssginer(rs);
                 laptops.add(laptop);
             }
+
+            for(Laptop laptop: laptops){
+                System.out.println(
+                        "Hello"+laptop.getTitle());
+            }
+
             System.out.println("Laptops fetched successfully");
             return laptops;
         } catch (SQLException e) {
             System.out.println("Error Getting Laptop" + e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public int totalLaptops(){
+
+        Connection conn = null;
+        String sql = "SELECT COUNT(*) FROM laptop";
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error Getting Laptop Count " + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+
+        return 0;
     }
 
     /**
@@ -357,32 +390,24 @@ public class LaptopDaoImpl implements LaptopDao {
      *           block to ensure proper resource management and prevent leaks.
      */
     @Override
-    public ArrayList<Laptop> getLaptopsFilterSearch(String searchWord, String brand, String category, String priceCondition) {
+    public ArrayList<Laptop> getLaptopsFilterSearch(String searchWord, String brand, String category, String priceCondition,int start,int limit) {
         ArrayList<Laptop> laptops = new ArrayList<>();
         Connection conn = null;
-        String sql = "";
+        String sql = switch (priceCondition) {
+            case "1" ->
+                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+            case "2" ->
+                    "SELECT * FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+            case "3" ->
+                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+            case "4" ->
+                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+            case "5" ->
+                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+            default ->
+                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+        };
 
-        switch (priceCondition) {
-            case "1":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
-                break;
-            case "2":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
-                break;
-            case "3":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
-                break;
-            case "4":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
-                break;
-            case "5":
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
-                break;
-            default:
-                sql = "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
-                break;
-
-        }
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -393,6 +418,8 @@ public class LaptopDaoImpl implements LaptopDao {
             stmt.setString(4, searchValue);
             stmt.setString(5, searchValue);
             stmt.setString(6, searchValue);
+            stmt.setInt(7, start);
+            stmt.setInt(8, limit);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Laptop laptop = laptopAssginer(rs);
@@ -405,6 +432,56 @@ public class LaptopDaoImpl implements LaptopDao {
             DatabaseConnection.closeConnection(conn);
         }
         return null;
+    }
+
+    @Override
+    public int countLaptopsFilterSearch(String searchWord, String brand, String category, String priceCondition) {
+        Connection conn = null;
+        String sql = "";
+
+        switch (priceCondition) {
+            case "1":
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                break;
+            case "2":
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                break;
+            case "3":
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                break;
+            case "4":
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                break;
+            case "5":
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                break;
+            default:
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                break;
+        }
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            String searchValue = toLikeValue(searchWord);
+            stmt.setString(1, toLikeValue(brand));
+            stmt.setString(2, toLikeValue(category));
+            stmt.setString(3, searchValue);
+            stmt.setString(4, searchValue);
+            stmt.setString(5, searchValue);
+            stmt.setString(6, searchValue);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+              System.out.println("Total Record By Filter = " + rs.getInt(1));
+                return rs.getInt(1);
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error Getting Laptop" + e.getMessage());
+            return 0;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
     }
 
     /**
@@ -474,5 +551,4 @@ public class LaptopDaoImpl implements LaptopDao {
         }
         return null;
     }
-
 }
