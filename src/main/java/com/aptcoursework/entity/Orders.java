@@ -60,6 +60,28 @@ public class Orders {
         return estimatedDelivery;
     }
 
+
+//    Helper method for dynamic status
+    public String getDynamicStatus() {
+        if (createdAt == null) return "PREPARING";
+
+        LocalDateTime now      = LocalDateTime.now();
+        LocalDateTime ordered  = createdAt.toLocalDateTime();
+        LocalDateTime delivery = estimatedDelivery.toLocalDateTime();
+
+        if (now.isAfter(delivery)) {
+            return "DELIVERED";
+        } else if (now.isAfter(ordered.plusDays(2))) {
+            return "OUT_FOR_DELIVERY";
+        } else if (now.isAfter(ordered.plusDays(1).plusHours(12))) {
+            return "SHIPPED";
+        } else if (now.isAfter(ordered.plusHours(12))) {
+            return "IN_TRANSIT";
+        } else {
+            return "PREPARING";
+        }
+    }
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }

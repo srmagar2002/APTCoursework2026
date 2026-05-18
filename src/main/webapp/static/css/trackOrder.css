@@ -1,0 +1,314 @@
+/* ═══════════════════════════════════════════
+   trackOrder.css
+   Uses design tokens from main.css
+   ═══════════════════════════════════════════ */
+
+/* ── Back link ── */
+.track-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+}
+.track-back:hover { color: var(--foreground); }
+
+/* ── Page header ── */
+.track-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.track-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.track-order-id {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+}
+
+.track-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.track-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.track-meta-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.track-meta-value {
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════
+   Tracking card
+   ═══════════════════════════════════════════ */
+.track-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.track-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+}
+
+/* ── Current status badge ── */
+.track-status-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2rem;
+}
+
+.track-status-preparing       { background: rgba(249,115,22,0.15); color: var(--primary);  border: 1px solid rgba(249,115,22,0.3); }
+.track-status-in_transit      { background: rgba(59,130,246,0.15);  color: #3b82f6;         border: 1px solid rgba(59,130,246,0.3); }
+.track-status-shipped         { background: rgba(168,85,247,0.15);  color: #a855f7;         border: 1px solid rgba(168,85,247,0.3); }
+.track-status-out_for_delivery{ background: rgba(234,179,8,0.15);   color: #eab308;         border: 1px solid rgba(234,179,8,0.3); }
+.track-status-delivered       { background: rgba(34,197,94,0.15);   color: #22c55e;         border: 1px solid rgba(34,197,94,0.3); }
+
+/* ═══════════════════════════════════════════
+   5-Step progress tracker
+   ═══════════════════════════════════════════ */
+.track-steps {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Single step ── */
+.track-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+/* ── Left side: circle + vertical line ── */
+.step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    border: 2px solid var(--border);
+    background-color: var(--card-hover);
+    color: var(--muted);
+}
+
+/* Connector line between steps */
+.step-connector {
+    width: 2px;
+    flex: 1;
+    min-height: 40px;
+    background-color: var(--border);
+    margin: 4px 0;
+}
+
+/* ── Step content ── */
+.step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-bottom: 2rem;
+}
+
+.step-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.step-desc {
+    font-size: 0.8125rem;
+    color: var(--muted);
+}
+
+.step-date {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+}
+
+/* ── Last step — no connector ── */
+.track-step.last .step-content {
+    padding-bottom: 0;
+}
+
+/* ══════════════════════════════
+   Step states
+   ══════════════════════════════ */
+
+/* DONE — completed steps */
+.track-step.done .step-circle {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+.track-step.done .step-connector {
+    background-color: var(--primary);
+}
+
+.track-step.done .step-title {
+    color: var(--foreground);
+}
+
+/* ACTIVE — current step */
+.track-step.active .step-circle {
+    background-color: transparent;
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+}
+
+.track-step.active .step-title {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.track-step.active .step-connector {
+    background-color: var(--border);
+}
+
+/* PENDING — future steps */
+.track-step.pending .step-circle {
+    background-color: var(--card-hover);
+    border-color: var(--border);
+    color: var(--muted);
+}
+
+.track-step.pending .step-title {
+    color: var(--muted);
+}
+
+.track-step.pending .step-desc {
+    color: var(--border);
+}
+
+/* ═══════════════════════════════════════════
+   Items card
+   ═══════════════════════════════════════════ */
+.track-items-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 1.75rem 1.75rem 0;
+}
+
+/* ── Single item row ── */
+.track-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.track-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.track-item-image {
+    width: 90px;
+    height: 72px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #262626 100%);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.track-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+}
+
+.track-item-name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.track-item-qty,
+.track-item-delivery {
+    font-size: 0.8125rem;
+    color: var(--muted);
+}
+
+.track-item-price {
+    font-size: 1.05rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════ */
+@media (max-width: 640px) {
+    .track-header {
+        flex-direction: column;
+    }
+
+    .track-meta {
+        gap: 1.25rem;
+    }
+
+    .track-item {
+        flex-wrap: wrap;
+    }
+
+    .track-item-price {
+        width: 100%;
+        text-align: right;
+    }
+}
