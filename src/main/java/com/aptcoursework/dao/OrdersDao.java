@@ -7,5 +7,6 @@ import java.util.ArrayList;
 public interface OrdersDao {
     boolean placeOrder(int userId, ArrayList<Integer> laptopIds); // ← updated
     ArrayList<Orders> fetchOrdersByUser(int userId);
+    Orders fetchOrderById(int orderId, int userId);
     boolean updateOrderStatus(int orderId, String status);
 }

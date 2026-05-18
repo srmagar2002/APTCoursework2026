@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | TechLaptops</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
     <style>
         /* About Page Specific Styles */
         .about-hero {
@@ -243,7 +243,6 @@
 <header class="header">
     <jsp:include page="../components/navbar.jsp"/>
 </header>
-
 <!-- Main Content -->
 <main class="page-container">
     <!-- Hero Section -->
