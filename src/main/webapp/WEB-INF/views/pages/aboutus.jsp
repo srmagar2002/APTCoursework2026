@@ -1,444 +1,767 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Acer
-  Date: 4/22/2026
-  Time: 8:26 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%-- Created by IntelliJ IDEA. User: Acer Date: 4/22/2026 Time: 8:26 AM To
+change this template use File | Settings | File Templates. --%> <%@ page
+contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib prefix="c"
+uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us | TechLaptops</title>
-    <link rel="stylesheet" href="styles.css">
+    <link
+      rel="stylesheet"
+      href="${pageContext.request.contextPath}/static/css/main.css"
+    />
     <style>
-        /* About Page Specific Styles */
-        .about-hero {
-            text-align: center;
-            padding: 4rem 0;
-            margin-bottom: 3rem;
-        }
+      /* About Page Specific Styles */
+      .about-hero {
+        text-align: center;
+        padding: 4rem 0;
+        margin-bottom: 3rem;
+      }
 
-        .about-hero-tag {
-            display: inline-block;
-            padding: 0.375rem 0.75rem;
-            background-color: rgba(249, 115, 22, 0.15);
-            color: var(--primary);
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 9999px;
-            margin-bottom: 1rem;
-        }
+      .about-hero-tag {
+        display: inline-block;
+        padding: 0.375rem 0.75rem;
+        background-color: rgba(249, 115, 22, 0.15);
+        color: var(--primary);
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 9999px;
+        margin-bottom: 1rem;
+      }
 
+      .about-hero-title {
+        font-size: 3rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .about-hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--muted);
+        max-width: 640px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
+
+      .team-section {
+        margin-bottom: 4rem;
+      }
+
+      .team-section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .team-section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .team-section-subtitle {
+        font-size: 1rem;
+        color: var(--muted);
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+
+      .team-card {
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .team-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px var(--shadow);
+      }
+
+      .team-card-image {
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        background: linear-gradient(135deg, #1a1a1a 0%, #262626 100%);
+      }
+
+      .team-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+
+      .team-card:hover .team-card-image img {
+        transform: scale(1.05);
+      }
+
+      .team-card-content {
+        padding: 1.5rem;
+      }
+
+      .team-card-role {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+      }
+
+      .team-card-name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+      }
+
+      .team-card-bio {
+        font-size: 0.9375rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .team-card-social {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .social-link {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--input-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--muted);
+        transition: all 0.2s;
+      }
+
+      .social-link:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .social-link svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* Mission Section */
+      .mission-section {
+        background: linear-gradient(135deg, var(--card) 0%, #1a1a1a 100%);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 3rem;
+        margin-bottom: 4rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+
+      .mission-item {
+        text-align: center;
+      }
+
+      .mission-icon {
+        width: 48px;
+        height: 48px;
+        background-color: rgba(249, 115, 22, 0.15);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        color: var(--primary);
+      }
+
+      .mission-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .mission-text {
+        font-size: 0.875rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      /* Light theme adjustments */
+      [data-theme="light"] .team-card-image {
+        background: linear-gradient(135deg, #e5e5e5 0%, #d4d4d4 100%);
+      }
+
+      [data-theme="light"] .mission-section {
+        background: linear-gradient(135deg, var(--card) 0%, #e5e5e5 100%);
+      }
+
+      @media (max-width: 1024px) {
+        .mission-section {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
+      /* Contact / Feedback Section */
+      .contact-section {
+        margin-bottom: 4rem;
+      }
+
+      .contact-section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .contact-section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-section-subtitle {
+        font-size: 1rem;
+        color: var(--muted);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .contact-info-card,
+      .contact-form-card {
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 2.5rem;
+      }
+
+      .contact-info-title,
+      .contact-form-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-detail {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.875rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .contact-detail-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        background-color: rgba(249, 115, 22, 0.15);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+      }
+
+      .contact-detail-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .contact-detail-content {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .contact-detail-label {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.125rem;
+      }
+
+      .contact-detail-value {
+        font-size: 0.9375rem;
+        color: var(--foreground);
+        line-height: 1.5;
+      }
+
+      .contact-map {
+        margin-top: 1.5rem;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        aspect-ratio: 16/9;
+      }
+
+      .contact-map iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
+      .form-group {
+        margin-bottom: 1.25rem;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--foreground);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 0.9375rem;
+        font-family: inherit;
+        color: var(--foreground);
+        background-color: var(--input-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--primary);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 140px;
+      }
+
+      .form-submit-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.75rem;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #fff;
+        background-color: var(--primary);
+        border: none;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .form-submit-btn:hover {
+        background-color: var(--primary-hover);
+      }
+
+      .form-submit-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .feedback-alert {
+        padding: 1rem 1.25rem;
+        border-radius: var(--radius);
+        margin-bottom: 1.5rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+      }
+
+      .feedback-alert-success {
+        background-color: rgba(34, 197, 94, 0.15);
+        color: #22c55e;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+      }
+
+      .feedback-alert-error {
+        background-color: rgba(239, 68, 68, 0.15);
+        color: #ef4444;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+
+      @media (max-width: 768px) {
         .about-hero-title {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            line-height: 1.2;
+          font-size: 2rem;
         }
 
         .about-hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--muted);
-            max-width: 640px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        .team-section {
-            margin-bottom: 4rem;
-        }
-
-        .team-section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .team-section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .team-section-subtitle {
-            font-size: 1rem;
-            color: var(--muted);
+          font-size: 1rem;
         }
 
         .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+          grid-template-columns: 1fr;
         }
 
-        .team-card {
-            background-color: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .team-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px var(--shadow);
-        }
-
-        .team-card-image {
-            aspect-ratio: 4/3;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1a1a1a 0%, #262626 100%);
-        }
-
-        .team-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .team-card:hover .team-card-image img {
-            transform: scale(1.05);
-        }
-
-        .team-card-content {
-            padding: 1.5rem;
-        }
-
-        .team-card-role {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.25rem;
-        }
-
-        .team-card-name {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .team-card-bio {
-            font-size: 0.9375rem;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
-        .team-card-social {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1.25rem;
-            padding-top: 1.25rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .social-link {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--muted);
-            transition: all 0.2s;
-        }
-
-        .social-link:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .social-link svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Mission Section */
         .mission-section {
-            background: linear-gradient(135deg, var(--card) 0%, #1a1a1a 100%);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 3rem;
-            margin-bottom: 4rem;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+          padding: 2rem;
         }
 
-        .mission-item {
-            text-align: center;
+        .contact-grid {
+          grid-template-columns: 1fr;
         }
 
-        .mission-icon {
-            width: 48px;
-            height: 48px;
-            background-color: rgba(249, 115, 22, 0.15);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            color: var(--primary);
+        .contact-info-card,
+        .contact-form-card {
+          padding: 1.5rem;
         }
-
-        .mission-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .mission-text {
-            font-size: 0.875rem;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        /* Light theme adjustments */
-        [data-theme="light"] .team-card-image {
-            background: linear-gradient(135deg, #e5e5e5 0%, #d4d4d4 100%);
-        }
-
-        [data-theme="light"] .mission-section {
-            background: linear-gradient(135deg, var(--card) 0%, #e5e5e5 100%);
-        }
-
-        @media (max-width: 1024px) {
-            .mission-section {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .about-hero-title {
-                font-size: 2rem;
-            }
-
-            .about-hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .mission-section {
-                padding: 2rem;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-<!-- Header -->
-<header class="header">
-    <jsp:include page="../components/navbar.jsp"/>
-</header>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <jsp:include page="../components/navbar.jsp" />
+    </header>
 
-<!-- Main Content -->
-<main class="page-container">
-    <!-- Hero Section -->
-    <section class="about-hero">
-        <span class="about-hero-tag">Our Story</span>
-        <h1 class="about-hero-title">Meet the Team Behind TechLaptops</h1>
-        <p class="about-hero-subtitle">We are a passionate team of technology enthusiasts dedicated to bringing you the best laptops at competitive prices. Our mission is to make premium computing accessible to everyone.</p>
-    </section>
+    <!-- Main Content -->
+    <main class="page-container">
+      <!-- Hero Section -->
+      <section class="about-hero">
+        <span class="about-hero-tag">Built with Java</span>
+        <h1 class="about-hero-title">
+          A Java Web Store for Modern Laptop Shopping
+        </h1>
+        <p class="about-hero-subtitle">
+          TechLaptops is a complete Java-powered eCommerce experience, designed
+          to help students, professionals, and tech fans find the right laptop
+          with confidence. Browse products, save items to your cart, read
+          reviews, place orders, and manage your account from one polished web
+          app.
+        </p>
+      </section>
 
-    <!-- Mission Section -->
-    <section class="mission-section">
+      <!-- Platform Section -->
+      <section class="mission-section">
         <div class="mission-item">
-            <div class="mission-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                    <path d="M2 17l10 5 10-5" />
-                    <path d="M2 12l10 5 10-5" />
-                </svg>
-            </div>
-            <h3 class="mission-title">Quality First</h3>
-            <p class="mission-text">We partner only with trusted brands and rigorously test every laptop before it reaches our customers.</p>
+          <div class="mission-icon">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <h3 class="mission-title">Java-Powered Reliability</h3>
+          <p class="mission-text">
+            This site is built with Jakarta Servlet technology, secure session
+            handling, and a robust data layer to keep products, carts, and
+            orders working smoothly.
+          </p>
         </div>
         <div class="mission-item">
-            <div class="mission-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-                    <line x1="9" y1="9" x2="9.01" y2="9" />
-                    <line x1="15" y1="9" x2="15.01" y2="9" />
-                </svg>
-            </div>
-            <h3 class="mission-title">Customer Happiness</h3>
-            <p class="mission-text">Your satisfaction is our priority. Our support team is always ready to help you find the perfect laptop.</p>
+          <div class="mission-icon">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+              <line x1="9" y1="9" x2="9.01" y2="9" />
+              <line x1="15" y1="9" x2="15.01" y2="9" />
+            </svg>
+          </div>
+          <h3 class="mission-title">Easy Shopping</h3>
+          <p class="mission-text">
+            From browsing laptops to checkout, every step is optimized for
+            clarity, speed, and a responsive experience across devices.
+          </p>
         </div>
         <div class="mission-item">
-            <div class="mission-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                </svg>
-            </div>
-            <h3 class="mission-title">Innovation</h3>
-            <p class="mission-text">We stay ahead of technology trends to bring you the latest and most innovative computing solutions.</p>
+          <div class="mission-icon">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+          </div>
+          <h3 class="mission-title">Customer Trust</h3>
+          <p class="mission-text">
+            We support product ratings, reviews, secure registration, and
+            detailed order tracking so buyers can shop with confidence.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- Team Section -->
-    <section class="team-section">
+      <!-- Feature Highlights -->
+      <section class="team-section">
         <div class="team-section-header">
-            <h2 class="team-section-title">Our Leadership Team</h2>
-            <p class="team-section-subtitle">The dedicated professionals driving our vision forward</p>
+          <h2 class="team-section-title">What Makes This Site Special</h2>
+          <p class="team-section-subtitle">
+            A smart Java eCommerce platform that brings features and usability
+            together
+          </p>
         </div>
 
         <div class="team-grid">
-            <!-- Team Member 1 -->
-            <article class="team-card">
-                <div class="team-card-image">
-                    <img src="" alt="CEO">
-                </div>
-                <div class="team-card-content">
-                    <span class="team-card-role">CEO</span>
-                    <h3 class="team-card-name">.</h3>
-                    <p class="team-card-bio">.</p>
-                    <div class="team-card-social">
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
+          <article class="team-card">
+            <div class="team-card-image">
+              <img
+                src="${pageContext.request.contextPath}/static/imgUpload/userDefaultimg/default0.png"
+                alt="Catalog browsing"
+              />
+            </div>
+            <div class="team-card-content">
+              <span class="team-card-role">Product Catalog</span>
+              <h3 class="team-card-name">Browse with confidence</h3>
+              <p class="team-card-bio">
+                Search and filter laptops by category, price, and
+                specifications, then compare options before adding the best
+                match to your cart.
+              </p>
+            </div>
+          </article>
 
-            <!-- Team Member 2 -->
-            <article class="team-card">
-                <div class="team-card-image">
-                    <img src="" alt="Chief">
-                </div>
-                <div class="team-card-content">
-                    <span class="team-card-role">..</span>
-                    <h3 class="team-card-name">..</h3>
-                    <p class="team-card-bio">..</p>
-                    <div class="team-card-social">
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="GitHub">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
+          <article class="team-card">
+            <div class="team-card-image">
+              <img
+                src="${pageContext.request.contextPath}/static/imgUpload/userDefaultimg/default0.png"
+                alt="Shopping cart"
+              />
+            </div>
+            <div class="team-card-content">
+              <span class="team-card-role">Shopping Experience</span>
+              <h3 class="team-card-name">Smooth cart and checkout</h3>
+              <p class="team-card-bio">
+                Add items to the cart, update quantities, and complete orders
+                with a clean, intuitive interface backed by a reliable Java
+                backend.
+              </p>
+            </div>
+          </article>
 
-            <!-- Team Member 3 -->
-            <article class="team-card">
-                <div class="team-card-image">
-                    <img src="" alt=", Head">
-                </div>
-                <div class="team-card-content">
-                    <span class="team-card-role">Head </span>
-                    <h3 class="team-card-name">...</h3>
-                    <p class="team-card-bio">...</p>
-                    <div class="team-card-social">
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Dribbble">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.814zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702-1.81-1.61-4.19-2.586-6.795-2.586-.825 0-1.63.1-2.4.285zm10.335 3.483c-.218.29-1.935 2.493-5.724 4.04.24.49.47.985.68 1.486.08.18.15.36.22.53 3.41-.43 6.8.26 7.14.33-.02-2.42-.88-4.64-2.31-6.38z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
+          <article class="team-card">
+            <div class="team-card-image">
+              <img
+                src="${pageContext.request.contextPath}/static/imgUpload/userDefaultimg/default0.png"
+                alt="Ratings and reviews"
+              />
+            </div>
+            <div class="team-card-content">
+              <span class="team-card-role">Trusted Reviews</span>
+              <h3 class="team-card-name">Real feedback from users</h3>
+              <p class="team-card-bio">
+                Explore ratings and reviews from other customers to make better
+                laptop decisions and discover the right product for your needs.
+              </p>
+            </div>
+          </article>
 
-            <!-- Team Member 4 -->
-            <article class="team-card">
-                <div class="team-card-image">
-                    <img src="" alt="Director">
-                </div>
-                <div class="team-card-content">
-                    <span class="team-card-role">Director</span>
-                    <h3 class="team-card-name">....</h3>
-                    <p class="team-card-bio">....</p>
-                    <div class="team-card-social">
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Team Member 5 -->
-            <article class="team-card">
-                <div class="team-card-image">
-                    <img src="" alt=", Manager">
-                </div>
-                <div class="team-card-content">
-                    <span class="team-card-role">Manager</span>
-                    <h3 class="team-card-name">.....</h3>
-                    <p class="team-card-bio">.....</p>
-                    <div class="team-card-social">
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
+          <article class="team-card">
+            <div class="team-card-image">
+              <img
+                src="${pageContext.request.contextPath}/static/imgUpload/userDefaultimg/default0.png"
+                alt="Account security"
+              />
+            </div>
+            <div class="team-card-content">
+              <span class="team-card-role">Secure Access</span>
+              <h3 class="team-card-name">Login, register, and manage orders</h3>
+              <p class="team-card-bio">
+                Secure account registration and login let customers access order
+                history, track purchases, and stay in control of their shopping
+                experience.
+              </p>
+            </div>
+          </article>
         </div>
-    </section>
-</main>
+      </section>
 
-<!-- Footer -->
-<jsp:include page="../components/footer.jsp"/>
+      <!-- Contact Us / Submit Feedback Section -->
+      <section class="contact-section">
+        <div class="contact-section-header">
+          <h2 class="contact-section-title">Contact Us</h2>
+          <p class="contact-section-subtitle">
+            Have a question, suggestion, or just want to say hello? We'd love to hear from you.
+          </p>
+        </div>
 
-<script>
-    // Theme Toggle
-    function toggleTheme() {
+        <div class="contact-grid">
+          <!-- Left Column: Get in Touch -->
+          <div class="contact-info-card">
+            <h3 class="contact-info-title">Get in Touch</h3>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="contact-detail-content">
+                <span class="contact-detail-label">Email</span>
+                <span class="contact-detail-value">support@techlaptops.com</span>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </div>
+              <div class="contact-detail-content">
+                <span class="contact-detail-label">Phone</span>
+                <span class="contact-detail-value">+977-61-123456</span>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="contact-detail-content">
+                <span class="contact-detail-label">Address</span>
+                <span class="contact-detail-value">Lakeside, Pokhara, Kaski, Nepal</span>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="contact-detail-content">
+                <span class="contact-detail-label">Business Hours</span>
+                <span class="contact-detail-value">Sun &ndash; Fri: 9am &ndash; 6pm<br/>Saturday: Closed</span>
+              </div>
+            </div>
+
+            <div class="contact-map">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14064.528812498498!2d83.94898785!3d28.2095831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3995937bbf0376ff%3A0xf6cf823b25802164!2sLakeside%2C%20Pokhara!5e0!3m2!1sen!2snp!4v1716048000000!5m2!1sen!2snp"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Right Column: Send Us a Message -->
+          <div class="contact-form-card">
+            <h3 class="contact-form-title">Send Us a Message</h3>
+
+            <c:if test="${param.feedbackStatus == 'success'}">
+              <div class="feedback-alert feedback-alert-success">
+                Thank you! Your feedback has been submitted successfully.
+              </div>
+            </c:if>
+            <c:if test="${param.feedbackStatus == 'error'}">
+              <div class="feedback-alert feedback-alert-error">
+                Something went wrong. Please fill in all fields and try again.
+              </div>
+            </c:if>
+
+            <form action="${pageContext.request.contextPath}/submitFeedback" method="POST">
+              <div class="form-group">
+                <label for="feedback-name">Name</label>
+                <input
+                  type="text"
+                  id="feedback-name"
+                  name="name"
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="feedback-email">Email</label>
+                <input
+                  type="email"
+                  id="feedback-email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="feedback-subject">Subject</label>
+                <input
+                  type="text"
+                  id="feedback-subject"
+                  name="subject"
+                  placeholder="What is this about?"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="feedback-message">Message</label>
+                <textarea
+                  id="feedback-message"
+                  name="message"
+                  placeholder="Write your message here..."
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="form-submit-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <jsp:include page="../components/footer.jsp" />
+
+    <script>
+      // Theme Toggle
+      function toggleTheme() {
         const html = document.documentElement;
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    }
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      }
 
-    // Load saved theme on page load
-    (function () {
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-    })();
-</script>
-</body>
-
+      // Load saved theme on page load
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      })();
+    </script>
+  </body>
 </html>
