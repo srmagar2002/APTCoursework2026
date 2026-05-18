@@ -73,6 +73,13 @@ public class LoginServlet extends HttpServlet {
 
         System.out.println("Login Successful");
         userDao.updateLastLogin(user.getUser_id());
-        response.sendRedirect(request.getContextPath() + "/products");
+
+        String referer = request.getHeader("Referer");
+        if (referer != null && !referer.isEmpty()) {
+            response.sendRedirect(referer);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/home");
+        }
+
     }
 }

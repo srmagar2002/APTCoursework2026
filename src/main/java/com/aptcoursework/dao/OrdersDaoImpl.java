@@ -68,7 +68,7 @@ public class OrdersDaoImpl implements OrdersDao{
             statement.setString(3, "PREPARING");
 
 //           Adding shipping logic using multi-converting
-            LocalDateTime estimatedDelivery = LocalDateTime.now().plusDays(3);
+            LocalDateTime estimatedDelivery = LocalDateTime.now().plusDays(5);
             Timestamp deliveryDate = Timestamp.valueOf(estimatedDelivery);
             statement.setTimestamp(4, deliveryDate);
             statement.executeUpdate();
@@ -162,10 +162,43 @@ public class OrdersDaoImpl implements OrdersDao{
 
     }
 
+    @Override
+    public Orders fetchOrderById(int orderId, int userId) {
+        // userId is checked in WHERE clause for security
+        // so User A cannot view User B's order by guessing the orderId
+        String sql = "SELECT * FROM orders WHERE orderId = ? AND userId = ?";
+        Connection conn = null;
+
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, orderId);
+            stmt.setInt(2, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Orders order = new Orders(
+                        rs.getInt("userId"),
+                        rs.getDouble("totalAmount"),
+                        rs.getString("status"),
+                        rs.getTimestamp("estimatedDelivery")
+                );
+                order.setOrderId(rs.getInt("orderId"));
+                order.setCreatedAt(rs.getTimestamp("createdAt"));
+                return order;
+            }
+            return null; // not found or doesn't belong to this user
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching order by id: " + e.getMessage());
+            return null;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
 
 
-
-//    Its implementation is halt for now if any updates comes up from member, will be implemented accordingly
+    //    Its implementation is halt for now if any updates comes up from member, will be implemented accordingly
     @Override
     public boolean updateOrderStatus(int orderId, String status) {
         String sql = "UPDATE ORDERS SET status = ? WHERE orderId = ?";
