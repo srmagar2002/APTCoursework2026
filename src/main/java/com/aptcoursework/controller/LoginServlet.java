@@ -78,6 +78,14 @@ public class LoginServlet extends HttpServlet {
         if (user.getRole() == Role.ADMIN) {
             SessionUtil.setAttribute(request, "recordsPerPage", 11);
         }
-        response.sendRedirect(request.getContextPath() + "/products");
+        // response.sendRedirect(request.getContextPath() + "/products");
+
+        String referer = request.getHeader("Referer");
+        if (referer != null && !referer.isEmpty()) {
+            response.sendRedirect(referer);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/home");
+        }
+
     }
 }

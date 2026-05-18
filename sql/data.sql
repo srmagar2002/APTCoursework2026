@@ -321,4 +321,3 @@ VALUES (2, 1, 5, 'Excellent performance'),
        (2, 7, 4, 'Good portability'),
        (3, 8, 5, 'Excellent for students');
 
-
