@@ -460,7 +460,9 @@
                                 <td><fmt:formatDate value="${user.created_at}"
                                                     pattern="yyyy-mm-dd"/></td>
                                 <td>
-                                    <button class="btn-action view" onclick="openDeleteModal()">Delete</button>
+                                    <c:if test="${user.user_id!=1}">
+                                        <button class="btn-action view" onclick="openDeleteModal(${user.user_id},'${user.username}')">Delete</button>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -492,7 +494,7 @@
             </div>
 
             <script>
-                function openDeleteModal(userName, userID) {
+                function openDeleteModal(userID, userName) {
                     document.body.style.overflow = 'hidden';
                     document.getElementById('deleteUserName').textContent = userName;
                     document.getElementById('deleteUserID').value = userID;
@@ -750,8 +752,6 @@
 <script>
     function switchTab(tabName) {
         // Hide all tabs
-
-
 
         const tabs = document.querySelectorAll('.dashboard-tab');
         tabs.forEach(tab => tab.classList.remove('active'));

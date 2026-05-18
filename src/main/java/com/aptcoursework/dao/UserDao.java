@@ -38,4 +38,5 @@ public interface UserDao {
     String usernameByUserID(int userID);
     User findByUserID(int userID);
     ArrayList<User> findAllUsers();
+    boolean deleteUserByID(int userID);
 }

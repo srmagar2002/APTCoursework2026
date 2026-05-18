@@ -52,10 +52,10 @@ public class ProductsServlet extends HttpServlet {
             Integer recordsPerPage = 12;
 
             recordsPerPage = (Integer) request.getSession().getAttribute("recordsPerPage");
+
             if(recordsPerPage == null) {
                 recordsPerPage = 12;
             }
-
 
             int currentPage = 1;
 
@@ -63,6 +63,7 @@ public class ProductsServlet extends HttpServlet {
             String category = request.getParameter("category");
             String price = request.getParameter("pricerange");
             String query = request.getParameter("q");
+
             if (query == null) {
                 query = "";
             }
@@ -111,7 +112,7 @@ public class ProductsServlet extends HttpServlet {
 
                 int start = (currentPage - 1) * recordsPerPage;
 
-                System.out.println("Total Pages after Filter: " + totalFilterPages);
+//                System.out.println("Total Pages after Filter: " + totalFilterPages);
 
                 ArrayList<Laptop> laptops = laptopDao.getLaptopsFilterSearch(query, brand, category, price, start, recordsPerPage);
                 request.setAttribute("currentPage", currentPage);

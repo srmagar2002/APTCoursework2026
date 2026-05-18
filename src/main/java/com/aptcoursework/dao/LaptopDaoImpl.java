@@ -466,7 +466,7 @@ public class LaptopDaoImpl implements LaptopDao {
             stmt.setString(6, searchValue);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-              System.out.println("Total Record By Filter = " + rs.getInt(1));
+//              System.out.println("Total Record By Filter = " + rs.getInt(1));
                 return rs.getInt(1);
 
             }

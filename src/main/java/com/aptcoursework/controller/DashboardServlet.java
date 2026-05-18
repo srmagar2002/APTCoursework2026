@@ -44,7 +44,10 @@ public class DashboardServlet extends HttpServlet {
         if(request.getParameter("tab")!=null){
             tab=request.getParameter("tab");
         }
-        else{
+        else if(request.getSession().getAttribute("tab")!=null){
+            tab= (String) request.getSession().getAttribute("tab");
+        }
+        else {
             tab="overview";
         }
         SessionUtil.setAttribute(request,"tab",tab);
@@ -85,7 +88,7 @@ public class DashboardServlet extends HttpServlet {
                 if(!"userDefaultimg".equals(oldImagePath.substring(0,oldImagePath.indexOf("/")))) {
                     ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload") + "/" + oldImagePath);
                 }
-                
+
                 String uploadPath = getServletContext().getRealPath("/static/imgUpload");
                 String profileImgPath = ImageUtil.userProfilePictureUploader(profileImg, userID, uploadPath);
                 userDaoImpl.insertImgProfilePath(profileImgPath, userID);
@@ -93,6 +96,21 @@ public class DashboardServlet extends HttpServlet {
             else{System.out.println(userName + " profile image unchanged");}
 
             response.sendRedirect(request.getContextPath() + "/dashboard?userID=" + userID);
+        }
+
+        if("delete".equals(action)){
+            int userID = Integer.parseInt(request.getParameter("userID"));
+            UserDaoImpl userDaoImpl = new UserDaoImpl();
+            String oldImagePath = userDaoImpl.findByUserID(userID).getProfileImg();
+            if(!"userDefaultimg".equals(oldImagePath.substring(0,oldImagePath.indexOf("/")))) {
+                ImageUtil.imageDeleter(getServletContext().getRealPath("/static/imgUpload") + "/" + oldImagePath);
+            }
+            if(userDaoImpl.deleteUserByID(userID)){
+                System.out.println("User: " +userID + " user profile has been deleted");
+            }
+            else{System.out.println("User: " +userID + " user profile hasn't been deleted");
+            }
+            response.sendRedirect(request.getContextPath() + "/dashboard?userID=" + 1);
         }
 
     }
