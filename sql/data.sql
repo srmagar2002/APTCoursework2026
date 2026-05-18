@@ -321,3 +321,25 @@ VALUES (2, 1, 5, 'Excellent performance'),
        (2, 7, 4, 'Good portability'),
        (3, 8, 5, 'Excellent for students');
 
+
+
+
+-- Dummy Data to get visuals
+INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 1, 1);
+INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 2, 2);
+INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 3, 1);
+
+
+INSERT INTO orders (userId, totalAmount, status, estimatedDelivery, createdAt)
+VALUES (1, 6267.80, 'PREPARING', DATE_ADD(NOW(), INTERVAL 5 DAY), NOW());
+
+INSERT INTO orders (userId, totalAmount, status, estimatedDelivery, createdAt)
+VALUES (1, 1649.00, 'PREPARING', DATE_ADD('2026-04-28', INTERVAL 5 DAY), '2026-04-28 10:00:00');
+
+
+INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (1, 1, 1, 3499.00);
+INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (1, 2, 1, 2199.00);
+
+
+INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (2, 3, 1, 1649.00);
+
