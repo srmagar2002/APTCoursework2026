@@ -3,6 +3,7 @@ package com.aptcoursework.controller;
 import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.User;
 import com.aptcoursework.utils.ImageUtil;
+import com.aptcoursework.utils.SessionUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 
 @MultipartConfig
@@ -27,14 +29,27 @@ public class DashboardServlet extends HttpServlet {
         UserDaoImpl userDaoImpl = new UserDaoImpl();
 
         User user = userDaoImpl.findByUserID(Integer.parseInt(userID));
-        Timestamp tsLastlog = Timestamp.valueOf(user.getLastLogin());
-        Timestamp tsCreated = Timestamp.valueOf(user.getCreated_at());
+        Timestamp tsLastlog = user.getLastLogin();
+        Timestamp tsCreated = user.getCreated_at();
 
         request.setAttribute("user", user);
         request.setAttribute("lastLogin", tsLastlog);
         request.setAttribute("createdAt", tsCreated);
-        request.getRequestDispatcher("/WEB-INF/views/pages/dashboardPage.jsp").forward(request, response);
 
+        ArrayList<User> users = userDaoImpl.findAllUsers();
+        request.setAttribute("users", users);
+
+
+        String tab="";
+        if(request.getParameter("tab")!=null){
+            tab=request.getParameter("tab");
+        }
+        else{
+            tab="overview";
+        }
+        SessionUtil.setAttribute(request,"tab",tab);
+        request.setAttribute("tab", tab);
+        request.getRequestDispatcher("/WEB-INF/views/pages/dashboardPage.jsp").forward(request, response);
     }
 
     @Override

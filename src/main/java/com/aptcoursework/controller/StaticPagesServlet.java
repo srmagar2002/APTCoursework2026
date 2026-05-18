@@ -15,6 +15,6 @@ public class StaticPagesServlet extends HttpServlet {
                          HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.getRequestDispatcher("/WEB-INF/views/pages/aboutus.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/pages/test.jsp").forward(request, response);
     }
 }
