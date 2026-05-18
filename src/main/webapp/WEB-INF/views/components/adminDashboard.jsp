@@ -21,7 +21,8 @@
             <nav class="sidebar-nav">
                 <ul class="sidebar-menu">
                     <li class="menu-item active" onclick="switchTab('overview')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <rect x="3" y="3" width="7" height="7"/>
                             <rect x="14" y="3" width="7" height="7"/>
                             <rect x="14" y="14" width="7" height="7"/>
@@ -30,14 +31,16 @@
                         <span>Overview</span>
                     </li>
                     <li class="menu-item" onclick="switchTab('sales')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <line x1="12" y1="2" x2="12" y2="22"/>
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                         </svg>
                         <span>Sales</span>
                     </li>
                     <li class="menu-item" onclick="switchTab('products')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                             <line x1="3" y1="6" x2="21" y2="6"/>
                             <path d="M16 10a4 4 0 0 1-8 0"/>
@@ -45,7 +48,8 @@
                         <span>Products</span>
                     </li>
                     <li class="menu-item" onclick="switchTab('orders')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <circle cx="9" cy="21" r="1"/>
                             <circle cx="20" cy="21" r="1"/>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
@@ -53,7 +57,8 @@
                         <span>Orders</span>
                     </li>
                     <li class="menu-item" onclick="switchTab('users')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                             <circle cx="9" cy="7" r="4"/>
                             <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
@@ -62,14 +67,16 @@
                         <span>Users</span>
                     </li>
                     <li class="menu-item" onclick="switchTab('reports')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <line x1="12" y1="2" x2="12" y2="22"/>
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                         </svg>
                         <span>Reports</span>
                     </li>
                     <li class="menu-item" onclick="switchTab('profile')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                             <circle cx="12" cy="7" r="4"/>
                         </svg>
@@ -93,7 +100,8 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-label">Total Revenue</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <line x1="12" y1="2" x2="12" y2="22"/>
                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                             </svg>
@@ -105,7 +113,8 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-label">Total Orders</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <circle cx="9" cy="21" r="1"/>
                                 <circle cx="20" cy="21" r="1"/>
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
@@ -118,7 +127,8 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-label">Active Users</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
                             </svg>
@@ -130,7 +140,8 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-label">Conversion Rate</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"/>
                                 <polyline points="12 12 20 7.5"/>
                                 <polyline points="12 12 12 21"/>
@@ -309,7 +320,9 @@
                             <td><span class="stock high">45</span></td>
                             <td>Premium</td>
                             <td>4.9/5</td>
-                            <td><button class="btn-action edit">Edit</button></td>
+                            <td>
+                                <button class="btn-action edit">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>Dell XPS 15</td>
@@ -318,7 +331,9 @@
                             <td><span class="stock low">8</span></td>
                             <td>Ultrabook</td>
                             <td>4.7/5</td>
-                            <td><button class="btn-action edit">Edit</button></td>
+                            <td>
+                                <button class="btn-action edit">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>HP Spectre 16</td>
@@ -327,7 +342,9 @@
                             <td><span class="stock high">32</span></td>
                             <td>Ultrabook</td>
                             <td>4.6/5</td>
-                            <td><button class="btn-action edit">Edit</button></td>
+                            <td>
+                                <button class="btn-action edit">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>ASUS ROG Gaming</td>
@@ -336,7 +353,9 @@
                             <td><span class="stock medium">15</span></td>
                             <td>Gaming</td>
                             <td>4.8/5</td>
-                            <td><button class="btn-action edit">Edit</button></td>
+                            <td>
+                                <button class="btn-action edit">Edit</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -417,42 +436,34 @@
                         <thead>
                         <tr>
                             <th>User ID</th>
-                            <th>Name</th>
+                            <th>Username</th>
                             <th>Email</th>
                             <th>Role</th>
                             <th>Join Date</th>
-                            <th>Orders</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#USR-001</td>
-                            <td>John Doe</td>
-                            <td>john@example.com</td>
-                            <td><span class="role customer">Customer</span></td>
-                            <td>2024-01-15</td>
-                            <td>5</td>
-                            <td><button class="btn-action view">View</button></td>
-                        </tr>
-                        <tr>
-                            <td>#USR-002</td>
-                            <td>Jane Smith</td>
-                            <td>jane@example.com</td>
-                            <td><span class="role customer">Customer</span></td>
-                            <td>2024-02-10</td>
-                            <td>3</td>
-                            <td><button class="btn-action view">View</button></td>
-                        </tr>
-                        <tr>
-                            <td>#USR-003</td>
-                            <td>Bob Johnson</td>
-                            <td>bob@example.com</td>
-                            <td><span class="role admin">Admin</span></td>
-                            <td>2023-12-01</td>
-                            <td>—</td>
-                            <td><button class="btn-action view">View</button></td>
-                        </tr>
+
+                        <c:forEach var="user" items="${users}" >
+                            <tr>
+                                <td>${user.user_id}</td>
+                                <td>
+                                    <div class="user-cell">
+                                        <img src="${pageContext.request.contextPath}/static/imgUpload/${user.profileImg}"
+                                             alt="User" class="user-avatar">
+                                        <span>${user.username}</span>
+                                    </div>
+                                </td>
+                                <td>${user.email}</td>
+                                <td><span class="role customer">${user.role}</span></td>
+                                <td><fmt:formatDate value="${Timestamp.valueof(user.created_at)}"
+                                                    pattern="MMM dd, yyyy hh:mm a"/></td>
+                                <td>
+                                    <button class="btn-action view">Delete</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -716,7 +727,7 @@
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 document.getElementById('profilePicturePreview').src = e.target.result;
             };
             reader.readAsDataURL(file);

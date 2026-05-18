@@ -6,6 +6,7 @@ import com.aptcoursework.utils.DatabaseConnection;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 /**
@@ -323,4 +324,47 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+
+    @Override
+    public ArrayList<User> findAllUsers() {
+        Connection conn = null;
+        String sql = "SELECT * FROM users";
+
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<User> users = new ArrayList<>();
+            while (rs.next()) {
+                Role role;
+                try {
+                    role = Role.valueOf(rs.getString("role").toUpperCase());
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    role = Role.CUSTOMER;
+                }
+                User user = new User(
+                        rs.getInt("user_id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("password_hash"),
+                        rs.getString("profileImg"),
+                        role,
+                        rs.getTimestamp("lastLogin").toLocalDateTime(),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("phoNo"),
+                        rs.getString("bio")
+                );
+                users.add(user);
+            }
+            return users;
+        } catch (SQLException e) {
+            System.out.println("Error in getting users" + e.getMessage());
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return null;
+    }
 }

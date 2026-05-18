@@ -13,6 +13,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 
 @MultipartConfig
@@ -33,6 +34,9 @@ public class DashboardServlet extends HttpServlet {
         request.setAttribute("user", user);
         request.setAttribute("lastLogin", tsLastlog);
         request.setAttribute("createdAt", tsCreated);
+
+        ArrayList<User> users = userDaoImpl.findAllUsers();
+        request.setAttribute("users", users);
         request.getRequestDispatcher("/WEB-INF/views/pages/dashboardPage.jsp").forward(request, response);
 
     }
