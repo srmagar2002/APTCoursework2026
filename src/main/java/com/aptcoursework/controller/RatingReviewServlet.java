@@ -1,7 +1,9 @@
 package com.aptcoursework.controller;
 
 import com.aptcoursework.dao.RatingDaoImpl;
+import com.aptcoursework.dao.UserDaoImpl;
 import com.aptcoursework.entity.Rating;
+import com.aptcoursework.entity.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,13 +17,39 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * Servlet handling the retrieval and calculation of product ratings and reviews.
+ * Computes average ratings, rating distribution statistics, and user rating status.
+ * @author Sugam Rana Magar
+ */
 @WebServlet("/rate")
 public class RatingReviewServlet extends HttpServlet {
+    /**
+     * Handles GET requests by retrieving ratings for a product and calculating statistics.
+     * Aggregates average rating, total count, and rating distribution by star value.
+     * Also checks if a specific user has already rated the product.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String userIDstring= request.getParameter("userID");
         int laptopID = Integer.parseInt(request.getParameter("laptopID"));
         RatingDaoImpl ratingDao = new RatingDaoImpl();
+
+       if(userIDstring != null) {
+           int userID = Integer.parseInt(userIDstring);
+           Rating rating = ratingDao.getRatingByUserID(userID, laptopID);
+           if (rating != null) {
+               request.setAttribute("isRated", true);
+               request.setAttribute("userRating", rating);
+               System.out.println(rating.getUsername() + " has rated");
+           } else {
+               UserDaoImpl userDao = new UserDaoImpl();
+               String username = userDao.usernameByUserID(userID);
+               request.setAttribute("isRated", false);
+               System.out.println(username + " has not rated");
+           }
+       }
 
         ArrayList<Rating> ratings = ratingDao.getRatingsByLaptop(laptopID);
         request.setAttribute("ratings", ratings);
@@ -29,7 +57,7 @@ public class RatingReviewServlet extends HttpServlet {
         double avgRating = ratingDao.getAvgRatingbyLaptop(laptopID);
         DecimalFormat df = new DecimalFormat("#.#");
         request.setAttribute("avgRating", df.format(avgRating));
-
+        request.setAttribute("avgRatingRounded", (int) avgRating);
 
         int totalRating = ratings.size();
         request.setAttribute("totalRating", totalRating);
@@ -55,13 +83,14 @@ public class RatingReviewServlet extends HttpServlet {
         ratingTotal.put("four", percentageForFour);
         ratingTotal.put("five", percentageForFive);
         request.setAttribute("ratingTotal", ratingTotal);
-
-
+        
         request.getRequestDispatcher("/WEB-INF/views/components/ratingAndReview.jsp").forward(request, response);
-
-
     }
 
+    /**
+     * Handles POST requests by adding a new rating and review for a product.
+     * Validates and stores the rating, then redirects back to the product view page.
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -75,7 +104,13 @@ public class RatingReviewServlet extends HttpServlet {
 
             String userID = request.getParameter("userid");
             rating.setUserID(Integer.parseInt(userID));
+
             String newrating = request.getParameter("newrating");
+
+            if (newrating == null || newrating.isEmpty()) {
+                newrating = "1";
+            }
+
             rating.setRating(Integer.parseInt(newrating));
             String review = request.getParameter("review");
             rating.setReview(review);
@@ -91,6 +126,22 @@ public class RatingReviewServlet extends HttpServlet {
             }
 
             response.sendRedirect(request.getContextPath() + "/productView?laptopID=" + laptopID);
+        }
+
+        if("update".equals(action)) {
+
+            String laptopID = request.getParameter("laptopid");
+            String userID = request.getParameter("userid");
+            String newrating = request.getParameter("newrating");
+            String review = request.getParameter("review");
+
+            RatingDaoImpl ratingDao = new RatingDaoImpl();
+            Boolean isUpdated = ratingDao.updateRatingReviewByLaptopUser(Integer.parseInt(userID), Integer.parseInt(laptopID), Integer.parseInt(newrating), review);
+
+            if(isUpdated) {
+                response.sendRedirect(request.getContextPath() + "/productView?laptopID=" + laptopID);
+            }
+
         }
 
 

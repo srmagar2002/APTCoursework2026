@@ -9,16 +9,13 @@ IGNORE INTO users (username,email,password_hash,role) VALUES ('admin'
 
 /* customers */
 INSERT
-IGNORE INTO users (username,email,password_hash,role) VALUES
-       ('sugam','sugam@sugam.com','$2a$10$jegFIlpCS74MO/mB25e9nulmuAj6chcLnQ764sHR7sfKZd6/PmTW2' /*Sugam&123*/,'CUSTOMER'),
-       ('heaven','heaven@heaven.com','$2a$10$lOk71gYCTkRFKE29aG604OkuhWAZC579NuvOCpbIj9gFTogsvSCjq' /*Heaven&123*/,'CUSTOMER'),
-       ('kushal','kushal@kushal.com','$2a$10$WRY2N7z77ruGR7JX8POeTe3gvsGrs5Dp582fr6ZXVhkPOn8VxUmGW' /*Kushal&123*/,'CUSTOMER'),
-       ('paras','paras@paras.com','$2a$10$6IReMXxVy84EOiYzOBNH5OasR8dMUvzPVKPcP/Tcc66QPQl.aZYXC'/*Paras&123*/,'CUSTOMER'),
-       ('suzan','suzan@suzan.com','$2a$10$cxgcPQEt6w.QoHa1whbVDu.WEg5b8sJ2LMSIeWXPjh1HicJJvtudy' /*Suzan&123*/,'CUSTOMER'),
-('sangam','sangam@sangam.com','$2a$10$cMoHlU259yfNhbxrQgkPuOj3tK1PvAojNVbKizjtosCuy5nPBENl2' /*Sangam&123*/,'CUSTOMER');
-
-
-
+IGNORE INTO users (username,email,password_hash,role,profileImg) VALUES
+       ('sugam','sugam@sugam.com','$2a$10$jegFIlpCS74MO/mB25e9nulmuAj6chcLnQ764sHR7sfKZd6/PmTW2' /*Sugam&123*/,'CUSTOMER','userImg/2.gif'),
+       ('heaven','heaven@heaven.com','$2a$10$lOk71gYCTkRFKE29aG604OkuhWAZC579NuvOCpbIj9gFTogsvSCjq' /*Heaven&123*/,'CUSTOMER','userImg/3.jpg'),
+       ('kushal','kushal@kushal.com','$2a$10$WRY2N7z77ruGR7JX8POeTe3gvsGrs5Dp582fr6ZXVhkPOn8VxUmGW' /*Kushal&123*/,'CUSTOMER','userDefaultimg/default0.png'),
+       ('paras','paras@paras.com','$2a$10$6IReMXxVy84EOiYzOBNH5OasR8dMUvzPVKPcP/Tcc66QPQl.aZYXC'/*Paras&123*/,'CUSTOMER','userImg/5.jpg'),
+       ('suzan','suzan@suzan.com','$2a$10$cxgcPQEt6w.QoHa1whbVDu.WEg5b8sJ2LMSIeWXPjh1HicJJvtudy' /*Suzan&123*/,'CUSTOMER','userDefaultimg/default0.png'),
+       ('sangam','sangam@sangam.com','$2a$10$cMoHlU259yfNhbxrQgkPuOj3tK1PvAojNVbKizjtosCuy5nPBENl2' /*Sangam&123*/,'CUSTOMER','userDefaultimg/default0.png');
 
 INSERT
 IGNORE INTO laptop (
@@ -268,7 +265,7 @@ IGNORE INTO laptop (
        2799.99,4,10,2900,'Black',8);
 
 
-INSERT INTO rating (userID, laptopID, rating, review)
+INSERT IGNORE INTO rating (userID, laptopID, rating, review)
 VALUES (2, 1, 5, 'Excellent performance'),
        (2, 2, 4, 'Very good laptop'),
        (2, 3, 3, 'Average experience'),
@@ -323,3 +320,4 @@ VALUES (2, 1, 5, 'Excellent performance'),
 
        (2, 7, 4, 'Good portability'),
        (3, 8, 5, 'Excellent for students');
+

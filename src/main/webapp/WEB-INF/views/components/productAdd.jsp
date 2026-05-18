@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<c:if test="${sessionScope.user.role== 'ADMIN' }">
+<c:if test="${sessionScope.user.role == 'ADMIN' }">
     <form action="${pageContext.request.contextPath}/products" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="add"/>
 

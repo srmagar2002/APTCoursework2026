@@ -9,9 +9,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * Servlet handling user logout functionality.
+ * Invalidates the user session and redirects to the login page.
+ *
+ * @author Sugam Rana Magar
+ */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 
+    /**
+     * Handles GET requests by invalidating the user session and redirecting to login page.
+     */
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)

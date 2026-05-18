@@ -1,7 +1,9 @@
 package com.aptcoursework.entity;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Orders {
@@ -10,12 +12,12 @@ public class Orders {
     private int userId;
     private double totalAmount;
     private String status;
-    private Date estimatedDelivery;
+    private Timestamp estimatedDelivery;
     private Timestamp createdAt;
     private ArrayList<OrderItems> orderItems;
 
 
-    public Orders(int userId, double totalAmount, String status, Date estimatedDelivery) {
+    public Orders(int userId, double totalAmount, String status, Timestamp estimatedDelivery) {
         this.userId = userId;
         this.totalAmount = totalAmount;
         this.status = status;
@@ -24,6 +26,14 @@ public class Orders {
 
     public int getOrderId() {
         return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
     public ArrayList<OrderItems> getItems(){
@@ -46,8 +56,30 @@ public class Orders {
         return status;
     }
 
-    public Date getEstimatedDelivery() {
+    public Timestamp getEstimatedDelivery() {
         return estimatedDelivery;
+    }
+
+
+//    Helper method for dynamic status
+    public String getDynamicStatus() {
+        if (createdAt == null) return "PREPARING";
+
+        LocalDateTime now      = LocalDateTime.now();
+        LocalDateTime ordered  = createdAt.toLocalDateTime();
+        LocalDateTime delivery = estimatedDelivery.toLocalDateTime();
+
+        if (now.isAfter(delivery)) {
+            return "DELIVERED";
+        } else if (now.isAfter(ordered.plusDays(2))) {
+            return "OUT_FOR_DELIVERY";
+        } else if (now.isAfter(ordered.plusDays(1).plusHours(12))) {
+            return "SHIPPED";
+        } else if (now.isAfter(ordered.plusHours(12))) {
+            return "IN_TRANSIT";
+        } else {
+            return "PREPARING";
+        }
     }
 
     public Timestamp getCreatedAt() {

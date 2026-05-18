@@ -1,6 +1,7 @@
 package com.aptcoursework.dao;
 
 
+import com.aptcoursework.entity.Laptop;
 import com.aptcoursework.utils.DatabaseConnection;
 import com.aptcoursework.entity.Cart;
 
@@ -46,6 +47,7 @@ public class cartDaoImpl implements cartDao {
                 PreparedStatement insertStm = conn.prepareStatement(insertLaptop);
                 insertStm.setInt(1, userId);
                 insertStm.setInt(2, laptopId);
+                insertStm.setInt(3, 1);
 
                 int numb = insertStm.executeUpdate();
                 System.out.println(numb+ " rows have been updatd");
@@ -63,14 +65,21 @@ public class cartDaoImpl implements cartDao {
     }
 
 
-    public ArrayList<Cart> fetchCartItems(){
+
+
+    public ArrayList<Cart> fetchCartItemsByUserId(int userId){
         ArrayList<Cart> cartItems = new ArrayList<>();
 
         Connection conn = null;
         try{
             conn = DatabaseConnection.getConnection();
-            String sql = "SELECT * FROM CART";
+            String sql = "SELECT c.cartId, c.userId, c.laptopId, c.quantity, l.title, l.price, l.thumbnailUrl," +
+                         " l.processor, l.ram, l.storage, l.color " +
+                         "FROM cart c JOIN laptop l " +
+                         "ON c.laptopId = l.laptopId " +
+                         "WHERE userId = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, userId);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 Cart cartItem = new Cart(
@@ -79,6 +88,17 @@ public class cartDaoImpl implements cartDao {
                         rs.getInt("laptopId"),
                         rs.getInt("quantity")
                 );
+
+                Laptop laptop = new Laptop();
+                laptop.setTitle(rs.getString("title"));
+                laptop.setPrice(rs.getBigDecimal("price"));
+                laptop.setThumbnailUrl(rs.getString("thumbnailUrl"));
+                laptop.setProcessor(rs.getString("processor"));
+                laptop.setRam(rs.getString("ram"));
+                laptop.setStorage(rs.getString("storage"));
+                laptop.setColor(rs.getString("color"));
+
+                cartItem.setLaptop(laptop);
                 cartItems.add(cartItem);
             }
             return cartItems;
@@ -119,14 +139,13 @@ public class cartDaoImpl implements cartDao {
 
             }
 
-            return true;
-
         }catch(SQLException e){
-            System.out.println("Eror while deleting quantity "+e.getMessage());
+            System.out.println("Error while deleting quantity "+e.getMessage());
             return false;
         }finally{
             DatabaseConnection.closeConnection(conn);
         }
+        return false;
 
     }
 
