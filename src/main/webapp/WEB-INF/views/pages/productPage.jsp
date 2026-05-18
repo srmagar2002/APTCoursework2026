@@ -6,17 +6,17 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/cart.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
+
 </head>
 <body>
 
 
-<header class="header">
-    <jsp:include page="../components/navbar.jsp"/>
-</header>
+<jsp:include page="../components/navbar.jsp"/>
+
 
 <main class="page-container">
-
     <!-- Page Header -->
     <div class="page-header" id="products">
         <h2 class="page-title">All Laptops</h2>
@@ -144,29 +144,94 @@
                    placeholder="Search laptops...">
         </div>
     </form>
-    <div class="products-grid" id="products-grid">
-        <c:if test="${sessionScope.user.role=='ADMIN'}">
 
-                    <article class="product-card add-product-card">
-                        <a href="${pageContext.request.contextPath}/products?action=add">
-                            <div class="product-image">
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="12" y1="5" x2="12" y2="19"/>
-                                    <line x1="5" y1="12" x2="19" y2="12"/>
-                                </svg>
-                            </div>
-                            <div class="product-content">
-                                <h3 class="product-name">Add New Product</h3>
-                            </div>
-                        </a>
-                    </article>
-        </c:if>
+    <div class="products-grid" id="products-grid">
         <jsp:include page="../components/products.jsp"/>
     </div>
+
+
+    <div class="pagination-section">
+        <c:choose>
+            <c:when test="${hasFilters}">
+                <button type="button"
+                        class="pagination-btn pagination-prev"
+                        <c:if test="${currentPage==1}">disabled</c:if>
+                        onclick="previousPage()" id="prevBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    Previous
+                </button>
+            </c:when>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/products?page=${currentPage-1}"
+                   class="pagination-btn pagination-prev  <c:if test="${currentPage==1}">disabled</c:if>"
+                   onclick="previousPage()" id="prevBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    Previous
+                </a></c:otherwise>
+        </c:choose>
+
+        <div class="pagination-info">
+            <span class="current-page" id="currentPage">${currentPage}</span>
+            <input type="hidden" name="page" id="currentPageInput" value="${currentPage}" form="filtersForm">
+            <span class="pagination-divider">of</span>
+            <span class="total-pages" id="totalPages">${totalPages}</span>
+        </div>
+
+        <c:choose>
+            <c:when test="${hasFilters}">
+                <button type="button"
+                        class="pagination-btn pagination-next"
+                        <c:if test="${currentPage>=totalPages}">disabled</c:if>
+                        onclick="nextPage()" id="nextBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    Next
+                </button>
+            </c:when>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/products?page=${currentPage+1}"
+                   class="pagination-btn pagination-next <c:if test="${currentPage>=totalPages}">disabled</c:if>"
+                   onclick="nextPage()" id="nextBtn">
+                    Next
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+            </c:otherwise>
+        </c:choose>
+    </div>
+
 </main>
 
 <jsp:include page="../components/footer.jsp"/>
 
+<c:if test="${sessionScope.user.role=='ADMIN'}">
+    <div id="deleteModal" class="delete-modal">
+        <div class="delete-modal-content delete-modal-danger">
+            <div class="delete-modal-header">
+                <h2>Delete Product</h2>
+                <button type="button" class="delete-modal-close" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            <div class="delete-modal-body">
+                <p>Are you sure you want to delete <strong id="deleteProductName"></strong>?</p>
+                <p class="warning-text">This action cannot be undone.</p>
+            </div>
+            <div class="delete-modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                <form action="${pageContext.request.contextPath}/products" method="post" style="display: inline;">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" id="deleteProductId" name="laptopid">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</c:if>
 <script>
 
     let debounceTimer;
@@ -187,11 +252,47 @@
             )
                 .then(res => res.text())
                 .then(html => {
-                    // console.log(html);
+                    console.log(html);
                     document.getElementById("products-grid").innerHTML = html;
                 });
         }, 500);
     });
+
+
+    let currentPage = <c:out value="${currentPage}" default="1"/> ;
+    const totalPages = ${totalPages};
+
+    function updatePaginationState() {
+        document.getElementById('currentPage').textContent = currentPage;
+        document.getElementById('currentPageInput').value = currentPage;
+    }
+
+    function previousPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            updatePaginationState();
+            if(${hasFilters}){
+                document.getElementById('filtersForm').submit();
+            }
+            console.log(`[v0] Navigated to page ${currentPage}`);
+        }
+    }
+
+    function nextPage() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            updatePaginationState();
+            if(${hasFilters}){
+                document.getElementById('filtersForm').submit();
+            }
+            console.log(`[v0] Navigated to page ${currentPage}`);
+        }
+    }
+
+    // Initialize pagination on page load
+    window.addEventListener('DOMContentLoaded', updatePaginationState);
+
+
 </script>
 
 </body>

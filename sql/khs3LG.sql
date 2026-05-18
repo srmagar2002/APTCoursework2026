@@ -6,7 +6,13 @@ KHS3LG;
 
 SET
 FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS rating;
+DROP TABLE IF EXISTS cart;
+DROP TABLE IF EXISTS orders;
+
+
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS laptop;
 SET
@@ -19,7 +25,15 @@ CREATE TABLE users
     email         VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     role          VARCHAR(10)  NOT NULL,
-    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at    TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    lastLogin     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    profileImg    VARCHAR(255) DEFAULT 'userDefaultimg/default0.png',
+
+    firstName     VARCHAR(100) ,
+    lastName      VARCHAR(100) ,
+    phoNo         VARCHAR(20),
+    bio            TEXT,
+
     CONSTRAINT role_const CHECK (role IN ('ADMIN', 'CUSTOMER'))
 );
 
@@ -33,10 +47,10 @@ CREATE TABLE laptop
     title              TEXT           NOT NULL,
     description        TEXT,
     imgUrl             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img/', CAST(laptopID AS CHAR), '.jpg')),
-    img1Url            VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img1/', CAST(laptopID AS CHAR), '.jpg')),
-    img2Url            VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img2/', CAST(laptopID AS CHAR), '.jpg')),
+    img1Url             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img1/', CAST(laptopID AS CHAR), '.jpg')),
+    img2Url             VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('img2/', CAST(laptopID AS CHAR), '.jpg')),
     thumbnailUrl       VARCHAR(255) GENERATED ALWAYS AS ( CONCAT('thumb/', CAST(laptopID AS CHAR), '.jpg')),
-    category           VARCHAR(200)            DEFAULT 'General',
+    `category`          VARCHAR(200)    DEFAULT 'General',
 
 /*SPECS*/
     processor          VARCHAR(200)   NOT NULL,
@@ -44,7 +58,7 @@ CREATE TABLE laptop
     storage            VARCHAR(200)   NOT NULL,
     storageType        VARCHAR(200)   NOT NULL,
     graphicsCard       VARCHAR(200)   NOT NULL,
-    screenSize         VARCHAR(200)   NOT NULL,
+    screenSize         DECIMAL(10, 2) NOT NULL,
     resolution         VARCHAR(200)   NOT NULL,
     operatingSystem    VARCHAR(200)   NOT NULL DEFAULT 'Windows',
 
@@ -67,30 +81,13 @@ CREATE TABLE laptop
 /*METADATA*/
     createdAt          TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
     updatedAt          TIMESTAMP               DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CONSTRAINT categoryCheck CHECK (category IN
+    CONSTRAINT categoryCheck CHECK (`category` IN
                                     ('Gaming', 'Ultrabook', 'Business', 'Student', 'Convertible', 'Workstation',
-                                     'General', 'Professional')),
+                                     'General')),
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
-    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'macOS', 'Chrome OS', 'Linux')),
+    CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Linux')),
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
-
 );
-
-CREATE TABLE rating
-(
-    ratingID INT AUTO_INCREMENT PRIMARY KEY,
-    userID INT NOT NULL ,
-    laptopID INT NOT NULL ,
-    rating INT DEFAULT NULL,
-    review TEXT,
-    ratingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-
-    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users(user_id),
-    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop(laptopID),
-    CONSTRAINT ratingCheck CHECK (rating BETWEEN 1 AND 5 ),
-    CONSTRAINT unique_user_laptop UNIQUE (userID, laptopID)
-);
-
 /*
 Category Explanation
 Gaming -	High-performance for gaming
@@ -100,6 +97,54 @@ Student -	Affordable, simple laptops
 Convertible -	2-in-1 touch laptops
 Workstation -	Powerful for professional tasks (CAD, rendering)
 General	Default - general-purpose
-*/
+  */
 
 
+CREATE TABLE cart (
+
+    cartId     INT PRIMARY KEY AUTO_INCREMENT,
+    userId     INT NOT NULL,
+    laptopId   INT NOT NULL,
+    quantity   INT NOT NULL DEFAULT 1,
+
+    CONSTRAINT fk_user_cart FOREIGN KEY (userId) REFERENCES users(user_id),
+    CONSTRAINT fk_laptop_cart FOREIGN KEY (laptopId) REFERENCES laptop(laptopID)
+
+);
+
+CREATE TABLE orders (
+    orderId INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT,
+    totalAmount DECIMAL(10, 2) NOT NULL,
+    status VARCHAR(20),
+    estimatedDelivery TIMESTAMP,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_user_orders FOREIGN KEY (userId) REFERENCES users(user_id)
+);
+
+CREATE TABLE order_items (
+     orderItemId INT AUTO_INCREMENT PRIMARY KEY,
+     orderId INT,
+     laptopId INT,
+     quantity INT,
+     price    DECIMAL(10, 2) NOT NULL,
+
+     CONSTRAINT fk_order_items FOREIGN KEY (orderId) REFERENCES orders(orderId),
+     CONSTRAINT fk_laptop_items FOREIGN KEY (laptopId) REFERENCES laptop(laptopID)
+);
+
+CREATE TABLE rating
+(
+    ratingID   INT AUTO_INCREMENT PRIMARY KEY,
+    userID     INT NOT NULL,
+    laptopID   INT NOT NULL,
+    rating     INT       DEFAULT NULL,
+    review     TEXT,
+    ratingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES users (user_id) ON DELETE CASCADE,
+    CONSTRAINT laptopFK FOREIGN KEY (laptopID) REFERENCES laptop (laptopID) ON DELETE CASCADE,
+    CONSTRAINT ratingCheck CHECK (rating BETWEEN 1 AND 5 ),
+    CONSTRAINT unique_user_laptop UNIQUE (userID, laptopID)
+);
