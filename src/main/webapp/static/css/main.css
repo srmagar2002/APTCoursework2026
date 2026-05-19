@@ -722,6 +722,7 @@ img {
     background-color: var(--primary);
     color: #fff;
     border-radius: 9999px;
+    z-index: 500;
 }
 
 .product-content {

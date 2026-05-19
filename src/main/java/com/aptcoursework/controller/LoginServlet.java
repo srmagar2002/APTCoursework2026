@@ -77,6 +77,7 @@ public class LoginServlet extends HttpServlet {
         userDao.updateLastLogin(user.getUser_id());
         if (user.getRole() == Role.ADMIN) {
             SessionUtil.setAttribute(request, "recordsPerPage", 11);
+           response.sendRedirect(request.getContextPath() + "/dashboard?userID=1"); return;
         }
         // response.sendRedirect(request.getContextPath() + "/products");
 
@@ -84,6 +85,7 @@ public class LoginServlet extends HttpServlet {
         if (referer != null && !referer.isEmpty()) {
             response.sendRedirect(referer);
         } else {
+
             response.sendRedirect(request.getContextPath() + "/home");
         }
 

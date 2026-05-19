@@ -146,10 +146,10 @@
                                 <span class="detail-value"><fmt:formatDate value="${lastLogin}"
                                                                            pattern="MMM dd, yyyy hh:mm a"/></span>
                             </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Total Orders</span>
-                                <span class="detail-value">1,284</span>
-                            </div>
+<%--                            <div class="detail-item">--%>
+<%--                                <span class="detail-label">Total Orders</span>--%>
+<%--                                <span class="detail-value">1,284</span>--%>
+<%--                            </div>--%>
                             <div class="detail-item">
                                 <span class="detail-label">Account Type</span>
                                 <span class="detail-value">
@@ -160,33 +160,33 @@
                     </div>
 
                     <!-- Security Card -->
-                    <div class="profile-info-card">
-                        <h3>Security</h3>
+<%--                    <div class="profile-info-card">--%>
+<%--                        <h3>Security</h3>--%>
 
-                        <div class="security-options">
-                            <div class="security-item">
-                                <div>
-                                    <h4>Password</h4>
-                                    <p class="muted">Change your password regularly to keep your account secure</p>
-                                </div>
-                                <button class="btn btn-ghost">Change Password</button>
-                            </div>
-                            <div class="security-item">
-                                <div>
-                                    <h4>Two-Factor Authentication</h4>
-                                    <p class="muted">Add an extra layer of security to your account</p>
-                                </div>
-                                <button class="btn btn-ghost">Enable 2FA</button>
-                            </div>
-                            <div class="security-item">
-                                <div>
-                                    <h4>Active Sessions</h4>
-                                    <p class="muted">Manage your active sessions and devices</p>
-                                </div>
-                                <button class="btn btn-ghost">View Sessions</button>
-                            </div>
-                        </div>
-                    </div>
+<%--                        <div class="security-options">--%>
+<%--                            <div class="security-item">--%>
+<%--                                <div>--%>
+<%--                                    <h4>Password</h4>--%>
+<%--                                    <p class="muted">Change your password regularly to keep your account secure</p>--%>
+<%--                                </div>--%>
+<%--                                <button class="btn btn-ghost">Change Password</button>--%>
+<%--                            </div>--%>
+<%--                            <div class="security-item">--%>
+<%--                                <div>--%>
+<%--                                    <h4>Two-Factor Authentication</h4>--%>
+<%--                                    <p class="muted">Add an extra layer of security to your account</p>--%>
+<%--                                </div>--%>
+<%--                                <button class="btn btn-ghost">Enable 2FA</button>--%>
+<%--                            </div>--%>
+<%--                            <div class="security-item">--%>
+<%--                                <div>--%>
+<%--                                    <h4>Active Sessions</h4>--%>
+<%--                                    <p class="muted">Manage your active sessions and devices</p>--%>
+<%--                                </div>--%>
+<%--                                <button class="btn btn-ghost">View Sessions</button>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
             </div>
         </section>

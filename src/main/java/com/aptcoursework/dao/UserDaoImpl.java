@@ -386,4 +386,26 @@ public class UserDaoImpl implements UserDao {
         }
         return false;
     }
+
+    @Override
+    public int countAllCustomers() {
+        Connection conn = null;
+        String sql = "SELECT COUNT(*) FROM users where role='CUSTOMER'";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting users" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
 }

@@ -219,4 +219,128 @@ public class OrdersDaoImpl implements OrdersDao{
             DatabaseConnection.closeConnection(conn);
         }
     }
+
+    @Override
+    public ArrayList<Orders> fetchAllOrders(){
+        ArrayList<Orders> orders = new ArrayList<>();
+        String sql = "SELECT o.orderId, o.userId, o.totalAmount, o.status, o.estimatedDelivery, o.createdAt, u.username FROM orders o LEFT JOIN users u ON o.userID = u.user_id ORDER BY createdAt DESC";
+        Connection conn = null;
+
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Orders order = new Orders(
+                        rs.getInt("orderId"),
+                        rs.getInt("userId"),
+                        rs.getDouble("totalAmount"),
+                        rs.getString("status"),
+                        rs.getTimestamp("estimatedDelivery"),
+                        rs.getTimestamp("createdAt"),
+                        rs.getString("username")
+                );
+                orders.add(order);
+            }
+            System.out.println("Total Orders: "+orders.size());
+            return orders;
+        }
+        catch(SQLException e){
+            System.out.println("Error while fetching orders " +  e.getMessage());
+            return null;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+    @Override
+    public int countAllOrders() {
+        Connection conn = null;
+        String sql = "SELECT COUNT(*) FROM orders";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getting orders" + e.getMessage());
+            return 0;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
+
+        @Override
+    public double sumTotalAmount(){
+        Connection conn = null;
+        String sql = "select SUM(totalAmount) from orders;";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting Total Amount" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
+
+    @Override
+    public double sumTotalAmountCurrentMonth(){
+        Connection conn = null;
+        String sql = "SELECT SUM(totalAmount) FROM orders WHERE YEAR(createdAt) = YEAR(NOW()) AND MONTH(createdAt) = MONTH(NOW())";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                double result = rs.getDouble(1);
+                // Handle NULL result from SUM
+                return rs.wasNull() ? 0 : result;
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting Total Amount" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+        //SELECT SUM(totalAmount) FROM orders WHERE YEAR(createdAt) = YEAR(DATE_SUB(NOW(), INTERVAL 1 MONTH)) AND MONTH(createdAt) = MONTH(DATE_SUB(NOW(), INTERVAL 1 MONTH))
+    }
+    @Override
+    public double sumTotalAmountLastMonth(){
+        Connection conn = null;
+        String sql = "SELECT SUM(totalAmount) FROM orders WHERE YEAR(createdAt) = YEAR(DATE_SUB(NOW(), INTERVAL 1 MONTH)) AND MONTH(createdAt) = MONTH(DATE_SUB(NOW(), INTERVAL 1 MONTH))";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                double result = rs.getDouble(1);
+                // Handle NULL result from SUM
+                return rs.wasNull() ? 0 : result;
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting Total Amount" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+
+    }
 }
