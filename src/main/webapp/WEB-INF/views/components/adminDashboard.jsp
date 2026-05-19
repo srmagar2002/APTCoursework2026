@@ -30,14 +30,14 @@
                         </svg>
                         <span>Overview</span>
                     </li>
-                    <li class="menu-item <c:if test="${tab=='sales'}">active</c:if>" onclick="switchTab('sales')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2">
-                            <line x1="12" y1="2" x2="12" y2="22"/>
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                        </svg>
-                        <span>Sales</span>
-                    </li>
+<%--                    <li class="menu-item <c:if test="${tab=='sales'}">active</c:if>" onclick="switchTab('sales')">--%>
+<%--                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
+<%--                             stroke-width="2">--%>
+<%--                            <line x1="12" y1="2" x2="12" y2="22"/>--%>
+<%--                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>--%>
+<%--                        </svg>--%>
+<%--                        <span>Sales</span>--%>
+<%--                    </li>--%>
                     <li class="menu-item" onclick="switchToProducts()">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2">
@@ -107,7 +107,7 @@
                             </svg>
                         </div>
                         <div class="stat-value">Rs. ${sumTotalAmount}</div>
-<%--                        <div class="stat-change positive">↑ 12.5% from last month</div>--%>
+                        <%--                        <div class="stat-change positive">↑ 12.5% from last month</div>--%>
                     </div>
 
                     <div class="stat-card">
@@ -121,7 +121,7 @@
                             </svg>
                         </div>
                         <div class="stat-value">${orderCount}</div>
-<%--                        <div class="stat-change positive">↑ 8.2% from last month</div>--%>
+                        <%--                        <div class="stat-change positive">↑ 8.2% from last month</div>--%>
                     </div>
 
                     <div class="stat-card">
@@ -134,161 +134,138 @@
                             </svg>
                         </div>
                         <div class="stat-value">${userCount}</div>
-<%--                        <div class="stat-change positive">↑ 4.1% from last month</div>--%>
+                        <%--                        <div class="stat-change positive">↑ 4.1% from last month</div>--%>
                     </div>
 
-<%--                    <div class="stat-card">--%>
-<%--                        <div class="stat-header">--%>
-<%--                            <span class="stat-label">Conversion Rate</span>--%>
-<%--                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
-<%--                                 stroke-width="2">--%>
-<%--                                <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"/>--%>
-<%--                                <polyline points="12 12 20 7.5"/>--%>
-<%--                                <polyline points="12 12 12 21"/>--%>
-<%--                                <polyline points="12 12 4 7.5"/>--%>
-<%--                            </svg>--%>
-<%--                        </div>--%>
-<%--                        <div class="stat-value">3.24%</div>--%>
-<%--                        <div class="stat-change negative">↓ 0.8% from last month</div>--%>
-<%--                    </div>--%>
+                    <%--                    <div class="stat-card">--%>
+                    <%--                        <div class="stat-header">--%>
+                    <%--                            <span class="stat-label">Conversion Rate</span>--%>
+                    <%--                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
+                    <%--                                 stroke-width="2">--%>
+                    <%--                                <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"/>--%>
+                    <%--                                <polyline points="12 12 20 7.5"/>--%>
+                    <%--                                <polyline points="12 12 12 21"/>--%>
+                    <%--                                <polyline points="12 12 4 7.5"/>--%>
+                    <%--                            </svg>--%>
+                    <%--                        </div>--%>
+                    <%--                        <div class="stat-value">3.24%</div>--%>
+                    <%--                        <div class="stat-change negative">↓ 0.8% from last month</div>--%>
+                    <%--                    </div>--%>
                 </div>
 
                 <!-- Charts Section -->
                 <div class="charts-grid">
-                    <div class="chart-card">
-                        <h3>Sales Trend (Last 7 Days)</h3>
-                        <div class="chart-placeholder">
-                            <svg viewBox="0 0 400 200" style="width: 100%; height: 100%;">
-                                <!-- Simple bar chart -->
-                                <rect x="20" y="120" width="40" height="60" fill="#f97316" opacity="0.7"/>
-                                <rect x="70" y="100" width="40" height="80" fill="#f97316" opacity="0.7"/>
-                                <rect x="120" y="80" width="40" height="100" fill="#f97316"/>
-                                <rect x="170" y="90" width="40" height="90" fill="#f97316" opacity="0.7"/>
-                                <rect x="220" y="70" width="40" height="110" fill="#f97316"/>
-                                <rect x="270" y="85" width="40" height="95" fill="#f97316" opacity="0.7"/>
-                                <rect x="320" y="75" width="40" height="105" fill="#f97316"/>
-                            </svg>
-                        </div>
-                    </div>
+<%--                    <div class="chart-card">--%>
+<%--                        <h3>Sales Trend (Last 7 Days)</h3>--%>
+<%--                        <div class="chart-placeholder">--%>
+<%--                            <svg viewBox="0 0 400 200" style="width: 100%; height: 100%;">--%>
+<%--                                <!-- Simple bar chart -->--%>
+<%--                                <rect x="20" y="120" width="40" height="60" fill="#f97316" opacity="0.7"/>--%>
+<%--                                <rect x="70" y="100" width="40" height="80" fill="#f97316" opacity="0.7"/>--%>
+<%--                                <rect x="120" y="80" width="40" height="100" fill="#f97316"/>--%>
+<%--                                <rect x="170" y="90" width="40" height="90" fill="#f97316" opacity="0.7"/>--%>
+<%--                                <rect x="220" y="70" width="40" height="110" fill="#f97316"/>--%>
+<%--                                <rect x="270" y="85" width="40" height="95" fill="#f97316" opacity="0.7"/>--%>
+<%--                                <rect x="320" y="75" width="40" height="105" fill="#f97316"/>--%>
+<%--                            </svg>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
 
                     <div class="chart-card">
                         <h3>Product Categories</h3>
                         <div class="category-list">
-                            <div class="category-item">
-                                <div class="category-info">
-                                    <span class="category-name">Gaming Laptops</span>
-                                    <span class="category-count">234 sales</span>
+
+                            <c:forEach var="entry" items="${categoryCountPercentage}">
+                                <div class="category-item">
+                                    <div class="category-info">
+                                        <span class="category-name">${entry.key}</span>
+                                        <span class="category-count">${categoryCount[entry.key]} items</span>
+                                    </div>
+                                    <div class="category-bar">
+                                        <div class="category-fill"
+                                             style="width: ${entry.value}%"></div>
+                                    </div>
                                 </div>
-                                <div class="category-bar">
-                                    <div class="category-fill" style="width: 45%"></div>
-                                </div>
-                            </div>
-                            <div class="category-item">
-                                <div class="category-info">
-                                    <span class="category-name">Business Laptops</span>
-                                    <span class="category-count">189 sales</span>
-                                </div>
-                                <div class="category-bar">
-                                    <div class="category-fill" style="width: 36%"></div>
-                                </div>
-                            </div>
-                            <div class="category-item">
-                                <div class="category-info">
-                                    <span class="category-name">Ultrabooks</span>
-                                    <span class="category-count">156 sales</span>
-                                </div>
-                                <div class="category-bar">
-                                    <div class="category-fill" style="width: 30%"></div>
-                                </div>
-                            </div>
-                            <div class="category-item">
-                                <div class="category-info">
-                                    <span class="category-name">Budget Laptops</span>
-                                    <span class="category-count">142 sales</span>
-                                </div>
-                                <div class="category-bar">
-                                    <div class="category-fill" style="width: 27%"></div>
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Sales Tab -->
-            <div id="sales-tab" class="dashboard-tab <c:if test="${tab=='sales'}">active</c:if>">
-                <div class="dashboard-header">
-                    <h1>Sales Analytics</h1>
-                    <p class="dashboard-subtitle">Track your sales performance</p>
-                </div>
+<%--            <div id="sales-tab" class="dashboard-tab <c:if test="${tab=='sales'}">active</c:if>">--%>
+<%--                <div class="dashboard-header">--%>
+<%--                    <h1>Sales Analytics</h1>--%>
+<%--                    <p class="dashboard-subtitle">Track your sales performance</p>--%>
+<%--                </div>--%>
 
-                <div class="filter-row">
-                    <select class="filter-select">
-                        <option>Last 7 Days</option>
-                        <option>Last 30 Days</option>
-                        <option>Last 90 Days</option>
-                        <option>This Year</option>
-                    </select>
-                </div>
+<%--                <div class="filter-row">--%>
+<%--                    <select class="filter-select">--%>
+<%--                        <option>Last 7 Days</option>--%>
+<%--                        <option>Last 30 Days</option>--%>
+<%--                        <option>Last 90 Days</option>--%>
+<%--                        <option>This Year</option>--%>
+<%--                    </select>--%>
+<%--                </div>--%>
 
-                <div class="sales-table-card">
-                    <h3>Recent Sales</h3>
-                    <table class="dashboard-table">
-                        <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Product</th>
-                            <th>Amount</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>#ORD-001</td>
-                            <td>John Doe</td>
-                            <td>MacBook Pro 16</td>
-                            <td>$2,499</td>
-                            <td>2024-04-15</td>
-                            <td><span class="status completed">Completed</span></td>
-                        </tr>
-                        <tr>
-                            <td>#ORD-002</td>
-                            <td>Jane Smith</td>
-                            <td>Dell XPS 15</td>
-                            <td>$1,899</td>
-                            <td>2024-04-15</td>
-                            <td><span class="status pending">Pending</span></td>
-                        </tr>
-                        <tr>
-                            <td>#ORD-003</td>
-                            <td>Bob Johnson</td>
-                            <td>HP Spectre 16</td>
-                            <td>$1,599</td>
-                            <td>2024-04-14</td>
-                            <td><span class="status completed">Completed</span></td>
-                        </tr>
-                        <tr>
-                            <td>#ORD-004</td>
-                            <td>Alice Brown</td>
-                            <td>Lenovo ThinkPad</td>
-                            <td>$899</td>
-                            <td>2024-04-14</td>
-                            <td><span class="status completed">Completed</span></td>
-                        </tr>
-                        <tr>
-                            <td>#ORD-005</td>
-                            <td>Charlie Wilson</td>
-                            <td>ASUS ROG Gaming</td>
-                            <td>$1,799</td>
-                            <td>2024-04-13</td>
-                            <td><span class="status cancelled">Cancelled</span></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<%--                <div class="sales-table-card">--%>
+<%--                    <h3>Recent Sales</h3>--%>
+<%--                    <table class="dashboard-table">--%>
+<%--                        <thead>--%>
+<%--                        <tr>--%>
+<%--                            <th>Order ID</th>--%>
+<%--                            <th>Customer</th>--%>
+<%--                            <th>Product</th>--%>
+<%--                            <th>Amount</th>--%>
+<%--                            <th>Date</th>--%>
+<%--                            <th>Status</th>--%>
+<%--                        </tr>--%>
+<%--                        </thead>--%>
+<%--                        <tbody>--%>
+<%--                        <tr>--%>
+<%--                            <td>#ORD-001</td>--%>
+<%--                            <td>John Doe</td>--%>
+<%--                            <td>MacBook Pro 16</td>--%>
+<%--                            <td>$2,499</td>--%>
+<%--                            <td>2024-04-15</td>--%>
+<%--                            <td><span class="status completed">Completed</span></td>--%>
+<%--                        </tr>--%>
+<%--                        <tr>--%>
+<%--                            <td>#ORD-002</td>--%>
+<%--                            <td>Jane Smith</td>--%>
+<%--                            <td>Dell XPS 15</td>--%>
+<%--                            <td>$1,899</td>--%>
+<%--                            <td>2024-04-15</td>--%>
+<%--                            <td><span class="status pending">Pending</span></td>--%>
+<%--                        </tr>--%>
+<%--                        <tr>--%>
+<%--                            <td>#ORD-003</td>--%>
+<%--                            <td>Bob Johnson</td>--%>
+<%--                            <td>HP Spectre 16</td>--%>
+<%--                            <td>$1,599</td>--%>
+<%--                            <td>2024-04-14</td>--%>
+<%--                            <td><span class="status completed">Completed</span></td>--%>
+<%--                        </tr>--%>
+<%--                        <tr>--%>
+<%--                            <td>#ORD-004</td>--%>
+<%--                            <td>Alice Brown</td>--%>
+<%--                            <td>Lenovo ThinkPad</td>--%>
+<%--                            <td>$899</td>--%>
+<%--                            <td>2024-04-14</td>--%>
+<%--                            <td><span class="status completed">Completed</span></td>--%>
+<%--                        </tr>--%>
+<%--                        <tr>--%>
+<%--                            <td>#ORD-005</td>--%>
+<%--                            <td>Charlie Wilson</td>--%>
+<%--                            <td>ASUS ROG Gaming</td>--%>
+<%--                            <td>$1,799</td>--%>
+<%--                            <td>2024-04-13</td>--%>
+<%--                            <td><span class="status cancelled">Cancelled</span></td>--%>
+<%--                        </tr>--%>
+<%--                        </tbody>--%>
+<%--                    </table>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
             <!-- Orders Tab -->
             <div id="orders-tab" class="dashboard-tab <c:if test="${tab=='orders'}">active</c:if>">
@@ -355,6 +332,7 @@
                             <th>Email</th>
                             <th>Role</th>
                             <th>Join Date</th>
+                            <th>Last Login</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -374,6 +352,7 @@
                                 <td><span class="role customer">${user.role}</span></td>
                                 <td><fmt:formatDate value="${user.created_at}"
                                                     pattern="yyyy-mm-dd"/></td>
+                                <td><fmt:formatDate value="${user.lastLogin}" pattern="MMM dd, yyyy hh:mm a"/></td>
                                 <td>
                                     <c:if test="${user.user_id!=1}">
                                         <button class="btn-action view"
@@ -445,15 +424,15 @@
                         <h3>Revenue Report</h3>
                         <div class="report-stat">
                             <span class="label">This Month</span>
-                            <span class="value">$54,230</span>
+                            <span class="value">Rs. ${thisMonthRevenue}</span>
                         </div>
                         <div class="report-stat">
                             <span class="label">Last Month</span>
-                            <span class="value">$48,120</span>
+                            <span class="value">Rs. ${lastMonthRevenue}</span>
                         </div>
                         <div class="report-stat">
                             <span class="label">Growth</span>
-                            <span class="value positive">↑ 12.7%</span>
+                            <span class="value positive">↑ ${revenueGrowth}</span>
                         </div>
                     </div>
 
@@ -667,7 +646,7 @@
     </div>
 </main>
 <script>
-    function switchToProducts(){
+    function switchToProducts() {
         window.location.href = "${pageContext.request.contextPath}/products";
     }
 

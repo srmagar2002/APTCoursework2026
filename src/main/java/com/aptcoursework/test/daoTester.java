@@ -36,11 +36,14 @@ public class daoTester {
         testConnection();
         String oldImagePath = "userDefaultimg/default0.jpg";
 
-        OrdersDaoImpl ordersDao = new OrdersDaoImpl();
-        ArrayList<Orders> orders= ordersDao.fetchAllOrders();
-        for (Orders order : orders) {
-            System.out.println(order.getStatus());
-        }
+        LaptopDaoImpl laptopDaoImpl = new LaptopDaoImpl();
+        System.out.println(laptopDaoImpl.getCountByCategory());
+
+//        OrdersDaoImpl ordersDao = new OrdersDaoImpl();
+//        ArrayList<Orders> orders= ordersDao.fetchAllOrders();
+//        for (Orders order : orders) {
+//            System.out.println(order.getStatus());
+//        }
 
 
         if("userdefaultimg".equalsIgnoreCase(oldImagePath.substring(0,oldImagePath.indexOf("/"))))

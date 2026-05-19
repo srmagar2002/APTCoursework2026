@@ -11,5 +11,8 @@ public interface OrdersDao {
     boolean updateOrderStatus(int orderId, String status);
     ArrayList<Orders> fetchAllOrders();
     int countAllOrders();
+
     double sumTotalAmount();
+    double sumTotalAmountCurrentMonth();
+    double sumTotalAmountLastMonth();
 }

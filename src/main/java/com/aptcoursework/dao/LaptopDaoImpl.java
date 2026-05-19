@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Data Access Object (DAO) implementation for managing {@code Laptop} entities.
@@ -28,44 +29,45 @@ import java.util.ArrayList;
  */
 public class LaptopDaoImpl implements LaptopDao {
     /**
+     * @param laptopID the unique identifier of the laptop to be deleted
+     * @return {@code true} if the deletion operation is successful,
+     * {@code false} if an error occurs during the process
+     * @throws Exception no exception is thrown directly, but any
+     *                   {@link SQLException} encountered is caught and logged
      * @author Sugam Rana Magar
      * Deletes a laptop record from the database based on the provided laptop ID.
      *
      * <p>This method establishes a database connection, prepares a SQL DELETE
      * statement, and executes it to remove the corresponding laptop entry
      * from the <code>Laptop</code> table.</p>
-     *
-     * @param laptopID the unique identifier of the laptop to be deleted
-     * @return {@code true} if the deletion operation is successful,
-     *         {@code false} if an error occurs during the process
-     *
-     * @throws Exception no exception is thrown directly, but any
-     *         {@link SQLException} encountered is caught and logged
-     *
      * @implNote The database connection is always closed in the
-     *           <code>finally</code> block to prevent resource leaks.
+     * <code>finally</code> block to prevent resource leaks.
      */
     @Override
     public boolean deleteByLaptopID(int laptopID) {
         Connection connection = null;
         String sql = "delete from Laptop where laptopID = ?";
-        try{
+        try {
             connection = DatabaseConnection.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, laptopID);
             stmt.executeUpdate();
             return true;
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error while Deleting Laptop" + e.getMessage());
             return false;
-        }
-        finally{
+        } finally {
             DatabaseConnection.closeConnection(connection);
         }
     }
 
     /**
+     * @param laptop the {@code Laptop} object containing all required details
+     *               to be inserted into the database
+     * @return {@code true} if the insertion is successful,
+     * {@code false} if an error occurs during execution
+     * @throws Exception no exception is thrown directly, but any
+     *                   {@link SQLException} encountered is caught and logged
      * @author Sugam Rana Magar
      * Inserts a new {@code Laptop} record into the database.
      *
@@ -73,17 +75,8 @@ public class LaptopDaoImpl implements LaptopDao {
      * statement, and populates it with values retrieved from the provided
      * {@code Laptop} object. The record is then persisted in the
      * <code>laptop</code> table.</p>
-     *
-     * @param laptop the {@code Laptop} object containing all required details
-     *               to be inserted into the database
-     * @return {@code true} if the insertion is successful,
-     *         {@code false} if an error occurs during execution
-     *
-     * @throws Exception no exception is thrown directly, but any
-     *         {@link SQLException} encountered is caught and logged
-     *
      * @implNote The database connection is closed in the <code>finally</code>
-     *           block to ensure proper resource management and prevent leaks.
+     * block to ensure proper resource management and prevent leaks.
      */
     @Override
     public boolean insertLaptop(Laptop laptop) {
@@ -116,7 +109,7 @@ public class LaptopDaoImpl implements LaptopDao {
             stmt.setString(17, laptop.getColor());
             stmt.setInt(18, laptop.getBatteryLife());
             stmt.setString(19, laptop.getCategory());
-            stmt.setString(20,laptop.getLaptopUUID());
+            stmt.setString(20, laptop.getLaptopUUID());
 
             stmt.executeUpdate();
             return true;
@@ -130,22 +123,19 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * @param id the unique identifier of the laptop to retrieve
+     * @return the corresponding {@code Laptop} object if found;
+     * {@code null} if no matching record exists or an error occurs
+     * @throws Exception no exception is thrown directly, but any
+     *                   {@link SQLException} encountered is caught and logged
      * @author Sugam Rana Magar
      * Retrieves a {@code Laptop} record from the database based on its unique ID.
      *
      * <p>This method establishes a database connection, executes a parameterized
      * SQL SELECT query, and maps the resulting row to a {@code Laptop} object
      * using the <code>laptopAssginer</code> method.</p>
-     *
-     * @param id the unique identifier of the laptop to retrieve
-     * @return the corresponding {@code Laptop} object if found;
-     *         {@code null} if no matching record exists or an error occurs
-     *
-     * @throws Exception no exception is thrown directly, but any
-     *         {@link SQLException} encountered is caught and logged
-     *
      * @implNote The database connection is closed in the <code>finally</code>
-     *           block to ensure proper resource management.
+     * block to ensure proper resource management.
      */
     @Override
     public Laptop getLaptopById(int id) {
@@ -172,22 +162,19 @@ public class LaptopDaoImpl implements LaptopDao {
 
 
     /**
+     * @param laptopUUID the unique UUID of the laptop to retrieve
+     * @return the corresponding {@code Laptop} object if found;
+     * {@code null} if no matching record exists or an error occurs
+     * @throws Exception no exception is thrown directly, but any
+     *                   {@link SQLException} encountered is caught and logged
      * @author Sugam Rana Magar
      * Retrieves a {@code Laptop} record from the database using its unique UUID.
      *
      * <p>This method establishes a database connection, executes a parameterized
      * SQL SELECT query using the provided UUID, and maps the result to a
      * {@code Laptop} object via the <code>laptopAssginer</code> method.</p>
-     *
-     * @param laptopUUID the unique UUID of the laptop to retrieve
-     * @return the corresponding {@code Laptop} object if found;
-     *         {@code null} if no matching record exists or an error occurs
-     *
-     * @throws Exception no exception is thrown directly, but any
-     *         {@link SQLException} encountered is caught and logged
-     *
      * @implNote The database connection is closed in the <code>finally</code>
-     *           block to ensure proper resource management and prevent leaks.
+     * block to ensure proper resource management and prevent leaks.
      */
     @Override
     public Laptop getLaptopByUUID(String laptopUUID) {
@@ -202,17 +189,21 @@ public class LaptopDaoImpl implements LaptopDao {
                 Laptop laptop = laptopAssginer(rs);
                 return laptop;
             }
-        }
-        catch (SQLException e){
-                System.out.println("Error Getting Laptop" + e.getMessage());
-            }
-        finally {
+        } catch (SQLException e) {
+            System.out.println("Error Getting Laptop" + e.getMessage());
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
         return null;
     }
 
     /**
+     * @param laptop the {@code Laptop} object containing updated values,
+     *               including the ID of the laptop to be modified
+     * @return {@code true} if the update operation is successful,
+     * {@code false} if an error occurs during execution
+     * @throws Exception no exception is thrown directly, but any
+     *                   {@link SQLException} encountered is caught and logged
      * @author Sugam Rana Magar
      * Updates an existing {@code Laptop} record in the database.
      *
@@ -220,17 +211,8 @@ public class LaptopDaoImpl implements LaptopDao {
      * statement, and sets all fields of the laptop based on the values provided
      * in the {@code Laptop} object. The record is identified using the
      * <code>laptopID</code>.</p>
-     *
-     * @param laptop the {@code Laptop} object containing updated values,
-     *               including the ID of the laptop to be modified
-     * @return {@code true} if the update operation is successful,
-     *         {@code false} if an error occurs during execution
-     *
-     * @throws Exception no exception is thrown directly, but any
-     *         {@link SQLException} encountered is caught and logged
-     *
      * @implNote The database connection is closed in the <code>finally</code>
-     *           block to ensure proper resource management and prevent leaks.
+     * block to ensure proper resource management and prevent leaks.
      */
 
     @Override
@@ -281,6 +263,10 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * @return an {@code ArrayList} containing all {@code Laptop} objects;
+     * {@code null} if an error occurs during execution
+     * @throws Exception no exception is thrown directly, but any
+     *                   {@link SQLException} encountered is caught and logged
      * @author Sugam Rana Magar
      * Retrieves all {@code Laptop} records from the database.
      *
@@ -288,16 +274,9 @@ public class LaptopDaoImpl implements LaptopDao {
      * query to fetch all rows from the <code>laptop</code> table, and maps each
      * row to a {@code Laptop} object using the <code>laptopAssginer</code> method.
      * The results are collected into an {@code ArrayList}.</p>
-     *
-     * @return an {@code ArrayList} containing all {@code Laptop} objects;
-     *         {@code null} if an error occurs during execution
-     *
-     * @throws Exception no exception is thrown directly, but any
-     *         {@link SQLException} encountered is caught and logged
-     *
      * @implNote The database connection is not explicitly closed in this method,
-     *           which may lead to resource leaks. Consider closing it in a
-     *           <code>finally</code> block for proper resource management.
+     * which may lead to resource leaks. Consider closing it in a
+     * <code>finally</code> block for proper resource management.
      */
     @Override
     public ArrayList<Laptop> fetchAllLaptops(int start, int limit) {
@@ -325,23 +304,21 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     @Override
-    public int totalLaptops(){
+    public int totalLaptops() {
 
         Connection conn = null;
         String sql = "SELECT COUNT(*) FROM laptop";
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1);
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error Getting Laptop Count " + e.getMessage());
             return 0;
-        }
-        finally {
+        } finally {
             DatabaseConnection.closeConnection(conn);
         }
 
@@ -349,6 +326,14 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * @param searchWord     the keyword used to search across multiple laptop fields
+     * @param brand          the brand filter (case-insensitive, partial match)
+     * @param category       the category filter (case-insensitive, partial match)
+     * @param priceCondition the selected price range condition
+     * @return an {@code ArrayList} of matching {@code Laptop} objects;
+     * {@code null} if an error occurs during execution
+     * @throws Exception no exception is thrown directly, but any
+     *                   {@link SQLException} encountered is caught and logged
      * @author Sugam Rana Magar
      * Retrieves a filtered list of {@code Laptop} records based on search criteria.
      *
@@ -370,35 +355,24 @@ public class LaptopDaoImpl implements LaptopDao {
      *
      * <p>All string filters use SQL LIKE patterns generated by the
      * <code>toLikeValue</code> method.</p>
-     *
-     * @param searchWord     the keyword used to search across multiple laptop fields
-     * @param brand          the brand filter (case-insensitive, partial match)
-     * @param category       the category filter (case-insensitive, partial match)
-     * @param priceCondition the selected price range condition
-     * @return an {@code ArrayList} of matching {@code Laptop} objects;
-     *         {@code null} if an error occurs during execution
-     *
-     * @throws Exception no exception is thrown directly, but any
-     *         {@link SQLException} encountered is caught and logged
-     *
      * @implNote The database connection is closed in the <code>finally</code>
-     *           block to ensure proper resource management and prevent leaks.
+     * block to ensure proper resource management and prevent leaks.
      */
     @Override
-    public ArrayList<Laptop> getLaptopsFilterSearch(String searchWord, String brand, String category, String priceCondition,int start,int limit) {
+    public ArrayList<Laptop> getLaptopsFilterSearch(String searchWord, String brand, String category, String priceCondition, int start, int limit) {
         ArrayList<Laptop> laptops = new ArrayList<>();
         Connection conn = null;
         String sql = switch (priceCondition) {
             case "1" ->
-                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <50000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
             case "2" ->
-                    "SELECT * FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+                    "SELECT * FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 50000 AND 100000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
             case "3" ->
-                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 100000 AND 150000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
             case "4" ->
-                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 150000 AND 200000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
             case "5" ->
-                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
+                    "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >200000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
             default ->
                     "SELECT * FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?) LIMIT ?,?";
         };
@@ -436,25 +410,25 @@ public class LaptopDaoImpl implements LaptopDao {
 
         switch (priceCondition) {
             case "1":
-                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price <50000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "2":
-                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 500 AND 1000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand)  like ? AND LOWER(category) like ? AND price BETWEEN 50000 AND 100000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "3":
-                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 1000 AND 1500 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price between 100000 AND 150000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "4":
-                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 1500 AND 2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price BETWEEN 150000 AND 200000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             case "5":
-                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >2000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
+                sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND price >200000 AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
             default:
                 sql = "SELECT COUNT(*) FROM laptop WHERE LOWER(brand) like ? AND LOWER(category) like ? AND (LOWER(brand) LIKE ? OR LOWER(description) LIKE ? OR LOWER(title) LIKE ? OR LOWER(model) LIKE ?)";
                 break;
         }
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             String searchValue = toLikeValue(searchWord);
@@ -479,7 +453,37 @@ public class LaptopDaoImpl implements LaptopDao {
         return 0;
     }
 
+    @Override
+    public HashMap<String, Integer> getCountByCategory() {
+        HashMap<String, Integer> categoryCount = new HashMap<>();
+        Connection conn = null;
+        String sql = "Select COUNT(*) FROM laptop where lower(category) like ?";
+
+        String[] categories = {"Gaming", "Ultrabook", "Business", "Student", "Convertible", "Workstation", "General"};
+        try {
+            conn = DatabaseConnection.getConnection();
+            for (String category : categories) {
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, toLikeValue(category));
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    categoryCount.put(category, rs.getInt(1));
+                }
+            }
+//            System.out.println(categoryCount);
+            return categoryCount;
+        } catch (SQLException e) {
+            System.out.println("Error Getting Laptop" + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+
+        return null;
+    }
+
     /**
+     * @param value the input string to be converted into a LIKE pattern
+     * @return a formatted string suitable for SQL LIKE queries
      * @author Sugam Rana Magar
      * Converts a string value into a SQL {@code LIKE} pattern for
      * case-insensitive partial matching.
@@ -488,9 +492,6 @@ public class LaptopDaoImpl implements LaptopDao {
      * the wildcard {@code "%"}, which matches any value. Otherwise, the value
      * is converted to lowercase and wrapped with {@code %} on both sides to
      * enable partial matching in SQL queries.</p>
-     *
-     * @param value the input string to be converted into a LIKE pattern
-     * @return a formatted string suitable for SQL LIKE queries
      */
     private String toLikeValue(String value) {
         if (value == null || value.isBlank()) {

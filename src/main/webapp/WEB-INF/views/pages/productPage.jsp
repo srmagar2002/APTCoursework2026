@@ -119,11 +119,11 @@
             <span class="filter-label">Price:</span>
             <select class="filter-select" name="pricerange" onchange="this.form.submit()">
                 <option value="" <c:if test="${empty param.pricerange}">selected</c:if>>Any Price</option>
-                <option value="1" <c:if test="${param.pricerange == '1'}">selected</c:if>>Under $500</option>
-                <option value="2" <c:if test="${param.pricerange == '2'}">selected</c:if>>$500 - $1,000</option>
-                <option value="3" <c:if test="${param.pricerange == '3'}">selected</c:if>>$1,000 - $1,500</option>
-                <option value="4" <c:if test="${param.pricerange == '4'}">selected</c:if>>$1,500 - $2,000</option>
-                <option value="5" <c:if test="${param.pricerange == '5'}">selected</c:if>>$2,000+</option>
+                <option value="1" <c:if test="${param.pricerange == '1'}">selected</c:if>>Under Rs.50,000</option>
+                <option value="2" <c:if test="${param.pricerange == '2'}">selected</c:if>>Rs.50,000 - Rs.1,00,000</option>
+                <option value="3" <c:if test="${param.pricerange == '3'}">selected</c:if>>Rs.1,00,000 - Rs.1,50,000</option>
+                <option value="4" <c:if test="${param.pricerange == '4'}">selected</c:if>>Rs.1,50,000 - Rs.2,00,000</option>
+                <option value="5" <c:if test="${param.pricerange == '5'}">selected</c:if>>Rs.2,00,000+</option>
             </select>
         </div>
         <div class="filter-group">
