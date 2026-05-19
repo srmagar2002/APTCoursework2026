@@ -253,4 +253,47 @@ public class OrdersDaoImpl implements OrdersDao{
             DatabaseConnection.closeConnection(conn);
         }
     }
+    @Override
+    public int countAllOrders(){
+        Connection conn = null;
+        String sql = "SELECT COUNT(*) FROM orders";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting orders" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
+
+    @Override
+    public double sumTotalAmount(){
+        Connection conn = null;
+        String sql = "select SUM(totalAmount) from orders;";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting Total Amount" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
 }

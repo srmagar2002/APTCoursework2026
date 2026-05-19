@@ -10,4 +10,6 @@ public interface OrdersDao {
     Orders fetchOrderById(int orderId, int userId);
     boolean updateOrderStatus(int orderId, String status);
     ArrayList<Orders> fetchAllOrders();
+    int countAllOrders();
+    double sumTotalAmount();
 }

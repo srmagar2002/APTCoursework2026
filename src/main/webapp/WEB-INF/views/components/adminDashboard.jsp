@@ -106,8 +106,8 @@
                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                             </svg>
                         </div>
-                        <div class="stat-value">$54,230</div>
-                        <div class="stat-change positive">↑ 12.5% from last month</div>
+                        <div class="stat-value">Rs. ${sumTotalAmount}</div>
+<%--                        <div class="stat-change positive">↑ 12.5% from last month</div>--%>
                     </div>
 
                     <div class="stat-card">
@@ -120,37 +120,37 @@
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                             </svg>
                         </div>
-                        <div class="stat-value">1,284</div>
-                        <div class="stat-change positive">↑ 8.2% from last month</div>
+                        <div class="stat-value">${orderCount}</div>
+<%--                        <div class="stat-change positive">↑ 8.2% from last month</div>--%>
                     </div>
 
                     <div class="stat-card">
                         <div class="stat-header">
-                            <span class="stat-label">Active Users</span>
+                            <span class="stat-label">Total Users</span>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                  stroke-width="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
                             </svg>
                         </div>
-                        <div class="stat-value">3,492</div>
-                        <div class="stat-change positive">↑ 4.1% from last month</div>
+                        <div class="stat-value">${userCount}</div>
+<%--                        <div class="stat-change positive">↑ 4.1% from last month</div>--%>
                     </div>
 
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <span class="stat-label">Conversion Rate</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                 stroke-width="2">
-                                <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"/>
-                                <polyline points="12 12 20 7.5"/>
-                                <polyline points="12 12 12 21"/>
-                                <polyline points="12 12 4 7.5"/>
-                            </svg>
-                        </div>
-                        <div class="stat-value">3.24%</div>
-                        <div class="stat-change negative">↓ 0.8% from last month</div>
-                    </div>
+<%--                    <div class="stat-card">--%>
+<%--                        <div class="stat-header">--%>
+<%--                            <span class="stat-label">Conversion Rate</span>--%>
+<%--                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
+<%--                                 stroke-width="2">--%>
+<%--                                <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"/>--%>
+<%--                                <polyline points="12 12 20 7.5"/>--%>
+<%--                                <polyline points="12 12 12 21"/>--%>
+<%--                                <polyline points="12 12 4 7.5"/>--%>
+<%--                            </svg>--%>
+<%--                        </div>--%>
+<%--                        <div class="stat-value">3.24%</div>--%>
+<%--                        <div class="stat-change negative">↓ 0.8% from last month</div>--%>
+<%--                    </div>--%>
                 </div>
 
                 <!-- Charts Section -->

@@ -63,6 +63,15 @@ public class DashboardServlet extends HttpServlet {
         ArrayList<Orders> orders = ordersDaoImpl.fetchAllOrders();
         request.setAttribute("orders", orders);
 
+        int userCount = userDaoImpl.countAllCustomers();
+        request.setAttribute("userCount", userCount);
+
+        int orderCount = ordersDaoImpl.countAllOrders();
+        request.setAttribute("orderCount", orderCount);
+
+        double sumTotalAmount = ordersDaoImpl.sumTotalAmount();
+        request.setAttribute("sumTotalAmount", sumTotalAmount);
+
         request.getRequestDispatcher("/WEB-INF/views/pages/dashboardPage.jsp").forward(request, response);
     }
 

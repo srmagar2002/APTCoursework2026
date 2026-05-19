@@ -334,15 +334,15 @@ INSERT IGNORE INTO cart (userId, laptopId, quantity)
 VALUES (2, 3, 1);
 
 INSERT IGNORE INTO orders (userId, totalAmount, status, estimatedDelivery, createdAt)
-VALUES (1, 6267.80, 'DELIVERED', DATE_ADD(NOW(), INTERVAL 5 DAY), NOW());
+VALUES (6, 6267.80, 'DELIVERED', DATE_ADD(NOW(), INTERVAL 5 DAY), NOW());
 INSERT IGNORE INTO orders (userId, totalAmount, status, estimatedDelivery, createdAt)
-VALUES (1, 1649.00, 'OUT_FOR_DELIVERY', DATE_ADD('2026-04-28', INTERVAL 5 DAY), '2026-04-28 10:00:00');
+VALUES (2, 1649.00, 'OUT_FOR_DELIVERY', DATE_ADD('2026-04-28', INTERVAL 5 DAY), '2026-04-28 10:00:00');
 -- Orders
 INSERT IGNORE INTO orders (userId, totalAmount, status, estimatedDelivery)
-VALUES (1, 1299.99, 'SHIPPED', '2026-05-25 14:00:00'),
+VALUES (2, 1299.99, 'SHIPPED', '2026-05-25 14:00:00'),
        (2, 899.50, 'SHIPPED', '2026-05-22 10:30:00'),
        (3, 1599.00, 'IN_TRANSIT', '2026-05-18 16:00:00'),
-       (1, 749.99, 'PREPARING', '2026-05-28 12:00:00'),
+       (2, 749.99, 'PREPARING', '2026-05-28 12:00:00'),
        (4, 2199.99, 'PREPARING', '2026-05-30 18:00:00'),
        (5, 499.99, 'PREPARING', '2026-05-17 09:00:00'),
        (2, 1349.49, 'PREPARING', '2026-05-24 15:45:00'),
