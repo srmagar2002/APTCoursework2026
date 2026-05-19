@@ -139,7 +139,7 @@
 
                             <div class="specs-grid specs-grid-admin">
                                 <div class="admin-edit-field">
-                                    <label for="price" class="edit-label">Price ($)</label>
+                                    <label for="price" class="edit-label">Price (Rs.)</label>
                                     <input name="price" id="price" type="number" class="edit-input edit-input-price"
                                            value="<c:out value="${laptop.price}" default="0.00"/>" placeholder="0.00"
                                            step="0.01">
@@ -597,7 +597,7 @@
                             <span class="rating-text">${productAvgRating} (${productTotalRating} reviews)</span>
                         </div>
 
-                        <span class="product-price">$${laptop.price}</span>
+                        <span class="product-price">Rs. ${laptop.price}</span>
 
                         <p class="product-description">
                                 ${laptop.description}

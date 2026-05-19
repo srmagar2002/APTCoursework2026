@@ -61,6 +61,11 @@
             </a>
         </article>
     </c:forEach>
+
+<input type="hidden" id="currentPageValue" value="${currentPage}">
+<input type="hidden" id="totalPagesValue" value="${totalPages}">
+<input type="hidden" id="hasFiltersValue" value="${hasFilters}">
+
 <script>
     // Delete Modal Functions
     function openDeleteModal(productName, productId) {

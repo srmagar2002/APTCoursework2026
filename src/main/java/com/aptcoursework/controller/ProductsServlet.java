@@ -119,6 +119,8 @@ public class ProductsServlet extends HttpServlet {
                 request.setAttribute("totalPages", totalFilterPages);
                 request.setAttribute("products", laptops);
 
+                System.out.println(query+ " " + totalFilterPages);
+
                 String isAjax = request.getHeader("X-Requested-With");
 
                 if ("XMLHttpRequest".equals(isAjax)) {
