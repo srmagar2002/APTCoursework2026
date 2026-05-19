@@ -339,7 +339,5 @@ VALUES (1, 1649.00, 'PREPARING', DATE_ADD('2026-04-28', INTERVAL 5 DAY), '2026-0
 
 INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (1, 1, 1, 3499.00);
 INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (1, 2, 1, 2199.00);
-
-
 INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (2, 3, 1, 1649.00);
 
