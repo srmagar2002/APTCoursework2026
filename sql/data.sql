@@ -265,7 +265,8 @@ IGNORE INTO laptop (
        2799.99,4,10,2900,'Black',8);
 
 
-INSERT IGNORE INTO rating (userID, laptopID, rating, review)
+INSERT
+IGNORE INTO rating (userID, laptopID, rating, review)
 VALUES (2, 1, 5, 'Excellent performance'),
        (2, 2, 4, 'Very good laptop'),
        (2, 3, 3, 'Average experience'),
@@ -325,19 +326,49 @@ VALUES (2, 1, 5, 'Excellent performance'),
 
 
 -- Dummy Data to get visuals
-INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 1, 1);
-INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 2, 2);
-INSERT INTO cart (userId, laptopId, quantity) VALUES (1, 3, 1);
+INSERT IGNORE INTO cart (userId, laptopId, quantity)
+VALUES (2, 1, 1);
+INSERT IGNORE INTO cart (userId, laptopId, quantity)
+VALUES (2, 2, 2);
+INSERT IGNORE INTO cart (userId, laptopId, quantity)
+VALUES (2, 3, 1);
+
+INSERT IGNORE INTO orders (userId, totalAmount, status, estimatedDelivery, createdAt)
+VALUES (1, 6267.80, 'DELIVERED', DATE_ADD(NOW(), INTERVAL 5 DAY), NOW());
+INSERT IGNORE INTO orders (userId, totalAmount, status, estimatedDelivery, createdAt)
+VALUES (1, 1649.00, 'OUT_FOR_DELIVERY', DATE_ADD('2026-04-28', INTERVAL 5 DAY), '2026-04-28 10:00:00');
+-- Orders
+INSERT IGNORE INTO orders (userId, totalAmount, status, estimatedDelivery)
+VALUES (1, 1299.99, 'SHIPPED', '2026-05-25 14:00:00'),
+       (2, 899.50, 'SHIPPED', '2026-05-22 10:30:00'),
+       (3, 1599.00, 'IN_TRANSIT', '2026-05-18 16:00:00'),
+       (1, 749.99, 'PREPARING', '2026-05-28 12:00:00'),
+       (4, 2199.99, 'PREPARING', '2026-05-30 18:00:00'),
+       (5, 499.99, 'PREPARING', '2026-05-17 09:00:00'),
+       (2, 1349.49, 'PREPARING', '2026-05-24 15:45:00'),
+       (6, 1799.89, 'DELIVERED', '2026-05-29 11:15:00'),
+       (3, 999.00, 'DELIVERED', '2026-05-16 13:00:00'),
+       (7, 2499.99, 'DELIVERED', '2026-06-01 17:30:00');
 
 
-INSERT INTO orders (userId, totalAmount, status, estimatedDelivery, createdAt)
-VALUES (1, 6267.80, 'PREPARING', DATE_ADD(NOW(), INTERVAL 5 DAY), NOW());
+-- Order Items
+INSERT IGNORE INTO order_items (orderId, laptopId, quantity, price)
+VALUES (1, 1, 1, 1299.99),
+       (2, 2, 1, 899.50),
+       (3, 3, 1, 1599.00),
+       (4, 4, 1, 749.99),
+       (5, 5, 1, 2199.99),
+       (6, 2, 1, 499.99),
+       (7, 6, 1, 1349.49),
+       (8, 7, 1, 1799.89),
+       (9, 3, 1, 999.00),
+       (10, 8, 1, 2499.99);
 
-INSERT INTO orders (userId, totalAmount, status, estimatedDelivery, createdAt)
-VALUES (1, 1649.00, 'PREPARING', DATE_ADD('2026-04-28', INTERVAL 5 DAY), '2026-04-28 10:00:00');
 
-
-INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (1, 1, 1, 3499.00);
-INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (1, 2, 1, 2199.00);
-INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (2, 3, 1, 1649.00);
+INSERT IGNORE INTO order_items (orderId, laptopId, quantity, price)
+VALUES (1, 1, 1, 3499.00);
+INSERT IGNORE INTO order_items (orderId, laptopId, quantity, price)
+VALUES (1, 2, 1, 2199.00);
+INSERT IGNORE INTO order_items (orderId, laptopId, quantity, price)
+VALUES (2, 3, 1, 1649.00);
 

@@ -19,10 +19,12 @@
 
 <main class="page-container">
     <!-- Page Header -->
-    <div class="page-header" id="products">
-        <h2 class="page-title">All Laptops</h2>
-        <p class="page-description">Browse our collection of premium laptops from top brands</p>
-    </div>
+    <c:if test="${sessionScope.user.role!='ADMIN'}">
+        <div class="page-header" id="products">
+            <h2 class="page-title">All Laptops</h2>
+            <p class="page-description">Browse our collection of premium laptops from top brands</p>
+        </div>
+    </c:if>
 
     <form action="${pageContext.request.contextPath}/products" method="get" class="filters-bar" id="filtersForm">
 
@@ -247,11 +249,11 @@
         const currentPageInput = document.getElementById("currentPageValue");
         const totalPagesInput = document.getElementById("totalPagesValue");
         const hasFiltersInput = document.getElementById("hasFiltersValue");
-        
+
         if (currentPageInput) currentPage = parseInt(currentPageInput.value) || 1;
         if (totalPagesInput) totalPages = parseInt(totalPagesInput.value) || 1;
         if (hasFiltersInput) hasFilters = hasFiltersInput.value === "true";
-        
+
         updatePaginationState();
     }
 
@@ -259,10 +261,10 @@
         document.getElementById('currentPage').textContent = currentPage;
         document.getElementById('currentPageInput').value = currentPage;
         document.getElementById('totalPages').textContent = totalPages;
-        
+
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        
+
         prevBtn.disabled = currentPage <= 1;
         nextBtn.disabled = currentPage >= totalPages;
     }
@@ -271,7 +273,7 @@
         if (currentPage > 1) {
             currentPage--;
             updatePaginationState();
-            if(hasFilters){
+            if (hasFilters) {
                 document.getElementById('filtersForm').submit();
             } else {
                 window.location.href = "${pageContext.request.contextPath}/products?page=" + currentPage;
@@ -284,7 +286,7 @@
         if (currentPage < totalPages) {
             currentPage++;
             updatePaginationState();
-            if(hasFilters){
+            if (hasFilters) {
                 document.getElementById('filtersForm').submit();
             } else {
                 window.location.href = "${pageContext.request.contextPath}/products?page=" + currentPage;
@@ -300,7 +302,7 @@
     // Reset pagination when filters change
     const filterSelects = document.querySelectorAll('.filter-select');
     filterSelects.forEach(select => {
-        select.addEventListener('change', function() {
+        select.addEventListener('change', function () {
             currentPage = 1;
             document.getElementById('currentPageInput').value = 1;
         });
@@ -310,7 +312,6 @@
     window.addEventListener('DOMContentLoaded', () => {
         updatePaginationFromGrid();
     });
-
 
 
 </script>

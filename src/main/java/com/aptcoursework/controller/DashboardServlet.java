@@ -1,6 +1,8 @@
 package com.aptcoursework.controller;
 
+import com.aptcoursework.dao.OrdersDaoImpl;
 import com.aptcoursework.dao.UserDaoImpl;
+import com.aptcoursework.entity.Orders;
 import com.aptcoursework.entity.User;
 import com.aptcoursework.utils.ImageUtil;
 import com.aptcoursework.utils.SessionUtil;
@@ -27,6 +29,9 @@ public class DashboardServlet extends HttpServlet {
 
         String userID = request.getParameter("userID");
         UserDaoImpl userDaoImpl = new UserDaoImpl();
+        OrdersDaoImpl ordersDaoImpl = new OrdersDaoImpl();
+
+
 
         User user = userDaoImpl.findByUserID(Integer.parseInt(userID));
         Timestamp tsLastlog = user.getLastLogin();
@@ -50,8 +55,14 @@ public class DashboardServlet extends HttpServlet {
         else {
             tab="overview";
         }
+
         SessionUtil.setAttribute(request,"tab",tab);
         request.setAttribute("tab", tab);
+
+
+        ArrayList<Orders> orders = ordersDaoImpl.fetchAllOrders();
+        request.setAttribute("orders", orders);
+
         request.getRequestDispatcher("/WEB-INF/views/pages/dashboardPage.jsp").forward(request, response);
     }
 

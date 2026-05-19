@@ -219,4 +219,38 @@ public class OrdersDaoImpl implements OrdersDao{
             DatabaseConnection.closeConnection(conn);
         }
     }
+
+    @Override
+    public ArrayList<Orders> fetchAllOrders(){
+        ArrayList<Orders> orders = new ArrayList<>();
+        String sql = "SELECT o.orderId, o.userId, o.totalAmount, o.status, o.estimatedDelivery, o.createdAt, u.username FROM orders o LEFT JOIN users u ON o.userID = u.user_id ORDER BY createdAt DESC";
+        Connection conn = null;
+
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Orders order = new Orders(
+                        rs.getInt("orderId"),
+                        rs.getInt("userId"),
+                        rs.getDouble("totalAmount"),
+                        rs.getString("status"),
+                        rs.getTimestamp("estimatedDelivery"),
+                        rs.getTimestamp("createdAt"),
+                        rs.getString("username")
+                );
+                orders.add(order);
+            }
+            System.out.println("Total Orders: "+orders.size());
+            return orders;
+        }
+        catch(SQLException e){
+            System.out.println("Error while fetching orders " +  e.getMessage());
+            return null;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
 }

@@ -9,4 +9,5 @@ public interface OrdersDao {
     ArrayList<Orders> fetchOrdersByUser(int userId);
     Orders fetchOrderById(int orderId, int userId);
     boolean updateOrderStatus(int orderId, String status);
+    ArrayList<Orders> fetchAllOrders();
 }

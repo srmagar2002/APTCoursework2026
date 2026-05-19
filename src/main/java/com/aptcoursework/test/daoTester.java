@@ -1,10 +1,8 @@
 package com.aptcoursework.test;
 
-import com.aptcoursework.dao.LaptopDao;
-import com.aptcoursework.dao.LaptopDaoImpl;
-import com.aptcoursework.dao.RatingDaoImpl;
-import com.aptcoursework.dao.UserDaoImpl;
+import com.aptcoursework.dao.*;
 import com.aptcoursework.entity.Laptop;
+import com.aptcoursework.entity.Orders;
 import com.aptcoursework.entity.Rating;
 import com.aptcoursework.entity.User;
 import com.aptcoursework.enums.Role;
@@ -37,6 +35,13 @@ public class daoTester {
     public static void main(String[] args) {
         testConnection();
         String oldImagePath = "userDefaultimg/default0.jpg";
+
+        OrdersDaoImpl ordersDao = new OrdersDaoImpl();
+        ArrayList<Orders> orders= ordersDao.fetchAllOrders();
+        for (Orders order : orders) {
+            System.out.println(order.getStatus());
+        }
+
 
         if("userdefaultimg".equalsIgnoreCase(oldImagePath.substring(0,oldImagePath.indexOf("/"))))
         {

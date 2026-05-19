@@ -38,7 +38,7 @@
                         </svg>
                         <span>Sales</span>
                     </li>
-                    <li class="menu-item <c:if test="${tab=='products'}">active</c:if>" onclick="switchTab('products')">
+                    <li class="menu-item" onclick="switchToProducts()">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2">
                             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -290,78 +290,6 @@
                 </div>
             </div>
 
-            <!-- Products Tab -->
-            <div id="products-tab" class="dashboard-tab <c:if test="${tab=='products'}">active</c:if>">
-                <div class="dashboard-header">
-                    <h1>Product Management</h1>
-                    <p class="dashboard-subtitle">Manage your laptop inventory</p>
-                </div>
-
-                <a href="productAdmin.html" class="btn btn-primary" style="margin-bottom: 1.5rem;">Add New Product</a>
-
-                <div class="products-table-card">
-                    <table class="dashboard-table">
-                        <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Brand</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Category</th>
-                            <th>Rating</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>MacBook Pro 16</td>
-                            <td>Apple</td>
-                            <td>$2,499</td>
-                            <td><span class="stock high">45</span></td>
-                            <td>Premium</td>
-                            <td>4.9/5</td>
-                            <td>
-                                <button class="btn-action edit">Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Dell XPS 15</td>
-                            <td>Dell</td>
-                            <td>$1,899</td>
-                            <td><span class="stock low">8</span></td>
-                            <td>Ultrabook</td>
-                            <td>4.7/5</td>
-                            <td>
-                                <button class="btn-action edit">Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>HP Spectre 16</td>
-                            <td>HP</td>
-                            <td>$1,599</td>
-                            <td><span class="stock high">32</span></td>
-                            <td>Ultrabook</td>
-                            <td>4.6/5</td>
-                            <td>
-                                <button class="btn-action edit">Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>ASUS ROG Gaming</td>
-                            <td>ASUS</td>
-                            <td>$1,799</td>
-                            <td><span class="stock medium">15</span></td>
-                            <td>Gaming</td>
-                            <td>4.8/5</td>
-                            <td>
-                                <button class="btn-action edit">Edit</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
             <!-- Orders Tab -->
             <div id="orders-tab" class="dashboard-tab <c:if test="${tab=='orders'}">active</c:if>">
                 <div class="dashboard-header">
@@ -369,14 +297,14 @@
                     <p class="dashboard-subtitle">View and manage customer orders</p>
                 </div>
 
-                <div class="filter-row">
-                    <select class="filter-select">
-                        <option>All Orders</option>
-                        <option>Completed</option>
-                        <option>Pending</option>
-                        <option>Cancelled</option>
-                    </select>
-                </div>
+                <%--                <div class="filter-row">--%>
+                <%--                    <select class="filter-select">--%>
+                <%--                        <option>All Orders</option>--%>
+                <%--                        <option>Completed</option>--%>
+                <%--                        <option>Pending</option>--%>
+                <%--                        <option>Cancelled</option>--%>
+                <%--                    </select>--%>
+                <%--                </div>--%>
 
                 <div class="orders-table-card">
                     <table class="dashboard-table">
@@ -384,7 +312,6 @@
                         <tr>
                             <th>Order ID</th>
                             <th>Customer</th>
-                            <th>Items</th>
                             <th>Total</th>
                             <th>Order Date</th>
                             <th>Delivery Date</th>
@@ -392,33 +319,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#ORD-001</td>
-                            <td>John Doe</td>
-                            <td>2</td>
-                            <td>$2,499</td>
-                            <td>2024-04-15</td>
-                            <td>2024-04-18</td>
-                            <td><span class="status completed">Delivered</span></td>
-                        </tr>
-                        <tr>
-                            <td>#ORD-002</td>
-                            <td>Jane Smith</td>
-                            <td>1</td>
-                            <td>$1,899</td>
-                            <td>2024-04-15</td>
-                            <td>Pending</td>
-                            <td><span class="status pending">Processing</span></td>
-                        </tr>
-                        <tr>
-                            <td>#ORD-003</td>
-                            <td>Bob Johnson</td>
-                            <td>1</td>
-                            <td>$1,599</td>
-                            <td>2024-04-14</td>
-                            <td>2024-04-17</td>
-                            <td><span class="status completed">Delivered</span></td>
-                        </tr>
+                        <c:forEach items="${orders}" var="order">
+                            <tr>
+                                <td>${order.orderId}</td>
+                                <td>${order.username}</td>
+                                <td>Rs. ${order.totalAmount}</td>
+                                <td><fmt:formatDate value="${order.createdAt}" pattern="MMM dd, yyyy hh:mm a"/></td>
+                                <td><fmt:formatDate value="${order.estimatedDelivery}"
+                                                    pattern="MMM dd, yyyy hh:mm a"/></td>
+                                <td><span
+                                        class="status <c:choose>
+<c:when test="${order.status=='DELIVERED'}">completed</c:when>
+<c:otherwise>pending</c:otherwise>
+</c:choose>">${order.status}</span></td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -461,7 +376,9 @@
                                                     pattern="yyyy-mm-dd"/></td>
                                 <td>
                                     <c:if test="${user.user_id!=1}">
-                                        <button class="btn-action view" onclick="openDeleteModal(${user.user_id},'${user.username}')">Delete</button>
+                                        <button class="btn-action view"
+                                                onclick="openDeleteModal(${user.user_id},'${user.username}')">Delete
+                                        </button>
                                     </c:if>
                                 </td>
                             </tr>
@@ -750,6 +667,10 @@
     </div>
 </main>
 <script>
+    function switchToProducts(){
+        window.location.href = "${pageContext.request.contextPath}/products";
+    }
+
     function switchTab(tabName) {
         // Hide all tabs
 
