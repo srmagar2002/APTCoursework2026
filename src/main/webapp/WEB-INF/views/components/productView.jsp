@@ -88,7 +88,6 @@
 
                         <div class="rating-review-section" id="rating-review-section">
                         </div>
-
                     </div>
 
                     <div class="product-right-column">
@@ -280,16 +279,16 @@
                                 </div>
 
 
-                                <div class="admin-edit-field" style="flex: 1;">
-                                    <label class="edit-label">Badge</label>
-                                    <select class="edit-select">
-                                        <option value="none">None</option>
-                                        <option value="bestseller" selected>Best Seller</option>
-                                        <option value="new">New</option>
-                                        <option value="sale">Sale</option>
-                                        <option value="popular">Popular</option>
-                                    </select>
-                                </div>
+<%--                                <div class="admin-edit-field" style="flex: 1;">--%>
+<%--                                    <label class="edit-label">Badge</label>--%>
+<%--                                    <select class="edit-select">--%>
+<%--                                        <option value="none">None</option>--%>
+<%--                                        <option value="bestseller" selected>Best Seller</option>--%>
+<%--                                        <option value="new">New</option>--%>
+<%--                                        <option value="sale">Sale</option>--%>
+<%--                                        <option value="popular">Popular</option>--%>
+<%--                                    </select>--%>
+<%--                                </div>--%>
                             </div>
 
                             <!-- Action Buttons -->
@@ -632,14 +631,14 @@
                         </div>
 
                         <!-- Quantity Selector -->
-                        <div class="quantity-selector">
-                            <span class="quantity-label">Quantity:</span>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn">-</button>
-                                <span class="quantity-value">1</span>
-                                <button class="quantity-btn">+</button>
-                            </div>
-                        </div>
+<%--                        <div class="quantity-selector">--%>
+<%--                            <span class="quantity-label">Quantity:</span>--%>
+<%--                            <div class="quantity-controls">--%>
+<%--                                <button class="quantity-btn">-</button>--%>
+<%--                                <span class="quantity-value">1</span>--%>
+<%--                                <button class="quantity-btn">+</button>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
 
                         <!-- Action Buttons -->
                         <div class="action-buttons">
@@ -649,13 +648,14 @@
                                 <input type="hidden" name="laptopId" value="${laptop.laptopID}"/>
                                 <button type="submit" class="btn btn-primary" id="addToCartButton" onclick="handleAddToCart()">Add to Cart</button>
                             </form>
-                            <button class="btn btn-secondary">
-                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                                     viewBox="0 0 24 24" style="margin-right: 0.5rem;">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                </svg>
-                                Wishlist
-                            </button>
+
+<%--                            <button class="btn btn-secondary">--%>
+<%--                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"--%>
+<%--                                     viewBox="0 0 24 24" style="margin-right: 0.5rem;">--%>
+<%--                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>--%>
+<%--                                </svg>--%>
+<%--                                Wishlist--%>
+<%--                            </button>--%>
                         </div>
 
                         <!-- Product Meta -->
@@ -704,12 +704,17 @@
 
     //For the corfirmation of product Added to cart
     function handleAddToCart() {
+        
+        if(${empty sessionScope.user}){
+            window.location.href = '${pageContext.request.contextPath}/login';
+            return;
+        }
 
         const btn = document.getElementById('addToCartButton');
         const form = document.getElementById('addToCartForm');
 
         // Change button to green "Added" confirmation state
-        btn.innerHTML = '✔✔ Added!';
+        btn.innerHTML = '✔ Added!';
         btn.style.backgroundColor = '#22c55e';
         btn.style.color = '#fff';
         btn.disabled = true; // prevent double clicking during the 1 second

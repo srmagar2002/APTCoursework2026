@@ -481,6 +481,50 @@ public class LaptopDaoImpl implements LaptopDao {
         return null;
     }
 
+    @Override
+    public int lowStockNoStockCount() {
+        Connection conn = null;
+        String sql = "select count(*) from laptop where availabilityStatus LIKE 'OUT OF STOCK' OR availabilityStatus LIKE 'LOW STOCK'";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting STOCK COUNT" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
+    @Override
+    public double getTotalValuation() {
+        Connection conn = null;
+        String sql = "select sum(stockQuantity * price) from laptop";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting total valuation" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
+
+
     /**
      * @param value the input string to be converted into a LIKE pattern
      * @return a formatted string suitable for SQL LIKE queries

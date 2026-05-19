@@ -75,6 +75,8 @@ public class DashboardServlet extends HttpServlet {
 
         HashMap<String, Integer> categoryCount = laptopDaoImpl.getCountByCategory();
         int totalLaptops = laptopDaoImpl.totalLaptops();
+        request.setAttribute("totalLaptops", totalLaptops);
+
         HashMap<String, Integer> categoryCountPercentage = new HashMap<>();
         for (Map.Entry<String, Integer> entry : categoryCount.entrySet()) {
             categoryCountPercentage.put(entry.getKey(), (int) (entry.getValue() * 100.0 / totalLaptops));
@@ -95,6 +97,9 @@ public class DashboardServlet extends HttpServlet {
         request.setAttribute("thisMonthRevenue", thisMonthRevenue);
         request.setAttribute("lastMonthRevenue", lastMonthRevenue);
         request.setAttribute("revenueGrowth", revenueGrowth);
+
+        request.setAttribute("stockCount", laptopDaoImpl.lowStockNoStockCount());
+        request.setAttribute("totalValuation", String.format("%,.2f",laptopDaoImpl.getTotalValuation()) );
 
 //        System.out.println(categoryCountPercentage);
 

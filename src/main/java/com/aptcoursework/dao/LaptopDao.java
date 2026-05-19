@@ -31,4 +31,6 @@ public interface LaptopDao {
     ArrayList<Laptop> getLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition,int start,int limit);
     int countLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition);
     HashMap<String,Integer> getCountByCategory();
+    int lowStockNoStockCount();
+    double getTotalValuation();
 }

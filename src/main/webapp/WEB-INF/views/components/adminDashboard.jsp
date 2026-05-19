@@ -437,52 +437,36 @@
                     </div>
 
                     <div class="report-card">
-                        <h3>Customer Report</h3>
-                        <div class="report-stat">
-                            <span class="label">New Customers</span>
-                            <span class="value">342</span>
-                        </div>
-                        <div class="report-stat">
-                            <span class="label">Returning Customers</span>
-                            <span class="value">1,247</span>
-                        </div>
-                        <div class="report-stat">
-                            <span class="label">Retention Rate</span>
-                            <span class="value">78.5%</span>
-                        </div>
-                    </div>
-
-                    <div class="report-card">
                         <h3>Inventory Report</h3>
                         <div class="report-stat">
-                            <span class="label">Total Products</span>
-                            <span class="value">87</span>
+                            <span class="label">Total Items</span>
+                            <span class="value">${totalLaptops}</span>
                         </div>
                         <div class="report-stat">
                             <span class="label">Low Stock Items</span>
-                            <span class="value negative">12</span>
+                            <span class="value negative">${stockCount}</span>
                         </div>
                         <div class="report-stat">
-                            <span class="label">Total Value</span>
-                            <span class="value">$284,560</span>
+                            <span class="label">Total Valuation</span>
+                            <span class="value">Rs. ${totalValuation}</span>
                         </div>
                     </div>
 
-                    <div class="report-card">
-                        <h3>Performance Report</h3>
-                        <div class="report-stat">
-                            <span class="label">Avg Order Value</span>
-                            <span class="value">$1,245</span>
-                        </div>
-                        <div class="report-stat">
-                            <span class="label">Conversion Rate</span>
-                            <span class="value">3.24%</span>
-                        </div>
-                        <div class="report-stat">
-                            <span class="label">Customer LTV</span>
-                            <span class="value">$4,850</span>
-                        </div>
-                    </div>
+<%--                    <div class="report-card">--%>
+<%--                        <h3>Performance Report</h3>--%>
+<%--                        <div class="report-stat">--%>
+<%--                            <span class="label">Avg Order Value</span>--%>
+<%--                            <span class="value">$1,245</span>--%>
+<%--                        </div>--%>
+<%--                        <div class="report-stat">--%>
+<%--                            <span class="label">Conversion Rate</span>--%>
+<%--                            <span class="value">3.24%</span>--%>
+<%--                        </div>--%>
+<%--                        <div class="report-stat">--%>
+<%--                            <span class="label">Customer LTV</span>--%>
+<%--                            <span class="value">$4,850</span>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
             </div>
 
@@ -599,47 +583,47 @@
                                 <span class="detail-value"><fmt:formatDate value="${lastLogin}"
                                                                            pattern="MMM dd, yyyy hh:mm a"/></span>
                             </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Total Orders</span>
-                                <span class="detail-value">1,284</span>
-                            </div>
+<%--                            <div class="detail-item">--%>
+<%--                                <span class="detail-label">Total Orders</span>--%>
+<%--                                <span class="detail-value">1,284</span>--%>
+<%--                            </div>--%>
                             <div class="detail-item">
                                 <span class="detail-label">Account Type</span>
                                 <span class="detail-value">
-                      <span class="role admin">Customer</span>
+                      <span class="role admin">Administrator</span>
                     </span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Security Card -->
-                    <div class="profile-info-card">
-                        <h3>Security</h3>
+<%--                    <div class="profile-info-card">--%>
+<%--                        <h3>Security</h3>--%>
 
-                        <div class="security-options">
-                            <div class="security-item">
-                                <div>
-                                    <h4>Password</h4>
-                                    <p class="muted">Change your password regularly to keep your account secure</p>
-                                </div>
-                                <button class="btn btn-ghost">Change Password</button>
-                            </div>
-                            <div class="security-item">
-                                <div>
-                                    <h4>Two-Factor Authentication</h4>
-                                    <p class="muted">Add an extra layer of security to your account</p>
-                                </div>
-                                <button class="btn btn-ghost">Enable 2FA</button>
-                            </div>
-                            <div class="security-item">
-                                <div>
-                                    <h4>Active Sessions</h4>
-                                    <p class="muted">Manage your active sessions and devices</p>
-                                </div>
-                                <button class="btn btn-ghost">View Sessions</button>
-                            </div>
-                        </div>
-                    </div>
+<%--                        <div class="security-options">--%>
+<%--                            <div class="security-item">--%>
+<%--                                <div>--%>
+<%--                                    <h4>Password</h4>--%>
+<%--                                    <p class="muted">Change your password regularly to keep your account secure</p>--%>
+<%--                                </div>--%>
+<%--                                <button class="btn btn-ghost">Change Password</button>--%>
+<%--                            </div>--%>
+<%--                            <div class="security-item">--%>
+<%--                                <div>--%>
+<%--                                    <h4>Two-Factor Authentication</h4>--%>
+<%--                                    <p class="muted">Add an extra layer of security to your account</p>--%>
+<%--                                </div>--%>
+<%--                                <button class="btn btn-ghost">Enable 2FA</button>--%>
+<%--                            </div>--%>
+<%--                            <div class="security-item">--%>
+<%--                                <div>--%>
+<%--                                    <h4>Active Sessions</h4>--%>
+<%--                                    <p class="muted">Manage your active sessions and devices</p>--%>
+<%--                                </div>--%>
+<%--                                <button class="btn btn-ghost">View Sessions</button>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
             </div>
         </section>

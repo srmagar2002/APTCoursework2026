@@ -87,7 +87,7 @@ CREATE TABLE laptop
                                      'General')),
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
     CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Linux')),
-    CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
+    CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK','LOW STOCK'))
 );
 /*
 Category Explanation

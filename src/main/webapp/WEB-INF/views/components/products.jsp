@@ -36,7 +36,14 @@
 
             <a href="${pageContext.request.contextPath}/productView?laptopID=${product.laptopID}">
                 <div class="product-image">
-                        <%--                <span class="product-badge">Best Seller</span>--%>
+                    <c:choose>
+                        <c:when test="${product.availabilityStatus=='LOW STOCK'}">
+                                        <span class="product-badge">LOW STOCK</span>
+                        </c:when>
+                        <c:when test="${product.availabilityStatus=='OUT OF STOCK'}">
+                            <span class="product-badge">OUT OF STOCK</span>
+                        </c:when>
+                    </c:choose>
                     <img src="${pageContext.request.contextPath}/static/imgUpload/${product.thumbnailUrl}" alt="">
                 </div>
                 <div class="product-content">

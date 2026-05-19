@@ -26,7 +26,7 @@ IGNORE INTO laptop (
 ) VALUES
       (UUID(),'Dell','XPS 15','Dell XPS 15 2026','The Dell XPS 15 2026 is a premium ultrabook designed for high performance and sleek portability. Powered by an Intel i7-13700H processor and NVIDIA RTX 4050 graphics, it handles demanding tasks effortlessly. Its 15.6-inch 2560x1600 display delivers sharp visuals, while the 1TB SSD ensures fast storage and responsiveness.','Ultrabook',
        'Intel i7-13700H','16GB','1TB','SSD','NVIDIA RTX 4050','15.6','2560x1600','Windows',
-       189999,8,20,1800,'Silver',10),
+       189999,8,3,1800,'Silver',10),
 
       (UUID(),'Dell','XPS 17','Dell XPS 17 2026','The Dell XPS 17 2026 is a high-end ultrabook built for power users who need a large, immersive display. Featuring an Intel i9-13900H processor, 32GB RAM, and NVIDIA RTX 4060 graphics, it delivers exceptional performance. Its 17-inch 4K display ensures stunning clarity, while the 1TB SSD provides fast and reliable storage.','Ultrabook',
        'Intel i9-13900H','32GB','1TB','SSD','NVIDIA RTX 4060','17','3840x2400','Windows',
@@ -42,7 +42,7 @@ IGNORE INTO laptop (
 
       (UUID(),'Dell','Alienware M16','Dell Alienware M16','The Dell Alienware M16 is a powerful gaming laptop built for extreme performance and immersive gameplay. Featuring an Intel i9-13900HX processor, 32GB RAM, and NVIDIA RTX 4080 graphics, it handles the latest AAA titles with ease. Its 16-inch high-resolution display and 2TB SSD deliver stunning visuals and massive, fast storage.','Gaming',
        'Intel i9-13900HX','32GB','2TB','SSD','NVIDIA RTX 4080','16','2560x1600','Windows',
-       299999,7,10,2800,'Black',6),
+       299999,7,2,2800,'Black',6),
 
       (UUID(),'Dell','Alienware X14','Dell Alienware X14','The Dell Alienware X14 is a slim and portable gaming laptop designed for performance on the go. Powered by an Intel i7-13700H processor, 16GB RAM, and NVIDIA RTX 4060 graphics, it delivers smooth gameplay. Its 14-inch high-resolution display and 1TB SSD ensure fast performance and vibrant visuals.','Gaming',
        'Intel i7-13700H','16GB','1TB','SSD','NVIDIA RTX 4060','14','2560x1440','Windows',
@@ -62,46 +62,46 @@ IGNORE INTO laptop (
 
       (UUID(),'Dell','G15 5530','Dell G15 Gaming Laptop','The Dell G15 5530 is a mid-range gaming laptop designed for smooth and responsive gameplay. Powered by an Intel i7-13650HX processor, 16GB RAM, and NVIDIA RTX 4050 graphics, it handles modern games with ease. Its 15.6-inch Full HD display and 1TB SSD deliver fast performance and immersive visuals.','Gaming',
        'Intel i7-13650HX','16GB','1TB','SSD','NVIDIA RTX 4050','15.6','1920x1080','Windows',
-       139999,10,22,2500,'Black',7),
+       139999,10,4,2500,'Black',7),
 
       (UUID(),'Apple','MacBook Air M2','MacBook Air 13 M2','The MacBook Air M2 is a lightweight and highly efficient ultrabook designed for everyday productivity and portability. Powered by Apple’s M2 chip with an integrated 8-core GPU, it delivers smooth performance and excellent battery life. Its 13.6-inch high-resolution display offers vibrant visuals, while the fast SSD ensures quick responsiveness and reliable storage.','Ultrabook',
-       'Apple M2','8GB','256GB','SSD','Integrated 8-core GPU','13.6','2560x1664','macOS',
+       'Apple M2','8GB','256GB','SSD','Integrated 8-core GPU','13.6','2560x1664','MacOS',
        119999,5,30,1240,'Silver',18),
 
       (UUID(),'Apple','MacBook Air M3','MacBook Air 13 M3','The MacBook Air M3 is Apple’s latest lightweight ultrabook, powered by the efficient M3 chip with a 10-core integrated GPU. It delivers fast, silent performance ideal for everyday productivity and creative tasks. With a 13.6-inch high-resolution display and 512GB SSD, it offers vibrant visuals, smooth multitasking, and ample storage in a sleek, portable design.','Ultrabook',
-       'Apple M3','8GB','512GB','SSD','Integrated 10-core GPU','13.6','2560x1664','macOS',
+       'Apple M3','8GB','512GB','SSD','Integrated 10-core GPU','13.6','2560x1664','MacOS',
        139999,4,25,1240,'Starlight',20),
 
       (UUID(),'Apple','MacBook Air 15 M2','MacBook Air 15 M2','The MacBook Air 15 M2 is a thin and lightweight ultrabook featuring a larger 15.3-inch Liquid Retina display for enhanced viewing comfort. Powered by Apple’s M2 chip with a 10-core GPU and 16GB RAM, it delivers smooth multitasking and strong performance. Its 512GB SSD ensures fast storage, making it ideal for productivity and creative work on the go.','Ultrabook',
-       'Apple M2','16GB','512GB','SSD','Integrated 10-core GPU','15.3','2880x1864','macOS',
+       'Apple M2','16GB','512GB','SSD','Integrated 10-core GPU','15.3','2880x1864','MacOS',
        159999,6,20,1480,'Midnight',18),
 
       (UUID(),'Apple','MacBook Air 15 M3','MacBook Air 15 M3','The MacBook Air 15 M3 combines power and portability in a sleek large-screen ultrabook. Powered by Apple’s M3 chip with a 10-core GPU and 16GB RAM, it delivers fast, efficient performance for demanding everyday tasks. Its 15.3-inch Liquid Retina display offers sharp, vibrant visuals, while the 512GB SSD ensures smooth, responsive storage access.','Ultrabook',
-       'Apple M3','16GB','512GB','SSD','Integrated 10-core GPU','15.3','2880x1864','macOS',
+       'Apple M3','16GB','512GB','SSD','Integrated 10-core GPU','15.3','2880x1864','MacOS',
        169999,5,18,1480,'Space Gray',20),
 
-      (UUID(),'Apple','MacBook Pro 13 M2','MacBook Pro 13-inch M2','The MacBook Pro 13-inch M2 is a compact professional laptop designed for strong performance and efficiency. Powered by Apple’s M2 chip with a 10-core GPU and 8GB RAM, it handles demanding workloads smoothly. Its 13.3-inch Retina display delivers sharp visuals, while the 512GB SSD ensures fast storage and responsive performance for creative and professional tasks.','Professional',
-       'Apple M2','8GB','512GB','SSD','Integrated 10-core GPU','13.3','2560x1600','macOS',
+      (UUID(),'Apple','MacBook Pro 13 M2','MacBook Pro 13-inch M2','The MacBook Pro 13-inch M2 is a compact professional laptop designed for strong performance and efficiency. Powered by Apple’s M2 chip with a 10-core GPU and 8GB RAM, it handles demanding workloads smoothly. Its 13.3-inch Retina display delivers sharp visuals, while the 512GB SSD ensures fast storage and responsive performance for creative and professional tasks.','Workstation',
+       'Apple M2','8GB','512GB','SSD','Integrated 10-core GPU','13.3','2560x1600','MacOS',
        149999,7,22,1400,'Space Gray',20),
 
-      (UUID(),'Apple','MacBook Pro 14 M3','MacBook Pro 14 M3','The MacBook Pro 14 M3 is a high-performance professional laptop built for demanding creative and technical workloads. Powered by the Apple M3 Pro chip with an integrated 14-core GPU and 18GB RAM, it delivers exceptional speed and efficiency. Its 14.2-inch Liquid Retina XDR display offers stunning clarity, while the 512GB SSD ensures fast, reliable storage performance.','Professional',
-       'Apple M3 Pro','18GB','512GB','SSD','Integrated 14-core GPU','14.2','3024x1964','macOS',
+      (UUID(),'Apple','MacBook Pro 14 M3','MacBook Pro 14 M3','The MacBook Pro 14 M3 is a high-performance professional laptop built for demanding creative and technical workloads. Powered by the Apple M3 Pro chip with an integrated 14-core GPU and 18GB RAM, it delivers exceptional speed and efficiency. Its 14.2-inch Liquid Retina XDR display offers stunning clarity, while the 512GB SSD ensures fast, reliable storage performance.','Workstation',
+       'Apple M3 Pro','18GB','512GB','SSD','Integrated 14-core GPU','14.2','3024x1964','MacOS',
        199999,5,15,1600,'Silver',18),
 
-      (UUID(),'Apple','MacBook Pro 14 M3 Max','MacBook Pro 14 M3 Max','The MacBook Pro 14 M3 Max is an extreme-performance professional laptop built for the most demanding workflows. Powered by the Apple M3 Max chip with a 30-core integrated GPU and 36GB RAM, it delivers outstanding speed for rendering, development, and AI tasks. Its 14.2-inch Liquid Retina XDR display and 1TB SSD ensure exceptional visuals and ultra-fast storage performance.','Professional',
-       'Apple M3 Max','36GB','1TB','SSD','Integrated 30-core GPU','14.2','3024x1964','macOS',
-       299999,3,10,1620,'Space Black',16),
+      (UUID(),'Apple','MacBook Pro 14 M3 Max','MacBook Pro 14 M3 Max','The MacBook Pro 14 M3 Max is an extreme-performance professional laptop built for the most demanding workflows. Powered by the Apple M3 Max chip with a 30-core integrated GPU and 36GB RAM, it delivers outstanding speed for rendering, development, and AI tasks. Its 14.2-inch Liquid Retina XDR display and 1TB SSD ensure exceptional visuals and ultra-fast storage performance.','Workstation',
+       'Apple M3 Max','36GB','1TB','SSD','Integrated 30-core GPU','14.2','3024x1964','MacOS',
+       299999,3,1,1620,'Space Black',16),
 
-      (UUID(),'Apple','MacBook Pro 16 M3 Pro','MacBook Pro 16 M3 Pro','The MacBook Pro 16 M3 Pro is a large-screen professional laptop designed for high-end productivity and creative workflows. Powered by the Apple M3 Pro chip with an 18-core integrated GPU and 18GB RAM, it delivers strong, efficient performance. Its 16.2-inch Liquid Retina XDR display offers stunning detail, while the 512GB SSD ensures fast and reliable storage access.','Professional',
-       'Apple M3 Pro','18GB','512GB','SSD','Integrated 18-core GPU','16.2','3456x2234','macOS',
+      (UUID(),'Apple','MacBook Pro 16 M3 Pro','MacBook Pro 16 M3 Pro','The MacBook Pro 16 M3 Pro is a large-screen professional laptop designed for high-end productivity and creative workflows. Powered by the Apple M3 Pro chip with an 18-core integrated GPU and 18GB RAM, it delivers strong, efficient performance. Its 16.2-inch Liquid Retina XDR display offers stunning detail, while the 512GB SSD ensures fast and reliable storage access.','Student',
+       'Apple M3 Pro','18GB','512GB','SSD','Integrated 18-core GPU','16.2','3456x2234','MacOS',
        249999,4,12,2100,'Silver',20),
 
-      (UUID(),'Apple','MacBook Pro 16 M3 Max','MacBook Pro 16 M3 Max','The MacBook Pro 16 M3 Max is the ultimate professional laptop, engineered for extreme performance and heavy workloads. Powered by the Apple M3 Max chip with a 40-core integrated GPU and 48GB RAM, it delivers unmatched speed for 3D rendering, video production, and advanced computing. Its 16.2-inch Liquid Retina XDR display and 1TB SSD ensure stunning visuals and ultra-fast, reliable storage performance.','Professional',
-       'Apple M3 Max','48GB','1TB','SSD','Integrated 40-core GPU','16.2','3456x2234','macOS',
-       349999,2,8,2150,'Space Black',18),
+      (UUID(),'Apple','MacBook Pro 16 M3 Max','MacBook Pro 16 M3 Max','The MacBook Pro 16 M3 Max is the ultimate professional laptop, engineered for extreme performance and heavy workloads. Powered by the Apple M3 Max chip with a 40-core integrated GPU and 48GB RAM, it delivers unmatched speed for 3D rendering, video production, and advanced computing. Its 16.2-inch Liquid Retina XDR display and 1TB SSD ensure stunning visuals and ultra-fast, reliable storage performance.','Student',
+       'Apple M3 Max','48GB','1TB','SSD','Integrated 40-core GPU','16.2','3456x2234','MacOS',
+       349999,2,2,2150,'Space Black',18),
 
-      (UUID(),'Apple','MacBook Pro 13 M1','MacBook Pro 13-inch M1','The MacBook Pro 13-inch M1 is a reliable and efficient professional laptop designed for smooth everyday performance. Powered by Apple’s M1 chip with an 8-core integrated GPU and 8GB RAM, it handles productivity and creative tasks with ease. Its 13.3-inch Retina display delivers sharp visuals, while the 256GB SSD ensures fast boot times and responsive storage.','Professional',
-       'Apple M1','8GB','256GB','SSD','Integrated 8-core GPU','13.3','2560x1600','macOS',
+      (UUID(),'Apple','MacBook Pro 13 M1','MacBook Pro 13-inch M1','The MacBook Pro 13-inch M1 is a reliable and efficient professional laptop designed for smooth everyday performance. Powered by Apple’s M1 chip with an 8-core integrated GPU and 8GB RAM, it handles productivity and creative tasks with ease. Its 13.3-inch Retina display delivers sharp visuals, while the 256GB SSD ensures fast boot times and responsive storage.','Student',
+       'Apple M1','8GB','256GB','SSD','Integrated 8-core GPU','13.3','2560x1600','MacOS',
        109999,10,35,1400,'Silver',20),
 
       (UUID(),'Acer','Aspire 5','Acer Aspire 5','The Acer Aspire 5 is an affordable everyday laptop designed for smooth and reliable performance. Powered by an Intel i5-1335U processor with 8GB RAM, it handles daily tasks like browsing, office work, and media consumption efficiently. Its 15.6-inch Full HD display offers clear visuals, while the 512GB SSD ensures fast boot times and responsive storage.','General',
@@ -122,7 +122,7 @@ IGNORE INTO laptop (
 
       (UUID(),'Acer','Predator Helios 16','Acer Predator Helios 16','The Acer Predator Helios 16 is a high-end gaming laptop built for serious performance. Powered by an Intel i9-13900HX, 32GB RAM, and a 1TB SSD, it handles demanding tasks effortlessly. Its 16-inch 2560×1600 display and RTX 4080 graphics deliver stunning visuals and ultra-smooth gameplay in a bold black design.','Gaming',
        'Intel i9-13900HX','32GB','1TB','SSD','NVIDIA RTX 4080','16','2560x1600','Windows',
-       279999,6,10,2900,'Black',6),
+       279999,6,3,2900,'Black',6),
 
       (UUID(),'Acer','Nitro 5','Acer Nitro 5','The Acer Nitro 5 is a budget-friendly gaming laptop that balances performance and value. It features an Intel i7-12700H processor, 16GB RAM, and a fast 512GB SSD for smooth gameplay and multitasking. With RTX 4060 graphics and a 15.6-inch Full HD display, it delivers an immersive gaming experience.','Gaming',
        'Intel i7-12700H','16GB','512GB','SSD','NVIDIA RTX 4060','15.6','1920x1080','Windows',
@@ -130,14 +130,14 @@ IGNORE INTO laptop (
 
       (UUID(),'Acer','Nitro 16','Acer Nitro 16','The Acer Nitro 16 is a mid-range gaming laptop designed for strong, reliable performance. Powered by an AMD Ryzen 7 7840HS, 16GB RAM, and a 1TB SSD, it handles modern games and multitasking smoothly. Its 16-inch 2560×1600 display and RTX 4070 graphics deliver sharp visuals and immersive gameplay.','Gaming',
        'AMD Ryzen 7 7840HS','16GB','1TB','SSD','NVIDIA RTX 4070','16','2560x1600','Windows',
-       169999,8,18,2700,'Black',6),
+       169999,8,4,2700,'Black',6),
 
       (UUID(),'Acer','TravelMate P4','Acer TravelMate P4','The Acer TravelMate P4 is a reliable business laptop built for professionals on the move. Powered by an Intel i5-1345U, 16GB RAM, and a 512GB SSD, it ensures smooth productivity. Its 14-inch 1920×1200 display and durable, lightweight design make it ideal for everyday office tasks.','Business',
        'Intel i5-1345U','16GB','512GB','SSD','Intel Iris Xe','14','1920x1200','Windows',
-       119999,10,22,1350,'Gray',13),
+       119999,10,0,1350,'Gray',13),
 
       (UUID(),'Acer','Chromebook Spin 714','Acer Chromebook Spin 714','The Acer Chromebook Spin 714 is a versatile convertible laptop designed for everyday flexibility. Powered by an Intel i5-1335U, 8GB RAM, and 256GB SSD, it handles daily tasks smoothly. Its 14-inch 1920×1200 touchscreen and 2-in-1 design make it perfect for work, study, and entertainment.','General',
-       'Intel i5-1335U','8GB','256GB','SSD','Intel Iris Xe','14','1920x1200','Chrome OS',
+       'Intel i5-1335U','8GB','256GB','SSD','Intel Iris Xe','14','1920x1200','Windows',
        74999,11,26,1500,'Silver',12),
 
       (UUID(),'Acer','Aspire Vero','Acer Aspire Vero','The Acer Aspire Vero is an eco-friendly laptop designed with sustainability in mind. Powered by an Intel i5-1235U, 8GB RAM, and a 512GB SSD, it delivers reliable everyday performance. Its 15.6-inch Full HD display and thoughtfully crafted design make it ideal for conscious, modern users.','General',
@@ -154,7 +154,7 @@ IGNORE INTO laptop (
 
       (UUID(),'HP','Envy x360','HP Envy x360','The HP Envy x360 is a premium convertible laptop designed for flexibility and performance. Powered by an AMD Ryzen 7 7730U, 16GB RAM, and a 512GB SSD, it delivers smooth multitasking. Its 15.6-inch Full HD touchscreen and 2-in-1 design make it ideal for work, creativity, and entertainment.','Convertible',
        'AMD Ryzen 7 7730U','16GB','512GB','SSD','AMD Radeon Graphics','15.6','1920x1080','Windows',
-       109999,8,25,1900,'Black',11),
+       109999,8,0,1900,'Black',11),
 
       (UUID(),'HP','Envy 16','HP Envy 16','The HP Envy 16 is a sleek high-performance ultrabook built for power users and creators. Featuring an Intel i7-13700H, 16GB RAM, and a 1TB SSD, it delivers fast and efficient performance. Its 16-inch 2560×1600 display and RTX 4060 graphics provide sharp visuals for work, design, and entertainment.','Ultrabook',
        'Intel i7-13700H','16GB','1TB','SSD','NVIDIA RTX 4060','16','2560x1600','Windows',
@@ -166,7 +166,7 @@ IGNORE INTO laptop (
 
       (UUID(),'HP','EliteBook 840','HP EliteBook 840 G10','The HP EliteBook 840 G10 is a business-class laptop built for security, reliability, and productivity. Powered by an Intel i7-1365U, 16GB RAM, and a 512GB SSD, it delivers smooth professional performance. Its 14-inch 1920×1200 display and sleek silver design make it ideal for modern workplace demands.','Business',
        'Intel i7-1365U','16GB','512GB','SSD','Intel Iris Xe','14','1920x1200','Windows',
-       149999,9,30,1350,'Silver',14),
+       149999,9,0,1350,'Silver',14),
 
       (UUID(),'HP','ProBook 450','HP ProBook 450 G10','The HP ProBook 450 G10 is a dependable office productivity laptop designed for business users. Powered by an Intel i5-1345U, 8GB RAM, and a 512GB SSD, it ensures smooth everyday performance. Its 15.6-inch Full HD display and durable gray design make it ideal for professional work environments.','Business',
        'Intel i5-1345U','8GB','512GB','SSD','Intel Iris Xe','15.6','1920x1080','Windows',
@@ -174,7 +174,7 @@ IGNORE INTO laptop (
 
       (UUID(),'HP','Omen 16','HP Omen 16','The HP Omen 16 is a high-end gaming laptop built for powerful and immersive performance. Equipped with an Intel i7-13700HX, 16GB RAM, and a 1TB SSD, it handles demanding games with ease. Its 16.1-inch 2560×1440 display and RTX 4070 graphics deliver sharp visuals and smooth gameplay in a sleek black design.','Gaming',
        'Intel i7-13700HX','16GB','1TB','SSD','NVIDIA RTX 4070','16.1','2560x1440','Windows',
-       179999,8,18,2600,'Black',7),
+       179999,8,2,2600,'Black',7),
 
       (UUID(),'HP','Victus 15','HP Victus 15','The HP Victus 15 is an affordable gaming laptop designed for smooth everyday performance and casual gaming. Powered by an Intel i5-13420H, 16GB RAM, and a 512GB SSD, it ensures responsive multitasking. Its 15.6-inch Full HD display and RTX 4050 graphics deliver solid visuals in a modern blue design.','Gaming',
        'Intel i5-13420H','16GB','512GB','SSD','NVIDIA RTX 4050','15.6','1920x1080','Windows',
@@ -182,7 +182,7 @@ IGNORE INTO laptop (
 
       (UUID(),'HP','ZBook Power','HP ZBook Power G10','The HP ZBook Power G10 is a mobile workstation built for demanding professional workloads. Powered by an Intel i9-13900H, 32GB RAM, and a 1TB SSD, it delivers exceptional performance for heavy multitasking. Its 15.6-inch Full HD display and RTX A2000 graphics make it ideal for design, engineering, and content creation.','Workstation',
        'Intel i9-13900H','32GB','1TB','SSD','NVIDIA RTX A2000','15.6','1920x1080','Windows',
-       229999,5,12,2200,'Silver',9),
+       229999,5,3,2200,'Silver',9),
 
       (UUID(),'ASUS','ROG Strix G16','ASUS ROG Strix G16','The ASUS ROG Strix G16 is a high-performance gaming laptop designed for smooth and immersive gameplay. Powered by an Intel i7-13650HX, 16GB RAM, and a 1TB SSD, it delivers fast and responsive performance. Its 16-inch 1920×1200 display and RTX 4060 graphics ensure sharp visuals and fluid gaming in a bold black design.','Gaming',
        'Intel i7-13650HX','16GB','1TB','SSD','NVIDIA RTX 4060','16','1920x1200','Windows',
@@ -190,11 +190,11 @@ IGNORE INTO laptop (
 
       (UUID(),'ASUS','ROG Strix G18','ASUS ROG Strix G18','The ASUS ROG Strix G18 is a powerful gaming laptop built for top-tier performance and immersive visuals. Equipped with an Intel i9-13980HX, 32GB RAM, and a 1TB SSD, it handles demanding games effortlessly. Its 18-inch 2560×1600 display and RTX 4080 graphics deliver stunning detail and ultra-smooth gameplay.','Gaming',
        'Intel i9-13980HX','32GB','1TB','SSD','NVIDIA RTX 4080','18','2560x1600','Windows',
-       249999,6,12,3100,'Black',6),
+       249999,6,1,3100,'Black',6),
 
       (UUID(),'ASUS','ROG Zephyrus G14','ASUS ROG Zephyrus G14','The ASUS ROG Zephyrus G14 is a compact premium gaming laptop that balances power and portability. Featuring an AMD Ryzen 9 7940HS, 16GB RAM, and a 1TB SSD, it delivers excellent performance for gaming and creative tasks. Its 14-inch 2560×1600 display and RTX 4070 graphics ensure sharp visuals and smooth gameplay.','Gaming',
        'AMD Ryzen 9 7940HS','16GB','1TB','SSD','NVIDIA RTX 4070','14','2560x1600','Windows',
-       199999,7,15,1650,'White',8),
+       199999,7,4,1650,'White',8),
 
       (UUID(),'ASUS','ROG Zephyrus G16','ASUS ROG Zephyrus G16','The ASUS ROG Zephyrus G16 is a slim yet powerful gaming laptop designed for high performance and portability. Powered by an Intel i9-13900H, 32GB RAM, and a 1TB SSD, it handles demanding games and workloads with ease. Its 16-inch 2560×1600 display and RTX 4070 deliver smooth, vibrant visuals.','Gaming',
        'Intel i9-13900H','32GB','1TB','SSD','NVIDIA RTX 4070','16','2560x1600','Windows',
@@ -202,7 +202,7 @@ IGNORE INTO laptop (
 
       (UUID(),'ASUS','ROG Zephyrus M16','ASUS ROG Zephyrus M16','The ASUS ROG Zephyrus M16 is a high-end slim gaming laptop built for serious performance and portability. Powered by an Intel i9-13900H, 32GB RAM, and a massive 2TB SSD, it handles heavy workloads with ease. Its 16-inch 2560×1600 display and RTX 4080 deliver stunning visuals and ultra-smooth gaming.','Gaming',
        'Intel i9-13900H','32GB','2TB','SSD','NVIDIA RTX 4080','16','2560x1600','Windows',
-       269999,4,10,2200,'Black',6),
+       269999,4,2,2200,'Black',6),
 
       (UUID(),'ASUS','ROG Flow X13','ASUS ROG Flow X13','The ASUS ROG Flow X13 is a versatile convertible gaming laptop that combines portability with strong performance. Powered by an AMD Ryzen 9 7940HS, 16GB RAM, and a 1TB SSD, it ensures smooth multitasking and gaming. Its 13.4-inch 1920×1200 touchscreen and RTX 4050 graphics make it ideal for both work and play.','Convertible',
        'AMD Ryzen 9 7940HS','16GB','1TB','SSD','NVIDIA RTX 4050','13.4','1920x1200','Windows',
@@ -214,15 +214,15 @@ IGNORE INTO laptop (
 
       (UUID(),'ASUS','ROG Strix Scar 16','ASUS ROG Strix Scar 16','The ASUS ROG Strix Scar 16 is a premium competitive gaming laptop built for extreme performance. Powered by an Intel i9-13980HX, 32GB RAM, and a 2TB SSD, it delivers unmatched speed and responsiveness. Its 16-inch 2560×1600 display and RTX 4090 graphics provide top-tier visuals for intense, high-FPS gaming.','Gaming',
        'Intel i9-13980HX','32GB','2TB','SSD','NVIDIA RTX 4090','16','2560x1600','Windows',
-       329999,3,8,2800,'Black',6),
+       329999,3,3,2800,'Black',6),
 
       (UUID(),'ASUS','ROG Strix Scar 18','ASUS ROG Strix Scar 18','The ASUS ROG Strix Scar 18 is the ultimate large-format gaming laptop built for extreme performance. Powered by an Intel i9-13980HX, 64GB RAM, and a 2TB SSD, it handles the most demanding workloads with ease. Its 18-inch 2560×1600 display and RTX 4090 deliver breathtaking visuals and elite-level gaming power.','Gaming',
        'Intel i9-13980HX','64GB','2TB','SSD','NVIDIA RTX 4090','18','2560x1600','Windows',
-       379999,2,6,3200,'Black',5),
+       379999,2,1,3200,'Black',5),
 
       (UUID(),'ASUS','ROG Zephyrus Duo 16','ASUS ROG Zephyrus Duo 16','The ASUS ROG Zephyrus Duo 16 is a cutting-edge dual-screen gaming laptop built for creators and gamers. Powered by an AMD Ryzen 9 7945HX, 32GB RAM, and a 2TB SSD, it delivers exceptional performance. Its 16-inch 2560×1600 display, RTX 4080 graphics, and secondary screen enhance multitasking and immersive gameplay.','Gaming',
        'AMD Ryzen 9 7945HX','32GB','2TB','SSD','NVIDIA RTX 4080','16','2560x1600','Windows',
-       299999,4,9,2600,'Black',6),
+       299999,4,2,2600,'Black',6),
 
       (UUID(),'Lenovo','ThinkPad X1 Carbon','Lenovo ThinkPad X1 Carbon Gen 11','The Lenovo ThinkPad X1 Carbon Gen 11 is a premium business ultrabook designed for professionals who value portability and performance. Powered by an Intel i7-1365U, 16GB RAM, and a 1TB SSD, it ensures smooth multitasking. Its 14-inch 1920×1200 display and lightweight black design make it ideal for productivity on the go.','Business',
        'Intel i7-1365U','16GB','1TB','SSD','Intel Iris Xe','14','1920x1200','Windows',
@@ -258,11 +258,11 @@ IGNORE INTO laptop (
 
       (UUID(),'Lenovo','Legion 7','Lenovo Legion 7','The Lenovo Legion 7 is a high-performance gaming laptop built for demanding players and creators. Powered by an Intel i9-13900HX, 32GB RAM, and a 1TB SSD, it delivers exceptional speed and responsiveness. Its 16-inch 2560×1600 display and RTX 4080 graphics ensure stunning visuals and smooth, immersive gameplay.','Gaming',
        'Intel i9-13900HX','32GB','1TB','SSD','NVIDIA RTX 4080','16','2560x1600','Windows',
-       249999,5,12,2700,'Black',6),
+       249999,5,4,2700,'Black',6),
 
       (UUID(),'Lenovo','ThinkPad P16','Lenovo ThinkPad P16','The Lenovo ThinkPad P16 is a powerful mobile workstation designed for professionals handling demanding workloads. Equipped with an Intel i9-13950HX, 32GB RAM, and a 1TB SSD, it delivers exceptional performance and reliability. Its 16-inch 1920×1200 display and RTX A3000 graphics make it ideal for engineering, design, and advanced creative tasks.','Workstation',
        'Intel i9-13950HX','32GB','1TB','SSD','NVIDIA RTX A3000','16','1920x1200','Windows',
-       279999,4,10,2900,'Black',8);
+       279999,4,3,2900,'Black',8);
 
 
 INSERT
