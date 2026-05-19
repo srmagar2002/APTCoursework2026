@@ -636,7 +636,7 @@ uri="jakarta.tags.core" %>
               </div>
               <div class="contact-detail-content">
                 <span class="contact-detail-label">Phone</span>
-                <span class="contact-detail-value">+977-61-123456</span>
+                <span class="contact-detail-value">+977-1234512345</span>
               </div>
             </div>
 
@@ -649,7 +649,7 @@ uri="jakarta.tags.core" %>
               </div>
               <div class="contact-detail-content">
                 <span class="contact-detail-label">Address</span>
-                <span class="contact-detail-value">Lakeside, Pokhara, Kaski, Nepal</span>
+                <span class="contact-detail-value">Lions Marga, Pokhara, Kaski, Nepal</span>
               </div>
             </div>
 
