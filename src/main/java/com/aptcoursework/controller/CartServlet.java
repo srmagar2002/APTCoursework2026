@@ -51,6 +51,13 @@ public class CartServlet extends HttpServlet {
         SessionUtil.setAttribute(request, "cartCount", count);
     }
 
+<<<<<<< HEAD
+
+//    Handles GET requests to /cart
+//    Two actions:
+//    - No action param, which will load and display the cart page
+//    - action = delete, which will delete a specific item from cart
+=======
     /**
      * Handles GET requests for cart operations.
      * Supports viewing cart items and deleting items from the cart.
@@ -67,6 +74,7 @@ public class CartServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
