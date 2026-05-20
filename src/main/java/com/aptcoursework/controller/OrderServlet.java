@@ -18,12 +18,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Servlet handling order display, management, and retrieval.
+ * Supports viewing user orders and individual order details with items.
+ * Provides order tracking and status information for customers.
+ *
+ * @author Kushal Puri
+ */
 @WebServlet("/orders")
 public class OrderServlet extends HttpServlet {
 
     private final OrdersDao ordersDao         = new OrdersDaoImpl();
     private final OrderItemsDao orderItemsDao = new orderItemsDaoImpl();
 
+    /**
+     * Handles GET requests by retrieving user orders or individual order details.
+     * Validates user session and fetches order information for display.
+     * Redirects to login if user is not authenticated.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,21 +47,50 @@ public class OrderServlet extends HttpServlet {
             return;
         }
 
-        // Fetch all orders for this user
-        ArrayList<Orders> orders = ordersDao.fetchOrdersByUser(user.getUser_id());
+        String orderIdParam = request.getParameter("orderId");
 
-        if (orders != null) {
-            // For each order, fetch its items and attach them
-            for (Orders order : orders) {
-                ArrayList<OrderItems> items = orderItemsDao.getItemsByOrderId(order.getOrderId());
-                order.setOrderItems(items); // attach items into the order object
+        if (orderIdParam != null) {
+            // ── Track Package page ──
+            try {
+                int orderId = Integer.parseInt(orderIdParam);
+
+                // Fetch the specific order
+                Orders order = ordersDao.fetchOrderById(orderId, user.getUser_id());
+
+                if (order == null) {
+                    // Order not found or doesn't belong to this user → back to orders
+                    response.sendRedirect(request.getContextPath() + "/orders");
+                    return;
+                }
+
+                // Fetch the items for this order
+                ArrayList<OrderItems> items = orderItemsDao.getItemsByOrderId(orderId);
+                order.setOrderItems(items);
+
+                // Send to tracking page
+                request.setAttribute("order", order);
+                request.getRequestDispatcher("/WEB-INF/views/pages/trackingPage.jsp")
+                        .forward(request, response);
+
+            } catch (NumberFormatException e) {
+                response.sendRedirect(request.getContextPath() + "/orders");
             }
-        }
 
-        // Send the complete orders (with items inside) to JSP
-        request.setAttribute("orders", orders);
-        request.getRequestDispatcher("/WEB-INF/views/pages/orders.jsp")
-                .forward(request, response);
+        } else {
+            // ── Orders list page ──
+            ArrayList<Orders> orders = ordersDao.fetchOrdersByUser(user.getUser_id());
+
+            if (orders != null) {
+                for (Orders order : orders) {
+                    ArrayList<OrderItems> items = orderItemsDao.getItemsByOrderId(order.getOrderId());
+                    order.setOrderItems(items);
+                }
+            }
+
+            request.setAttribute("orders", orders);
+            request.getRequestDispatcher("/WEB-INF/views/pages/orders.jsp")
+                    .forward(request, response);
+        }
     }
 
     @Override

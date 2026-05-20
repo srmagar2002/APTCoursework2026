@@ -15,12 +15,25 @@ import jakarta.servlet.ServletException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Servlet handling shopping cart operations and management.
+ * Supports viewing cart items, adding items, and updating item quantities.
+ * Maintains cart count in session for display across pages.
+ *
+ * @author Kushal Puri
+ */
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
 
     private final cartDao cartdao = new cartDaoImpl();
 
-
+    /**
+     * Updates the total cart item count in the user's session.
+     * Aggregates quantities across all cart items for the given user.
+     *
+     * @param request the HTTP request containing session information
+     * @param userId the ID of the user whose cart count should be updated
+     */
     private void updateCartCount(HttpServletRequest request, int userId) {
         ArrayList<Cart> items = cartdao.fetchCartItemsByUserId(userId);
 

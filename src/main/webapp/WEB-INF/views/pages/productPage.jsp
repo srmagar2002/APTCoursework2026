@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/static/imgUpload/logo/logo.svg"/>
     <title>Title</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/cart.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
@@ -18,10 +19,12 @@
 
 <main class="page-container">
     <!-- Page Header -->
-    <div class="page-header" id="products">
-        <h2 class="page-title">All Laptops</h2>
-        <p class="page-description">Browse our collection of premium laptops from top brands</p>
-    </div>
+    <c:if test="${sessionScope.user.role!='ADMIN'}">
+        <div class="page-header" id="products">
+            <h2 class="page-title">All Laptops</h2>
+            <p class="page-description">Browse our collection of premium laptops from top brands</p>
+        </div>
+    </c:if>
 
     <form action="${pageContext.request.contextPath}/products" method="get" class="filters-bar" id="filtersForm">
 
@@ -116,11 +119,11 @@
             <span class="filter-label">Price:</span>
             <select class="filter-select" name="pricerange" onchange="this.form.submit()">
                 <option value="" <c:if test="${empty param.pricerange}">selected</c:if>>Any Price</option>
-                <option value="1" <c:if test="${param.pricerange == '1'}">selected</c:if>>Under $500</option>
-                <option value="2" <c:if test="${param.pricerange == '2'}">selected</c:if>>$500 - $1,000</option>
-                <option value="3" <c:if test="${param.pricerange == '3'}">selected</c:if>>$1,000 - $1,500</option>
-                <option value="4" <c:if test="${param.pricerange == '4'}">selected</c:if>>$1,500 - $2,000</option>
-                <option value="5" <c:if test="${param.pricerange == '5'}">selected</c:if>>$2,000+</option>
+                <option value="1" <c:if test="${param.pricerange == '1'}">selected</c:if>>Under Rs.50,000</option>
+                <option value="2" <c:if test="${param.pricerange == '2'}">selected</c:if>>Rs.50,000 - Rs.1,00,000</option>
+                <option value="3" <c:if test="${param.pricerange == '3'}">selected</c:if>>Rs.1,00,000 - Rs.1,50,000</option>
+                <option value="4" <c:if test="${param.pricerange == '4'}">selected</c:if>>Rs.1,50,000 - Rs.2,00,000</option>
+                <option value="5" <c:if test="${param.pricerange == '5'}">selected</c:if>>Rs.2,00,000+</option>
             </select>
         </div>
         <div class="filter-group">
@@ -149,62 +152,38 @@
         <jsp:include page="../components/products.jsp"/>
     </div>
 
+    <!-- Pagination Section -->
+    <nav class="pagination-wrapper" id="paginationWrapper" aria-label="Products pagination">
+        <div class="pagination-section">
+            <button type="button"
+                    class="pagination-btn pagination-prev"
+                    id="prevBtn"
+                    aria-label="Previous page">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                <span>Previous</span>
+            </button>
 
-    <div class="pagination-section">
-        <c:choose>
-            <c:when test="${hasFilters}">
-                <button type="button"
-                        class="pagination-btn pagination-prev"
-                        <c:if test="${currentPage==1}">disabled</c:if>
-                        onclick="previousPage()" id="prevBtn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                    Previous
-                </button>
-            </c:when>
-            <c:otherwise>
-                <a href="${pageContext.request.contextPath}/products?page=${currentPage-1}"
-                   class="pagination-btn pagination-prev  <c:if test="${currentPage==1}">disabled</c:if>"
-                   onclick="previousPage()" id="prevBtn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                    Previous
-                </a></c:otherwise>
-        </c:choose>
+            <div class="pagination-info">
+                <span class="pagination-label">Page</span>
+                <span class="current-page" id="currentPage">1</span>
+                <span class="pagination-divider">/</span>
+                <span class="total-pages" id="totalPages">1</span>
+                <input type="hidden" name="page" id="currentPageInput" value="1" form="filtersForm">
+            </div>
 
-        <div class="pagination-info">
-            <span class="current-page" id="currentPage">${currentPage}</span>
-            <input type="hidden" name="page" id="currentPageInput" value="${currentPage}" form="filtersForm">
-            <span class="pagination-divider">of</span>
-            <span class="total-pages" id="totalPages">${totalPages}</span>
+            <button type="button"
+                    class="pagination-btn pagination-next"
+                    id="nextBtn"
+                    aria-label="Next page">
+                <span>Next</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
         </div>
-
-        <c:choose>
-            <c:when test="${hasFilters}">
-                <button type="button"
-                        class="pagination-btn pagination-next"
-                        <c:if test="${currentPage>=totalPages}">disabled</c:if>
-                        onclick="nextPage()" id="nextBtn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                    Next
-                </button>
-            </c:when>
-            <c:otherwise>
-                <a href="${pageContext.request.contextPath}/products?page=${currentPage+1}"
-                   class="pagination-btn pagination-next <c:if test="${currentPage>=totalPages}">disabled</c:if>"
-                   onclick="nextPage()" id="nextBtn">
-                    Next
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </a>
-            </c:otherwise>
-        </c:choose>
-    </div>
+    </nav>
 
 </main>
 
@@ -241,6 +220,8 @@
     searchInput.addEventListener("input", function () {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
+            currentPage = 1;
+            document.getElementById('currentPageInput').value = 1;
             const params = new URLSearchParams(new FormData(filtersForm));
             fetch(
                 "${pageContext.request.contextPath}/products?" + params.toString(),
@@ -254,25 +235,48 @@
                 .then(html => {
                     console.log(html);
                     document.getElementById("products-grid").innerHTML = html;
+                    updatePaginationFromGrid();
                 });
         }, 500);
     });
 
 
-    let currentPage = <c:out value="${currentPage}" default="1"/> ;
-    const totalPages = ${totalPages};
+    let currentPage = 1;
+    let totalPages = 1;
+    let hasFilters = false;
+
+    function updatePaginationFromGrid() {
+        const currentPageInput = document.getElementById("currentPageValue");
+        const totalPagesInput = document.getElementById("totalPagesValue");
+        const hasFiltersInput = document.getElementById("hasFiltersValue");
+
+        if (currentPageInput) currentPage = parseInt(currentPageInput.value) || 1;
+        if (totalPagesInput) totalPages = parseInt(totalPagesInput.value) || 1;
+        if (hasFiltersInput) hasFilters = hasFiltersInput.value === "true";
+
+        updatePaginationState();
+    }
 
     function updatePaginationState() {
         document.getElementById('currentPage').textContent = currentPage;
         document.getElementById('currentPageInput').value = currentPage;
+        document.getElementById('totalPages').textContent = totalPages;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        prevBtn.disabled = currentPage <= 1;
+        nextBtn.disabled = currentPage >= totalPages;
     }
 
     function previousPage() {
         if (currentPage > 1) {
             currentPage--;
             updatePaginationState();
-            if(${hasFilters}){
+            if (hasFilters) {
                 document.getElementById('filtersForm').submit();
+            } else {
+                window.location.href = "${pageContext.request.contextPath}/products?page=" + currentPage;
             }
             console.log(`[v0] Navigated to page ${currentPage}`);
         }
@@ -282,15 +286,32 @@
         if (currentPage < totalPages) {
             currentPage++;
             updatePaginationState();
-            if(${hasFilters}){
+            if (hasFilters) {
                 document.getElementById('filtersForm').submit();
+            } else {
+                window.location.href = "${pageContext.request.contextPath}/products?page=" + currentPage;
             }
             console.log(`[v0] Navigated to page ${currentPage}`);
         }
     }
 
+    // Pagination button event listeners
+    document.getElementById('prevBtn').addEventListener('click', previousPage);
+    document.getElementById('nextBtn').addEventListener('click', nextPage);
+
+    // Reset pagination when filters change
+    const filterSelects = document.querySelectorAll('.filter-select');
+    filterSelects.forEach(select => {
+        select.addEventListener('change', function () {
+            currentPage = 1;
+            document.getElementById('currentPageInput').value = 1;
+        });
+    });
+
     // Initialize pagination on page load
-    window.addEventListener('DOMContentLoaded', updatePaginationState);
+    window.addEventListener('DOMContentLoaded', () => {
+        updatePaginationFromGrid();
+    });
 
 
 </script>

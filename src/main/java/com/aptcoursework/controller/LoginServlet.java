@@ -5,6 +5,7 @@ import com.aptcoursework.dao.cartDao;
 import com.aptcoursework.dao.cartDaoImpl;
 import com.aptcoursework.entity.Cart;
 import com.aptcoursework.entity.User;
+import com.aptcoursework.enums.Role;
 import com.aptcoursework.utils.PasswordUtil;
 import com.aptcoursework.utils.SessionUtil;
 import jakarta.servlet.ServletException;
@@ -20,7 +21,8 @@ import java.util.ArrayList;
 /**
  * Servlet handling user authentication and login functionality.
  * Processes GET requests to display the login form and POST requests to validate credentials.
-* @author Sugam Rana Magar
+ *
+ * @author Sugam Rana Magar
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -73,6 +75,18 @@ public class LoginServlet extends HttpServlet {
 
         System.out.println("Login Successful");
         userDao.updateLastLogin(user.getUser_id());
-        response.sendRedirect(request.getContextPath() + "/products");
+        if (user.getRole() == Role.ADMIN) {
+            SessionUtil.setAttribute(request, "recordsPerPage", 11);
+           response.sendRedirect(request.getContextPath() + "/dashboard?userID=1"); return;
+        }
+        // response.sendRedirect(request.getContextPath() + "/products");
+
+        String referer = request.getHeader("Referer");
+        if (referer != null && !referer.isEmpty()) {
+            response.sendRedirect(referer);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/home");
+        }
+
     }
 }

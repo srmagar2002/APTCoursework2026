@@ -29,9 +29,31 @@ import java.nio.file.StandardCopyOption;
  */
 public class ImageUtil {
 
+/**
+ * Uploads and stores a user's profile picture on the server.
+ *
+ * <p>This method creates the upload directory if it does not already exist,
+ * generates a new filename based on the user's ID, and saves the uploaded
+ * image file to the specified location. Existing files with the same name
+ * are replaced.</p>
+ *
+ * <p>If the uploaded file does not contain a valid file extension,
+ * a default profile image path is returned instead.</p>
+ *
+ * @param partUser   the uploaded file part containing the user's profile image
+ * @param userID     the unique identifier of the user
+ * @param uploadPath the absolute path where the image should be stored
+ * @return the relative path of the uploaded profile image, or the default
+ *         profile image path if the upload fails or no valid extension exists
+ *
+ * @throws Exception no exception is thrown directly, but any file handling
+ *         exceptions encountered during upload are caught and logged
+ *
+ * @implNote The uploaded image is saved in the <code>userImg</code> directory
+ *           using the format: <code>{userID}.{extension}</code>.
+ */
 
     public static String userProfilePictureUploader(Part partUser, int userID, String uploadPath) {
-
 
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) uploadDir.mkdir();
@@ -60,7 +82,6 @@ public class ImageUtil {
             }
         }
         return newFilename;
-
     }
 
     /**

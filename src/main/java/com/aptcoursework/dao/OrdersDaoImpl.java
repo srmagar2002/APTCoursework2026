@@ -11,6 +11,28 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Implementation class for the {@link OrdersDao} interface.
+ *
+ * <p>This class provides concrete database operations for managing customer orders.
+ * It handles order placement, retrieval, status updates, and sales analytics calculations.
+ * It interacts with both the orders and order_items tables using JDBC.</p>
+ *
+ * <p>The class includes operations such as:</p>
+ * <ul>
+ *   <li>Placing new orders and creating associated order items</li>
+ *   <li>Retrieving orders by user or by order ID</li>
+ *   <li>Updating order status during fulfillment</li>
+ *   <li>Fetching all orders for administrative purposes</li>
+ *   <li>Calculating sales metrics and revenue analytics</li>
+ * </ul>
+ *
+ * <p>All database interactions are performed using JDBC with the
+ * {@code DatabaseConnection} utility class managing connections.</p>
+ *
+ * @author Kushal Puri
+ * @author Sugam Rana Magar
+ */
 public class OrdersDaoImpl implements OrdersDao{
 
     cartDao cartdao = new cartDaoImpl();
@@ -20,6 +42,15 @@ public class OrdersDaoImpl implements OrdersDao{
     String ordersSql = "INSERT INTO ORDERS (userId, totalAmount, status, estimatedDelivery) VALUES (?, ?, ?, ?)";
     String orderItemsSql = "INSERT INTO order_items (orderId, laptopId, quantity, price) VALUES (?, ?, ?, ?)";
 
+    /**
+     * Places a new order for a user with selected cart items.
+     * Calculates total amount including tax and shipping, creates order record,
+     * and inserts associated order items. Removes ordered items from cart.
+     *
+     * @param userId the user placing the order
+     * @param laptopIds list of laptop IDs selected for purchase
+     * @return {@code true} if order placed successfully, {@code false} otherwise
+     */
     @Override
     public boolean placeOrder(int userId, ArrayList<Integer> laptopIds) {
 
@@ -68,7 +99,7 @@ public class OrdersDaoImpl implements OrdersDao{
             statement.setString(3, "PREPARING");
 
 //           Adding shipping logic using multi-converting
-            LocalDateTime estimatedDelivery = LocalDateTime.now().plusDays(3);
+            LocalDateTime estimatedDelivery = LocalDateTime.now().plusDays(5);
             Timestamp deliveryDate = Timestamp.valueOf(estimatedDelivery);
             statement.setTimestamp(4, deliveryDate);
             statement.executeUpdate();
@@ -125,6 +156,12 @@ public class OrdersDaoImpl implements OrdersDao{
         }
     }
 
+    /**
+     * Retrieves all orders for a specific user, ordered by creation date (newest first).
+     *
+     * @param userId the user ID
+     * @return list of orders for the user, or {@code null} if error occurs
+     */
     @Override
     public ArrayList<Orders> fetchOrdersByUser(int userId) {
 
@@ -162,10 +199,56 @@ public class OrdersDaoImpl implements OrdersDao{
 
     }
 
+    /**
+     * Retrieves a specific order by ID with security verification.
+     * Ensures the order belongs to the requesting user to prevent unauthorized access.
+     *
+     * @param orderId the order ID
+     * @param userId the user ID (security check)
+     * @return the Order object, or {@code null} if not found or access denied
+     */
+    @Override
+    public Orders fetchOrderById(int orderId, int userId) {
+        // userId is checked in WHERE clause for security
+        // so User A cannot view User B's order by guessing the orderId
+        String sql = "SELECT * FROM orders WHERE orderId = ? AND userId = ?";
+        Connection conn = null;
 
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, orderId);
+            stmt.setInt(2, userId);
+            ResultSet rs = stmt.executeQuery();
 
+            if (rs.next()) {
+                Orders order = new Orders(
+                        rs.getInt("userId"),
+                        rs.getDouble("totalAmount"),
+                        rs.getString("status"),
+                        rs.getTimestamp("estimatedDelivery")
+                );
+                order.setOrderId(rs.getInt("orderId"));
+                order.setCreatedAt(rs.getTimestamp("createdAt"));
+                return order;
+            }
+            return null; // not found or doesn't belong to this user
 
-//    Its implementation is halt for now if any updates comes up from member, will be implemented accordingly
+        } catch (SQLException e) {
+            System.out.println("Error fetching order by id: " + e.getMessage());
+            return null;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+
+    /**
+     * Updates the status of an order.
+     *
+     * @param orderId the order ID to update
+     * @param status the new status value
+     * @return {@code true} if update successful, {@code false} otherwise
+     */
     @Override
     public boolean updateOrderStatus(int orderId, String status) {
         String sql = "UPDATE ORDERS SET status = ? WHERE orderId = ?";
@@ -185,5 +268,156 @@ public class OrdersDaoImpl implements OrdersDao{
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
+    }
+
+    /**
+     * Retrieves all orders in the system with associated usernames (admin function).
+     * Orders are sorted by creation date (newest first).
+     *
+     * @return list of all orders, or {@code null} if error occurs
+     */
+    @Override
+    public ArrayList<Orders> fetchAllOrders(){
+        ArrayList<Orders> orders = new ArrayList<>();
+        String sql = "SELECT o.orderId, o.userId, o.totalAmount, o.status, o.estimatedDelivery, o.createdAt, u.username FROM orders o LEFT JOIN users u ON o.userID = u.user_id ORDER BY createdAt DESC";
+        Connection conn = null;
+
+        try{
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Orders order = new Orders(
+                        rs.getInt("orderId"),
+                        rs.getInt("userId"),
+                        rs.getDouble("totalAmount"),
+                        rs.getString("status"),
+                        rs.getTimestamp("estimatedDelivery"),
+                        rs.getTimestamp("createdAt"),
+                        rs.getString("username")
+                );
+                orders.add(order);
+            }
+            System.out.println("Total Orders: "+orders.size());
+            return orders;
+        }
+        catch(SQLException e){
+            System.out.println("Error while fetching orders " +  e.getMessage());
+            return null;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+
+    /**
+     * Counts the total number of orders in the system.
+     *
+     * @return total order count, or 0 if error occurs
+     */
+    @Override
+    public int countAllOrders() {
+        Connection conn = null;
+        String sql = "SELECT COUNT(*) FROM orders";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getting orders" + e.getMessage());
+            return 0;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
+
+    /**
+     * Calculates the sum of total amount across all orders.
+     *
+     * @return total revenue from all orders, or 0 if error occurs or no orders exist
+     */
+    @Override
+    public double sumTotalAmount(){
+        Connection conn = null;
+        String sql = "select SUM(totalAmount) from orders;";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting Total Amount" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
+
+    /**
+     * Calculates the sum of total amount for orders placed in the current month.
+     *
+     * @return total revenue for current month, or 0 if error occurs or no orders exist
+     */
+    @Override
+    public double sumTotalAmountCurrentMonth(){
+        Connection conn = null;
+        String sql = "SELECT SUM(totalAmount) FROM orders WHERE YEAR(createdAt) = YEAR(NOW()) AND MONTH(createdAt) = MONTH(NOW())";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                double result = rs.getDouble(1);
+                // Handle NULL result from SUM
+                return rs.wasNull() ? 0 : result;
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting Total Amount" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
+
+    /**
+     * Calculates the sum of total amount for orders placed in the previous month.
+     *
+     * @return total revenue for last month, or 0 if error occurs or no orders exist
+     */
+    @Override
+    public double sumTotalAmountLastMonth(){
+        Connection conn = null;
+        String sql = "SELECT SUM(totalAmount) FROM orders WHERE YEAR(createdAt) = YEAR(DATE_SUB(NOW(), INTERVAL 1 MONTH)) AND MONTH(createdAt) = MONTH(DATE_SUB(NOW(), INTERVAL 1 MONTH))";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                double result = rs.getDouble(1);
+                // Handle NULL result from SUM
+                return rs.wasNull() ? 0 : result;
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting Total Amount" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+
     }
 }

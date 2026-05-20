@@ -10,6 +10,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Implementation class for the {@link OrderItemsDao} interface.
+ *
+ * <p>This class provides concrete database operations for retrieving order items.
+ * It fetches individual line items associated with customer orders, including
+ * related laptop product details.</p>
+ *
+ * <p>The class handles:</p>
+ * <ul>
+ *   <li>Retrieving order items by order ID</li>
+ *   <li>Joining with the laptop table to fetch product information</li>
+ *   <li>Populating OrderItems with laptop details for display</li>
+ * </ul>
+ *
+ * <p>All database interactions are performed using JDBC with connections managed
+ * through the {@code DatabaseConnection} utility class.</p>
+ *
+ * @author Kushal Puri
+ */
 public class orderItemsDaoImpl implements OrderItemsDao{
 
     @Override

@@ -98,7 +98,7 @@
     </div>
     <div class="breakdown-stats">
         <div class="rating-summary">
-            <div class="summary-value"><c:out value="${avgRating}" default="0"/> ${avgRatingRounded}</div>
+            <div class="summary-value"><c:out value="${avgRating}" default="0"/></div>
             <div class="summary-stars">
                 <c:forEach begin="1" end="5" var="starIndex">
                     <c:choose>

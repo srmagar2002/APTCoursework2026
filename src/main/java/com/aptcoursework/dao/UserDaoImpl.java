@@ -6,23 +6,29 @@ import com.aptcoursework.utils.DatabaseConnection;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
 
 /**
  * Implementation of the {@link UserDao} interface.
  *
- * <p>This class handles all database operations related to the User entity.
+ * <p>
+ * This class handles all database operations related to the User entity.
  * It provides concrete implementations for user-related functionalities such
  * as inserting new users, retrieving user details by username or email,
- * and fetching usernames using user ID.</p>
+ * and fetching usernames using user ID.
+ * </p>
  *
- * <p>The class uses JDBC for database interaction and relies on the
+ * <p>
+ * The class uses JDBC for database interaction and relies on the
  * {@code DatabaseConnection} utility class to establish and close connections.
  * All SQL operations are executed using prepared statements to ensure security
- * and prevent SQL injection.</p>
+ * and prevent SQL injection.
+ * </p>
  *
- * <p>This class acts as the Data Access Layer (DAL) for user management,
- * separating database logic from business logic.</p>
+ * <p>
+ * This class acts as the Data Access Layer (DAL) for user management,
+ * separating database logic from business logic.
+ * </p>
  *
  * @author Heaven Gurung
  * @author Sugam Rana Magar
@@ -81,17 +87,21 @@ public class UserDaoImpl implements UserDao {
     /**
      * Inserts a new user into the database.
      *
-     * <p>This method adds a new record into the {@code users} table using the
+     * <p>
+     * This method adds a new record into the {@code users} table using the
      * details provided in the {@link User} object, including username, email,
-     * password hash, and role.</p>
+     * password hash, and role.
+     * </p>
      *
-     * <p>If the insertion is successful, the method returns {@code true}.
+     * <p>
+     * If the insertion is successful, the method returns {@code true}.
      * If an SQL exception occurs during execution, the error is logged
-     * and the method returns {@code false}.</p>
+     * and the method returns {@code false}.
+     * </p>
      *
      * @param user the {@link User} object containing user details to be inserted
      * @return {@code true} if the user is successfully added;
-     * {@code false} if an error occurs
+     *         {@code false} if an error occurs
      */
     @Override
     public boolean insertUser(User user) {
@@ -117,7 +127,6 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-
     @Override
     public boolean insertImgProfilePath(String path, int userID) {
 
@@ -141,21 +150,26 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
-
     /**
      * Finds a user in the database by username (case-insensitive).
      *
-     * <p>This method executes a SQL query to retrieve a user record from the
+     * <p>
+     * This method executes a SQL query to retrieve a user record from the
      * {@code users} table where the username matches the provided value,
-     * ignoring case differences using {@code LOWER()} function.</p>
+     * ignoring case differences using {@code LOWER()} function.
+     * </p>
      *
-     * <p>If a matching user is found, a {@link User} object is created and
+     * <p>
+     * If a matching user is found, a {@link User} object is created and
      * populated with the retrieved data, including user ID, username, email,
      * password hash, and role. If the role value is invalid or missing,
-     * it defaults to {@code Role.CUSTOMER}.</p>
+     * it defaults to {@code Role.CUSTOMER}.
+     * </p>
      *
-     * <p>If no matching record is found or an SQL exception occurs,
-     * the method returns {@code null}.</p>
+     * <p>
+     * If no matching record is found or an SQL exception occurs,
+     * the method returns {@code null}.
+     * </p>
      *
      * @param username the username to search for
      * @return a {@link User} object if found; otherwise {@code null}
@@ -194,21 +208,26 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-
     /**
      * Finds a user in the database by email address (case-insensitive).
      *
-     * <p>This method executes a SQL query to retrieve a user record from the
+     * <p>
+     * This method executes a SQL query to retrieve a user record from the
      * {@code users} table where the email matches the provided value,
-     * ignoring case differences using the {@code LOWER()} function.</p>
+     * ignoring case differences using the {@code LOWER()} function.
+     * </p>
      *
-     * <p>If a matching user is found, a {@link User} object is created and
+     * <p>
+     * If a matching user is found, a {@link User} object is created and
      * populated with the retrieved data, including username, email,
      * password hash, and role. If the role value is invalid or missing,
-     * it defaults to {@code Role.CUSTOMER}.</p>
+     * it defaults to {@code Role.CUSTOMER}.
+     * </p>
      *
-     * <p>If no matching record is found or an SQL exception occurs,
-     * the method returns {@code null}.</p>
+     * <p>
+     * If no matching record is found or an SQL exception occurs,
+     * the method returns {@code null}.
+     * </p>
      *
      * @param email the email address to search for
      * @return a {@link User} object if found; otherwise {@code null}
@@ -246,17 +265,20 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-
     /**
      *
      * Retrieves the username associated with a given user ID.
      *
-     * <p>This method executes a SQL query on the {@code users} table to find
+     * <p>
+     * This method executes a SQL query on the {@code users} table to find
      * the record matching the provided {@code userID}. If a matching record
-     * is found, the corresponding username is returned.</p>
+     * is found, the corresponding username is returned.
+     * </p>
      *
-     * <p>If no user is found or an SQL exception occurs, the method returns
-     * {@code null}.</p>
+     * <p>
+     * If no user is found or an SQL exception occurs, the method returns
+     * {@code null}.
+     * </p>
      *
      * @param userID the unique identifier of the user
      * @return the username of the user if found; otherwise {@code null}
@@ -284,6 +306,16 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+    /**
+     * Retrieves a {@code User} from the database using the user's ID.
+     *
+     * @param userID the unique ID of the user
+     * @return the matching {@code User} object, or {@code null} if not found
+     *
+     * @implNote Defaults the role to {@code CUSTOMER} if the database role is
+     *           invalid or null.
+     */
+
     @Override
     public User findByUserID(int userID) {
         Connection conn = null;
@@ -307,13 +339,12 @@ public class UserDaoImpl implements UserDao {
                         rs.getString("password_hash"),
                         rs.getString("profileImg"),
                         role,
-                        rs.getTimestamp("lastLogin").toLocalDateTime(),
-                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("lastLogin"),
+                        rs.getTimestamp("created_at"),
                         rs.getString("firstName"),
                         rs.getString("lastName"),
                         rs.getString("phoNo"),
-                        rs.getString("bio")
-                );
+                        rs.getString("bio"));
             }
         } catch (SQLException e) {
             System.out.println("Error in getting user" + e.getMessage());
@@ -323,4 +354,102 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+    /**
+     * Retrieves all users from the database.
+     *
+     * @return an {@code ArrayList} containing all {@code User} objects,
+     *         or {@code null} if an error occurs
+     *
+     * @implNote Defaults the role to {@code CUSTOMER} if the database role is
+     *           invalid or null.
+     */
+    @Override
+    public ArrayList<User> findAllUsers() {
+        Connection conn = null;
+        String sql = "SELECT * FROM users";
+
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<User> users = new ArrayList<>();
+            while (rs.next()) {
+                Role role;
+                try {
+                    role = Role.valueOf(rs.getString("role").toUpperCase());
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    role = Role.CUSTOMER;
+                }
+                User user = new User(
+                        rs.getInt("user_id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("password_hash"),
+                        rs.getString("profileImg"),
+                        role,
+                        rs.getTimestamp("lastLogin"),
+                        rs.getTimestamp("created_at"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("phoNo"),
+                        rs.getString("bio"));
+                users.add(user);
+            }
+            return users;
+        } catch (SQLException e) {
+            System.out.println("Error in getting users" + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return null;
+    }
+
+    /**
+     * Deletes a user from the database using the user's ID.
+     *
+     * @param userID the unique ID of the user to delete
+     * @return {@code true} if the user was successfully deleted,
+     *         otherwise {@code false}
+     */
+    @Override
+    public boolean deleteUserByID(int userID) {
+        Connection conn = null;
+        String sql = "DELETE FROM users WHERE user_id=?";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userID);
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error in deleting user" + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return false;
+    }
+
+    /**
+     * Counts the total number of users with the {@code CUSTOMER} role.
+     *
+     * @return the total number of customers, or {@code 0} if an error occurs
+     */
+    @Override
+    public int countAllCustomers() {
+        Connection conn = null;
+        String sql = "SELECT COUNT(*) FROM users where role='CUSTOMER'";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getting users" + e.getMessage());
+            return 0;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
 }
