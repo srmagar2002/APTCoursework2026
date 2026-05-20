@@ -35,6 +35,7 @@ import java.util.HashMap;
  */
 public class LaptopDaoImpl implements LaptopDao {
     /**
+     * Removes a laptop record by its <code>laptopID</code>
      * @param laptopID the unique identifier of the laptop to be deleted
      * @return {@code true} if the deletion operation is successful,
      *         {@code false} if an error occurs during the process
@@ -71,6 +72,8 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * Inserts a new Laptop from provided {@code Laptop} object
+     *
      * @param laptop the {@code Laptop} object containing all required details
      *               to be inserted into the database
      * @return {@code true} if the insertion is successful,
@@ -134,6 +137,8 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * Retrieves a laptop by its id
+     *
      * @param id the unique identifier of the laptop to retrieve
      * @return the corresponding {@code Laptop} object if found;
      *         {@code null} if no matching record exists or an error occurs
@@ -177,6 +182,7 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * Retrieves a laptop by its UUID
      * @param laptopUUID the unique UUID of the laptop to retrieve
      * @return the corresponding {@code Laptop} object if found;
      *         {@code null} if no matching record exists or an error occurs
@@ -217,6 +223,7 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * Updates a laptop record
      * @param laptop the {@code Laptop} object containing updated values,
      *               including the ID of the laptop to be modified
      * @return {@code true} if the update operation is successful,
@@ -285,6 +292,7 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * Fetches certain amount of laptops
      * @return an {@code ArrayList} containing all {@code Laptop} objects;
      *         {@code null} if an error occurs during execution
      * @throws Exception no exception is thrown directly, but any
@@ -332,6 +340,11 @@ public class LaptopDaoImpl implements LaptopDao {
         return null;
     }
 
+    /**
+     * Retrieves the total number of laptops stored in the database.
+     *
+     * @return the total count of laptop records, or {@code 0} if an error occurs
+     */
     @Override
     public int totalLaptops() {
 
@@ -355,6 +368,8 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * Fetches laptop by applied filters
+     *
      * @param searchWord     the keyword used to search across multiple laptop
      *                       fields
      * @param brand          the brand filter (case-insensitive, partial match)
@@ -443,6 +458,7 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     *
      * Counts the number of laptops that match the given search and filter criteria.
      *
      * <p>
@@ -607,6 +623,7 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
+     * Coverts a string into a LIKE sql pattern
      * @param value the input string to be converted into a LIKE pattern
      * @return a formatted string suitable for SQL LIKE queries
      * @author Sugam Rana Magar
@@ -629,7 +646,7 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     /**
-     * Laptop assginer laptop.
+     * Assigns retrieved laptop data to a object.
      *
      * @param rs the {@code ResultSet} positioned at a valid row containing laptop
      *           data
