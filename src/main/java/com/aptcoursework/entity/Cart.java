@@ -8,6 +8,7 @@ public class Cart {
     private int userId;
     private int laptopId;
     private int quantity;
+    private Laptop laptop;
 
 
     public Cart(int userId, int laptopId, int quantity){
@@ -21,6 +22,14 @@ public class Cart {
         this.userId = userId;
         this.laptopId = laptopId;
         this.quantity = quantity;
+    }
+
+    public Laptop getLaptop() {
+        return laptop;
+    }
+
+    public void setLaptop(Laptop laptop){
+        this.laptop = laptop;
     }
 
     public int getCartId() {

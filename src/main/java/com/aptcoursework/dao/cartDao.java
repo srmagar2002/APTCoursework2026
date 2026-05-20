@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface cartDao {
 
     boolean addToCart(int userId, int laptopId);
-    ArrayList<Cart> fetchCartItems();
+    ArrayList<Cart> fetchCartItemsByUserId(int userId);
     boolean reduceItem(int userId, int laptopId);
     boolean deleteItem(int userId, int laptopId);
 
