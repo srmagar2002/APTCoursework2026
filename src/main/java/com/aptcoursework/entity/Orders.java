@@ -6,6 +6,12 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Represents a customer order containing one or more laptop products.
+ * Tracks order status, total amount, estimated delivery, and associated order items.
+ *
+ * @author Kushal Puri
+ */
 public class Orders {
 
     private int orderId;
@@ -17,8 +23,25 @@ public class Orders {
     private String username;
     private ArrayList<OrderItems> orderItems;
 
+    /**
+     * Default constructor that creates an empty Orders instance.
+     */
     public Orders() {}
 
+    /**
+     * Constructs a complete Orders instance with all fields including database-assigned order ID.
+     * Used for retrieving existing orders from the database.
+     *
+     * @param orderId database primary key for the order
+     * @param userId identifier of the user who placed the order
+     * @param totalAmount total purchase amount of the order
+     * @param status current status of the order (e.g., PREPARING, SHIPPED, DELIVERED)
+     * @param estimatedDelivery estimated delivery timestamp
+     * @param createdAt order creation timestamp
+     * @param username username of the customer who placed the order
+     * 
+     * @author Sugam Rana Magar
+     */
     public Orders(int orderId, int userId, double totalAmount, String status, Timestamp estimatedDelivery, Timestamp createdAt,String username) {
         this.orderId = orderId;
         this.userId = userId;
@@ -29,6 +52,15 @@ public class Orders {
         this.username = username;
     }
 
+    /**
+     * Constructs an Orders instance without a database-assigned order ID.
+     * Used for creating new orders without retrieving from the database.
+     *
+     * @param userId identifier of the user placing the order
+     * @param totalAmount total purchase amount of the order
+     * @param status current status of the order
+     * @param estimatedDelivery estimated delivery timestamp
+     */
     public Orders(int userId, double totalAmount, String status, Timestamp estimatedDelivery) {
         this.userId = userId;
         this.totalAmount = totalAmount;

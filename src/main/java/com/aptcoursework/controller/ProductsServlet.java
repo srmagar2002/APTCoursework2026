@@ -30,7 +30,6 @@ import java.util.UUID;
  *
  * @author Sugam Rana Magar
  */
-
 @WebServlet("/products")
 @MultipartConfig
 public class ProductsServlet extends HttpServlet {
