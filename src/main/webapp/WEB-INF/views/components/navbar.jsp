@@ -54,6 +54,7 @@
             <c:if test="${sessionScope.user.role!='ADMIN'}">
                 <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/products">Products</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus">About us</a></li>
             </c:if>
             <%--            <li><a href="#">Contact</a></li>--%>
         </ul>
