@@ -33,6 +33,24 @@ import java.util.Map;
 @WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
 
+    /**
+     * Handles HTTP GET requests for the dashboard page.
+     *
+     * <p>This method retrieves user, order, and laptop analytics data from the
+     * database and prepares it for display in the dashboard view. It loads
+     * user details, order statistics, revenue metrics, and laptop category
+     * distribution, then stores them as request attributes for rendering in
+     * the JSP page.</p>
+     *
+     * <p>It also manages the active dashboard tab using either request parameters
+     * or session attributes.</p>
+     *
+     * @param request  the {@link HttpServletRequest} containing client request data
+     * @param response the {@link HttpServletResponse} used to send the response
+     *
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an input or output error occurs while processing the request
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -111,7 +129,25 @@ public class DashboardServlet extends HttpServlet {
 
         request.getRequestDispatcher("/WEB-INF/views/pages/dashboardPage.jsp").forward(request, response);
     }
-
+    /**
+     * Handles HTTP POST requests for user-related dashboard actions.
+     *
+     * <p>This method processes user actions such as updating and deleting user
+     * profiles based on the {@code action} parameter.</p>
+     *
+     * <ul>
+     *   <li><b>update</b> - Updates user details and profile image if provided</li>
+     *   <li><b>delete</b> - Deletes the user and removes their profile image if not default</li>
+     * </ul>
+     *
+     * <p>After processing, the method redirects back to the dashboard page.</p>
+     *
+     * @param request  the {@link HttpServletRequest} containing form data and action type
+     * @param response the {@link HttpServletResponse} used to redirect the client
+     *
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs during request processing
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

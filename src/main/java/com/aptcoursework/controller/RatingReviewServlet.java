@@ -88,8 +88,23 @@ public class RatingReviewServlet extends HttpServlet {
     }
 
     /**
-     * Handles POST requests by adding a new rating and review for a product.
-     * Validates and stores the rating, then redirects back to the product view page.
+     * Handles HTTP POST requests for adding and updating product ratings.
+     *
+     * <p>This method processes rating-related actions based on the {@code action}
+     * parameter.</p>
+     *
+     * <ul>
+     *   <li><b>add</b> - Creates a new rating and review for a laptop</li>
+     *   <li><b>update</b> - Updates an existing rating and review</li>
+     * </ul>
+     *
+     * <p>After processing, the user is redirected back to the product view page.</p>
+     *
+     * @param request  the {@link HttpServletRequest} containing rating data
+     * @param response the {@link HttpServletResponse} used for redirection
+     *
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs during request processing
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -37,9 +37,28 @@ public class ProductsServlet extends HttpServlet {
     private static final LaptopDaoImpl laptopDao = new LaptopDaoImpl();
 
     /**
-     * Handles GET requests for displaying products.
-     * Retrieves all products or filters by brand, category, price, and search query.
-     * Supports both full page and AJAX requests.
+     * Handles HTTP GET requests for product listing, filtering, pagination,
+     * and product add page navigation.
+     *
+     * <p>This method supports:
+     * <ul>
+     *   <li>Paginated product listing</li>
+     *   <li>Filtering by brand, category, price range, and keyword search</li>
+     *   <li>AJAX-based partial page updates</li>
+     *   <li>Navigation to the product add page</li>
+     * </ul>
+     * </p>
+     *
+     * <p>If filters are not applied, products are fetched using standard pagination.
+     * If filters are applied, a filtered search query is executed with pagination
+     * support.</p>
+     *
+     * @param request  the {@link HttpServletRequest} containing query parameters
+     *                 such as page, brand, category, price range, and search text
+     * @param response the {@link HttpServletResponse} used to forward the view
+     *
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs during request processing
      */
     @Override
     protected void doGet(HttpServletRequest request,

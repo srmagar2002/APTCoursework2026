@@ -93,6 +93,24 @@ public class OrderServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Handles HTTP POST requests for placing an order.
+     *
+     * <p>This method validates the user session, retrieves selected laptop IDs
+     * from the request, converts them into a list, and places an order using
+     * the Orders DAO.</p>
+     *
+     * <p>If the user is not logged in, they are redirected to the login page.
+     * If no items are selected, an error message is stored in the session and
+     * the user is redirected back to the cart page.</p>
+     *
+     * @param request  the {@link HttpServletRequest} containing selected laptop IDs
+     * @param response the {@link HttpServletResponse} used for redirection
+     *
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs during request processing
+     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
