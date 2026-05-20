@@ -1,4 +1,7 @@
+![logo](./src/main/webapp/static/imgUpload/logo/logoText.svg) 
 # APT Coursework - Laptop E-Commerce System
+
+Head Over to [https://srmagar2002.github.io/atpcoursework2026-doc](https://srmagar2002.github.io/atpcoursework2026-doc) for Java Documentation  
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -101,9 +104,10 @@ This will download all required dependencies specified in `pom.xml`.
 ### Step 4: Import SQL Data
 1. Select the newly created database
 2. Click the **Import** tab
-3. Choose file: Navigate to `sql/data.sql` in your project
+3. Choose file: Navigate to `sql/khs3lg.sql` in your project
 4. Click **Import**
-5. Verify tables are created:
+5. Do same for `sql/data.sql`
+6. Verify tables are created:
    - Check database contains all required tables (users, laptops, cart, ratings, etc.)
 
 ### Step 5: Verify Database Connection

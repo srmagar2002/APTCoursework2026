@@ -74,7 +74,7 @@ public class CartServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
->>>>>>> sugam
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -122,11 +122,6 @@ public class CartServlet extends HttpServlet {
         }
     }
 
-<<<<<<< HEAD
-
-//    Handles POST requests to /cart
-//    handles action = add and reduce
-=======
     /**
      * Handles POST requests for cart operations.
      * Supports adding items to cart and reducing item quantities.
@@ -143,7 +138,6 @@ public class CartServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
->>>>>>> sugam
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
