@@ -75,7 +75,6 @@ public class RegisterServlet extends HttpServlet {
         if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
             errors.append("Passwords do not match. ");
         }
-
         if (!errors.isEmpty()) {
             request.setAttribute("error", errors.toString().trim());
             request.getRequestDispatcher("/WEB-INF/views/pages/registerPage.jsp")
@@ -87,8 +86,6 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(username, email, hashedPassword, Role.CUSTOMER);
 
         boolean success = userDao.insertUser(user);
-
-
 
         if (!success) {
             request.setAttribute("error", "Username or email already exists.");

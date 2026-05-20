@@ -5,6 +5,8 @@
   Time: 06:49
   To change this template use File | Settings | File Templates.
 --%>
+
+<%--Import Java packages needed for JSP--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
@@ -18,6 +20,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
 </head>
 <body>
+
+<%--navber components included form components folder--%>
 <header>
     <jsp:include page="../components/navbar.jsp"/>
 </header>
@@ -36,9 +40,11 @@
 
 
     <c:choose>
-        <%-- ===================== EMPTY CART ===================== --%>
+        <%--  EMPTY CART shows whene there is no cart items --%>
         <c:when test="${empty cartItems}">
             <div class="cart-empty">
+
+               <%--    svg tag is used instead of img because it can easily blends in with dark-light theme with single change in attribute            --%>
                 <svg width="64" height="64" viewBox="0 0 902.86 902.86" fill="none">
                     <path fill="var(--muted)" d="M671.504 577.829l110.485-432.609H902.86v-68H729.174L703.128 179.2 0 178.697l74.753 399.129h596.751zm14.262-330.641-67.077 262.64H131.199L81.928 246.756z"/>
                     <path fill="var(--muted)" d="M578.418 825.641c59.961 0 108.743-48.783 108.743-108.744s-48.782-108.742-108.743-108.742H168.717c-59.961 0-108.744 48.781-108.744 108.742s48.782 108.744 108.744 108.744c59.962 0 108.743-48.783 108.743-108.744 0-14.4-2.821-28.152-7.927-40.742h208.069c-5.107 12.59-7.928 26.342-7.928 40.742 0 59.961 48.782 108.744 108.743 108.744zm-409.701-68c-22.466 0-40.744-18.277-40.744-40.744 0-22.465 18.277-40.742 40.744-40.742 22.466 0 40.743 18.277 40.743 40.742 0 22.467-18.277 40.744-40.743 40.744zm409.701 0c-22.466 0-40.743-18.277-40.743-40.744 0-22.465 18.277-40.742 40.743-40.742s40.743 18.277 40.743 40.742c0 22.467-18.277 40.744-40.743 40.744z"/>
@@ -48,7 +54,7 @@
             </div>
         </c:when>
 
-        <%-- ===================== CART WITH ITEMS ===================== --%>
+        <%--  CART WITH ITEMS  --%>
         <c:otherwise>
             <div class="cart-layout">
 
@@ -166,10 +172,12 @@
 
 <script>
 
+    //It selects all the elements of cart items and returns an array of it.
     function getCartItems() {
         return Array.from(document.querySelectorAll('.cart-item'));
     }
 
+    //Calculates and updates the orfer summary panel based on checked items
     function updateSummary() {
         const items = getCartItems();
         let itemSelected = 0;
@@ -238,7 +246,7 @@
             form.appendChild(input);
         });
 
-        // Attach form to body and submit — goes to OrderServlet.doPost()
+        // Attach form to body and submit which goes to OrderServlet.doPost()
         document.body.appendChild(form);
         form.submit();
     }
