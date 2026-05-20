@@ -22,13 +22,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * Servlet handling the admin dashboard with user and order statistics.
+ * Displays user profile information, order history, sales analytics, and product inventory metrics.
+ * Supports profile image uploads and user information updates.
+ *
+ * @author Sugam Rana Magar
+ */
 @MultipartConfig
 @WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 
         String userID = request.getParameter("userID");
         UserDaoImpl userDaoImpl = new UserDaoImpl();
