@@ -22,6 +22,11 @@ public class cartDaoImpl implements cartDao {
     String deleteItem = "DELETE FROM cart WHERE userId=? AND laptopId=?";
 
 
+    /**
+     * Adds a laptop to the user's cart.
+     * If the laptop already exists in the cart, increments its quantity by 1.
+     * If it does not exist, inserts a new row with quantity = 1.
+     */
     public boolean addToCart(int userId, int laptopId){
 
          Connection conn = null;
@@ -65,6 +70,12 @@ public class cartDaoImpl implements cartDao {
     }
 
 
+    /**
+     * Fetches all cart items for a specific user.
+     * Uses a JOIN between cart and laptop tables so the JSP gets
+     * full laptop details (title, price, image, specs) alongside cart data.
+     * Returns ArrayList of Cart objects, each containing an embedded Laptop object.
+     */
 
 
     public ArrayList<Cart> fetchCartItemsByUserId(int userId){
@@ -112,6 +123,11 @@ public class cartDaoImpl implements cartDao {
     }
 
 
+    /**
+     * Reduces the quantity of a specific laptop in the cart by 1.
+     * If quantity is already 1, does nothing and returns false.
+     * Deletion when quantity reaches 0 is handled separately by deleteItem().
+     */
     public boolean reduceItem(int userId, int laptopId){
 
         Connection conn = null;
@@ -151,6 +167,12 @@ public class cartDaoImpl implements cartDao {
 
 
 
+
+    /**
+     * Permanently removes a specific laptop from the user's cart.
+     * Both userId and laptopId are used in WHERE clause for security —
+     * prevents a user from deleting another user's cart item.
+     */
     public boolean deleteItem(int userId, int laptopId){
 
         Connection conn = null;

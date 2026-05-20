@@ -25,18 +25,18 @@
         <div class="footer-column">
             <h4>Shop</h4>
             <ul class="footer-links">
-                <li><a href="#">All Laptops</a></li>
-                <li><a href="#">Gaming</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Ultrabooks</a></li>
-                <li><a href="#">Accessories</a></li>
+                <li><a href="${pageContext.request.contextPath}/products">All Laptops</a></li>
+                <li><a href="${pageContext.request.contextPath}/products">Gaming</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus">Business</a></li>
+                <li><a href="${pageContext.request.contextPath}/products">Ultrabooks</a></li>
+                <li><a href="${pageContext.request.contextPath}/products">Accessories</a></li>
             </ul>
         </div>
         <div class="footer-column">
             <h4>Support</h4>
             <ul class="footer-links">
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">FAQs</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus">Contact Us</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus">FAQs</a></li>
                 <li><a href="#">Shipping</a></li>
                 <li><a href="#">Returns</a></li>
                 <li><a href="#">Warranty</a></li>
@@ -45,9 +45,9 @@
         <div class="footer-column">
             <h4>Company</h4>
             <ul class="footer-links">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus">About Us</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus">Careers</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus">Blog</a></li>
                 <li><a href="#">Press</a></li>
                 <li><a href="#">Partners</a></li>
             </ul>

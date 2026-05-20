@@ -15,12 +15,14 @@ import jakarta.servlet.ServletException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//the connection line, to handle all the request
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
 
+//    A single dao object that is shared accross all request
     private final cartDao cartdao = new cartDaoImpl();
 
-
+//Helper method which will recalculates the total cart item quantity and stores it in session.
     private void updateCartCount(HttpServletRequest request, int userId) {
         ArrayList<Cart> items = cartdao.fetchCartItemsByUserId(userId);
 
@@ -31,9 +33,15 @@ public class CartServlet extends HttpServlet {
                 count += item.getQuantity(); //  adding quantity,
             }
         }
+//        it will store the updated count in session.
         SessionUtil.setAttribute(request, "cartCount", count);
     }
 
+
+//    Handles GET requests to /cart
+//    Two actions:
+//    - No action param, which will load and display the cart page
+//    - action = delete, which will delete a specific item from cart
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,10 +53,12 @@ public class CartServlet extends HttpServlet {
             return;
         }
 
+//        get iserId from the session
         int userId = user.getUser_id();
         String action = request.getParameter("action");
 
         if (action == null) {
+//            No action means fetch all the cart items and display ion the cart page
             ArrayList<Cart> cartItems = cartdao.fetchCartItemsByUserId(userId);
             updateCartCount(request, userId);
             request.setAttribute("cartItems", cartItems);
@@ -56,6 +66,7 @@ public class CartServlet extends HttpServlet {
                     .forward(request, response);
 
         } else if ("delete".equals(action)) {
+//           It will delete the specific laptop
             String laptopIdParam = request.getParameter("laptopId");
             if (laptopIdParam == null || laptopIdParam.isEmpty()) {
                 response.sendRedirect(request.getContextPath() + "/cart");
@@ -78,6 +89,9 @@ public class CartServlet extends HttpServlet {
         }
     }
 
+
+//    Handles POST requests to /cart
+//    handles action = add and reduce
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -89,6 +103,7 @@ public class CartServlet extends HttpServlet {
             return;
         }
 
+        // Get userId from session — never from request params
         int userId = user.getUser_id();
         String action = request.getParameter("action");
 
@@ -109,19 +124,26 @@ public class CartServlet extends HttpServlet {
         }
 
         if ("add".equals(action)) {
+            // Add laptop to cart — if already in cart, increments quantity by 1
             boolean success = cartdao.addToCart(userId, laptopId);
             if (success) {
                 SessionUtil.setAttribute(request, "success", "Item added to cart!");
                 updateCartCount(request, userId);
             }
+
+            // Redirect back to the page the user came from (e.g. products or product detail)
+            // Referer header contains the previous page URL sent automatically by the browser
+
             String referer = request.getHeader("Referer");
             if (referer != null && !referer.isEmpty()) {
-                response.sendRedirect(referer);
+                response.sendRedirect(referer); // go back to where they clicked Add to Cart
             } else {
                 response.sendRedirect(request.getContextPath() + "/products");
             }
 
         } else if ("reduce".equals(action)) {
+            // Reduce laptop quantity in cart by 1
+            // If quantity reaches 1, cartDaoImpl.reduceItem() handles deletion automatically
             boolean success = cartdao.reduceItem(userId, laptopId);
             if (success) {
                 SessionUtil.setAttribute(request, "success", "Item quantity updated!");

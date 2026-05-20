@@ -67,8 +67,14 @@
                 </div>
                 <div class="order-meta-item">
                   <span class="order-meta-label">STATUS:</span>
-                  <span class="order-status order-status-${order.status.toLowerCase()}">
-                    <c:out value="${order.status}"/>
+                  <span class="order-status order-status-${order.dynamicStatus.toLowerCase()}">
+                      <c:choose>
+                        <c:when test="${order.dynamicStatus == 'PREPARING'}">Preparing</c:when>
+                        <c:when test="${order.dynamicStatus == 'IN_TRANSIT'}">In Transit</c:when>
+                        <c:when test="${order.dynamicStatus == 'SHIPPED'}">Shipped</c:when>
+                        <c:when test="${order.dynamicStatus == 'OUT_FOR_DELIVERY'}">Out for Delivery</c:when>
+                        <c:when test="${order.dynamicStatus == 'DELIVERED'}">Delivered</c:when>
+                      </c:choose>
                   </span>
                 </div>
               </div>
