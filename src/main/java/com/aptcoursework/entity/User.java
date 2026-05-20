@@ -2,6 +2,7 @@ package com.aptcoursework.entity;
 
 import com.aptcoursework.enums.Role;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -16,8 +17,8 @@ public class User {
     private String passwordHash;
     private Role role;
     private String profileImg;
-    private LocalDateTime lastLogin;
-    private LocalDateTime created_at;
+    private Timestamp lastLogin;
+    private Timestamp created_at;
 
     private String firstName;
     private String lastName;
@@ -63,10 +64,10 @@ public class User {
         this.passwordHash = passwordHash;
         this.role = role;
         this.profileImg = profileImg;
-        this.created_at = LocalDateTime.now();
+        this.created_at = Timestamp.valueOf(LocalDateTime.now());
     }
 
-    public User(int user_id, LocalDateTime lastLogin) {
+    public User(int user_id, Timestamp lastLogin) {
         this.user_id = user_id;
         this.lastLogin = lastLogin;
     }
@@ -77,8 +78,8 @@ public class User {
                 String passwordHash,
                 String profileImg,
                 Role role,
-                LocalDateTime lastLogin,
-                LocalDateTime created_at,
+                Timestamp lastLogin,
+                Timestamp created_at,
                 String firstName,
                 String lastName,
                 String phoNo,
@@ -157,20 +158,20 @@ public class User {
         this.profileImg = profileImg;
     }
 
-    public LocalDateTime getLastLogin() {
+    public Timestamp getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(LocalDateTime lastLogin) {
+    public void setLastLogin(Timestamp lastLogin) {
         this.lastLogin = lastLogin;
     }
 
-    public LocalDateTime getCreated_at() {
+    public Timestamp getCreated_at() {
 
         return created_at;
     }
 
-    public void setCreated_at(LocalDateTime created_at) {
+    public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
 

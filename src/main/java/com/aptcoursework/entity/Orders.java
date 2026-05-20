@@ -14,8 +14,20 @@ public class Orders {
     private String status;
     private Timestamp estimatedDelivery;
     private Timestamp createdAt;
+    private String username;
     private ArrayList<OrderItems> orderItems;
 
+    public Orders() {}
+
+    public Orders(int orderId, int userId, double totalAmount, String status, Timestamp estimatedDelivery, Timestamp createdAt,String username) {
+        this.orderId = orderId;
+        this.userId = userId;
+        this.totalAmount = totalAmount;
+        this.status = status;
+        this.estimatedDelivery = estimatedDelivery;
+        this.createdAt = createdAt;
+        this.username = username;
+    }
 
     public Orders(int userId, double totalAmount, String status, Timestamp estimatedDelivery) {
         this.userId = userId;
@@ -58,6 +70,13 @@ public class Orders {
 
     public Timestamp getEstimatedDelivery() {
         return estimatedDelivery;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 

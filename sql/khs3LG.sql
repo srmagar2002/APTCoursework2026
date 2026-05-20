@@ -79,6 +79,7 @@ CREATE TABLE laptop
     availabilityStatus VARCHAR(200) GENERATED ALWAYS AS (
         CASE
             WHEN stockQuantity < 1 THEN 'OUT OF STOCK'
+            WHEN stockQuantity < 5 THEN 'LOW STOCK'
             ELSE 'IN STOCK'
             END
         ) STORED,
@@ -96,9 +97,13 @@ CREATE TABLE laptop
                                      'General')),
     CONSTRAINT storageCheck CHECK (storageType IN ('SSD', 'HDD')),
     CONSTRAINT osCheck CHECK (operatingSystem IN ('Windows', 'MacOS', 'Linux')),
+<<<<<<< HEAD
     CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK'))
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+    CONSTRAINT availabilityCheck CHECK (availabilityStatus IN ('IN STOCK', 'OUT OF STOCK','LOW STOCK'))
+>>>>>>> origin/sugam
 );
 =======
 

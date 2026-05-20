@@ -13,6 +13,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/static/imgUpload/logo/logo.svg"/>
     <title>Track Order #${order.orderId}</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/cart.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">

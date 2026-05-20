@@ -3,6 +3,7 @@ package com.aptcoursework.dao;
 import com.aptcoursework.entity.Laptop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Data Access Object (DAO) interface for managing {@code Laptop} entities.
@@ -29,4 +30,7 @@ public interface LaptopDao {
     int totalLaptops();
     ArrayList<Laptop> getLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition,int start,int limit);
     int countLaptopsFilterSearch(String searchWord,String brand, String category, String priceCondition);
+    HashMap<String,Integer> getCountByCategory();
+    int lowStockNoStockCount();
+    double getTotalValuation();
 }

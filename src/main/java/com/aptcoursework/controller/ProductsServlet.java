@@ -49,13 +49,21 @@ public class ProductsServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         if (action == null) {
-            int recordsPerPage = 12;
+            Integer recordsPerPage = 12;
+
+            recordsPerPage = (Integer) request.getSession().getAttribute("recordsPerPage");
+
+            if(recordsPerPage == null) {
+                recordsPerPage = 12;
+            }
+
             int currentPage = 1;
 
             String brand = request.getParameter("brand");
             String category = request.getParameter("category");
             String price = request.getParameter("pricerange");
             String query = request.getParameter("q");
+
             if (query == null) {
                 query = "";
             }
@@ -98,18 +106,20 @@ public class ProductsServlet extends HttpServlet {
                 if (request.getParameter("page") != null) {
                     currentPage = Integer.parseInt(request.getParameter("page"));
                 }
-                if(currentPage > totalFilterPages) {
+                if (currentPage > totalFilterPages) {
                     currentPage = 1;
                 }
 
                 int start = (currentPage - 1) * recordsPerPage;
 
-                System.out.println( "Total Pages after Filter: " + totalFilterPages);
+//                System.out.println("Total Pages after Filter: " + totalFilterPages);
 
                 ArrayList<Laptop> laptops = laptopDao.getLaptopsFilterSearch(query, brand, category, price, start, recordsPerPage);
                 request.setAttribute("currentPage", currentPage);
                 request.setAttribute("totalPages", totalFilterPages);
                 request.setAttribute("products", laptops);
+
+                System.out.println(query+ " " + totalFilterPages);
 
                 String isAjax = request.getHeader("X-Requested-With");
 

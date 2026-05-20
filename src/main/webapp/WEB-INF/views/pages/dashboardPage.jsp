@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/static/imgUpload/logo/logo.svg"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/dashboard.css">
 </head>

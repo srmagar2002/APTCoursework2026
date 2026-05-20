@@ -3,6 +3,7 @@ package com.aptcoursework.dao;
 import com.aptcoursework.entity.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 /**
@@ -36,4 +37,7 @@ public interface UserDao {
     User findByEmail(String email);
     String usernameByUserID(int userID);
     User findByUserID(int userID);
+    ArrayList<User> findAllUsers();
+    int countAllCustomers();
+    boolean deleteUserByID(int userID);
 }

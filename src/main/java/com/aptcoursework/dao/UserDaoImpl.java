@@ -6,6 +6,7 @@ import com.aptcoursework.utils.DatabaseConnection;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 /**
@@ -307,8 +308,8 @@ public class UserDaoImpl implements UserDao {
                         rs.getString("password_hash"),
                         rs.getString("profileImg"),
                         role,
-                        rs.getTimestamp("lastLogin").toLocalDateTime(),
-                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("lastLogin"),
+                        rs.getTimestamp("created_at"),
                         rs.getString("firstName"),
                         rs.getString("lastName"),
                         rs.getString("phoNo"),
@@ -323,4 +324,88 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+
+    @Override
+    public ArrayList<User> findAllUsers() {
+        Connection conn = null;
+        String sql = "SELECT * FROM users";
+
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<User> users = new ArrayList<>();
+            while (rs.next()) {
+                Role role;
+                try {
+                    role = Role.valueOf(rs.getString("role").toUpperCase());
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    role = Role.CUSTOMER;
+                }
+                User user = new User(
+                        rs.getInt("user_id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("password_hash"),
+                        rs.getString("profileImg"),
+                        role,
+                        rs.getTimestamp("lastLogin"),
+                        rs.getTimestamp("created_at"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("phoNo"),
+                        rs.getString("bio")
+                );
+                users.add(user);
+            }
+            return users;
+        } catch (SQLException e) {
+            System.out.println("Error in getting users" + e.getMessage());
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean deleteUserByID(int userID) {
+        Connection conn = null;
+        String sql = "DELETE FROM users WHERE user_id=?";
+        try{
+            conn= DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userID);
+            return pstmt.executeUpdate()>0;
+        }
+        catch (SQLException e){
+            System.out.println("Error in deleting user" + e.getMessage());
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return false;
+    }
+
+    @Override
+    public int countAllCustomers() {
+        Connection conn = null;
+        String sql = "SELECT COUNT(*) FROM users where role='CUSTOMER'";
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in getting users" + e.getMessage());
+            return 0;
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
 }
