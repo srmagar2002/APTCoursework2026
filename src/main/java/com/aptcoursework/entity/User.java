@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
  * @author Sugam Rana Magar
  */
 public class User {
+
     private int user_id;
     private String username;
     private String email;
@@ -19,7 +20,6 @@ public class User {
     private String profileImg;
     private Timestamp lastLogin;
     private Timestamp created_at;
-
     private String firstName;
     private String lastName;
     private String phoNo;

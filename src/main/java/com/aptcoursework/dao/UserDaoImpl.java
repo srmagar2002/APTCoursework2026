@@ -34,7 +34,11 @@ import java.util.ArrayList;
  * @author Sugam Rana Magar
  */
 public class UserDaoImpl implements UserDao {
-
+    /**
+     * Updates the last login timestamp of a user to the current date and time.
+     *
+     * @param userID the unique ID of the user whose last login time will be updated
+     */
     @Override
     public void updateLastLogin(int userID) {
         Connection conn = null;
@@ -51,7 +55,13 @@ public class UserDaoImpl implements UserDao {
             DatabaseConnection.closeConnection(conn);
         }
     }
-
+    /**
+     * Updates a user's profile information in the database.
+     *
+     * @param user the {@code User} object containing updated profile details
+     * @return {@code true} if the profile was successfully updated,
+     *         otherwise {@code false}
+     */
     @Override
     public boolean updateUserProfile(User user) {
         Connection conn = null;
@@ -126,6 +136,15 @@ public class UserDaoImpl implements UserDao {
             DatabaseConnection.closeConnection(conn);
         }
     }
+
+    /**
+     * Updates the profile image path of a user in the database.
+     *
+     * @param path   the image path to store
+     * @param userID the unique ID of the user
+     * @return {@code true} if the image path was successfully updated,
+     *         otherwise {@code false}
+     */
 
     @Override
     public boolean insertImgProfilePath(String path, int userID) {

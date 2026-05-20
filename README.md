@@ -1,4 +1,7 @@
+![logo](./src/main/webapp/static/imgUpload/logo/logoText.svg) 
 # APT Coursework - Laptop E-Commerce System
+
+Head Over to [https://srmagar2002.github.io/atpcoursework2026-doc](https://srmagar2002.github.io/atpcoursework2026-doc) for Java Documentation  
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)

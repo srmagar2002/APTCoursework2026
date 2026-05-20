@@ -12,7 +12,10 @@ package com.aptcoursework.enums;
  *
  * @author Sugam Rana Magar
  */
+
 public enum Role {
     ADMIN,
     CUSTOMER
 }
+
+

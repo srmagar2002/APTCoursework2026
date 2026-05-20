@@ -51,11 +51,22 @@ public class CartServlet extends HttpServlet {
         SessionUtil.setAttribute(request, "cartCount", count);
     }
 
-
-//    Handles GET requests to /cart
-//    Two actions:
-//    - No action param, which will load and display the cart page
-//    - action = delete, which will delete a specific item from cart
+    /**
+     * Handles GET requests for cart operations.
+     * Supports viewing cart items and deleting items from the cart.
+     * Requires an active user session.
+     *
+     * <p>Actions supported:</p>
+     * <ul>
+     *   <li>No action: Displays all items in the user's cart</li>
+     *   <li>action=delete: Removes a specific item (laptopId) from the cart</li>
+     * </ul>
+     *
+     * @param request the HTTP request containing action and optional laptopId parameters
+     * @param response the HTTP response to send back to the client
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -103,9 +114,22 @@ public class CartServlet extends HttpServlet {
         }
     }
 
-
-//    Handles POST requests to /cart
-//    handles action = add and reduce
+    /**
+     * Handles POST requests for cart operations.
+     * Supports adding items to cart and reducing item quantities.
+     * Requires an active user session and valid laptopId parameter.
+     *
+     * <p>Actions supported:</p>
+     * <ul>
+     *   <li>action=add: Adds a new item (laptopId) to the user's cart and redirects to referrer page</li>
+     *   <li>action=reduce: Decreases the quantity of an item (laptopId) in the cart</li>
+     * </ul>
+     *
+     * @param request the HTTP request containing action and laptopId parameters
+     * @param response the HTTP response to send back to the client
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
