@@ -24,11 +24,13 @@ import java.io.IOException;
  *
  * @author Sugam Rana Magar
  */
-
 @MultipartConfig
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
+    /**
+     * The User dao.
+     */
     UserDaoImpl userDao = new UserDaoImpl();
 
     /**

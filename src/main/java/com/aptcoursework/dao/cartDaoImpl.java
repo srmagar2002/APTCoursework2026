@@ -12,6 +12,23 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
+/**
+ * Implementation class for the {@link cartDao} interface.
+ *
+ * <p>This class provides concrete database operations for managing shopping cart items.
+ * It handles adding items to cart, retrieving cart items, reducing quantities, and
+ * deleting items from the database.</p>
+ *
+ * <p>The class uses JDBC for database interaction and relies on the
+ * {@code DatabaseConnection} utility class to establish and close connections.
+ * All SQL operations are executed using prepared statements to ensure security
+ * and prevent SQL injection.</p>
+ *
+ * <p>This implementation follows the {@code cartDao} interface, ensuring a
+ * consistent contract for all cart-related persistence operations.</p>
+ *
+ * @author Kushal Puri
+ */
 public class cartDaoImpl implements cartDao {
 
 //    Queries to perform add and delete operation.
@@ -21,11 +38,13 @@ public class cartDaoImpl implements cartDao {
     String deleteQuantity = "UPDATE cart SET quantity = quantity - 1 WHERE userId=? AND laptopId=?";
     String deleteItem = "DELETE FROM cart WHERE userId=? AND laptopId=?";
 
-
     /**
-     * Adds a laptop to the user's cart.
-     * If the laptop already exists in the cart, increments its quantity by 1.
-     * If it does not exist, inserts a new row with quantity = 1.
+     * Adds a laptop to the user's cart or increments quantity if already present.
+     * Checks if the item exists and either inserts new cart entry or updates quantity.
+     *
+     * @param userId the user ID
+     * @param laptopId the laptop ID to add
+     * @return {@code true} if item added/updated successfully, {@code false} otherwise
      */
     public boolean addToCart(int userId, int laptopId){
 
@@ -78,6 +97,13 @@ public class cartDaoImpl implements cartDao {
      */
 
 
+    /**
+     * Retrieves all cart items for a specific user with associated laptop details.
+     * Joins cart and laptop tables to get complete item information including price, specs, and thumbnail.
+     *
+     * @param userId the user ID
+     * @return list of cart items with laptop details, or {@code null} if error occurs
+     */
     public ArrayList<Cart> fetchCartItemsByUserId(int userId){
         ArrayList<Cart> cartItems = new ArrayList<>();
 
@@ -127,6 +153,9 @@ public class cartDaoImpl implements cartDao {
      * Reduces the quantity of a specific laptop in the cart by 1.
      * If quantity is already 1, does nothing and returns false.
      * Deletion when quantity reaches 0 is handled separately by deleteItem().
+     * @param userId the user ID
+     * @param laptopId the laptop ID to reduce quantity for
+     * @return {@code true} if quantity reduced successfully, {@code false} if item not found or quantity is 1
      */
     public boolean reduceItem(int userId, int laptopId){
 
@@ -172,6 +201,10 @@ public class cartDaoImpl implements cartDao {
      * Permanently removes a specific laptop from the user's cart.
      * Both userId and laptopId are used in WHERE clause for security —
      * prevents a user from deleting another user's cart item.
+     *
+     * @param userId the user ID
+     * @param laptopId the laptop ID to delete
+     * @return {@code true} if item deleted successfully, {@code false} otherwise
      */
     public boolean deleteItem(int userId, int laptopId){
 

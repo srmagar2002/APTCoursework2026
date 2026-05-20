@@ -16,6 +16,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 //the connection line, to handle all the request
+/**
+ * Servlet handling shopping cart operations and management.
+ * Supports viewing cart items, adding items, and updating item quantities.
+ * Maintains cart count in session for display across pages.
+ *
+ * @author Kushal Puri
+ */
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
 
@@ -23,6 +30,13 @@ public class CartServlet extends HttpServlet {
     private final cartDao cartdao = new cartDaoImpl();
 
 //Helper method which will recalculates the total cart item quantity and stores it in session.
+    /**
+     * Updates the total cart item count in the user's session.
+     * Aggregates quantities across all cart items for the given user.
+     *
+     * @param request the HTTP request containing session information
+     * @param userId the ID of the user whose cart count should be updated
+     */
     private void updateCartCount(HttpServletRequest request, int userId) {
         ArrayList<Cart> items = cartdao.fetchCartItemsByUserId(userId);
 

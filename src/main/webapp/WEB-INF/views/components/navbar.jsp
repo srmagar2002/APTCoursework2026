@@ -75,7 +75,9 @@
                     </c:if>
                 </a>
 
-                <a class="nav-links" href="${pageContext.request.contextPath}/orders">My Orders</a>
+<%--                class="nav-links"--%>
+                <a  class="btn btn-ghost" href="${pageContext.request.contextPath}/orders">My
+                    Orders</a>
 
             </c:if>
 

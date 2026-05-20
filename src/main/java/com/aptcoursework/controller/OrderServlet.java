@@ -18,12 +18,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Servlet handling order display, management, and retrieval.
+ * Supports viewing user orders and individual order details with items.
+ * Provides order tracking and status information for customers.
+ *
+ * @author Kushal Puri
+ */
 @WebServlet("/orders")
 public class OrderServlet extends HttpServlet {
 
     private final OrdersDao ordersDao         = new OrdersDaoImpl();
     private final OrderItemsDao orderItemsDao = new orderItemsDaoImpl();
 
+    /**
+     * Handles GET requests by retrieving user orders or individual order details.
+     * Validates user session and fetches order information for display.
+     * Redirects to login if user is not authenticated.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

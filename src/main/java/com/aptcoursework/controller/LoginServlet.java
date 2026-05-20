@@ -85,7 +85,6 @@ public class LoginServlet extends HttpServlet {
         if (referer != null && !referer.isEmpty()) {
             response.sendRedirect(referer);
         } else {
-
             response.sendRedirect(request.getContextPath() + "/home");
         }
 
