@@ -88,6 +88,15 @@ public class cartDaoImpl implements cartDao {
 
     }
 
+
+    /**
+     * Fetches all cart items for a specific user.
+     * Uses a JOIN between cart and laptop tables so the JSP gets
+     * full laptop details (title, price, image, specs) alongside cart data.
+     * Returns ArrayList of Cart objects, each containing an embedded Laptop object.
+     */
+
+
     /**
      * Retrieves all cart items for a specific user with associated laptop details.
      * Joins cart and laptop tables to get complete item information including price, specs, and thumbnail.
@@ -139,10 +148,11 @@ public class cartDaoImpl implements cartDao {
         }
     }
 
+
     /**
-     * Reduces the quantity of a laptop in the user's cart by 1.
-     * Item is not deleted if quantity is 1; operation returns false to prevent removal.
-     *
+     * Reduces the quantity of a specific laptop in the cart by 1.
+     * If quantity is already 1, does nothing and returns false.
+     * Deletion when quantity reaches 0 is handled separately by deleteItem().
      * @param userId the user ID
      * @param laptopId the laptop ID to reduce quantity for
      * @return {@code true} if quantity reduced successfully, {@code false} if item not found or quantity is 1
@@ -184,8 +194,13 @@ public class cartDaoImpl implements cartDao {
 
     }
 
+
+
+
     /**
-     * Deletes a laptop item completely from the user's cart.
+     * Permanently removes a specific laptop from the user's cart.
+     * Both userId and laptopId are used in WHERE clause for security —
+     * prevents a user from deleting another user's cart item.
      *
      * @param userId the user ID
      * @param laptopId the laptop ID to delete

@@ -96,7 +96,7 @@
     <div class="team-card">
       <div class="team-photo">
 
-        <img src="" alt="Heaven Gurung"/>
+        <img src="${pageContext.request.contextPath}/static/imgUpload/MemberImage/heaven.jpeg" alt="Heaven Gurung"/>
       </div>
       <h3 class="team-name">Heaven Gurung</h3>
       <p class="team-role">Full Stack Developer</p>

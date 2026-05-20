@@ -1,7 +1,7 @@
-/* ═══════════════════════════════════════════
+/*
    home.css — Landing page styles
    Uses design tokens from main.css
-   ═══════════════════════════════════════════ */
+    */
 
 /* ── Hero Section ── */
 .hero {
@@ -47,7 +47,7 @@
     max-width: 560px;
     padding-top: 5rem;
     padding-bottom: 5rem;
-    left: -300px;
+    margin-left: 2rem;
 }
 
 /* "New Arrivals" pill */
@@ -148,9 +148,9 @@
     font-weight: 700;
 }
 
-/* ═══════════════════════════════════════════
+/*
    Who We Are / Make Us Better sections
-   ═══════════════════════════════════════════ */
+    */
 .info-section {
     margin-bottom: 5rem;
 }
@@ -216,14 +216,23 @@
     line-height: 1.7;
 }
 
-/* ═══════════════════════════════════════════
+/*
    Responsive
-   ═══════════════════════════════════════════ */
+ */
 @media (max-width: 768px) {
     .info-card,
     .info-card-reverse {
         grid-template-columns: 1fr;
         direction: ltr;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        margin-left: 0;      /* ← reset on mobile */
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
     }
 
     .info-image-wrap {

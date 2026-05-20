@@ -59,7 +59,7 @@ img {
 .header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     background-color: var(--header-bg);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);

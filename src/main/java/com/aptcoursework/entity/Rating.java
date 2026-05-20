@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
  * @author Sugam Rana Magar
  */
 public class Rating {
+
     int ratingID;
     int userID;
     int laptopID;

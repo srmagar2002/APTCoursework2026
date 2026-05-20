@@ -2,6 +2,10 @@
 
 /*
    cart.css — Cart page styles
+   In this CSS here, it has used rem more that px
+   rem is the relative unit which is based on root font size which is usually 16px
+   1 rem = 16 px, 1.5 rem = 24px;
+
   */
 
 /* ── Cart icon in navbar ── */
@@ -12,6 +16,7 @@
     margin-top: 6px;
 }
 
+/*Red notification badge on cart icon showing item count*/
 .cart-badge {
     position: absolute;
     top: -8px;
@@ -45,14 +50,14 @@
     color: var(--foreground);
 }
 
-/* ── Page title ── */
+/*  Page title  */
 .cart-page-title {
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 1.75rem;
 }
 
-/* ── Success flash message ── */
+/*  Success flash message  */
 .cart-success {
     background-color: rgba(34, 197, 94, 0.1);
     border: 1px solid rgba(34, 197, 94, 0.3);
@@ -66,6 +71,7 @@
 
 /*
    Empty Cart State
+   shown when the cart items is empty
   */
 .cart-empty {
     display: flex;
@@ -86,7 +92,7 @@
 }
 
 /*
-   Two-column layout: items | summary
+   Two-column layout (items and summary)
 */
 .cart-layout {
     display: grid;
@@ -96,7 +102,7 @@
 }
 
 /*
-   LEFT — Cart Items Section
+   LEFT  Cart Items Section
  */
 .cart-items-section {
     background-color: var(--card);
@@ -118,7 +124,7 @@
 
 
 
-/* ── Individual Cart Item ── */
+/* Individual Cart Item */
 .cart-item {
     display: flex;
     align-items: center;
@@ -136,7 +142,7 @@
     background-color: var(--card-hover);
 }
 
-/* ── Checkbox ── */
+/* Checkbox  */
 .cart-checkbox-label {
     position: relative;
     display: flex;
@@ -184,7 +190,7 @@
     display: block;
 }
 
-/* ── Item Image ── */
+/*  Item Image  */
 .cart-item-image {
     width: 100px;
     height: 80px;
@@ -203,7 +209,7 @@
     object-fit: cover;
 }
 
-/* ── Item Info (name, specs, quantity controls) ── */
+/*  Item Info (name, specs, quantity controls) */
 .cart-item-info {
     flex: 1;
     display: flex;
@@ -270,7 +276,7 @@
     font-size: 0.9375rem;
 }
 
-/* ── Right side: price + delete ── */
+/*  Right side: price + delete  */
 .cart-item-right {
     display: flex;
     flex-direction: column;

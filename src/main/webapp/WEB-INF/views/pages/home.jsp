@@ -25,13 +25,13 @@
     <jsp:include page="../components/navbar.jsp"/>
 </header>
 
-<%-- ═══════════════════════════════════════
+<%--
      HERO SECTION
-     Image: leave src empty — you will add it
-════════════════════════════════════════ --%>
+
+ --%>
 <section class="hero">
     <div class="hero-image-wrap">
-        <%-- TODO: replace with your actual hero image path --%>
+
         <img src="${pageContext.request.contextPath}/static/imgUpload/landingPageImage.jpg" alt="Hero laptop" class="hero-img" id="heroImg"/>
     </div>
     <div class="hero-overlay"></div>
@@ -71,10 +71,10 @@
     </div>
 </section>
 
-<%-- ═══════════════════════════════════════
+<%--
      FEATURED LAPTOPS SECTION
      Dynamic — fetched from DB via HomeServlet
-════════════════════════════════════════ --%>
+--%>
 <section class="featured-section page-container">
     <div class="featured-header">
         <div>
@@ -111,20 +111,20 @@
     </div>
 </section>
 
-<%-- ═══════════════════════════════════════
+<%--
      WHO WE ARE SECTION
-     Image: leave src empty — you will add it
-════════════════════════════════════════ --%>
+
+ --%>
 <section class="info-section page-container">
     <div class="info-card">
         <div class="info-image-wrap">
-            <%-- TODO: replace with your actual "who we are" image path --%>
+
             <img src="${pageContext.request.contextPath}/static/imgUpload/team.avif" alt="Who we are" class="info-img" id="whoWeAreImg"/>
         </div>
         <div class="info-content">
             <p class="info-tag">WHO WE ARE</p>
             <h2 class="info-title">
-                Pakistan's Most<br>
+                Nepal's Most<br>
                 <span class="hero-highlight">Trusted</span> Laptop<br>
                 Store
             </h2>
@@ -133,19 +133,18 @@
                 accessible to everyone. From students to professionals to gamers,
                 we match every buyer with the perfect machine at the best price.
             </p>
-            <a href="#" class="btn btn-primary">Know More About Us →</a>
+            <a href="${pageContext.request.contextPath}/aboutus" class="btn btn-primary">Know More About Us →</a>
         </div>
     </div>
 </section>
 
-<%-- ═══════════════════════════════════════
+<%--
      MAKE US BETTER SECTION
-     Image: leave src empty — you will add it
-════════════════════════════════════════ --%>
+ --%>
 <section class="info-section page-container">
     <div class="info-card info-card-reverse">
         <div class="info-image-wrap">
-            <%-- TODO: replace with your actual "make us better" image path --%>
+
             <img src="${pageContext.request.contextPath}/static/imgUpload/feedback%20laptop.webp" alt="Make us better" class="info-img" id="makeUsBetterImg"/>
         </div>
         <div class="info-content">
@@ -159,7 +158,7 @@
                 or just want to share what we build next? Your voice shapes what we
                 build next.
             </p>
-            <a href="#" class="btn btn-primary">Improve Us →</a>
+            <a href="${pageContext.request.contextPath}/aboutus" class="btn btn-primary">Improve Us →</a>
         </div>
     </div>
 </section>
