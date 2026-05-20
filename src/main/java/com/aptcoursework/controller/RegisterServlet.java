@@ -104,7 +104,7 @@ public class RegisterServlet extends HttpServlet {
 
             int userID = userDao.findByUsername(username).getUser_id();
 
-            System.out.println("THIS IS USER ID : "+userID);
+//            System.out.println("THIS IS USER ID : "+userID);
 
             String imagePath = ImageUtil.userProfilePictureUploader(filePart, userID, uploadPath);
 
