@@ -42,7 +42,7 @@ Before you begin, ensure you have the following installed on your system:
 ### Step 1: Clone or Extract the Project
 ```bash
 # If using git
-git clone <repository-url>
+git clone https://github.com/srmagar2002/APTCoursework2026.git
 cd Coursework
 
 # Or extract the project folder if you have a ZIP file

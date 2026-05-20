@@ -21,7 +21,6 @@ import java.util.ArrayList;
  *
  * @author Sugam Rana Magar
  */
-
 @WebServlet("/productView")
 public class ProductViewServlet extends HttpServlet {
 
